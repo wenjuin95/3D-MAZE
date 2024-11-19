@@ -12,8 +12,11 @@ OBJ_FOLDER = object_files
 
 OBJ_SRC = $(addprefix $(OBJ_FOLDER)/, $(notdir $(SRC:.c=.o)))
 
+LIBFT_DIR = libft/libft.a
+
 # color
 GREEN = \033[0;32m
+BLUE = \033[0;34m
 RESET = \033[0m
 
 # check for OS
@@ -30,8 +33,7 @@ all: $(NAME)
 $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
-	cp libft/libft.a .
-	$(CC) $(CFLAGS) $(OBJ_SRC) $(INC) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
 	@echo "${GREEN}-----COMPILED DONE-----\n${RESET}"
 
 $(OBJ_FOLDER)/%.o : src/%.c
@@ -49,5 +51,13 @@ fclean : clean
 	@echo "${GREEN}-----FULLY REMOVE-----\n${RESET}"
 
 re : fclean all
+
+norm:
+	@echo "${BLUE}\n-----CHECK SRC-----${RESET}"
+	@norminette src/*.c
+	@echo "${BLUE}\n-----CHECK INCLUDE-----${RESET}"
+	@norminette include/*.h
+	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
+	@norminette libft/*.c libft/*.h
 
 .PHONY : all clean fclean re bonus
