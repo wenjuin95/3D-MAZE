@@ -4,7 +4,14 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
-SRC = src/*.c
+# directory that contains source files
+FILE_DIR = src src/parse
+
+# specify the directory where make should look for files
+vpath %.c $(FILE_DIR)
+
+# list all ".c" in the specified directories
+SRC = $(foreach dir, $(FILE_DIR), $(wildcard $(dir)/*.c))
 
 INC = -I include
 
@@ -36,7 +43,7 @@ $(NAME) : $(OBJ_SRC)
 	$(CC) $(CFLAGS) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
 	@echo "${GREEN}-----COMPILED DONE-----\n${RESET}"
 
-$(OBJ_FOLDER)/%.o : src/%.c
+$(OBJ_FOLDER)/%.o : %.c
 	@mkdir -p $(OBJ_FOLDER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
