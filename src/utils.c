@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/11/20 15:22:39 by chtan            ###   ########.fr       */
+/*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
+/*   Updated: 2024/11/20 16:47:29 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "../include/parse.h"
+# include <stdio.h>
 
-# include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
-# include <math.h>
-
-void   ft_error(char *str);
-
-#endif
+void   ft_error(char *str)
+{
+    printf("Error : %s\n", str);
+    exit(1);
+}

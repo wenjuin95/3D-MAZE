@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   parse_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/11/20 15:22:39 by chtan            ###   ########.fr       */
+/*   Created: 2024/11/20 16:32:25 by chtan             #+#    #+#             */
+/*   Updated: 2024/11/20 17:05:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "../include/parse.h"
 
-# include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
-# include <math.h>
+/**
+ * @brief Check map to make sure it is a .cub file
+ */
+void	check_valid_map_name(char *file, char *type)
+{
+	int		i;
+	char	*extension;
 
-void   ft_error(char *str);
-
-#endif
+	i = ft_strlen(file) - 4;
+	extension = ft_substr(file, i, 4);
+	if (ft_strncmp(type, extension, 4) != 0)
+	{
+		free(extension);
+		ft_error("wrong file type");
+	}
+	free(extension);
+}

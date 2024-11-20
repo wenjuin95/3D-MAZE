@@ -2,9 +2,13 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FSANITIZE = -fsanitize=address
 
-SRC = src/*.c
+CFLAGS = -Wall -Wextra -Werror -g
+
+SRC_FOLDER = src
+
+SRC = $(addprefix $(SRC_FOLDER)/, *.c) # Add your source files here
 
 INC = -I include
 
@@ -29,6 +33,12 @@ else
 endif
 
 all: $(NAME)
+
+fsan : $(OBJ_SRC)
+	make -C $(MINILIBX)
+	make -C libft
+	$(CC) $(CFLAGS) $(FSANITIZE) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
+	@echo "${GREEN}-----COMPILED FSAN DONE-----\n${RESET}"
 
 $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
@@ -60,4 +70,7 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
-.PHONY : all clean fclean re bonus
+leak:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+
+.PHONY : all clean fclean re bonus norm leak fsan
