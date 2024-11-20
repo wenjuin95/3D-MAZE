@@ -10,6 +10,9 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define BLOCK_SIZE 64
+# define CHANGE_VIEW 0 // 0 for raycasting, 1 for map view
+# define SKY 0x87CEEB
+# define FLOOR 0x808080
 
 # define W 119
 # define A 97
@@ -55,6 +58,7 @@ typedef struct s_data
 void init_player(t_player *player);
 int key_press(int keycode, t_player *player);
 int key_release(int keycode, t_player *player);
-void move_player(t_player *player);
+void move_player(t_player *player, t_data *game);
+bool player_view(float px, float py, t_data *game);
 
 #endif

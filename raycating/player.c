@@ -8,9 +8,15 @@
  */
 void init_player(t_player *player)
 {
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = PI / 2;
+	player->x = WIDTH / 2; //set the player x position to the center of the window
+	player->y = HEIGHT / 2; //set the player y position to the center of the window
+	player->angle = 3 * PI / 2;
+	/*
+		0 radians: Right (positive x-axis)
+		PI / 2 radians: Down (positive y-axis)
+		PI radians: Left (negative x-axis)
+		3 * PI / 2 radians: Up (negative y-axis)
+	*/
 
 	player->key_up = false;
 	player->key_down = false;
@@ -30,7 +36,6 @@ void init_player(t_player *player)
  */
 int key_press(int keycode, t_player *player)
 {
-	printf("player x: %f, y: %f\n", player->x, player->y);
 	if (keycode == ESC)
 		exit(0);
 	if (keycode == W)
@@ -78,40 +83,63 @@ int key_release(int keycode, t_player *player)
  * @note 1. move the player based on the key press event
  * @note 2. "speed" is the speed of the player
  */
-void move_player(t_player *player)
+void move_player(t_player *player, t_data *game)
 {
-	int speed = 5;
-	float angle_speed = 0.1;
-	float cos_angle = cos(player->angle);
-	float sin_angle = sin(player->angle);
+    int speed = 5;
+    float angle_speed = 0.03;
+    float cos_angle = cos(player->angle); //cos is the triangle x cordination length
+    float sin_angle = sin(player->angle); //sin is the triangle y cordination length
+    float new_x, new_y;
 
-	if (player->key_turn_left)
-		player->angle -= angle_speed;
-	if (player->key_turn_right)
-		player->angle += angle_speed;
-	if (player->angle > 2 * PI) // if player angle is over the 2 * PI
-		player->angle = 0;
-	if (player->angle < 0) // if player angle is under the 0
-		player->angle = 2 * PI;
-	if (player->key_up)
-	{
-		player->x += cos_angle * speed;
-		player->y += sin_angle * speed;
-	}
-	if (player->key_down)
-	{
-		player->x -= cos_angle * speed;
-		player->y -= sin_angle * speed;
-	}
-	if (player->key_left)
-	{
-		player->x += sin_angle * speed;
-		player->y -= cos_angle * speed;
-	}
-	if (player->key_right)
-	{
-		player->x -= sin_angle * speed;
-		player->y += cos_angle * speed;
-	}
+    if (player->key_turn_left) // if player press the left key
+        player->angle -= angle_speed;
+    if (player->key_turn_right) // if player press the right key
+        player->angle += angle_speed;
 
+	//these to make sure angle alway stay between 0 and 2 * PI ( is ecessary for consistent trigonometric calculations)
+    if (player->angle > 2 * PI) // if player angle is over 360 degree then set to 0
+        player->angle = 0;
+    if (player->angle < 0) // if player angle is under 0 then set to 360 degree
+        player->angle = 2 * PI;
+
+    if (player->key_up == true)
+    {
+        new_x = player->x + cos_angle * speed;
+        new_y = player->y + sin_angle * speed;
+        if (player_view(new_x, new_y, game) == false)
+        {
+            player->x = new_x;
+            player->y = new_y;
+        }
+    }
+    if (player->key_down == true)
+    {
+        new_x = player->x - cos_angle * speed;
+        new_y = player->y - sin_angle * speed;
+        if (player_view(new_x, new_y, game) == false)
+        {
+            player->x = new_x;
+            player->y = new_y;
+        }
+    }
+    if (player->key_left == true)
+    {
+        new_x = player->x + sin_angle * speed;
+        new_y = player->y - cos_angle * speed;
+        if (player_view(new_x, new_y, game) == false)
+        {
+            player->x = new_x;
+            player->y = new_y;
+        }
+    }
+    if (player->key_right == true)
+    {
+        new_x = player->x - sin_angle * speed;
+        new_y = player->y + cos_angle * speed;
+        if (player_view(new_x, new_y, game) == false)
+        {
+            player->x = new_x;
+            player->y = new_y;
+        }
+    }
 }

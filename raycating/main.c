@@ -93,7 +93,7 @@ void draw_map(t_data *game)
  * @brief clear the image
  * @param game the game structure
  */
-void clear_image(t_data *game)
+void clear_trail(t_data *game)
 {
 	int y = 0;
 	while (y < HEIGHT)
@@ -126,18 +126,40 @@ char **get_map()
 }
 
 /**
+ * @brief draw the background
+ * @param game the game structure
+ */
+void draw_background(t_data *game)
+{
+    int x, y;
+	int color;
+
+    for (y = 0; y < HEIGHT; y++)
+    {
+        for (x = 0; x < WIDTH; x++)
+        {
+            if (y < HEIGHT / 2)
+				color = SKY;
+			else
+				color = FLOOR;
+            put_pixel(x, y, color, game);
+        }
+    }
+}
+
+/**
  * @brief initialize the game
  * @param game the game structure
  */
 void init(t_data *game)
 {
-	init_player(&game->player);
-	game->map = get_map(); //initialize the map
 	game->mlx = mlx_init(); //initialize the mlx pointer
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "RAYCASTING"); //create window
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); //create a new image for window
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian); //function to get the image data
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0); //put the image to the window
+	init_player(&game->player);
+	game->map = get_map(); //initialize the map
 }
 
 /**
@@ -147,13 +169,48 @@ void init(t_data *game)
  * @param game the game structure
  * @return true if the player view touch the wall, false if the player view doesn't touch the wall
  */
-bool touch(float px, float py, t_data *game)
+bool player_view(float px, float py, t_data *game)
 {
+	// //this for window size
+	// (void)game;
+	// if (px < 0 || py < 0 || px >= WIDTH || py >= HEIGHT)
+	// 	return (true);
+
+	//this for map size
 	int x = px / BLOCK_SIZE;
 	int y = py / BLOCK_SIZE;
 	if (game->map[y][x] == '1')
 		return (true);
 	return (false);
+}
+
+/**
+ * @brief calculate the distance between two point (for view)
+ * @param x1 the x position of the first point
+ * @param y1 the y position of the first point
+ * @return the distance between two point view
+ */
+float distance(float x, float y)
+{
+	return (sqrt(x * x + y * y));
+}
+
+/**
+ * @brief calculate the distance between two point (remove fish eye effect)
+ * @param x1 the x position of the first point
+ * @param y1 the y position of the first point
+ * @param x2 the x position of the second point
+ * @param y2 the y position of the second point
+ * @param game the game structure
+ * @return the distance between two point view
+ */
+float fixed_distance(float x1, float y1, float x2, float y2, t_data *game)
+{
+	float delta_x = x2 - x1;
+	float delta_y = y2 - y1;
+	float angle = atan2(delta_y, delta_x) - game->player.angle;
+	float fix_dist = distance(delta_x, delta_y) * cos(angle);
+	return fix_dist;
 }
 
 /**
@@ -163,17 +220,31 @@ bool touch(float px, float py, t_data *game)
  *@param start_x the start angle of the line
  *@note 1. if "touch" function return false, draw the pixel
  */
-void draw_line( t_player *player, t_data *game, float start_x)
+void draw_player_view( t_player *player, t_data *game, float start_x, int i)
 {
 	float cos_angle = cos(start_x);
 	float sin_angle = sin(start_x);
 	float ray_x = player->x;
 	float ray_y = player->y;
-	while (touch(ray_x, ray_y, game) == false)
+	while (player_view(ray_x, ray_y, game) == false)
 	{
-		put_pixel(ray_x, ray_y, 0xFFFFFF, game);
+		if (CHANGE_VIEW)
+			put_pixel(ray_x, ray_y, 0xFFFFFF, game);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
+	}
+	if (CHANGE_VIEW == 0)
+	{
+		// float dis = distance(ray_x - player->x, ray_y - player->y); //this cuse fish eye effect
+		float dis = fixed_distance(player->x, player->y, ray_x, ray_y, game); //this fix the fish eye effect
+		float height = (BLOCK_SIZE / dis) * (WIDTH / 2);
+		int start_y = (HEIGHT - height) / 2;
+		int end = start_y + height;
+		while (start_y < end)
+		{
+			put_pixel(i, start_y, 0x0000FF, game);
+			start_y++;
+		}
 	}
 }
 
@@ -185,20 +256,30 @@ void draw_line( t_player *player, t_data *game, float start_x)
 int draw_loop(t_data *game)
 {
 	t_player *player = &game->player;
-	move_player(player);
-	clear_image(game);
-	draw_square(player->x, player->y, 10, 0xFF0000, game);
-	draw_map(game);
-
-	float fraction = PI / 3 / WIDTH; //the angle of the player view
-	float start_x = player->angle - PI / 6; //the start angle of the player view
-	int i = 0;
-	while ( i < WIDTH)
+	move_player(player, game);
+	clear_trail(game);
+	if (CHANGE_VIEW == 0)
+		draw_background(game);
+	if (CHANGE_VIEW)
 	{
-		draw_line(player, game, start_x); //draw the line from the player view
-		start_x += fraction;
+		draw_square(player->x, player->y, 10, 0xFF0000, game);
+		draw_map(game);
+	}
+
+	//this for draw a line player view
+	// draw_line(player, game, player->angle);
+
+	//this for draw a player view
+	float fraction = PI / 3 / WIDTH; //get the triangle angle view
+	float start_x = player->angle - PI / 6; //triangle angle view start from player angle
+	int i = 0;
+	while (i < WIDTH)
+	{
+		draw_player_view(player, game, start_x, i); //draw the line from the player view
+		start_x += fraction; //increment the angle when draw the next line
 		i++;
 	}
+
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }
