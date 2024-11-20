@@ -66,6 +66,11 @@ void draw_square(int x, int y, int size, int color, t_data *game)
 	}
 }
 
+/**
+ * @brief draw the map
+ * @param game the game structure
+ * @note 1. if the map[y][x] is '1', draw the square
+ */
 void draw_map(t_data *game)
 {
 	char **map = game->map;
@@ -127,12 +132,12 @@ char **get_map()
 void init(t_data *game)
 {
 	init_player(&game->player);
-	game->map = get_map();
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "RAYCASTING");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->map = get_map(); //initialize the map
+	game->mlx = mlx_init(); //initialize the mlx pointer
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "RAYCASTING"); //create window
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); //create a new image for window
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian); //function to get the image data
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0); //put the image to the window
 }
 
 /**
@@ -194,8 +199,6 @@ int draw_loop(t_data *game)
 		start_x += fraction;
 		i++;
 	}
-
-
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }
