@@ -2,16 +2,11 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+FSANITIZE = -fsanitize=address
 
-# directory that contains source files
-FILE_DIR = src src/parse
+CFLAGS = -Wall -Wextra -Werror -g
 
-# specify the directory where make should look for files
-vpath %.c $(FILE_DIR)
-
-# list all ".c" in the specified directories
-SRC = $(foreach dir, $(FILE_DIR), $(wildcard $(dir)/*.c))
+SRC = src/*.c
 
 INC = -I include
 
@@ -37,13 +32,19 @@ endif
 
 all: $(NAME)
 
+fsan : $(OBJ_SRC)
+	make -C $(MINILIBX)
+	make -C libft
+	$(CC) $(CFLAGS) $(FSANITIZE) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
+	@echo "${GREEN}-----COMPILED FSAN DONE-----\n${RESET}"
+
 $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
 	$(CC) $(CFLAGS) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
 	@echo "${GREEN}-----COMPILED DONE-----\n${RESET}"
 
-$(OBJ_FOLDER)/%.o : %.c
+$(OBJ_FOLDER)/%.o : src/%.c
 	@mkdir -p $(OBJ_FOLDER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -67,4 +68,7 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
-.PHONY : all clean fclean re bonus
+leak:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+
+.PHONY : all clean fclean re bonus norm leak fsan

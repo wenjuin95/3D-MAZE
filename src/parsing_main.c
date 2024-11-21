@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/20 20:05:55 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/21 15:34:34 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,65 @@ static char	**read_map_file(char *file, int lines_num)
 	return (map);
 }
 
+static void	error_handling(t_map *map)
+{
+	if (!map->north || !map->sout || !map->west || !map->east || !map->sprite
+		|| !map->floor || !map->ceiling || !map->map_layout)
+		ft_error("Fail to allocate memory");
+}
+
+char	*cut_first3(char *s, int len)
+{
+	int i;
+	int j;
+	char *str;
+	
+	i = 2;
+	j = 0;
+	str = malloc(sizeof(char) * len - 2);
+	while (i < len)
+	{
+		str[j] = s[i];
+		j++;
+		i++;
+	}
+	return (str);	
+}
+
+static int *tranfer(char *str)
+{
+	char **split;
+
+	split = ft_split(str, ',');
+	int *rgb = malloc(sizeof(int) * 3);
+	rgb[0] = ft_atoi(split[0]);
+	rgb[1] = ft_atoi(split[1]);
+	rgb[2] = ft_atoi(split[2]);
+	if (!rgb)
+		ft_error("Fail to allocate memory");
+	return (rgb);
+}
+
 int	parse_struct(t_map *map)
 {
-	map->north = map->map[0];
-	map->sout = map->map[1];
-	map->west = map->map[2];
-	map->east = map->map[3];
-	map->sprite = map->map[4];
-	map->floor = map->map[5];
-	map->ceiling = map->map[6];
-	map->map_layout = map->map + 8;
+	char *str;
+	int i;
+
+	i = 8;
+	map->north = cut_first3(map->map[0], ft_strlen(map->map[0]));
+	map->sout = cut_first3(map->map[1], ft_strlen(map->map[1]));
+	map->west = cut_first3(map->map[2], ft_strlen(map->map[2]));
+	map->east = cut_first3(map->map[3], ft_strlen(map->map[3]));
+	map->sprite = cut_first(map->map[4], ft_strlen(map->map[4]));
+	map->floor = tranfer(cut_first3(map->map[5], ft_strlen(map->map[5])));
+	map->ceiling = tranfer(cut_first3(map->map[6], ft_strlen(map->map[6])));
+	while (i < map->map_height)
+	{
+		ft_strlcpy(str, map->map[i], ft_strlen(map->map[i]) + 1);
+		i++;
+	}
+	map->map_layout = ft_split(map->map[8], ' ');
+	error_handling(map);
 	return (0);
 }
 

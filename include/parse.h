@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/20 17:05:56 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/21 15:34:51 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_map
     char    *sout;
     char    *west;
     char    *east;
-    char    *sprite;
-    char    *floor;
-    char    *ceiling;
+    char     *sprite;
+    int    *floor;
+    int    *ceiling;
     char    **map_layout;
 }               t_map;
 
@@ -45,6 +45,9 @@ typedef struct s_arg
 // parsing
 void    take_arg(int argc, char **argv, t_arg *arg);
 int     parse(int ac, char **av, t_arg *arg);
+int     parse_struct(t_map *map);
+char	*cut_first3(char *s, int len);
+
 
 //check
 void	check_valid_map_name(char *file, char *type);
