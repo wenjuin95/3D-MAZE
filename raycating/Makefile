@@ -2,7 +2,8 @@ NAME = raycasting
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 OBJ = $(SRC:.c=.o)
-SRC = main.c player.c
+SRC = $(wildcard *.c)
+LIBFT_DIR = ../libft/libft.a
 
 ifeq ($(shell uname), Linux)
 	MINILIBX = ../minilibx-linux/
@@ -14,9 +15,9 @@ endif
 
 all : $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT_DIR)
 	make -C $(MINILIBX)
-	$(CC) $(CFLAGS) $(SRC) $(MINILIBX_LIBRARY) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) $(MINILIBX_LIBRARY) $(LIBFT_DIR) -o $(NAME)
 
 fclean:
 	rm -f $(OBJ)

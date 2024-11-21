@@ -1,300 +1,140 @@
 #include "raycasting.h"
 
-/**
- * @brief put the pixel in the window
- * @param x the x position of the pixel
- * @param y the y position of the pixel
- * @param color the color of the pixel
- * @param game the game structure
- */
-void put_pixel(int x, int y, int color, t_data *game)
+void parse_arg(t_data *data)
 {
-	if ( x >= WIDTH || y >= HEIGHT || x < 0 || y < 0) //if the pixel is not out of the window
+	data->map = malloc(sizeof(char *) * 10);
+	data->map[0] = "111111111111111";
+	data->map[1] = "100000000000N01";
+	data->map[2] = "100000000000001";
+	data->map[3] = "100000000000001";
+	data->map[4] = "100000000000001";
+	data->map[5] = "100000000000001";
+	data->map[6] = "100000000000001";
+	data->map[7] = "100000000000001";
+	data->map[8] = "100000000000001";
+	data->map[9] = "111111111111111";
+	data->map[10] = NULL;
+	data->tex.north = "wood.xpm";
+	data->tex.south = "wood.xpm";
+	data->tex.east = "wood.xpm";
+	data->tex.west = "wood.xpm";
+	data->tex.floor = set_rgb("138, 138, 138");
+	data->tex.ceiling = set_rgb("36, 36, 36");
+	data->tex.hex_floor = convert_rgb_to_hex(data->tex.floor);
+	data->tex.hex_ceiling = convert_rgb_to_hex(data->tex.ceiling);
+	data->player.dir = 'N';
+	if (data->player.dir == 'W')
+	{
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = -0.66;
+	}
+	else if (data->player.dir == 'E')
+	{
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = 0.66;
+	}
+	else if (data->player.dir == 'S')
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
+		data->player.plane_x = -0.66;
+		data->player.plane_y = 0;
+	}
+	else if (data->player.dir == 'N')
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
+		data->player.plane_x = 0.66;
+		data->player.plane_y = 0;
+	}
+	else
 		return ;
-	int index = y * game->size_line + x * game->bpp / 8; // calculate the position for pixel color data should be stored
-	/*
-		these info from the mlx_get_data_addr function
-		size_line : the size of a line in bytes
-		bpp : the number of bits per pixel
-	*/
-	game->data[index] = color & 0xFF; //get the red color of the pixel
-	game->data[index + 1] = (color >> 8) & 0xFF; //get the green color of the pixel
-	game->data[index + 2] = (color >> 16) & 0xFF; //get the blue color of the pixel
-	/*
-		EXAMPLE:
-		color = 0x00FF00
-		0x00FF00 & 0xFF = 0x00
-		(0x00FF00 >> 8) & 0xFF = 0xFF
-		(0x00FF00 >> 16) & 0xFF = 0x00
-		so the pixel color is green
-	*/
-}
-
-/**
- *	@brief draw a square in the window
- *	@param x the x position of the square
- *	@param y the y position of the square
- *	@param size the size of the square
- *	@param color the color of the square
- *	@param game the game structure
- */
-void draw_square(int x, int y, int size, int color, t_data *game)
-{
 	int i = 0;
-	while (i < size)
+	while (data->map[i])
 	{
-		put_pixel(x + i, y, color, game); //draw the top line of the square
-		i++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		put_pixel(x, y + i, color, game); //draw the left line of the square
-		i++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		put_pixel(x + size, y + i, color, game); //draw the right line of the square
-		i++;
-	}
-	i = 0;
-	while (i < size)
-	{
-		put_pixel(x + i, y + size, color, game); //draw the bottom line of the square
-		i++;
-	}
-}
-
-/**
- * @brief draw the map
- * @param game the game structure
- * @note 1. if the map[y][x] is '1', draw the square
- */
-void draw_map(t_data *game)
-{
-	char **map = game->map;
-	int color = 0x0000FF;
-	int y = 0;
-	while(map[y])
-	{
-		int x = 0;
-		while (map[y][x])
+		int j = 0;
+		while (data->map[i][j])
 		{
-			if (map[y][x] == '1')
-				draw_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, color, game);
-			x++;
+			if (data->map[i][j] == 'N')
+			{
+				data->player.pos_x = (double)j + 0.5;
+				data->player.pos_y = (double)i + 0.5;
+			}
+			j++;
 		}
-		y++;
-	}
-}
-
-/**
- * @brief clear the image
- * @param game the game structure
- */
-void clear_trail(t_data *game)
-{
-	int y = 0;
-	while (y < HEIGHT)
-	{
-		int x = 0;
-		while (x < WIDTH)
-		{
-			put_pixel(x, y, 0, game); //clear the pixel
-			x++;
-		}
-		y++;
-	}
-}
-
-char **get_map()
-{
-	char **map = malloc(sizeof(char *) * 11);
-	map[0] = "111111111111";
-	map[1] = "100000000001";
-	map[2] = "100000000101";
-	map[3] = "101000000001";
-	map[4] = "100000000001";
-	map[5] = "100010000001";
-	map[6] = "100000000001";
-	map[7] = "100100000001";
-	map[8] = "100000000001";
-	map[9] = "111111111111";
-	map[10] = NULL;
-	return (map);
-}
-
-/**
- * @brief draw the background
- * @param game the game structure
- */
-void draw_background(t_data *game)
-{
-    int x, y;
-	int color;
-
-    for (y = 0; y < HEIGHT; y++)
-    {
-        for (x = 0; x < WIDTH; x++)
-        {
-            if (y < HEIGHT / 2)
-				color = SKY;
-			else
-				color = FLOOR;
-            put_pixel(x, y, color, game);
-        }
-    }
-}
-
-/**
- * @brief initialize the game
- * @param game the game structure
- */
-void init(t_data *game)
-{
-	game->mlx = mlx_init(); //initialize the mlx pointer
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "RAYCASTING"); //create window
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); //create a new image for window
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian); //function to get the image data
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0); //put the image to the window
-	init_player(&game->player);
-	game->map = get_map(); //initialize the map
-}
-
-/**
- * @brief check if the player view touch the wall
- * @param px the x position of the player view
- * @param py the y position of the player view
- * @param game the game structure
- * @return true if the player view touch the wall, false if the player view doesn't touch the wall
- */
-bool player_view(float px, float py, t_data *game)
-{
-	// //this for window size
-	// (void)game;
-	// if (px < 0 || py < 0 || px >= WIDTH || py >= HEIGHT)
-	// 	return (true);
-
-	//this for map size
-	int x = px / BLOCK_SIZE;
-	int y = py / BLOCK_SIZE;
-	if (game->map[y][x] == '1')
-		return (true);
-	return (false);
-}
-
-/**
- * @brief calculate the distance between two point (for view)
- * @param x1 the x position of the first point
- * @param y1 the y position of the first point
- * @return the distance between two point view
- */
-float distance(float x, float y)
-{
-	return (sqrt(x * x + y * y));
-}
-
-/**
- * @brief calculate the distance between two point (remove fish eye effect)
- * @param x1 the x position of the first point
- * @param y1 the y position of the first point
- * @param x2 the x position of the second point
- * @param y2 the y position of the second point
- * @param game the game structure
- * @return the distance between two point view
- */
-float fixed_distance(float x1, float y1, float x2, float y2, t_data *game)
-{
-	float delta_x = x2 - x1;
-	float delta_y = y2 - y1;
-	float angle = atan2(delta_y, delta_x) - game->player.angle;
-	float fix_dist = distance(delta_x, delta_y) * cos(angle);
-	return fix_dist;
-}
-
-/**
- *@brief view line from player
- *@param player the player structure
- *@param game the game structure
- *@param start_x the start angle of the line
- *@note 1. if "touch" function return false, draw the pixel
- */
-void draw_player_view( t_player *player, t_data *game, float start_x, int i)
-{
-	float cos_angle = cos(start_x);
-	float sin_angle = sin(start_x);
-	float ray_x = player->x;
-	float ray_y = player->y;
-	while (player_view(ray_x, ray_y, game) == false)
-	{
-		if (CHANGE_VIEW)
-			put_pixel(ray_x, ray_y, 0xFFFFFF, game);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
-	}
-	if (CHANGE_VIEW == 0)
-	{
-		// float dis = distance(ray_x - player->x, ray_y - player->y); //this cuse fish eye effect
-		float dis = fixed_distance(player->x, player->y, ray_x, ray_y, game); //this fix the fish eye effect
-		float height = (BLOCK_SIZE / dis) * (WIDTH / 2);
-		int start_y = (HEIGHT - height) / 2;
-		int end = start_y + height;
-		while (start_y < end)
-		{
-			put_pixel(i, start_y, 0x0000FF, game);
-			start_y++;
-		}
-	}
-}
-
-/**
- * @brief to move the square in the window
- * @param game the game structure
- * @return 0 is required by mlx_loop_hook
- */
-int draw_loop(t_data *game)
-{
-	t_player *player = &game->player;
-	move_player(player, game);
-	clear_trail(game);
-	if (CHANGE_VIEW == 0)
-		draw_background(game);
-	if (CHANGE_VIEW)
-	{
-		draw_square(player->x, player->y, 10, 0xFF0000, game);
-		draw_map(game);
-	}
-
-	//this for draw a line player view
-	// draw_line(player, game, player->angle);
-
-	//this for draw a player view
-	float fraction = PI / 3 / WIDTH; //get the triangle angle view
-	float start_x = player->angle - PI / 6; //triangle angle view start from player angle
-	int i = 0;
-	while (i < WIDTH)
-	{
-		draw_player_view(player, game, start_x, i); //draw the line from the player view
-		start_x += fraction; //increment the angle when draw the next line
 		i++;
 	}
 
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	return (0);
+	printf("-----------------DEBUG-----------------\n");
+	printf("color floor: #%lx\n", data->tex.hex_floor);
+	printf("color ceiling: #%lx\n", data->tex.hex_ceiling);
+	printf("texture north: %s\n", data->tex.north);
+	printf("texture south: %s\n", data->tex.south);
+	printf("texture east: %s\n", data->tex.east);
+	printf("texture west: %s\n", data->tex.west);
+	printf("Player pos: ");
+	printf("x = %f, y = %f\n", data->player.pos_x, data->player.pos_y);
+	printf("Player direction: %c ", data->player.dir);
+	printf("(x = %f, y = %f)\n", data->player.dir_x, data->player.dir_y);
+}
+
+void init_data(t_data *data)
+{
+	data->mlx = NULL;
+	data->win = NULL;
+	data->win_height = WIN_HEIGHT;
+	data->win_width = WIN_WIDTH;
+	data->map = NULL;
+	data->texture_pixels = NULL;
+	data->texture = NULL;
+
+	data->player.dir = '\0';
+	data->player.pos_x = 0;
+	data->player.pos_y = 0;
+	data->player.dir_x = 0;
+	data->player.dir_y = 0;
+	data->player.plane_x = 0;
+	data->player.plane_y = 0;
+	data->player.moved = 0;
+	data->player.move_x = 0;
+	data->player.move_y = 0;
+	data->player.rotate = 0;
+
+	data->tex.north = NULL;
+	data->tex.south = NULL;
+	data->tex.east = NULL;
+	data->tex.west = NULL;
+	data->tex.floor = 0;
+	data->tex.ceiling = 0;
+	data->tex.hex_ceiling = 0x0;
+	data->tex.hex_floor = 0x0;
+	data->tex.size = BLOCK_SIZE;
+	data->tex.step = 0;
+	data->tex.pos = 0;
+	data->tex.x = 0;
+	data->tex.y = 0;
+
+	data->img.img = NULL;
+	data->img.addr = NULL;
+	data->img.pixel_bits = 0;
+	data->img.size_line = 0;
+	data->img.endian = 0;
 }
 
 int main()
 {
-	t_data game;
-	init(&game);
-	mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
-	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
-	// mlx_hook(game.win, 4, 1L<<2, mouse_press, &game.player);
-	// mlx_hook(game.win, 5, 1L<<3, mouse_release, &game.player);
-	mlx_mouse_move(game.mlx, game.win, WIDTH / 2, HEIGHT / 2);
-	mlx_loop_hook(game.mlx, draw_loop, &game); //this function will keep calling the draw_loop function
-	mlx_loop(game.mlx);
-
-	return (0);
+	t_data data;
+	init_data(&data);
+	parse_arg(&data);
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "RAYCASTING");
+	init_image(&data);
+	render_images(&data);
+	input_control(&data);
+	mlx_loop_hook(data.mlx, rendering, &data);
+	mlx_loop(data.mlx);
 }
