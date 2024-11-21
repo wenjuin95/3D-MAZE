@@ -90,7 +90,7 @@ void draw_map(t_data *game)
 }
 
 /**
- * @brief clear the image
+ * @brief overwrite the trail with black color
  * @param game the game structure
  */
 void clear_trail(t_data *game)
@@ -108,6 +108,9 @@ void clear_trail(t_data *game)
 	}
 }
 
+/**
+ * @brief get the map
+*/
 char **get_map()
 {
 	char **map = malloc(sizeof(char *) * 11);
@@ -147,20 +150,6 @@ void draw_background(t_data *game)
     }
 }
 
-/**
- * @brief initialize the game
- * @param game the game structure
- */
-void init(t_data *game)
-{
-	game->mlx = mlx_init(); //initialize the mlx pointer
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "RAYCASTING"); //create window
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); //create a new image for window
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian); //function to get the image data
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0); //put the image to the window
-	init_player(&game->player);
-	game->map = get_map(); //initialize the map
-}
 
 /**
  * @brief check if the player view touch the wall
@@ -249,7 +238,7 @@ void draw_player_view( t_player *player, t_data *game, float start_x, int i)
 }
 
 /**
- * @brief to move the square in the window
+ * @brief to move the square in the window (in 2d)
  * @param game the game structure
  * @return 0 is required by mlx_loop_hook
  */
@@ -260,16 +249,16 @@ int draw_loop(t_data *game)
 	clear_trail(game);
 	if (CHANGE_VIEW == 0)
 		draw_background(game);
-	if (CHANGE_VIEW)
+	if (CHANGE_VIEW) //in 2d
 	{
 		draw_square(player->x, player->y, 10, 0xFF0000, game);
 		draw_map(game);
 	}
 
-	//this for draw a line player view
-	// draw_line(player, game, player->angle);
+	//this for draw a line player view (in 2d)
+	// draw_player_view(player, game, player->angle, 0);
 
-	//this for draw a player view
+	//this for draw a player view (in 3d)
 	float fraction = PI / 3 / WIDTH; //get the triangle angle view
 	float start_x = player->angle - PI / 6; //triangle angle view start from player angle
 	int i = 0;
@@ -284,14 +273,27 @@ int draw_loop(t_data *game)
 	return (0);
 }
 
+/**
+ * @brief initialize the game
+ * @param game the game structure
+ */
+void init(t_data *game)
+{
+	game->mlx = mlx_init(); //initialize the mlx pointer
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "RAYCASTING"); //create window
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); //create a new image for window
+	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian); //function to get the image data
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0); //put the image to the window
+	init_player(&game->player);
+	game->map = get_map(); //initialize the map
+}
+
 int main()
 {
 	t_data game;
 	init(&game);
 	mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
-	// mlx_hook(game.win, 4, 1L<<2, mouse_press, &game.player);
-	// mlx_hook(game.win, 5, 1L<<3, mouse_release, &game.player);
 	mlx_mouse_move(game.mlx, game.win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(game.mlx, draw_loop, &game); //this function will keep calling the draw_loop function
 	mlx_loop(game.mlx);

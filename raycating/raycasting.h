@@ -10,7 +10,7 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define BLOCK_SIZE 64
-# define CHANGE_VIEW 1 // 0 for raycasting, 1 for map view
+# define CHANGE_VIEW 0 // 0 for raycasting, 1 for map view
 # define SKY 0x000000
 # define FLOOR 0x808080
 
@@ -55,6 +55,10 @@ typedef struct s_data
 
 	t_player player;
 	char **map;
+
+	void *wall_img;
+	int img_width;
+	int img_height;
 }	t_data;
 
 void init_player(t_player *player);

@@ -78,50 +78,6 @@ int key_release(int keycode, t_player *player)
 }
 
 /**
- * @brief handle the mouse press event
- * @param button the button code
- * @param x the x position of the mouse
- * @param y the y position of the mouse
- * @param player the player structure
- * @return 0
- * @note 1. set flag to true when the mouse button is pressed
- */
-int mouse_press(int button, int x, int y, t_player *player)
-{
-    (void)x; // Unused parameter
-    (void)y; // Unused parameter
-
-    if (button == MOUSE_LEFT)
-        player->key_turn_left = true;
-    if (button == MOUSE_RIGHT)
-        player->key_turn_right = true;
-
-    return (0);
-}
-
-/**
- * @brief handle the mouse relase event
- * @param button the button code
- * @param x the x position of the mouse
- * @param y the y position of the mouse
- * @param player the player structure
- * @return 0
- * @note 1. set flag to true when the mouse button is released
- */
-int mouse_release(int button, int x, int y, t_player *player)
-{
-    (void)x; // Unused parameter
-    (void)y; // Unused parameter
-
-    if (button == MOUSE_LEFT)
-        player->key_turn_left = false;
-    if (button == MOUSE_RIGHT)
-        player->key_turn_right = false;
-
-    return (0);
-}
-
-/**
  * @brief move the player
  * @param player the player structure
  * @note 1. move the player based on the key press event
