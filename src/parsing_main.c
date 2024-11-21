@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/20 17:09:51 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/20 20:05:55 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	parse_struct(t_map *map)
 	map->floor = map->map[5];
 	map->ceiling = map->map[6];
 	map->map_layout = map->map + 8;
+	return (0);
 }
 
 int parse(int ac, char **av, t_arg *arg)
