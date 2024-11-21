@@ -290,8 +290,9 @@ int main()
 	init(&game);
 	mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
-	mlx_hook(game.win, 4, 1L<<2, mouse_press, &game.player);
-	mlx_hook(game.win, 5, 1L<<3, mouse_release, &game.player);
+	// mlx_hook(game.win, 4, 1L<<2, mouse_press, &game.player);
+	// mlx_hook(game.win, 5, 1L<<3, mouse_release, &game.player);
+	mlx_mouse_move(game.mlx, game.win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(game.mlx, draw_loop, &game); //this function will keep calling the draw_loop function
 	mlx_loop(game.mlx);
 

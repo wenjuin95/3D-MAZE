@@ -150,40 +150,36 @@ void move_player(t_player *player, t_data *game)
     {
         new_x = player->x + cos_angle * speed;
         new_y = player->y + sin_angle * speed;
-        if (player_view(new_x, new_y, game) == false)
-        {
-            player->x = new_x;
-            player->y = new_y;
-        }
+        if (player_view(new_x, player->y, game) == false) //check if player view is not block at x cordination
+			player->x = new_x; //get the new x cordination
+        if (player_view(player->x, new_y, game) == false) //check if player view is not block at y cordination
+			player->y = new_y; //get the new y cordination
     }
     if (player->key_down == true)
     {
         new_x = player->x - cos_angle * speed;
         new_y = player->y - sin_angle * speed;
-        if (player_view(new_x, new_y, game) == false)
-        {
-            player->x = new_x;
-            player->y = new_y;
-        }
+        if (player_view(new_x, player->y, game) == false)
+			player->x = new_x;
+        if (player_view(player->x, new_y, game) == false)
+			player->y = new_y;
     }
     if (player->key_left == true)
     {
         new_x = player->x + sin_angle * speed;
         new_y = player->y - cos_angle * speed;
-        if (player_view(new_x, new_y, game) == false)
-        {
-            player->x = new_x;
-            player->y = new_y;
-        }
+        if (player_view(new_x, player->y, game) == false)
+			player->x = new_x;
+        if (player_view(player->x, new_y, game) == false)
+			player->y = new_y;
     }
     if (player->key_right == true)
     {
         new_x = player->x - sin_angle * speed;
         new_y = player->y + cos_angle * speed;
-        if (player_view(new_x, new_y, game) == false)
-        {
-            player->x = new_x;
-            player->y = new_y;
-        }
+        if (player_view(new_x, player->y, game) == false)
+			player->x = new_x;
+        if (player_view(player->x, new_y, game) == false)
+			player->y = new_y;
     }
 }
