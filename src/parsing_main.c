@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/21 15:34:34 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/22 14:07:03 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ static int	get_line_nb(char *file)
 	char	*str;
 
 	lines_num = 0;
+	if (is_directory(file))
+		ft_error("File is a directory");
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		ft_error("Fail to open file");
-	str = get_next_line(fd);
-	while (str)
+	while ((str = get_next_line(fd)) != NULL)
 	{
+		printf("line: %s\n", str);
 		lines_num++;
 		free(str);
-		str = get_next_line(fd);
 	}
 	if (lines_num == 0)
 		ft_error("Map file is empty");
@@ -40,7 +39,6 @@ void    take_arg(int argc, char **argv, t_arg *arg)
     if (argc != 2)
         ft_error("Wrong number of arguments");
     arg->map_add = argv[1];
-    printf("Map address : %s\n", arg->map_add);
 }
 
 static char	**read_map_file(char *file, int lines_num)
@@ -110,16 +108,17 @@ int	parse_struct(t_map *map)
 	int i;
 
 	i = 8;
+	str = NULL;
 	map->north = cut_first3(map->map[0], ft_strlen(map->map[0]));
 	map->sout = cut_first3(map->map[1], ft_strlen(map->map[1]));
 	map->west = cut_first3(map->map[2], ft_strlen(map->map[2]));
 	map->east = cut_first3(map->map[3], ft_strlen(map->map[3]));
-	map->sprite = cut_first(map->map[4], ft_strlen(map->map[4]));
+	map->sprite = cut_first3(map->map[4], ft_strlen(map->map[4]));
 	map->floor = tranfer(cut_first3(map->map[5], ft_strlen(map->map[5])));
 	map->ceiling = tranfer(cut_first3(map->map[6], ft_strlen(map->map[6])));
 	while (i < map->map_height)
 	{
-		ft_strlcpy(str, map->map[i], ft_strlen(map->map[i]) + 1);
+		ft_strlcpy(str, map->map[i], ft_strlen(map->map[i]));
 		i++;
 	}
 	map->map_layout = ft_split(map->map[8], ' ');
@@ -127,11 +126,12 @@ int	parse_struct(t_map *map)
 	return (0);
 }
 
-int parse(int ac, char **av, t_arg *arg)
+int	parse(int ac, char **av, t_arg *arg)
 {
     take_arg(ac, av, arg);
 	check_valid_map_name(arg->map_add, ".cub");
     arg->map.map_height = get_line_nb(arg->map.map_add);
+	printf("map height: %d\n", arg->map.map_height);
     arg->map.map = read_map_file(arg->map.map_add, arg->map.map_height);
 	parse_struct(&arg->map);
     return (0); 

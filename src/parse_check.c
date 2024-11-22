@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:32:25 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/20 17:05:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/22 12:14:00 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,19 @@ void	check_valid_map_name(char *file, char *type)
 		ft_error("wrong file type");
 	}
 	free(extension);
+}
+
+bool	is_directory(char *file)
+{
+	int		fd;
+	bool	ret;
+
+	ret = false;
+	fd = open(file, O_DIRECTORY);
+	if (fd >= 0)
+	{
+		close (fd);
+		ret = true;
+	}
+	return (ret);
 }
