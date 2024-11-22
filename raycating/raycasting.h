@@ -22,6 +22,14 @@
 # define MAP_COLOR_FLOOR 0xE6E6E6 // Light Gray
 # define MAP_COLOR_CEILING 0x404040 // Dark Gray
 
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define LEFT 65361
+# define RIGHT 65363
+# define ESC 65307
+
 enum e_output
 {
 	SUCCESS = 0,
@@ -129,5 +137,7 @@ void init_ray(t_raycast *raycast);
 
 void raycasting(t_player *player, t_data *data);
 
+void input_control(t_data *data);
 
+int replace_img(t_data *data);
 #endif

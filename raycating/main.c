@@ -134,7 +134,7 @@ int main()
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "RAYCASTING");
 	init_image(&data);
 	render_images(&data);
-	// input_control(&data);
-	// mlx_loop_hook(data.mlx, rendering, &data);
+	input_control(&data);
+	mlx_loop_hook(data.mlx, replace_img, &data);
 	mlx_loop(data.mlx);
 }
