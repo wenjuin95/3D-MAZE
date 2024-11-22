@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/22 19:32:41 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/22 20:45:36 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,23 @@ char	*cut_first3(char *s, int len)
 // 	return (rgb);
 // }
 
+static void copy_2d_array(char **dest, char **src, int start, int src_height)
+{
+    int j;
+	int i;
+
+	i = start;
+	j = 0;
+    while(i < src_height)
+    {
+        ft_strlcpy(dest[j], src[i], ft_strlen(src[i]) - 1);
+		j++;
+		i++;
+    }
+}
+
 int	parse_struct(t_map *map)
 {
-	int i;
-	int	j;
-
-	j = 0;
-	i = 8;
 	map->north = cut_first3(map->map[0], ft_strlen(map->map[0]));
 	map->sout = cut_first3(map->map[1], ft_strlen(map->map[1]));
 	map->west = cut_first3(map->map[2], ft_strlen(map->map[2]));
@@ -127,13 +137,14 @@ int	parse_struct(t_map *map)
 	map->sprite = cut_first3(map->map[4], ft_strlen(map->map[4]));
 	map->floor = set_rgb(cut_first3(map->map[5], ft_strlen(map->map[5])));
 	map->ceiling = set_rgb(cut_first3(map->map[6], ft_strlen(map->map[6])));
-
-	while (i < map->map_height - 1)
-	{
-		map->map_layout[j] = ft_strdup(map->map[i]);
-		j++;
-		i++;
-	}
+	copy_2d_array(map->map_layout, map->map, 8, map->map_height);
+	// while (i < map->map_height - 1)
+	// {
+	// 	ft_strlcpy(map->map_layout[j], map->map[i], ft_strlen(map->map[i]) - 1);
+	// 	printf("map = %s\n", map->map_layout[j]);
+	// 	j++;
+	// 	i++;
+	// }
 	printf("ok\n\n\n");
 	error_handling(map);
 	return (0);
