@@ -4,10 +4,10 @@ void parse_arg(t_data *data)
 {
 	data->map = malloc(sizeof(char *) * 10);
 	data->map[0] = "111111111111111";
-	data->map[1] = "100000000000N01";
+	data->map[1] = "100000000000001";
 	data->map[2] = "100000000000001";
 	data->map[3] = "100000000000001";
-	data->map[4] = "100000000000001";
+	data->map[4] = "1000000N0000001";
 	data->map[5] = "100000000000001";
 	data->map[6] = "100000000000001";
 	data->map[7] = "100000000000001";
@@ -134,7 +134,7 @@ int main()
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "RAYCASTING");
 	init_image(&data);
 	render_images(&data);
-	input_control(&data);
-	mlx_loop_hook(data.mlx, rendering, &data);
+	// input_control(&data);
+	// mlx_loop_hook(data.mlx, rendering, &data);
 	mlx_loop(data.mlx);
 }
