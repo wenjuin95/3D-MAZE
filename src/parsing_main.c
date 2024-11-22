@@ -6,12 +6,16 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/22 14:07:03 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/22 19:32:41 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parse.h"
 
+/**
+ * get the number of lines in the file
+ * for read the file
+ */
 static int	get_line_nb(char *file)
 {
 	int		fd;
@@ -24,7 +28,6 @@ static int	get_line_nb(char *file)
 	fd = open(file, O_RDONLY);
 	while ((str = get_next_line(fd)) != NULL)
 	{
-		printf("line: %s\n", str);
 		lines_num++;
 		free(str);
 	}
@@ -34,6 +37,9 @@ static int	get_line_nb(char *file)
 	return (lines_num);
 }
 
+/**
+ * the function is parse the arg to the struct
+ */
 void    take_arg(int argc, char **argv, t_arg *arg)
 {
     if (argc != 2)
@@ -41,6 +47,9 @@ void    take_arg(int argc, char **argv, t_arg *arg)
     arg->map_add = argv[1];
 }
 
+/**
+ * read the file and store the map in a 2d array
+ */
 static char	**read_map_file(char *file, int lines_num)
 {
 	char	**map;
@@ -88,40 +97,44 @@ char	*cut_first3(char *s, int len)
 	return (str);	
 }
 
-static int *tranfer(char *str)
-{
-	char **split;
+// static int *tranfer(char *str)
+// {
+// 	char **split;
 
-	split = ft_split(str, ',');
-	int *rgb = malloc(sizeof(int) * 3);
-	rgb[0] = ft_atoi(split[0]);
-	rgb[1] = ft_atoi(split[1]);
-	rgb[2] = ft_atoi(split[2]);
-	if (!rgb)
-		ft_error("Fail to allocate memory");
-	return (rgb);
-}
+// 	split = ft_split(str, ',');
+// 	if (!split)
+// 		ft_error("Fail to allocate memory");
+// 	int *rgb = malloc(sizeof(int) * 3);
+// 	rgb[0] = ft_atoi(split[0]);
+// 	rgb[1] = ft_atoi(split[1]);
+// 	rgb[2] = ft_atoi(split[2]);
+// 	if (!rgb)
+// 		ft_error("Fail to allocate memory");
+// 	return (rgb);
+// }
 
 int	parse_struct(t_map *map)
 {
-	char *str;
 	int i;
+	int	j;
 
+	j = 0;
 	i = 8;
-	str = NULL;
 	map->north = cut_first3(map->map[0], ft_strlen(map->map[0]));
 	map->sout = cut_first3(map->map[1], ft_strlen(map->map[1]));
 	map->west = cut_first3(map->map[2], ft_strlen(map->map[2]));
 	map->east = cut_first3(map->map[3], ft_strlen(map->map[3]));
 	map->sprite = cut_first3(map->map[4], ft_strlen(map->map[4]));
-	map->floor = tranfer(cut_first3(map->map[5], ft_strlen(map->map[5])));
-	map->ceiling = tranfer(cut_first3(map->map[6], ft_strlen(map->map[6])));
-	while (i < map->map_height)
+	map->floor = set_rgb(cut_first3(map->map[5], ft_strlen(map->map[5])));
+	map->ceiling = set_rgb(cut_first3(map->map[6], ft_strlen(map->map[6])));
+
+	while (i < map->map_height - 1)
 	{
-		ft_strlcpy(str, map->map[i], ft_strlen(map->map[i]));
+		map->map_layout[j] = ft_strdup(map->map[i]);
+		j++;
 		i++;
 	}
-	map->map_layout = ft_split(map->map[8], ' ');
+	printf("ok\n\n\n");
 	error_handling(map);
 	return (0);
 }
@@ -130,9 +143,8 @@ int	parse(int ac, char **av, t_arg *arg)
 {
     take_arg(ac, av, arg);
 	check_valid_map_name(arg->map_add, ".cub");
-    arg->map.map_height = get_line_nb(arg->map.map_add);
-	printf("map height: %d\n", arg->map.map_height);
-    arg->map.map = read_map_file(arg->map.map_add, arg->map.map_height);
+    arg->map.map_height = get_line_nb(av[1]);
+    arg->map.map = read_map_file(av[1], arg->map.map_height);
 	parse_struct(&arg->map);
     return (0); 
 }

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/11/21 17:40:50 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/22 14:44:54 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int main(int argc, char **argv)
 
     if (parse(argc, argv, &arg) == 1)
         return (1);
+    printf("parsing okay\n");
     return (0);
 }
