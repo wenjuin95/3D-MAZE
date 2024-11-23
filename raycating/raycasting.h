@@ -12,7 +12,7 @@
 # define WIN_HEIGHT 480
 # define BLOCK_SIZE 64
 
-# define MOVE_SPEED 5
+# define MOVE_SPEED 0.1
 # define ROT_SPEED 0.03
 
 # define MAP_PIXEL_SIZE 128
@@ -139,5 +139,6 @@ void raycasting(t_player *player, t_data *data);
 
 void input_control(t_data *data);
 
-int replace_img(t_data *data);
+int replace_i(t_data *data);
+
 #endif

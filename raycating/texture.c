@@ -23,7 +23,7 @@ static int *xpm_to_img(t_data *data, char *path)
 		x = 0;
 		while (x < data->tex.size)
 		{
-			buffer[y * data->tex.size + x] = tmp.addr[y * data->tex.size + x];
+			buffer[y * data->tex.size + x] = tmp.addr[y * data->tex.size + x]; // store the pixel data in the buffer
 			x++;
 		}
 		y++;

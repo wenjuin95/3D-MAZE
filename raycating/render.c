@@ -48,17 +48,17 @@ void set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 {
 	int pixel;
 
-	if (data->texture_pixels[y][x] > 0)
+	if (data->texture_pixels[y][x] > 0) // if the pixel is not empty
 	{
 		pixel = y * ( image->size_line / 4 ) + x;
 		image->addr[pixel] = data->texture_pixels[y][x];
 	}
-	else if (y < data->win_height / 2)
+	else if (y < data->win_height / 2) // if the pixel is empty and the y position is less than half of the window height
 	{
 		pixel = y * ( image->size_line / 4 ) + x;
 		image->addr[pixel] = data->tex.hex_ceiling;
 	}
-	else if (y < data->win_height - 1)
+	else if (y < data->win_height - 1) // if the pixel is empty and the y position is less than the window height minus 1
 	{
 		pixel = y * ( image->size_line / 4 ) + x;
 		image->addr[pixel] = data->tex.hex_floor;
