@@ -10,7 +10,7 @@
 # define WIDTH 1280
 # define HEIGHT 720
 # define BLOCK_SIZE 64
-# define CHANGE_VIEW 0 // 0 for raycasting, 1 for map view
+# define CHANGE_VIEW 1 // 0 for raycasting, 1 for map view
 # define SKY 0x000000
 # define FLOOR 0x808080
 
@@ -24,7 +24,7 @@
 # define MOUSE_RIGHT 3
 # define ESC 65307
 
-# define PI 3.14159265359
+# define PI 3.142
 
 
 typedef struct s_player

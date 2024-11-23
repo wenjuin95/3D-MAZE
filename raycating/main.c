@@ -66,6 +66,24 @@ void draw_square(int x, int y, int size, int color, t_data *game)
 	}
 }
 
+void draw_grid(t_data *game)
+{
+	char **map = game->map;
+	int color = 0x666666;
+	int y = 0;
+	while(map[y])
+	{
+		int x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == '0')
+				draw_square(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, color, game);
+			x++;
+		}
+		y++;
+	}
+}
+
 /**
  * @brief draw the map
  * @param game the game structure
@@ -117,11 +135,11 @@ char **get_map()
 	map[0] = "111111111111";
 	map[1] = "100000000001";
 	map[2] = "100000000101";
-	map[3] = "101000000001";
+	map[3] = "100000000001";
 	map[4] = "100000000001";
 	map[5] = "100010000001";
-	map[6] = "100000000001";
-	map[7] = "100100000001";
+	map[6] = "100001000001";
+	map[7] = "100100100001";
 	map[8] = "100000000001";
 	map[9] = "111111111111";
 	map[10] = NULL;
@@ -211,21 +229,26 @@ float fixed_distance(float x1, float y1, float x2, float y2, t_data *game)
  */
 void draw_player_view( t_player *player, t_data *game, float start_x, int i)
 {
-	float cos_angle = cos(start_x);
-	float sin_angle = sin(start_x);
-	float ray_x = player->x;
-	float ray_y = player->y;
-	while (player_view(ray_x, ray_y, game) == false)
+	printf("\nori angle: %f\n", start_x);
+	float cos_angle = cos(start_x); //
+	printf("cos_angle: %f\n", cos_angle);
+	float sin_angle = sin(start_x); //next y cordination length
+	printf("sin_angle: %f\n", sin_angle);
+	float coordinate_x = player->x; //start x cordination
+	printf("coordinate_x: %f\n", coordinate_x);
+	float coordinate_y = player->y; //start y cordination
+	printf("coordinate_y: %f\n\n", coordinate_y);
+	while (player_view(coordinate_x, coordinate_y, game) == false) //if the ray not touch the wall
 	{
-		if (CHANGE_VIEW)
-			put_pixel(ray_x, ray_y, 0xFFFFFF, game);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
+		if (CHANGE_VIEW == 1)
+			put_pixel(coordinate_x, coordinate_y, 0x00FF00, game); //keep drawing the ray
+		coordinate_x += cos_angle; //move x cordinate to the next pixel
+		coordinate_y += sin_angle; //move y cordinate to the next pixel
 	}
 	if (CHANGE_VIEW == 0)
 	{
-		// float dis = distance(ray_x - player->x, ray_y - player->y); //this cuse fish eye effect
-		float dis = fixed_distance(player->x, player->y, ray_x, ray_y, game); //this fix the fish eye effect
+		// float dis = distance(coordinate_x - player->x, coordinate_y - player->y); //this cuse fish eye effect
+		float dis = fixed_distance(player->x, player->y, coordinate_x, coordinate_y, game); //this fix the fish eye effect
 		float height = (BLOCK_SIZE / dis) * (WIDTH / 2);
 		int start_y = (HEIGHT - height) / 2;
 		int end = start_y + height;
@@ -252,22 +275,29 @@ int draw_loop(t_data *game)
 	if (CHANGE_VIEW) //in 2d
 	{
 		draw_square(player->x, player->y, 10, 0xFF0000, game);
+		draw_grid(game);
 		draw_map(game);
 	}
 
 	//this for draw a line player view (in 2d)
-	// draw_player_view(player, game, player->angle, 0);
+	draw_player_view(player, game, player->angle, 0);
 
-	//this for draw a player view (in 3d)
-	float fraction = PI / 3 / WIDTH; //get the triangle angle view
-	float start_x = player->angle - PI / 6; //triangle angle view start from player angle
-	int i = 0;
-	while (i < WIDTH)
-	{
-		draw_player_view(player, game, start_x, i); //draw the line from the player view
-		start_x += fraction; //increment the angle when draw the next line
-		i++;
-	}
+	// //this for draw a player view (in 3d)
+	// float fraction = ((PI / 3) / WIDTH) * 1; //calculate how much angle per line
+	// //"PI / 3" is the angle of the triangle view
+	// // "WIDTH" is the number of line to draw
+	// printf("\nfraction: %f\n", fraction);
+	// float start_x = player->angle - (PI / 6); // calculate where the field of view starts (the leftmost ray).
+	// // "PI / 6" is the half of the triangle view (30 degree)
+	// // "player->angle" is the player angle
+	// printf("start_x: %f\n\n", start_x);
+	// int i = 0;
+	// while (i < WIDTH)
+	// {
+	// 	draw_player_view(player, game, start_x, i); //draw the line from the player view
+	// 	start_x += fraction ; //move to the next angle line
+	// 	i+= 1; //move to the next line
+	// }
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
