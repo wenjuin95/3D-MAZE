@@ -1,6 +1,6 @@
 #include "raycasting.h"
 
-//store pixel data for rendering textures
+//create a 2D array to store the pixels of the texture
 static void init_texture_pixels(t_data *data)
 {
 	data->texture_pixels = ft_calloc(data->win_height + 1, sizeof *data->texture_pixels);
@@ -14,23 +14,23 @@ static void init_texture_pixels(t_data *data)
 
 void init_ray(t_raycast *raycast)
 {
-	raycast->camera_x = 0;
-	raycast->dir_x = 0;
-	raycast->dir_y = 0;
-	raycast->map_x = 0;
-	raycast->map_y = 0;
-	raycast->step_x = 0;
-	raycast->step_y = 0;
-	raycast->side_dist_x = 0;
-	raycast->side_dist_y = 0;
-	raycast->delta_dist_x = 0;
-	raycast->delta_dist_y = 0;
-	raycast->wall_dis = 0;
-	raycast->wall_x = 0;
-	raycast->side = 0;
-	raycast->line_height = 0;
-	raycast->draw_start = 0;
-	raycast->draw_end = 0;
+	raycast->camera_x = 0; // x position of the camera
+	raycast->dir_x = 0; // x direction of the camera
+	raycast->dir_y = 0; // y direction of the camera
+	raycast->map_x = 0; // x position of the map
+	raycast->map_y = 0; // y position of the map
+	raycast->step_x = 0; // x step of the ray
+	raycast->step_y = 0; // y step of the ray
+	raycast->side_dist_x = 0; // x distance of the side
+	raycast->side_dist_y = 0; // y distance of the side
+	raycast->delta_dist_x = 0; //delta distance of the x
+	raycast->delta_dist_y = 0; //delta distance of the y
+	raycast->wall_dis = 0; // distance to the wall
+	raycast->wall_x = 0; // x position of the wall
+	raycast->side = 0; // side of the wall
+	raycast->line_height = 0; // height of the line
+	raycast->draw_start = 0; // start of the drawing
+	raycast->draw_end = 0; // end of the drawing
 }
 
 void init_img(t_data *data, t_img *image, int width, int height)

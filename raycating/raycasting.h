@@ -12,7 +12,7 @@
 # define WIN_HEIGHT 480
 # define BLOCK_SIZE 64
 
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 0.011
 # define ROT_SPEED 0.03
 
 # define MAP_PIXEL_SIZE 128

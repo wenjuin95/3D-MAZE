@@ -1,11 +1,13 @@
 #include "raycasting.h"
 
+//convert xpm to img
 static void init_texture_img(t_data *data, t_img *img, char *path)
 {
 	img->img = mlx_xpm_file_to_image(data->mlx, path, &data->tex.size, &data->tex.size);
 	img->addr = (int *)mlx_get_data_addr(img->img, &img->pixel_bits, &img->size_line, &img->endian);
 }
 
+// Function to convert the xpm to img and store the pixel data in a buffer and delete the image
 static int *xpm_to_img(t_data *data, char *path)
 {
 	t_img tmp;
@@ -23,12 +25,12 @@ static int *xpm_to_img(t_data *data, char *path)
 		x = 0;
 		while (x < data->tex.size)
 		{
-			buffer[y * data->tex.size + x] = tmp.addr[y * data->tex.size + x]; // store the pixel data in the buffer
+			buffer[y * data->tex.size + x] = tmp.addr[y * data->tex.size + x]; // copy the pixel data in the buffer
 			x++;
 		}
 		y++;
 	}
-	mlx_destroy_image(data->mlx, tmp.img);
+	mlx_destroy_image(data->mlx, tmp.img); //after storing the pixel data, destroy the image
 	return (buffer);
 }
 
@@ -42,16 +44,17 @@ void print_texture(int *texture, int size) {
     }
 }
 
+
 void init_image(t_data *data)
 {
 	data->texture = ft_calloc(5, sizeof * data->texture);
-	data->texture[NORTH] = xpm_to_img(data, data->tex.north);
-	data->texture[SOUTH] = xpm_to_img(data, data->tex.south);
-	data->texture[EAST] = xpm_to_img(data, data->tex.east);
-	data->texture[WEST] = xpm_to_img(data, data->tex.west);
-	// printf("--------------DEBUG TEXTURE--------------\n");
-	// printf("texture[NORTH]: ");
-	// print_texture(data->texture[NORTH], data->tex.size);
+	data->texture[NORTH] = xpm_to_img(data, data->tex.north); //pixel data of the north texture
+	data->texture[SOUTH] = xpm_to_img(data, data->tex.south); //pixel data of the south texture
+	data->texture[EAST] = xpm_to_img(data, data->tex.east); //pixel data of the east texture
+	data->texture[WEST] = xpm_to_img(data, data->tex.west); //pixel data of the west texture
+	printf("--------------DEBUG TEXTURE--------------\n");
+	printf("texture[NORTH]: ");
+	print_texture(data->texture[NORTH], data->tex.size);
 	// printf("texture[SOUTH]: ");
 	// print_texture(data->texture[SOUTH], data->tex.size);
 	// printf("texture[EAST]: ");

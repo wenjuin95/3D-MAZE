@@ -3,12 +3,13 @@
 static void init_raycast_info(int x, t_raycast *raycast, t_player *player)
 {
 	init_ray(raycast);
-	raycast->camera_x = 2 * x / (double)WIN_WIDTH - 1; // x-coordinate in camera space
+	raycast->camera_x = 2 * x / (double)WIN_WIDTH - 1; // x-coordinate in camera space (from -1 to 1)
 	raycast->dir_x = player->dir_x + player->plane_x * raycast->camera_x; // x direction of the ray
 	raycast->dir_y = player->dir_y + player->plane_y * raycast->camera_x; // y direction of the ray
 	raycast->map_x = (int)player->pos_x; // x position in the map
 	raycast->map_y = (int)player->pos_y; // y position in the map
 	raycast->delta_dist_x = fabs(1 / raycast->dir_x); // x distance of the delta
+	//"fabs" is a function that returns the absolute value of a floating point number
 	raycast->delta_dist_y = fabs(1 / raycast->dir_y); // y distance of the delta
 }
 
@@ -130,7 +131,7 @@ void raycasting(t_player *player, t_data *data)
 
 	x = 0;
 	raycast = data->raycast;
-	while (x < data->win_width)
+	while (x < data->win_width) // loop through the width of the window
 	{
 		init_raycast_info(x, &raycast, player);
 		set_dda(&raycast, player);
