@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/22 19:33:18 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/24 11:25:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef struct s_map
 {
+    int     mapl_len;
     char    **map;
     int     map_height;
     int     map_width;
@@ -47,6 +48,12 @@ typedef struct s_arg
     t_map   map;
 }               t_arg;
 
+// Free functions
+void free_arg(t_arg *arg);
+
+//initialize
+void    initialize_arg(t_arg *arg);
+
 // parsing
 void    take_arg(int argc, char **argv, t_arg *arg);
 int     parse(int ac, char **av, t_arg *arg);
@@ -62,5 +69,6 @@ void    free_2d(char **str);
 //convert
 int     *set_rgb(char *line);
 size_t	convert_rgb_to_hex(int *rgb_tab);
+char	**copy_2d_array(char **src, int start, int src_height);
 
 #endif

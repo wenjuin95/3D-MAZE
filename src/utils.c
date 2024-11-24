@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/22 15:14:09 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/24 10:37:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void   ft_error(char *str)
 {
     printf("Error : %s\n", str);
-    exit(1);
 }
 
 void    free_2d(char **str)

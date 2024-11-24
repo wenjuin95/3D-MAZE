@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/22 20:45:36 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/24 11:13:50 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	get_line_nb(char *file)
 	if (is_directory(file))
 		ft_error("File is a directory");
 	fd = open(file, O_RDONLY);
-	while ((str = get_next_line(fd)) != NULL)
+	while ((str = get_next_line(fd)))
 	{
 		lines_num++;
 		free(str);
 	}
 	if (lines_num == 0)
-		ft_error("Map file is empty");
+		return (ft_error("Map file is empty"), -1);
 	close(fd);
 	return (lines_num);
 }
@@ -111,21 +111,26 @@ char	*cut_first3(char *s, int len)
 // 	if (!rgb)
 // 		ft_error("Fail to allocate memory");
 // 	return (rgb);
-// }
-
-static void copy_2d_array(char **dest, char **src, int start, int src_height)
+char	**copy_2d_array(char **src, int start, int src_height)
 {
     int j;
 	int i;
+	char **dest;
 
 	i = start;
 	j = 0;
+	dest = malloc(sizeof(char *) * src_height);
     while(i < src_height)
     {
         ft_strlcpy(dest[j], src[i], ft_strlen(src[i]) - 1);
 		j++;
 		i++;
     }
+	free_2d(src);
+	j = -1;
+	while (++j)
+		printf("map = %s\n", dest[j]);
+	return (dest);
 }
 
 int	parse_struct(t_map *map)
@@ -137,14 +142,7 @@ int	parse_struct(t_map *map)
 	map->sprite = cut_first3(map->map[4], ft_strlen(map->map[4]));
 	map->floor = set_rgb(cut_first3(map->map[5], ft_strlen(map->map[5])));
 	map->ceiling = set_rgb(cut_first3(map->map[6], ft_strlen(map->map[6])));
-	copy_2d_array(map->map_layout, map->map, 8, map->map_height);
-	// while (i < map->map_height - 1)
-	// {
-	// 	ft_strlcpy(map->map_layout[j], map->map[i], ft_strlen(map->map[i]) - 1);
-	// 	printf("map = %s\n", map->map_layout[j]);
-	// 	j++;
-	// 	i++;
-	// }
+	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
 	printf("ok\n\n\n");
 	error_handling(map);
 	return (0);
@@ -155,6 +153,8 @@ int	parse(int ac, char **av, t_arg *arg)
     take_arg(ac, av, arg);
 	check_valid_map_name(arg->map_add, ".cub");
     arg->map.map_height = get_line_nb(av[1]);
+	if (arg->map.map_height == -1)
+		return (1);
     arg->map.map = read_map_file(av[1], arg->map.map_height);
 	parse_struct(&arg->map);
     return (0); 
