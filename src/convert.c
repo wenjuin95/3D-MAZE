@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:29:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/22 19:33:10 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/25 17:09:00 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/parse.h"
+#include "../include/parse.h"
 
 size_t	convert_rgb_to_hex(int *rgb_tab)
 {
 	size_t	result;
-	int				r;
-	int				g;
-	int				b;
+	int		r;
+	int		g;
+	int		b;
 
 	r = rgb_tab[0];
 	g = rgb_tab[1];
@@ -26,9 +26,11 @@ size_t	convert_rgb_to_hex(int *rgb_tab)
 	return (result);
 }
 
-static int *copy_to_rgb_array(char **rgb_to_convert, int *rgb)
+static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (rgb_to_convert[i])
 	{
 		rgb[i] = ft_atoi(rgb_to_convert[i]);
@@ -37,14 +39,18 @@ static int *copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 	return (rgb);
 }
 
-int *set_rgb(char *line)
+int	*set_rgb(char *line)
 {
-	char **rgb_to_convert = ft_split(line, ',');
-	int count = 0;
+	char	**rgb_to_convert;
+	int		count;
+	int		*rgb;
+
+	count = 0;
+	rgb_to_convert = ft_split(line, ',');
 	while (rgb_to_convert[count])
 		count++;
 	if (count != 3)
 		return (0);
-	int *rgb = malloc(sizeof(int) * 3);
+	rgb = malloc(sizeof(int) * 3);
 	return (copy_to_rgb_array(rgb_to_convert, rgb));
 }

@@ -20,6 +20,7 @@
 # include <limits.h>
 # include <stdio.h>
 # include <stdarg.h>
+# include <stddef.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 15
@@ -51,6 +52,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strcpy(char *dest, char *src);
 
 /* memory */
 void	ft_bzero(void *s, size_t n);
@@ -87,11 +89,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 /* get_next_line */
-char	*ft_strjoin_free(char *line, char *buffer);
+char	*ft_free(char *buffer, char *buf);
+char	*ft_next(char *buffer);
 char	*get_next_line(int fd);
-char	*create_line(int fd, char *line);
-char	*get_only_next_line(char *line);
-char	*new_line(char *line);
+char	*ft_line(char *buffer);
+char	*read_file(int fd, char *res);
 
 /*printf*/
 char	ft_putchar(char c);

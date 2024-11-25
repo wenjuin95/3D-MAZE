@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 16:42:24 by chtan            ###   ########.fr       */
+/*   Created: 2024/11/25 14:50:49 by chtan             #+#    #+#             */
+/*   Updated: 2024/11/25 14:51:01 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parse.h"
+#include "libft.h"
 
-void	ft_error(char *str)
-{
-	printf("Error : %s\n", str);
-}
-
-void	free_2d(char **str)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (src[i])
 	{
-		free(str[i]);
+		dest[i] = src[i];
 		i++;
 	}
-	free(str);
+	dest[i] = '\0';
+	return (dest);
 }
