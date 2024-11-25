@@ -24,7 +24,7 @@ void parse_arg(t_data *data)
 	data->tex.east = "wood.xpm";
 	data->tex.west = "wood.xpm";
 	data->tex.floor = set_rgb("138, 138, 138"); //set floor color
-	data->tex.ceiling = set_rgb("179, 131, 0"); //set ceiling color
+	data->tex.ceiling = set_rgb("56, 182, 255"); //set ceiling color
 	data->tex.hex_floor = convert_rgb_to_hex(data->tex.floor); //convert floor color to hex
 	data->tex.hex_ceiling = convert_rgb_to_hex(data->tex.ceiling); //convert ceiling color to hex
 	data->player.dir = 'N';
@@ -34,7 +34,7 @@ void parse_arg(t_data *data)
 	{
 
 		//this coordinate will point to (x = -1, y = 0)
-		data->player.dir_x = -1.0; 
+		data->player.dir_x = -1.0;
 		data->player.dir_y = 0.0;
 
 		//this coordinate will point to (x = 0, y = -0.66) and you also get (x = 0, y = 0.66)
@@ -46,14 +46,14 @@ void parse_arg(t_data *data)
 		/**
 		 * Why Only One Vector is Defined in Your Code
 		 * In your code, the camera plane vector (0.66, 0) represents the right side of the camera plane relative to the player's current direction. The left side is derived automatically during the rendering process because it is simply the negative of the right side.
-		 * 
+		 *
 		 * How (-0.66, 0) is Derived
 		 * For a field of view:
 		 * The full camera plane spans symmetrically around the direction vector.
 		 * If the right side of the camera plane is (0.66, 0), the left side will be (-0.66, 0) because:
 		 * > Left = −1 × Right Vector
 		 * So, for (0.66, 0), the opposite side becomes (-0.66, 0).
-		 * 
+		 *
 		 * In Raycasting:
 		 * When casting rays:
 		 * Rays are spread across the full field of view.
@@ -61,7 +61,7 @@ void parse_arg(t_data *data)
 		 * > Ray Direction = Direction Vector + (Camera Plane Vector × Interpolation Factor)
 		 * >> For the left edge, the interpolation factor is -1 (leading to (-0.66, 0)).
 		 * >> For the right edge, the interpolation factor is +1 (keeping (0.66, 0)).
-		 * 
+		 *
 		 * Code Behavior
 		 * Your code specifies the player's view direction (dir_x, dir_y) and the camera plane's right vector. The left side is implicit because it's symmetric and is derived during calculations.
 		*/
@@ -86,7 +86,7 @@ void parse_arg(t_data *data)
 		data->player.dir_y = 1.0;
 
 		//this coordinate will point to (x = -0.66, y = 0) and you also get (x = 0.66, y = 0)
-		//it mean a whole horizontal line 
+		//it mean a whole horizontal line
 		data->player.plane_x = -0.66;
 		data->player.plane_y = 0.0;
 	}
