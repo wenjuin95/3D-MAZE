@@ -4,59 +4,63 @@ static void init_raycast_info(int x, t_raycast *raycast, t_player *player)
 {
 	init_ray(raycast);
 	raycast->camera_x = 2 * x / (double)WIN_WIDTH - 1; // x-coordinate in camera space (from -1 to 1)
+	//"2 * x / (double)WIN_WIDTH - 1"
+	printf("2 * %d / %d - 1 = %f\n", x, WIN_WIDTH, raycast->camera_x);
 	raycast->dir_x = player->dir_x + player->plane_x * raycast->camera_x; // x direction of the ray
 	raycast->dir_y = player->dir_y + player->plane_y * raycast->camera_x; // y direction of the ray
 	raycast->map_x = (int)player->pos_x; // x position in the map
 	raycast->map_y = (int)player->pos_y; // y position in the map
-	raycast->delta_dist_x = fabs(1 / raycast->dir_x); // x distance of the delta
+	raycast->delta_dist_x = fabs(1 / raycast->dir_x); // x distance of the delta x
 	//"fabs" is a function that returns the absolute value of a floating point number
-	raycast->delta_dist_y = fabs(1 / raycast->dir_y); // y distance of the delta
+	raycast->delta_dist_y = fabs(1 / raycast->dir_y); // y distance of the delta y
 }
 
+//set the step and side distance of the ray
 static void set_dda(t_raycast *raycast, t_player *player)
 {
-	if (raycast->dir_x < 0)
+	if (raycast->dir_x < 0) //if the x drection is left
 	{
 		raycast->step_x = -1;
 		raycast->side_dist_x = (player->pos_x - raycast->map_x) * raycast->delta_dist_x;
 	}
-	else
+	else //if the x direction is right
 	{
 		raycast->step_x = 1;
 		raycast->side_dist_x = (raycast->map_x + 1.0 - player->pos_x) * raycast->delta_dist_x;
 	}
-	if (raycast->dir_y < 0)
+	if (raycast->dir_y < 0) //if the y direction is up
 	{
 		raycast->step_y = -1;
 		raycast->side_dist_y = (player->pos_y - raycast->map_y) * raycast->delta_dist_y;
 	}
-	else
+	else //if the y direction is down
 	{
 		raycast->step_y = 1;
 		raycast->side_dist_y = (raycast->map_y + 1.0 - player->pos_y) * raycast->delta_dist_y;
 	}
 }
 
+//check is the ray hit the wall
 static void perform_dda(t_data *data, t_raycast *raycast)
 {
 	int hit = 0;
-	while (hit == 0)
+	while (hit == 0) //if it hit the wall
 	{
-		if (raycast->side_dist_x < raycast->side_dist_y)
+		if (raycast->side_dist_x < raycast->side_dist_y) //if the x distance of the side is less than the y distance of the side
 		{
 			raycast->side_dist_x += raycast->delta_dist_x;
 			raycast->map_x += raycast->step_x;
 			raycast->side = 0;
 		}
-		else
+		else //if the y distance of the side is less than the x distance of the side
 		{
 			raycast->side_dist_y += raycast->delta_dist_y;
 			raycast->map_y += raycast->step_y;
 			raycast->side = 1;
 		}
-		if (raycast->map_y < 0.25 || raycast->map_x < 0.25)
+		if (raycast->map_y < 0.25 || raycast->map_x < 0.25) // if the map in coordinate x and y is less than 0.25 (0.25 is the size of the block)
 			break ;
-		else if (data->map[raycast->map_y][raycast->map_x] == '1')
+		else if (data->map[raycast->map_y][raycast->map_x] == '1') //if the map in coordinate x and y is a wall
 			hit = 1;
 	}
 }

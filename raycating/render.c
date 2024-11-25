@@ -12,6 +12,7 @@ static void init_texture_pixels(t_data *data)
 	}
 }
 
+//initialize ray
 void init_ray(t_raycast *raycast)
 {
 	raycast->camera_x = 0; // x position of the camera
@@ -90,8 +91,8 @@ void render_frame(t_data* data)
 
 void render_images(t_data *data)
 {
-	init_texture_pixels(data);
-	init_ray(&data->raycast);
+	init_texture_pixels(data); //initialize texture pixels
+	init_ray(&data->raycast); //initialize ray
 	raycasting(&data->player, data);
 	render_frame(data);
 }

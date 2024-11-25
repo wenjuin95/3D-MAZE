@@ -16,6 +16,8 @@ static int *xpm_to_img(t_data *data, char *path)
 	int y;
 
 	init_texture_img(data, &tmp, path);
+	ft_printf("address: %d\n", tmp.addr);
+
 
 	//convert the image to a buffer of pixel data
 	buffer = ft_calloc(1, sizeof * buffer * data->tex.size * data->tex.size);
@@ -26,6 +28,7 @@ static int *xpm_to_img(t_data *data, char *path)
 		while (x < data->tex.size)
 		{
 			buffer[y * data->tex.size + x] = tmp.addr[y * data->tex.size + x]; // copy the pixel data in the buffer
+			//"y * data->tex.size + x * 4" is the beginning of the pixel data
 			x++;
 		}
 		y++;
@@ -52,13 +55,4 @@ void init_image(t_data *data)
 	data->texture[SOUTH] = xpm_to_img(data, data->tex.south); //pixel data of the south texture
 	data->texture[EAST] = xpm_to_img(data, data->tex.east); //pixel data of the east texture
 	data->texture[WEST] = xpm_to_img(data, data->tex.west); //pixel data of the west texture
-	printf("--------------DEBUG TEXTURE--------------\n");
-	printf("texture[NORTH]: ");
-	print_texture(data->texture[NORTH], data->tex.size);
-	// printf("texture[SOUTH]: ");
-	// print_texture(data->texture[SOUTH], data->tex.size);
-	// printf("texture[EAST]: ");
-	// print_texture(data->texture[EAST], data->tex.size);
-	// printf("texture[WEST]: ");
-	// print_texture(data->texture[WEST], data->tex.size);
 }
