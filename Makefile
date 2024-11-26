@@ -1,10 +1,10 @@
 NAME = cub3d
 
-CC = gcc
+CC = clang
 
 FSANITIZE = -fsanitize=address
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g3
 
 SRC = src/*.c
 
