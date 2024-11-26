@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/26 10:57:09 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 13:21:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	error_handling(t_map *map)
 int	parse_struct(t_map *map)
 {
 	map->mapl_len = map->map_height - 8;
-	map->north = cut_first3(map->map[0], ft_strlen(map->map[0]), 3);
-	map->sout = cut_first3(map->map[1], ft_strlen(map->map[1]), 3);
-	map->west = cut_first3(map->map[2], ft_strlen(map->map[2]), 3);
-	map->east = cut_first3(map->map[3], ft_strlen(map->map[3]), 3);
-	map->sprite = cut_first3(map->map[4], ft_strlen(map->map[4]), 2);
+	map->north = ft_strdup(cut_first3(map->map[0], ft_strlen(map->map[0]), 3));
+	map->sout = ft_strdup(cut_first3(map->map[1], ft_strlen(map->map[1]), 3));
+	map->west = ft_strdup(cut_first3(map->map[2], ft_strlen(map->map[2]), 3));
+	map->east = ft_strdup(cut_first3(map->map[3], ft_strlen(map->map[3]), 3));
+	map->sprite = ft_strdup(cut_first3(map->map[4], ft_strlen(map->map[4]), 2));
 	map->floor = set_rgb(cut_first3(map->map[5], ft_strlen(map->map[5]), 2));
 	map->ceiling = set_rgb(cut_first3(map->map[6], ft_strlen(map->map[6]), 2));
 	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
@@ -60,13 +60,14 @@ char	*cut_first3(char *s, int len, int start)
 
 	i = start;
 	j = 0;
-	str = malloc(sizeof(char) * len - 2);
+	str = malloc(sizeof(char) * (len - start + 1));
 	while (i < len)
 	{
 		str[j] = s[i];
 		j++;
 		i++;
 	}
+	str[j] = '\0';
 	return (str);
 }
 

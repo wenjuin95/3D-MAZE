@@ -3,7 +3,7 @@ NAME = cub3d
 CC = gcc
 
 # CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror -g3 
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 # directory that contains source files
 FILE_DIR = src src/parse

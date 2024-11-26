@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:29:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 17:09:00 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 11:22:21 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 	while (rgb_to_convert[i])
 	{
 		rgb[i] = ft_atoi(rgb_to_convert[i]);
+		free(rgb_to_convert[i]);
 		i++;
 	}
+	free(rgb_to_convert);
 	return (rgb);
 }
 

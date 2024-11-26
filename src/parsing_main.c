@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/26 10:53:06 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 11:11:26 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	get_line_nb(char *file)
 {
 	int		fd;
 	int		lines_num;
+	char 	*line;
 
 	lines_num = 0;
 	if (is_directory(file))
@@ -27,8 +28,13 @@ static int	get_line_nb(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (perror("Fail to open file "), -1);
-	while (get_next_line(fd) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
 		lines_num++;
+		free(line);
+		line = get_next_line(fd);
+	}
 	if (lines_num == 0)
 		return (perror("Map file is empty "), -1);
 	close(fd);
