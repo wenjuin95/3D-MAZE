@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 17:19:46 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 10:57:09 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**copy_2d_array(char **src, int start, int src_height)
 	char	**dest;
 
 	j = 0;
-	dest = malloc(sizeof(char *) * src_height);
+	dest = malloc(sizeof(char *) * (src_height - start + 1));
 	while (start < src_height)
 	{
 		dest[j] = ft_strdup(src[start]);
@@ -77,5 +77,5 @@ void	take_arg(int ac, char **av, t_arg *arg)
 {
 	if (ac != 2)
 		ft_error("Wrong number of arguments");
-	arg->map_add = ft_strjoin("../", av[1]);
+	arg->map_add = ft_strdup(av[1]);
 }

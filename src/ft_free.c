@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:41:39 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 17:03:38 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 10:54:50 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ static void	free_map(t_map *map)
 {
 	int	i;
 
-	i = 0;
-	while (i < map->map_height)
-		free(map->map[i++]);
-	free(map->map);
 	free(map->north);
 	free(map->sout);
 	free(map->west);

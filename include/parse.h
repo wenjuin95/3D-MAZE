@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 17:25:49 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 10:56:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_map
 	char	**map;
 	int		map_height;
 	int		map_width;
-	char	*map_add;//map address
+	char	*map_add;
 	char	*north;
 	char	*sout;
 	char	*west;
@@ -43,7 +43,7 @@ typedef struct s_map
 
 typedef struct s_arg
 {
-	char	*map_add;//map address
+	char	*map_add;
 	t_map	map;
 }	t_arg;
 
