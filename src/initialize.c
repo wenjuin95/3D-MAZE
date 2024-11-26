@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:24:56 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/24 11:25:26 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/26 13:49:44 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	initialize_map(t_map *map)
 	map->map = NULL;
 	map->map_height = 0;
 	map->map_width = 0;
-	map->map_add = NULL;
 	map->north = NULL;
 	map->sout = NULL;
 	map->west = NULL;
