@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/27 11:20:00 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/27 12:40:22 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	parse_struct(t_map *map)
 	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
-	printf("floor = %ld\n", map->floor_hex);
-	printf("ceiling = %ld\n", map->ceiling_hex);
 	error_handling(map);
 	return (0);
 }

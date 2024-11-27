@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/26 11:11:26 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/27 13:03:11 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	get_line_nb(char *file)
 {
 	int		fd;
 	int		lines_num;
-	char 	*line;
+	char	*line;
 
 	lines_num = 0;
 	if (is_directory(file))
@@ -72,6 +72,7 @@ static char	**read_map_file(char *file, int lines_num)
 // 	tmp = ft_strchr(str, '\n');
 // 	return (tmp);
 // }
+
 int	parse(int ac, char **av, t_arg *arg)
 {
 	take_arg(ac, av, arg);
