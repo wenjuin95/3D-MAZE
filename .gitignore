@@ -2,3 +2,4 @@ object_files/
 *.o
 *.a
 cub3d
+*.txt
