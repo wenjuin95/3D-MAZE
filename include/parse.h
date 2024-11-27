@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/26 13:49:31 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/27 11:11:16 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_map
 	int		*floor;
 	int		*ceiling;
 	char	**map_layout;
+	size_t	floor_hex;
+	size_t	ceiling_hex;
 }	t_map;
 
 typedef struct s_arg

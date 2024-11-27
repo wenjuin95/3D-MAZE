@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 16:42:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/27 11:18:50 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,15 @@ void	free_2d(char **str)
 	}
 	free(str);
 }
+
+// bool	skip_ispace(char *str)
+// {
+// 	while (*str != ' ' || *str != '\t' || *str != '\n'
+// 			|| *str != '\v' || *str != '\f' || *str != '\r')
+// 	{
+// 		if (*str == '\0')
+// 			return (false);
+// 		str++;
+// 	}
+// 	return (true);
+// }
