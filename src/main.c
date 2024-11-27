@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/11/27 13:06:27 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/27 21:05:14 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,26 @@ void	initialize_data(t_data *data)
 	data->texture.tex_size = TEXTURE_SIZE;
 }
 
+void	initialize_ime(t_data *data)
+{
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
 
 	(void)av;
-	if (ac == 2)
+	if (ac != 2)
 		return (printf("Wrong argument"), 1);
 	initialize_data(&data);
-	debugger(&data);
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		return (1);
 	data.win = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "cub3D");
 	if (data.win == NULL)
 		return (1);
+	initialize_img(&data);
+	debuger(&data);
 	mlx_hook(data.win, DestroyNotify, NoEventMask, close_win, &data);
 	mlx_loop(data.mlx);
 }

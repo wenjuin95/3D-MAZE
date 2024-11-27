@@ -1,12 +1,12 @@
 NAME = cub3d
 
-CC = clang
+CC = gcc
 
 FSANITIZE = -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-SRC = src/*.c
+SRC = $(wildcard src/*.c)
 
 INC = -I include
 

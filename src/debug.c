@@ -7,18 +7,15 @@ void debuger(t_data *data)
 	printf("win: %p\n", data->win);
 	printf("win_width: %d\n", data->win_width);
 	printf("win_height: %d\n", data->win_height);
-	for (int i = 0; data->map[i]; i++)
-		for (int j = 0; data->map[i][j]; j++)
-			printf("map[%d][%d]: %c\n", i, j, data->map[i][j]);
 
-	printf("DEBUG IMG DATA\n");
+	printf("\nDEBUG IMG DATA\n");
 	printf("img: %p\n", data->img.img);
 	printf("addr: %p\n", data->img.img_addr);
 	printf("bit per pixel: %d\n", data->img.pixel_bits);
 	printf("line size: %d\n", data->img.size_line);
 	printf("endian: %d\n", data->img.endian);
 
-	printf("DEBUG TEXTURE DATA\n");
+	printf("\nDEBUG TEXTURE DATA\n");
 	printf("NORTH: %s\n", data->texture.north);
 	printf("SOUTH: %s\n", data->texture.south);
 	printf("EAST: %s\n", data->texture.east);
@@ -34,7 +31,7 @@ void debuger(t_data *data)
 	printf("tex_x: %d\n", data->texture.tex_x);
 	printf("tex_y: %d\n", data->texture.tex_y);
 
-	printf("DEBUG RAYCAST DATA\n");
+	printf("\nDEBUG RAYCAST DATA\n");
 	printf("camera: %f\n", data->ray.camera);
 	printf("map_x: %d\n", data->ray.map_x);
 	printf("map_y: %d\n", data->ray.map_y);
@@ -53,7 +50,7 @@ void debuger(t_data *data)
 	printf("draw_start: %d\n", data->ray.draw_start);
 	printf("draw_end: %d\n", data->ray.draw_end);
 
-	printf("DEBUG PLAYER DATA\n");
+	printf("\nDEBUG PLAYER DATA\n");
 	printf("player direction: %s\n", data->player.dir);
 	printf("position x: %f\n", data->player.pos_x);
 	printf("position y: %f\n", data->player.pos_y);
