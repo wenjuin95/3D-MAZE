@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/11/26 13:19:14 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/27 13:05:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,16 @@ typedef struct s_raycast
 	int		draw_end;
 }	t_raycast;
 
-typedef struct s_map_info
-{
-	char	**map;
-	int		size;
-	int		offset_x;
-	int		offset_y;
-	int		view_dist;
-	int		tile_size;
-	t_img	*img;
-}	t_map_info;
+//typedef struct s_map_info
+//{
+//	char	**map;
+//	int		size;
+//	int		offset_x;
+//	int		offset_y;
+//	int		view_dist;
+//	int		tile_size;
+//	t_img	*img;
+//}	t_map_info;
 
 typedef struct s_player
 {
@@ -141,7 +141,9 @@ typedef struct s_data
 	t_raycast	ray;
 	t_img		img;
 	t_tex		texture;
-	t_map_info	map_info;
+	//t_map_info	map_info;
 }	t_data;
+
+void debugger(t_data *data);
 
 #endif
