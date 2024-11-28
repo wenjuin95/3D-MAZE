@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/27 13:00:35 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/28 18:48:29 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_arg
 
 // Free functions
 void	free_arg(t_arg *arg);
+void	free_2d(char **str);
 
 //initialize
 void	initialize_arg(t_arg *arg);
@@ -63,7 +64,9 @@ char	*cut_first3(char *s, int len, int start);
 //check
 void	check_valid_map_name(char *file, char *type);
 bool	is_directory(char *file);
-void	free_2d(char **str);
+void	check_map_wall(t_map *map);
+void	check_valid_element(char **buffer);
+void	check_valid_element(char **buffer);
 
 //convert
 int		*set_rgb(char *line);

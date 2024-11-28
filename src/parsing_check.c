@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_check.c                                      :+:      :+:    :+:   */
+/*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 16:32:25 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/25 15:35:04 by chtan            ###   ########.fr       */
+/*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
+/*   Updated: 2024/11/28 18:54:43 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,57 @@ bool	is_directory(char *file)
 		ret = true;
 	}
 	return (ret);
+}
+
+/***
+ * @brief Check if the map is surrounded by wall
+ * will need to use map_layout height and array of width
+ */
+void	check_map_wall(t_map *map)
+{
+	int	i;
+	int	j;
+	int	width;
+
+	i = 0;
+	while (i < map->mapl_len)
+	{
+		j = 0;
+		width = ft_strlen(map->map_layout[i]);
+		while (j < width)
+		{
+			if (i == 0 || i == map->map_height - 1 || j == 0 || j == width - 1)
+			{
+				if (map->map_layout[i][j] != '1')
+					ft_error("map not surrounded by wall!");
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	check_valid_element(char **buffer)
+{
+	char **tmp;
+	int	i;
+	int	j;
+
+	i = 0;
+	tmp = buffer;
+	while (tmp[i])
+	{
+		j = 0;
+		while (tmp[i][j])
+		{
+			if (tmp[i][j] != '1' && tmp[i][j] != '0' &&
+			tmp[i][j] != 'N' && tmp[i][j] != 'S' && tmp[i][j] != 'E'
+				&& tmp[i][j] != ' ' && tmp[i][j] != 'W'
+				&& tmp[i][j] != '\n')
+				ft_error("invalid char in map!");
+			j++;
+		}
+		i++;
+	}
+	free_2d(tmp);
 }
