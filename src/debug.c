@@ -1,6 +1,19 @@
-#include "../include/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
+/*   Updated: 2024/11/28 11:56:14 by welow            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void debuger(t_data *data)
+
+#include	"../include/cub3d.h"
+
+void	debuger(t_data *data)
 {
 	printf("DEBUG MAIN DATA\n");
 	printf("mlx: %p\n", data->mlx);
@@ -24,8 +37,8 @@ void debuger(t_data *data)
 	printf("ceiling: %p\n", data->texture.ceiling);
 	printf("hex_floor: %zu\n", data->texture.hex_floor);
 	printf("hex_ceiling: %zu\n", data->texture.hex_ceiling);
-	printf("tex_size: %d\n", data->texture.tex_size);
-	printf("tex_index: %d\n", data->texture.tex_index);
+	printf("tex_size: %d\n", data->texture.texture_size);
+	printf("tex_index: %d\n", data->texture.texture_index);
 	printf("step: %f\n", data->texture.step);
 	printf("position: %f\n", data->texture.position);
 	printf("tex_x: %d\n", data->texture.tex_x);

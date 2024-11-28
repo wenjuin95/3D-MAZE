@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/11/27 21:56:11 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/28 11:57:02 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ void	free_texture(t_tex *texture)
 }
 
 /**
- * @brief free the texture, tex, tex_pixel and map
- * @param data the texture, tex, tex_pixel and map
-*/
-void	free_texture_and_map(t_data *data)
-{
-	if (data->tex != NULL)
-		free_array((void **)data->tex);
-	if (data->tex_pixel != NULL)
-		free_array((void **)data->tex_pixel);
-	if (data->map != NULL)
-		free_array((void **)data->map);
-	free_texture(&data->texture);
-}
-
-/**
  * @brief clean the data that relate memory and exit
  * @param data the win, mlx, tex, tex_pixel, and map to free
  * @return void
@@ -74,7 +59,13 @@ void	clean_and_exit(t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx != NULL)
 		free(data->mlx);
-	free_texture_and_map(data);
+	if (data->map != NULL)
+		free_array((void **)data->map);
+	if (data->tex_data != NULL)
+		free_array((void **)data->tex_data);
+	if (data->tex_pixel != NULL)
+		free_array((void **)data->tex_pixel);
+	free_texture(&data->texture);
 	exit(EXIT_SUCCESS);
 }
 

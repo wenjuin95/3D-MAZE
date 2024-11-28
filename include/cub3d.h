@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/11/27 20:51:36 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/28 11:56:50 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef struct s_tex
 	int		*ceiling;
 	size_t	hex_floor;
 	size_t	hex_ceiling;
-	int		tex_size;
-	int		tex_index;
+	int		texture_size;
+	int		texture_index;
 	double	step;
 	double	position;
 	int		tex_x;
@@ -136,7 +136,7 @@ typedef struct s_data
 	int			win_height;
 	char		**map;
 	int			**tex_pixel;
-	int			**tex;
+	int			**tex_data;
 	t_player	player;
 	t_raycast	ray;
 	t_img		img;
@@ -144,6 +144,13 @@ typedef struct s_data
 	//t_map_info	map_info;
 }	t_data;
 
-void debuger(t_data *data);
+void	debuger(t_data *data);
+
+//initialize_image.c
+void	initialize_img(t_data *data);
+
+// exit.c
+int		close_win(t_data *data);
+void	clean_and_exit(t_data *data);
 
 #endif
