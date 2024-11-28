@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/27 13:03:11 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/28 17:17:57 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,6 @@ static char	**read_map_file(char *file, int lines_num)
 	map[i] = NULL;
 	return (map);
 }
-
-// static int len_whitout_newline(char *str)
-// {
-// 	char *tmp;
-// 	tmp = ft_strchr(str, '\n');
-// 	return (tmp);
-// }
 
 int	parse(int ac, char **av, t_arg *arg)
 {

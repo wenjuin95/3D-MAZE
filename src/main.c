@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/11/27 12:59:05 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/28 17:26:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void print_arg_struct(const t_arg *arg)
     printf("Map Address: %s\n", arg->map_add ? arg->map_add : "(null)");
     printf("Map Struct:\n");
     print_map_struct(&arg->map);
-    printf("printng end\n");
+    printf("\033[1;31mprinting end!!!\n\n\n\033[0m");
 }
 
 
@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 		return (ft_error("wrong argument/ without argument"), 1);
 	initialize_arg(&arg);
 	parse(argc, argv, &arg);
-	// print_arg_struct(&arg);
+	print_arg_struct(&arg);
 	if (arg.map.map_layout != NULL)
 		printf("parsing okay\n");
 	free_arg(&arg);

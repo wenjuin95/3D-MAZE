@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/27 12:40:22 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/28 17:34:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parse_struct(t_map *map)
 {
 	map->mapl_len = map->map_height - 8;
 	map->north = ft_substr(map->map[0], 3, ft_strlen(map->map[0]));
-	map->sout = (ft_substr(map->map[1], 3, ft_strlen(map->map[1])));
+	map->sout = ft_substr(map->map[1], 3, ft_strlen(map->map[1]));
 	map->west = ft_substr(map->map[2], 3, ft_strlen(map->map[2]));
 	map->east = ft_substr(map->map[3], 3, ft_strlen(map->map[3]));
 	map->sprite = ft_substr(map->map[4], 2, ft_strlen(map->map[4]));

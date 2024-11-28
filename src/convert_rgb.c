@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_rgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/27 11:09:47 by chtan            ###   ########.fr       */
+/*   Updated: 2024/11/28 17:36:17 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	*set_rgb(char *line)
 
 	count = 0;
 	rgb_to_convert = ft_split(line, ',');
+	free(line);
 	while (rgb_to_convert[count])
 		count++;
 	if (count != 3)
