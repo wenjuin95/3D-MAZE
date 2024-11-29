@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/11/28 11:56:50 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/29 17:46:38 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_data
 	int			win_width;
 	int			win_height;
 	char		**map;
+	int			map_width;
+	int			map_height;
 	int			**tex_pixel;
 	int			**tex_data;
 	t_player	player;
@@ -152,5 +154,9 @@ void	initialize_img(t_data *data);
 // exit.c
 int		close_win(t_data *data);
 void	clean_and_exit(t_data *data);
+
+// render_image.c
+void	render_frame(t_data *data);
+void	initialize_image(t_data *data, t_img *img, int w_width, int w_height);
 
 #endif
