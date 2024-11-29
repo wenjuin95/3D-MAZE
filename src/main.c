@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/11/29 20:46:54 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/30 00:18:38 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	perform_dda(t_data *data, t_raycast *ray)
 		{
 			ray->side_dist_x += ray->delta_dist_x; //add the distance to the next grid x
 			ray->map_x += ray->step_x; //move to the next grid x
-			ray->side = 0; //set the side to 0
+			ray->side = HORIZONTAL_WALL; //set the side to 0
 		}
 		else
 		{
@@ -125,28 +125,38 @@ void	perform_dda(t_data *data, t_raycast *ray)
 			ray->side = 1; //set the side to 1
 		}
 		if (data->map[ray->map_y][ray->map_x] == '1')
-			hit_wall = 1;
+			hit_wall = VERTICAL_WALL;
 	}
 }
 
-void	calculate_line_height(t_raycast *ray, t_data *data, t_player *player)
+/**
+ * @brief calculate the line height to draw
+ * @param ray the ray to be calculated
+ * @param data the data to be calculated
+ * @param player the player to be calculated
+*/
+void	calculate_line_height_to_draw(t_raycast *ray, t_data *data, t_player *player)
 {
-	if (ray->side == 0) //if the side is 0 mean horizontal side
-		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x);
-	else //if the side is 1 mean vertical side
-		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y);
-	ray->line_height = (int)(data->win_height / ray->wall_dis);  //not yet done
-	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
-	if (ray->draw_end >= data->win_height)
-		ray->draw_end = data->win_height - 1;
-	if (ray->side == 0)
-		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y;
-	else
-		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;
-	ray->wall_x -= floor(ray->wall_x);
+	if (ray->side == HORIZONTAL_WALL) //Checks if the ray hit a horizontal wall.
+		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x); //Calculates the perpendicular distance to the wall for a horizontal hit.
+	else // If the ray hit a vertical wall.
+		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y); //Calculates the perpendicular distance to the wall for a vertical hit.
+	ray->line_height = (int)(data->win_height / ray->wall_dis); //calculate the line height to be draw on screen
+	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2; //calculate the start point to draw the line
+	if (ray->draw_start < 0) //ensure the starting point is not above the window
+		ray->draw_start = 0; //Sets the starting position to the top of the window if it is
+	ray->draw_end = ray->line_height / 2 + data->win_height / 2; //calculate the end point to draw the line
+	if (ray->draw_end >= data->win_height) //Ensures the ending position is not below the window.
+		ray->draw_end = data->win_height - 1; //Sets the ending position to the bottom of the window if it exceeds the window height
+	if (ray->side == HORIZONTAL_WALL) //Checks if the ray hit a horizontal wall.
+		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y; //Calculates the exact x-coordinate of the wall hit for a horizontal wall.
+	else // If the ray hit a vertical wall.
+		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x; //Calculates the exact x-coordinate of the wall hit for a vertical wall.
+	ray->wall_x -= floor(ray->wall_x); //Normalizes the wall hit coordinate to a value between 0 and 1.
+}
+
+void	update_texture_pixels(t_data *data, t_tex *tex, t_raycast *ray, int x)
+{
 }
 
 int	raycasting(t_player *player, t_data *data)
@@ -159,7 +169,7 @@ int	raycasting(t_player *player, t_data *data)
 		calculate_ray_and_grid(x, &data->ray, player);
 		set_dda(&data->ray, player);
 		perform_dda(&data->ray, data);
-		calculate_line_height(&data->ray, data, player); //not yet
+		calculate_line_height_to_draw(&data->ray, data, player);
 		update_texture_pixel(data, &data->texture, &data->ray, x); //not yet
 	}
 }
