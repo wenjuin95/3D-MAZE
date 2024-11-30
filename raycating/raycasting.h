@@ -8,23 +8,23 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-////laptop
-//# define WIN_WIDTH 640
-//# define WIN_HEIGHT 480
+//laptop
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
 
-//campus
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 1024
+// //campus
+// # define WIN_WIDTH 1280
+// # define WIN_HEIGHT 1024
 
 # define BLOCK_SIZE 64
 
 //laptop
-//# define MOVE_SPEED 0.011
-//# define ROT_SPEED 0.03
-
-//campus
 # define MOVE_SPEED 0.1
-# define ROT_SPEED 0.1
+# define ROT_SPEED 0.03
+
+// //campus
+// # define MOVE_SPEED 0.1
+// # define ROT_SPEED 0.1
 
 
 # define MAP_PIXEL_SIZE 128

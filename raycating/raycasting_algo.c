@@ -5,7 +5,6 @@ static void init_raycast_info(int x, t_raycast *raycast, t_player *player)
 	init_ray(raycast);
 	raycast->camera_x = 2 * x / (double)WIN_WIDTH - 1; // x-coordinate in camera space (from -1 to 1)
 	//"2 * x / (double)WIN_WIDTH - 1"
-	printf("2 * %d / %d - 1 = %f\n", x, WIN_WIDTH, raycast->camera_x);
 	raycast->dir_x = player->dir_x + player->plane_x * raycast->camera_x; // x direction of the ray
 	raycast->dir_y = player->dir_y + player->plane_y * raycast->camera_x; // y direction of the ray
 	raycast->map_x = (int)player->pos_x; // x position in the map
@@ -106,7 +105,8 @@ static void get_texture_index(t_data *data, t_raycast *raycast)
 void update_texture_pixels(t_data *data, t_texture *tex, t_raycast *raycast, int x)
 {
 	int y;
-	int color;
+	(void)x;
+	// int color;
 
 	get_texture_index(data, raycast);
 	tex->x = (int)(raycast->wall_x * tex->size);
@@ -119,11 +119,9 @@ void update_texture_pixels(t_data *data, t_texture *tex, t_raycast *raycast, int
 	{
 		tex->y = (int)tex->pos & (tex->size - 1);
 		tex->pos += tex->step;
-		color = data->texture[tex->index][tex->size * tex->y + tex->x];
-		if (tex->index == NORTH || tex->index == EAST)
-			color = (color >> 1) & 8355711;
-		if (color > 0)
-			data->texture_pixels[y][x] = color;
+		data->texture_pixels[y][x] = data->texture[tex->index][tex->size * tex->y + tex->x];
+		// if (color > 0)
+		// 	data->texture_pixels[y][x] = color;
 		y++;
 	}
 }
