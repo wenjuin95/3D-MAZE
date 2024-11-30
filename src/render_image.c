@@ -109,3 +109,28 @@ void	render_frame(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
 	mlx_destroy_image(data->mlx, img.img);
 }
+
+void	initialize_square_texture_pixel(t_data *data)
+{
+	int	i;
+
+	data->tex_pixel = ft_calloc(data->win_height + 1, sizeof * data->tex_pixel);
+	if (data->tex_pixel == NULL)
+		clean_and_exit(data);
+	i = 0;
+	while (i < data->win_height)
+	{
+		data->tex_pixel[i] = ft_calloc(data->win_width + 1,
+				sizeof * data->tex_pixel);
+		if (data->tex_pixel[i] == NULL)
+			clean_and_exit(data);
+		i++;
+	}
+}
+
+void	render_image(t_data *data)
+{
+	initialize_square_texture_pixel(data);
+	raycasting(&data->player, data);
+	render_frame(data);
+}

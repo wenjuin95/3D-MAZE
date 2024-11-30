@@ -46,8 +46,8 @@
 # define MAP_PIXEL 128
 # define MAP_VIEW 4
 
-# define VERTICAL_WALL 1
-# define HORIZONTAL_WALL 0
+# define VERTICAL_WALL 0
+# define HORIZONTAL_WALL 1
 
 enum	e_direction
 {
@@ -161,5 +161,10 @@ void	clean_and_exit(t_data *data);
 // render_image.c
 void	render_frame(t_data *data);
 void	initialize_image(t_data *data, t_img *img, int w_width, int w_height);
+void	initialize_square_texture_pixel(t_data *data);
+void	render_image(t_data *data);
+
+//raycast_and_dda.c
+int	raycasting(t_player *player, t_data *data);
 
 #endif
