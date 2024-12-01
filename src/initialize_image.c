@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_image.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/11/28 19:18:05 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/01 00:10:03 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 static void	convert_xpm_to_img(t_data *data, char *path)
 {
 	//initialize the texture to 0
-	data->img.img = NULL;
-	data->img.img_addr = NULL;
-	data->img.pixel_bits = 0;
-	data->img.size_line = 0;
-	data->img.endian = 0;
+	// data->img.img = NULL;
+	// data->img.img_addr = NULL;
+	// data->img.pixel_bits = 0;
+	// data->img.size_line = 0;
+	// data->img.endian = 0;
 	//////////////////////////
 	data->img.img = mlx_xpm_file_to_image(data->mlx, path,
 			&data->texture.texture_size, &data->texture.texture_size);

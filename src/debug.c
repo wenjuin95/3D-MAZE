@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/11/28 11:56:14 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/01 00:35:21 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	debuger(t_data *data)
 	printf("draw_end: %d\n", data->ray.draw_end);
 
 	printf("\nDEBUG PLAYER DATA\n");
-	printf("player direction: %s\n", data->player.dir);
+	printf("player direction: %c\n", data->player.dir);
 	printf("position x: %f\n", data->player.pos_x);
 	printf("position y: %f\n", data->player.pos_y);
 	printf("diraction x: %f\n", data->player.dir_x);
@@ -75,4 +75,30 @@ void	debuger(t_data *data)
 	printf("player moved_x: %d\n", data->player.moved_x);
 	printf("player moved_y: %d\n", data->player.moved_y);
 	printf("player rotate: %d\n", data->player.rotated);
+}
+
+void debug_parsing(t_data *data)
+{
+	printf("MAP\n");
+	printf("map_height: %d\n", data->map_height);
+	printf("map_width: %d\n", data->map_width);
+	printf("map floor: #%lx\n", data->texture.hex_floor);
+	printf("map ceiling: #%lx\n", data->texture.hex_ceiling);
+	printf("map texture north: %s\n", data->texture.north);
+	printf("map texture south: %s\n", data->texture.south);
+	printf("map texture east: %s\n", data->texture.east);
+	printf("map texture west: %s\n", data->texture.west);
+	printf("\n");
+	for(int i = 0; data->map[i]; i++)
+		printf("%s\n", data->map[i]);
+	printf("\n");
+
+	printf("\nPLAYER\n");
+	printf("player direction: %c\n", data->player.dir);
+	printf("player position x: %f\n", data->player.pos_x);
+	printf("player position y: %f\n", data->player.pos_y);
+	printf("player direction x: %f\n", data->player.dir_x);
+	printf("player direction y: %f\n", data->player.dir_y);
+
+
 }

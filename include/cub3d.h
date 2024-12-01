@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/11/30 00:13:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/01 00:32:40 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_raycast
 
 typedef struct s_player
 {
-	char	*dir;
+	char	dir;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -150,6 +150,7 @@ typedef struct s_data
 }	t_data;
 
 void	debuger(t_data *data);
+void 	debug_parsing(t_data *data);
 
 //initialize_image.c
 void	initialize_img(t_data *data);
@@ -166,5 +167,8 @@ void	render_image(t_data *data);
 
 //raycast_and_dda.c
 int	raycasting(t_player *player, t_data *data);
+
+//parsing.c
+int parsing(t_data *data, char **file_name);
 
 #endif

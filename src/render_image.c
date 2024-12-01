@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/11/29 14:14:05 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/01 00:29:28 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,11 @@
 */
 void	initialize_image(t_data *data, t_img *img, int w_width, int w_height)
 {
-	//initialize to all 0 again
-	img->img = NULL;
-	img->img_addr = NULL;
-	img->pixel_bits = 0;
-	img->size_line = 0;
-	img->endian = 0;
-	//////////////////////////
 	img->img = mlx_new_image(data->mlx, w_width, w_height);
 	if (img->img == NULL)
 		clean_and_exit(data);
 	img->img_addr = (int *)mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->size_line, &img->endian);
-
 }
 
 /**

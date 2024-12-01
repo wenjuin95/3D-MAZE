@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_and_dda.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          #+#  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-11-30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024-11-30 09:28:44 by welow            ###   ########.fr       */
+/*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
+/*   Updated: 2024/12/01 00:28:31 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	set_dda(t_raycast *ray, t_player *player)
 	else //if ray is facing right direction in x axis
 	{
 		ray->step_x = 1; //ray moves to the right
-		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) //Calculates the initial side distance in the x-direction.
-			* ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x)
+			* ray->delta_dist_x; //Calculates the initial side distance in the x-direction.
 	}
 	if (ray->dir_y < 0) //if ray is facing down direction in y axis
 	{
@@ -63,8 +63,8 @@ void	set_dda(t_raycast *ray, t_player *player)
 	else //if ray is facing up direction in y axis
 	{
 		ray->step_y = 1; //ray move up
-		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) //Calculates the initial side distance in the y-direction.
-			* ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y)
+			* ray->delta_dist_y; //Calculates the initial side distance in the y-direction.
 	}
 }
 
@@ -111,7 +111,7 @@ void	perform_dda(t_data *data, t_raycast *ray)
 */
 void	calculate_line_height_to_draw(t_raycast *ray, t_data *data, t_player *player)
 {
-	if (ray->side == HORIZONTAL_WALL) //Checks if the ray hit a horizontal wall.
+	if (ray->side == VERTICAL_WALL) //Checks if the ray hit a horizontal wall.
 		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x); //Calculates the perpendicular distance to the wall for a horizontal hit.
 	else // If the ray hit a vertical wall.
 		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y); //Calculates the perpendicular distance to the wall for a vertical hit.
@@ -122,7 +122,7 @@ void	calculate_line_height_to_draw(t_raycast *ray, t_data *data, t_player *playe
 	ray->draw_end = ray->line_height / 2 + data->win_height / 2; //calculate the end point to draw the line
 	if (ray->draw_end >= data->win_height) //Ensures the ending position is not below the window.
 		ray->draw_end = data->win_height - 1; //Sets the ending position to the bottom of the window if it exceeds the window height
-	if (ray->side == HORIZONTAL_WALL) //Checks if the ray hit a horizontal wall.
+	if (ray->side == VERTICAL_WALL) //Checks if the ray hit a horizontal wall.
 		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y; //Calculates the exact x-coordinate of the wall hit for a horizontal wall.
 	else // If the ray hit a vertical wall.
 		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x; //Calculates the exact x-coordinate of the wall hit for a vertical wall.
@@ -165,8 +165,8 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 
 	get_texture_index(data, ray);
 	tex->tex_x = (int)(ray->wall_x * tex->texture_size); //Calculates the x-coordinate on the texture based on the wall hit position (ray->wall_x) and the texture size
-	if (ray->side == 0 && ray->dir_x < 0 //Checks if the texture needs to be flipped horizontally.
-		|| (ray->side == 1 && ray->dir_y > 0))
+	if ((ray->side == 0 && ray->dir_x < 0)
+		|| (ray->side == 1 && ray->dir_y > 0)) //Checks if the texture needs to be flipped horizontally.
 		tex->tex_x = tex->texture_size - tex->tex_x - 1; //Flips the texture coordinate if necessary.
 	tex->step = 1.0 * tex->texture_size / ray->line_height; //Calculates the step size for sampling the texture vertically
 	tex->position = (ray->draw_start - data->win_height / 2 //Initializes the texture position for the first pixel to be drawn.
@@ -184,7 +184,7 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 			color = (color >> 1) & 8355711; //Darkens the color if the texture is from the north or east wall.
 
 		if (color > 0) //Checks if the color is not transparent.
-			data->tex_pixel[y][x] = color;  //ets the pixel color on the screen.
+			data->tex_pixel[y][x] = color;  //set the pixel color on the screen.
 		y++; //Advances to the next y-coordinate.
 	}
 }
@@ -198,8 +198,10 @@ int	raycasting(t_player *player, t_data *data)
 	{
 		calculate_ray_and_grid(x, &data->ray, player);
 		set_dda(&data->ray, player);
-		perform_dda(&data->ray, data);
+		perform_dda(data, &data->ray);
 		calculate_line_height_to_draw(&data->ray, data, player);
 		update_texture_pixel(data, &data->texture, &data->ray, x);
+		x++;
 	}
+	return (0);
 }
