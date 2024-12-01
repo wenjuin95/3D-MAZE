@@ -26,7 +26,7 @@ void	free_array(void **array)
 		free(array[i]);
 		i++;
 	}
-	if (array != NULL)
+	if (array)
 		free(array);
 }
 
@@ -44,6 +44,32 @@ void	free_texture(t_tex *texture)
 		free(texture->west);
 	if (texture->east != NULL)
 		free(texture->east);
+	if (texture->floor != NULL)
+		free(texture->floor);
+	if (texture->ceiling != NULL)
+		free(texture->ceiling);
+}
+
+void	clean_mlx(t_data *data)
+{
+	if (data->win != NULL)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx != NULL)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+}
+
+void	clean_data(t_data *data)
+{
+	if (data->map != NULL)
+		free_array((void **)data->map);
+	if (data->tex_data)
+		free_array((void **)data->tex_data);
+	if (data->tex_pixel != NULL)
+		free_array((void **)data->tex_pixel);
+	free_texture(&data->texture);
 }
 
 /**
@@ -55,17 +81,8 @@ void	clean_and_exit(t_data *data)
 {
 	if (data == NULL)
 		exit(EXIT_SUCCESS);
-	if (data->win != NULL)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx != NULL)
-		free(data->mlx);
-	if (data->map != NULL)
-		free_array((void **)data->map);
-	if (data->tex_data != NULL)
-		free_array((void **)data->tex_data);
-	if (data->tex_pixel != NULL)
-		free_array((void **)data->tex_pixel);
-	free_texture(&data->texture);
+	clean_mlx(data);
+	clean_data(data);
 	exit(EXIT_SUCCESS);
 }
 

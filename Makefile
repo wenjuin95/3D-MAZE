@@ -32,7 +32,7 @@ endif
 
 all: $(NAME)
 
-fsan : $(OBJ_SRC)
+fsan : fclean $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
 	$(CC) $(CFLAGS) $(FSANITIZE) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
@@ -69,6 +69,6 @@ norm:
 	@norminette libft/*.c libft/*.h
 
 leak:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) map
 
 .PHONY : all clean fclean re bonus norm leak fsan

@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
+# include <stdbool.h>
 # include <X11/X.h>
 
 # define ESC 65307
@@ -35,12 +36,12 @@
 # define ROTATE_SPEED 0.1
 
 ////laptop
-//# define SCREEN_W 1280
-//# define SCREEN_H 1024
+//# define WIN_WIDTH 1280
+//# define WIN_HEIGHT 1024
 
 //campus
-# define SCREEN_W 640
-# define SCREEN_H 480
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
 # define TEXTURE_SIZE 64
 
 # define MAP_PIXEL 128
@@ -150,13 +151,14 @@ typedef struct s_data
 }	t_data;
 
 void	debuger(t_data *data);
-void 	debug_parsing(t_data *data);
+void	debug_parsing(t_data *data);
 
 //initialize_image.c
 void	initialize_img(t_data *data);
 
 // exit.c
 int		close_win(t_data *data);
+void	free_array(void **array);
 void	clean_and_exit(t_data *data);
 
 // render_image.c
@@ -170,5 +172,12 @@ int	raycasting(t_player *player, t_data *data);
 
 //parsing.c
 int parsing(t_data *data, char **file_name);
+
+//control.c
+int	handle_key_press(int keycode, t_data *data);
+int	handle_key_release(int keycode, t_data *data);
+
+//rendering.c
+int	rendering(t_data *data);
 
 #endif

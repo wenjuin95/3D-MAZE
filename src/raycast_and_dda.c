@@ -27,7 +27,7 @@
 void	calculate_ray_and_grid(int x, t_raycast *ray, t_player *player)
 {
 	//These directions are calculated using the player's direction and the camera plane.
-	ray->camera = 2 * x / (double)SCREEN_W - 1; //Calculates the camera's x-coordinate in the range [-1, 1]
+	ray->camera = 2 * x / (double)WIN_WIDTH - 1; //Calculates the camera's x-coordinate in the range [-1, 1]
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera; //Sets the x-direction of the ray.
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera; //Sets the y-direction of the ray.
 

@@ -12,33 +12,21 @@
 
 #include "../include/cub3d.h"
 
+/**
+ * @brief initialize data
+ * @param data data to initialize
+ * @note 1. initialize the data to all null and zero
+ * @note 2. initialize the window height and width
+ * @note 3. initialize the texture size
+*/
 void	initialize_data(t_data *data)
 {
 	ft_bzero(data, sizeof(t_data));
-	data->win_width = SCREEN_W;
-	data->win_height = SCREEN_H;
+	data->win_width = WIN_WIDTH;
+	data->win_height = WIN_HEIGHT;
 	data->texture.texture_size = TEXTURE_SIZE;
 }
 //////////////////////////////////////////////////////////////////////////////////
-
-int	handle_key_press(int keycode, t_data *data)
-{
-	if (keycode == ESC)
-		clean_and_exit(data);
-	if (keycode == W)
-		data->player.moved_y = 1;
-	if (keycode == S)
-		data->player.moved_y = -1;
-	if (keycode == A)
-		data->player.moved_x = -1;
-	if (keycode == D)
-		data->player.moved_x = 1;
-	if (keycode == LEFT)
-		data->player.rotated -= 1;
-	if (keycode == RIGHT)
-		data->player.rotated += 1;
-	return (0);
-}
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -55,15 +43,15 @@ int	main(int ac, char **av)
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
 		return (1);
-	data.win = mlx_new_window(data.mlx, SCREEN_W, SCREEN_H, "cub3D");
+	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (data.win == NULL)
 		return (1);
 	initialize_img(&data);
 	render_image(&data);
-	debuger(&data);
+	// debuger(&data);
 	mlx_hook(data.win, DestroyNotify, NoEventMask, close_win, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, handle_key_press, &data);
-	// mlx_hook(data.win, KeyRelease, KeyReleaseMask, handle_key_release, &data); //not yet
-	// mlx_loop_hook(data.mlx, rendering, &data); //not yet
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, handle_key_release, &data);
+	mlx_loop_hook(data.mlx, rendering, &data);
 	mlx_loop(data.mlx);
 }

@@ -96,6 +96,7 @@ int *set_rgb(char *line)
 		rgb[i] = ft_atoi(rgb_to_convert[i]);
 		i++;
 	}
+	free_array((void **)rgb_to_convert);
 	return (rgb);
 }
 
@@ -118,23 +119,29 @@ int parsing(t_data *data, char **file_name)
 	data->map_height = 10;
 	data->map_width = 10;
 
-	data->map = malloc(sizeof(char *) * data->map_height);
-	data->map[0] ="1111111111";
-	data->map[1] ="1000000001";
-	data->map[2] ="1000000001";
-	data->map[3] ="1000000001";
-	data->map[4] ="1000000001";
-	data->map[5] ="10000S0001";
-	data->map[6] ="1000000001";
-	data->map[7] ="1000000001";
-	data->map[8] ="1000000001";
-	data->map[9] ="1111111111";
+	data->map = malloc(sizeof(char *) * (data->map_height + 1));
+	if (data->map == NULL)
+	{
+		perror("map memory");
+		exit(1);
+	}
+	data->map[0] = ft_strdup("1111111111");
+	data->map[1] = ft_strdup("1000000001");
+	data->map[2] = ft_strdup("1000000001");
+	data->map[3] = ft_strdup("1000000001");
+	data->map[4] = ft_strdup("1000000001");
+	data->map[5] = ft_strdup("10000S0001");
+	data->map[6] = ft_strdup("1000000001");
+	data->map[7] = ft_strdup("1000000001");
+	data->map[8] = ft_strdup("1000000001");
+	data->map[9] = ft_strdup("1111111111");
+	data->map[10] = NULL;
 
 
-	data->texture.north = "src/wood.xpm";
-	data->texture.south = "src/wood.xpm";
-	data->texture.east = "src/wood.xpm";
-	data->texture.west = "src/wood.xpm";
+	data->texture.north = ft_strdup("src/wood.xpm");
+	data->texture.south = ft_strdup("src/wood.xpm");
+	data->texture.east = ft_strdup("src/wood.xpm");
+	data->texture.west = ft_strdup("src/wood.xpm");
 
 	data->texture.floor = set_rgb("138, 138, 138");
 	data->texture.ceiling = set_rgb("56, 182, 255");
@@ -144,7 +151,7 @@ int parsing(t_data *data, char **file_name)
 	check_player_position(data);
 	init_player_dir(data);
 
-	debug_parsing(data);
+	// debug_parsing(data);
 
 	return (0);
 }

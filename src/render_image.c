@@ -29,6 +29,7 @@ void	initialize_image(t_data *data, t_img *img, int w_width, int w_height)
 		clean_and_exit(data);
 	img->img_addr = (int *)mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->size_line, &img->endian);
+	return ;
 }
 
 /**
@@ -106,6 +107,8 @@ void	initialize_square_texture_pixel(t_data *data)
 {
 	int	i;
 
+	if (data->tex_pixel != NULL)
+		free_array((void **)data->tex_pixel);
 	data->tex_pixel = ft_calloc(data->win_height + 1, sizeof * data->tex_pixel);
 	if (data->tex_pixel == NULL)
 		clean_and_exit(data);
@@ -120,6 +123,10 @@ void	initialize_square_texture_pixel(t_data *data)
 	}
 }
 
+/**
+ * @brief render the image
+ * @param data data struct
+*/
 void	render_image(t_data *data)
 {
 	initialize_square_texture_pixel(data);
