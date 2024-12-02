@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:41:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 15:00:51 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,27 @@ typedef struct s_data
 void	debuger(t_data *data);
 void	debug_parsing(t_data *data);
 
-//initialize_image.c
-//static void	get_xpm_data(t_data *data, char *path)
-//static int	*init_texture_data(t_data *data, char *path)
+//initialize.c
+void	initialize_data(t_data *data);
+int		initialize_mlx(t_data *data);
+void	initialize_mlx_hook(t_data *data);
+void	initialize_image(t_data *data, t_img *img, int w_width, int w_height);
+
+//initialize_texture.c
 void	initialize_texture(t_data *data);
+void	get_texture_index(t_data *data, t_raycast *ray);
+void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x);
 
 // exit.c
 int		close_win(t_data *data);
 void	free_array(void **array);
 void	clean_mlx(t_data *data);
 void	clean_data(t_data *data);
-int	clean_and_exit(t_data *data);
-int	close_win(t_data *data);
+int		clean_and_exit(t_data *data);
+int		close_win(t_data *data);
 
 // render_image.c
-//static void	set_image_pixel(t_img *img, int x, int y, int color)
-//static void	set_image(t_data *data, t_img *img, int x, int y)
 void	put_image(t_data *data);
-void	initialize_image(t_data *data, t_img *img, int w_width, int w_height);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
@@ -96,29 +99,28 @@ void	render_the_image(t_data *data);
 void	calculate_ray_and_grid(int x, t_raycast *ray, t_player *player);
 void	set_dda(t_raycast *ray, t_player *player);
 void	perform_dda(t_data *data, t_raycast *ray);
-void	calculate_line_height_to_draw(t_raycast *ray, t_data *data, t_player *player);
-void	get_texture_index(t_data *data, t_raycast *ray);
-void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x);
-int	raycasting(t_player *player, t_data *data);
+void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
+			t_player *player);
+int		raycasting(t_player *player, t_data *data);
 
 //parsing.c
-int parsing(t_data *data, char **file_name);
+int		parsing(t_data *data, char **file_name);
 
 //control.c
-int	handle_key_press(int keycode, t_data *data);
-int	handle_key_release(int keycode, t_data *data);
+int		handle_key_press(int keycode, t_data *data);
+int		handle_key_release(int keycode, t_data *data);
 
 //check_movement.c
-int	check_move(t_data *data, double move_x, double move_y);
-int	rotate_left(t_data *data);
-int	rotate_right(t_data *data);
-int	update_image(t_data *data);
+int		check_move(t_data *data, double move_x, double move_y);
+int		rotate_left(t_data *data);
+int		rotate_right(t_data *data);
+int		update_image(t_data *data);
 
 //movement.c
-int	move_forward(t_data *data);
-int	move_backward(t_data *data);
-int	move_left(t_data *data);
-int	move_right(t_data *data);
-int	player_movement(t_data *data);
+int		move_forward(t_data *data);
+int		move_backward(t_data *data);
+int		move_left(t_data *data);
+int		move_right(t_data *data);
+int		player_movement(t_data *data);
 
 #endif

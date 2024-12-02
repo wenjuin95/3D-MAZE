@@ -6,30 +6,11 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 11:47:32 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:52:22 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-/**
- * @brief initialize the image
- * @param data get mlx pointer
- * @param img get img pointer
- * @param width get the window width
- * @param height get the window height
- * @note 1. initialize all the img struct to 0 to prevent garbage value
- * @note 2. create a new image with mlx_new_image
- * @note 3. use mlx_get_data_addr to get the address of the image
-*/
-void	initialize_image(t_data *data, t_img *img, int w_width, int w_height)
-{
-	img->img = mlx_new_image(data->mlx, w_width, w_height);
-	if (img->img == NULL)
-		clean_and_exit(data);
-	img->img_addr = (int *)mlx_get_data_addr(img->img, &img->pixel_bits,
-			&img->size_line, &img->endian);
-}
 
 /**
  * @brief set the image pixel to each position
