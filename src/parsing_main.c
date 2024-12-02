@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 12:18:25 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 16:38:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ t_map	*parse_width(t_arg *arg)
 
 	i = 0;
 	tmp = &arg->map;
-	while(i < tmp->mapl_len - 1)
+	if (tmp->map_layout == NULL)
+		ft_error("Fail to allocate memory");
+	tmp->map_width = (int *)malloc(sizeof(int) * tmp->mapl_len);
+	if (!tmp->map_width)
+		ft_error("Fail to allocate memory for map_width");
+	while(i < tmp->mapl_len)
 	{
 		tmp->map_width[i] = ft_strlen(arg->map.map_layout[i]);
 		i++;
