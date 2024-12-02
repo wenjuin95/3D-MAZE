@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 15:00:51 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 16:20:26 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,8 @@ int		move_backward(t_data *data);
 int		move_left(t_data *data);
 int		move_right(t_data *data);
 int		player_movement(t_data *data);
+
+//handle_mouse.c
+int	handle_mouse(int x, int y, t_data *data);
 
 #endif

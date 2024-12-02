@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 15:00:08 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 15:56:36 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_player
 	double	plane_y;
 	int		moved_x;
 	int		moved_y;
+	int		mouse_moved;
 	int		rotated;
 }	t_player;
 
