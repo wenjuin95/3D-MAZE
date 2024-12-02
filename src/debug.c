@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:35:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 13:35:09 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	debuger(t_data *data)
 	printf("diraction y: %f\n", data->player.dir_y);
 	printf("camera plane x: %f\n", data->player.plane_x);
 	printf("camera plane y: %f\n", data->player.plane_y);
-	printf("player move: %d\n", data->player.moved);
 	printf("player moved_x: %d\n", data->player.moved_x);
 	printf("player moved_y: %d\n", data->player.moved_y);
 	printf("player rotate: %d\n", data->player.rotated);

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_image.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:10:03 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:31:18 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /**
- * @brief convert xpm to image
+ * @brief convert xpm to image and get the data
  * @param data the data to be initialized
  * @param path the path to the xpm file
 */
-static void	convert_xpm_to_img(t_data *data, char *path)
+static void	get_xpm_data(t_data *data, char *path)
 {
 	data->img.img = mlx_xpm_file_to_image(data->mlx, path,
 			&data->texture.texture_size, &data->texture.texture_size);
@@ -36,13 +36,13 @@ static void	convert_xpm_to_img(t_data *data, char *path)
  * 			copy the different buffer to each texture buffer
  * 			like NORTH, SOUTH, WEST, EAST
 */
-static int	*xpm_to_img(t_data *data, char *path)
+static int	*init_texture_data(t_data *data, char *path)
 {
 	int		*texture_buffer;
 	int		x;
 	int		y;
 
-	convert_xpm_to_img(data, path);
+	get_xpm_data(data, path);
 	texture_buffer = ft_calloc(1, sizeof * texture_buffer
 			* data->texture.texture_size * data->texture.texture_size);
 	if (!texture_buffer)
@@ -69,13 +69,13 @@ static int	*xpm_to_img(t_data *data, char *path)
  * @return void
  * @note 1. allocate 4 + 1(null) memory for the texture data
 */
-void	initialize_img(t_data *data)
+void	initialize_texture(t_data *data)
 {
 	data->tex_data = ft_calloc(5, sizeof * data->tex_data);
 	if (data->tex_data == NULL)
 		clean_and_exit(data);
-	data->tex_data[NORTH] = xpm_to_img(data, data->texture.north);
-	data->tex_data[SOUTH] = xpm_to_img(data, data->texture.south);
-	data->tex_data[WEST] = xpm_to_img(data, data->texture.west);
-	data->tex_data[EAST] = xpm_to_img(data, data->texture.east);
+	data->tex_data[NORTH] = init_texture_data(data, data->texture.north);
+	data->tex_data[SOUTH] = init_texture_data(data, data->texture.south);
+	data->tex_data[WEST] = init_texture_data(data, data->texture.west);
+	data->tex_data[EAST] = init_texture_data(data, data->texture.east);
 }

@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/11/28 11:57:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 12:09:25 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	free_array(void **array)
 		free(array[i]);
 		i++;
 	}
-	if (array)
+	if (array != NULL)
 		free(array);
 }
 
 /**
- * @brief free the north, south, west, east texture
- * @param texture the north, south, west, east texture
+ * @brief free the north, south, west, east, floor, and ceiling texture
+ * @param texture the north, south, west, east, floor, and ceiling texture
 */
 void	free_texture(t_tex *texture)
 {
@@ -50,6 +50,12 @@ void	free_texture(t_tex *texture)
 		free(texture->ceiling);
 }
 
+/**
+ * @brief free the mlx and win
+ * @param data the data
+ * @note 1. mlx_destroy_display : free the display
+ * @note 2. mlx_destroy_window : free the window
+*/
 void	clean_mlx(t_data *data)
 {
 	if (data->win != NULL)
@@ -61,6 +67,11 @@ void	clean_mlx(t_data *data)
 	}
 }
 
+/**
+ * @brief free the data struct
+ * @param data the data to free
+ * @note 1. free the map, tex_data, tex_pixel and texture
+*/
 void	clean_data(t_data *data)
 {
 	if (data->map != NULL)
@@ -77,7 +88,7 @@ void	clean_data(t_data *data)
  * @param data the win, mlx, tex, tex_pixel, and map to free
  * @return void
 */
-void	clean_and_exit(t_data *data)
+int	clean_and_exit(t_data *data)
 {
 	if (data == NULL)
 		exit(EXIT_SUCCESS);
@@ -93,7 +104,6 @@ void	clean_and_exit(t_data *data)
 */
 int	close_win(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	free(data->mlx);
-	exit(EXIT_SUCCESS);
+	clean_and_exit(data);
+	return (0);
 }

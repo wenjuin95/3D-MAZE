@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:29:28 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:47:32 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	initialize_image(t_data *data, t_img *img, int w_width, int w_height)
 		clean_and_exit(data);
 	img->img_addr = (int *)mlx_get_data_addr(img->img, &img->pixel_bits,
 			&img->size_line, &img->endian);
-	return ;
 }
 
 /**
- * @brief set the image pixel to each coordinate
+ * @brief set the image pixel to each position
  * @param img get the image struct
  * @param x get the x coordinate
  * @param y get the y coordinate
@@ -53,7 +52,7 @@ static void	set_image_pixel(t_img *img, int x, int y, int color)
 }
 
 /**
- * @brief set the image in each position
+ * @brief set the image in the window
  * @param data get teture_pixel, win_height, win_width and hex_ceiling
  * 			   and hex_floor
  * @param img get the image struct
@@ -64,7 +63,7 @@ static void	set_image_pixel(t_img *img, int x, int y, int color)
  * 			the color ceiling
  * @note 3. if the y is less than the window height then set the color floor
 */
-static void	set_frame_image_pixel(t_data *data, t_img *img, int x, int y)
+static void	set_image(t_data *data, t_img *img, int x, int y)
 {
 	if (data->tex_pixel[y][x] > 0)
 		set_image_pixel(img, x, y, data->tex_pixel[y][x]);
@@ -75,13 +74,13 @@ static void	set_frame_image_pixel(t_data *data, t_img *img, int x, int y)
 }
 
 /**
- * @brief render the frame
+ * @brief put image to the window
  * @param data get win_height, win_width, mlx and win
  * @note 1. initialize the image
  * @note 2. loop through the window height and width and set the pixel
  * @note 3. put the image to the window
 */
-void	render_frame(t_data *data)
+void	put_image(t_data *data)
 {
 	t_img	img;
 	int		x;
@@ -94,7 +93,7 @@ void	render_frame(t_data *data)
 		x = 0;
 		while (x < data->win_width)
 		{
-			set_frame_image_pixel(data, &img, x, y);
+			set_image(data, &img, x, y);
 			x++;
 		}
 		y++;
@@ -103,7 +102,13 @@ void	render_frame(t_data *data)
 	mlx_destroy_image(data->mlx, img.img);
 }
 
-void	initialize_square_texture_pixel(t_data *data)
+/**
+ * @brief initialize the map size for texture
+ * @param data get the texture pixel
+ * @note 1. if the texture pixel is not null then free the texture pixel
+ * 			to prevent memory overlaping
+*/
+void	init_map_size_for_texture(t_data *data)
 {
 	int	i;
 
@@ -127,9 +132,9 @@ void	initialize_square_texture_pixel(t_data *data)
  * @brief render the image
  * @param data data struct
 */
-void	render_image(t_data *data)
+void	render_the_image(t_data *data)
 {
-	initialize_square_texture_pixel(data);
+	init_map_size_for_texture(data);
 	raycasting(&data->player, data);
-	render_frame(data);
+	put_image(data);
 }

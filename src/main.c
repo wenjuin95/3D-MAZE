@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:40:01 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:41:15 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ void	initialize_data(t_data *data)
 	data->win_height = WIN_HEIGHT;
 	data->texture.texture_size = TEXTURE_SIZE;
 }
-//////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////
 
 int	main(int ac, char **av)
 {
@@ -46,12 +43,12 @@ int	main(int ac, char **av)
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (data.win == NULL)
 		return (1);
-	initialize_img(&data);
-	render_image(&data);
-	// debuger(&data);
+	initialize_texture(&data);
+	render_the_image(&data);
 	mlx_hook(data.win, DestroyNotify, NoEventMask, close_win, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, handle_key_press, &data);
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, handle_key_release, &data);
-	mlx_loop_hook(data.mlx, rendering, &data);
+	mlx_loop_hook(data.mlx, update_image, &data);
+	debuger(&data);
 	mlx_loop(data.mlx);
 }
