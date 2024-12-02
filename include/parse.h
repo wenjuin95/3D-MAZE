@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 10:37:57 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:52:37 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,5 @@ size_t	convert_rgb_to_hex(int *rgb_tab);
 char	**copy_2d_array(char **src, int start, int src_height);
 
 //tmp
-// void	print_arg_struct(const t_arg *arg);
 
 #endif

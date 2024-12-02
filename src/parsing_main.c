@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/28 19:59:03 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:03:18 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	parse(int ac, char **av, t_arg *arg)
 	if (arg->map.map_height == -1)
 		return (1);
 	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
-	// check_valid_element(arg->map.map_layout);
+	check_valid_element(arg->map.map_layout);
 	// check_map_wall(&arg->map);
 	parse_struct(&arg->map);
 	return (0);
