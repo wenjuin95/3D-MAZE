@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 11:33:32 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 12:01:54 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ bool	is_directory(char *file)
 	return (ret);
 }
 
+static int skip_space(char *str, int i)
+{
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
+}
+
 /***
  * @brief Check if the map is surrounded by wall
  * will need to use map_layout height and array of width
@@ -58,7 +65,7 @@ void	check_map_wall(t_map *map)
 	i = 0;
 	while (i < map->mapl_len)
 	{
-		j = 0;
+		j = skip_space(map->map_layout[i], 0);
 		width = ft_strlen(map->map_layout[i]);
 		while (j < width)
 		{

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 11:30:21 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 12:18:25 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ static char	**read_map_file(char *file, int lines_num)
 	return (map);
 }
 
+t_map	*parse_width(t_arg *arg)
+{
+	t_map *tmp;
+	int i;
+
+	i = 0;
+	tmp = &arg->map;
+	while(i < tmp->mapl_len - 1)
+	{
+		tmp->map_width[i] = ft_strlen(arg->map.map_layout[i]);
+		i++;
+	}
+	return (tmp);
+}
+
 int	parse(int ac, char **av, t_arg *arg)
 {
 	take_arg(ac, av, arg);
@@ -77,5 +92,6 @@ int	parse(int ac, char **av, t_arg *arg)
 	check_valid_element(arg);
 	// check_map_wall(&arg->map);
 	parse_struct(&arg->map);
+	arg->map = *parse_width(arg);
 	return (0);
 }
