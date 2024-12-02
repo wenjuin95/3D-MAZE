@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 10:52:37 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:30:35 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ char	*cut_first3(char *s, int len, int start);
 void	check_valid_map_name(char *file, char *type);
 bool	is_directory(char *file);
 void	check_map_wall(t_map *map);
-void	check_valid_element(char **buffer);
-void	check_valid_element(char **buffer);
+void	check_valid_element(t_arg *arg);
 
 //convert
 int		*set_rgb(char *line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/28 18:54:43 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:33:32 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,20 @@ void	check_map_wall(t_map *map)
 	}
 }
 
-void	check_valid_element(char **buffer)
+void	check_valid_element(t_arg *arg)
 {
-	char **tmp;
+	t_map	*temp;
+	char	**tmp;
 	int	i;
 	int	j;
 
 	i = 0;
-	tmp = buffer;
-	while (tmp[i])
+	temp = &arg->map;
+	tmp = temp->map_layout;
+	while (i < temp->mapl_len)
 	{
 		j = 0;
-		while (tmp[i][j])
+		while (tmp[i][j] != '\0')
 		{
 			if (tmp[i][j] != '1' && tmp[i][j] != '0' &&
 			tmp[i][j] != 'N' && tmp[i][j] != 'S' && tmp[i][j] != 'E'

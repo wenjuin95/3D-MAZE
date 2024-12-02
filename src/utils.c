@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/11/27 11:18:50 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:34:54 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	free_2d(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str == NULL)
+		return ;
+	while (str[i] != NULL)
 	{
 		free(str[i]);
 		i++;

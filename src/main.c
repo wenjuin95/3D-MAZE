@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 11:11:55 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/02 11:26:50 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	main(int argc, char **argv)
 	initialize_arg(&arg);
 	parse(argc, argv, &arg);
 	print_arg_struct(&arg);
-    if (arg.map.map_layout != NULL)
-        printf("parsing okay\n");
+    // if (arg.map.map_layout)
+    //     printf("parsing okay\n");
 	free_arg(&arg);
 	return (0);
 }
