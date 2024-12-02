@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 00:31:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:32:03 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:53:31 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int parsing(t_data *data, char **file_name)
 	data->map[0] = ft_strdup("1111111111");
 	data->map[1] = ft_strdup("1000000001");
 	data->map[2] = ft_strdup("1000000001");
-	data->map[3] = ft_strdup("1000000001");
+	data->map[3] = ft_strdup("1111001111");
 	data->map[4] = ft_strdup("1000000001");
 	data->map[5] = ft_strdup("10000S0001");
 	data->map[6] = ft_strdup("1000000001");

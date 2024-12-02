@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:32:40 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:52:50 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@
 # define MOVE_SPEED 0.1
 # define ROTATE_SPEED 0.1
 
-////laptop
-//# define WIN_WIDTH 1280
-//# define WIN_HEIGHT 1024
-
 //campus
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1024
+
+////laptop
+//# define WIN_WIDTH 640
+//# define WIN_HEIGHT 480
+
 # define TEXTURE_SIZE 64
 
 # define MAP_PIXEL 128

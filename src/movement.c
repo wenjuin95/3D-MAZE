@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          #+#  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-01 07:51:06 by welow             #+#    #+#             */
-/*   Updated: 2024-12-01 07:51:06 by welow            ###   ########.fr       */
+/*   Created: 2024/12/01 07:51:06 by welow             #+#    #+#             */
+/*   Updated: 2024/12/02 11:09:32 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+/**
+ * @brief Check if the player is moving to a valid position
+ * @param data The data structure
+ * @param move_x The x position
+ * @param move_y The y position
+ * @return true if the position is valid, false is not
+ */
 bool	valid_position(t_data *data, double move_x, double move_y)
 {
 	if (data->map[(int)move_y][(int)move_x] == '1')
@@ -64,7 +71,7 @@ int	move_left(t_data *data)
 
 	move_x = data->player.pos_x + data->player.dir_y * MOVE_SPEED;
 	move_y = data->player.pos_y - data->player.dir_x * MOVE_SPEED;
-	return (check_move(data, move_x, move_y));	
+	return (check_move(data, move_x, move_y));
 }
 
 int	move_right(t_data *data)
@@ -77,32 +84,38 @@ int	move_right(t_data *data)
 	return (check_move(data, move_x, move_y));
 }
 
-int	rotate_left_or_right(t_data *data, double rotate)
+int	rotate_left(t_data *data)
 {
 	double	tmp_x;
 
 	tmp_x = data->player.dir_x;
-	data->player.dir_x = data->player.dir_x * cos(rotate)
-		- data->player.dir_y * sin(rotate);
-	data->player.dir_y = tmp_x * sin(rotate) + data->player.dir_y
-		* cos(rotate);
+	data->player.dir_x = data->player.dir_x * cos(ROTATE_SPEED)
+		- data->player.dir_y * sin(ROTATE_SPEED);
+	data->player.dir_y = tmp_x * sin(ROTATE_SPEED) + data->player.dir_y
+		* cos(ROTATE_SPEED);
 	tmp_x = data->player.plane_x;
-	data->player.plane_x = data->player.plane_x * cos(rotate)
-		- data->player.plane_y * sin(rotate);
-	data->player.plane_y = tmp_x * sin(rotate) + data->player.plane_y
-		* cos(rotate);
+	data->player.plane_x = data->player.plane_x * cos(ROTATE_SPEED)
+		- data->player.plane_y * sin(ROTATE_SPEED);
+	data->player.plane_y = tmp_x * sin(ROTATE_SPEED) + data->player.plane_y
+		* cos(ROTATE_SPEED);
 	return (1);
 }
 
-int	rotate_player(t_data *data, double rotate)
+int	rotate_right(t_data *data)
 {
-	int		moved;
-	double	rot_speed;
+	double	tmp_x;
 
-	moved = 0;
-	rot_speed = rotate * ROTATE_SPEED;
-	moved += rotate_left_or_right(data, rot_speed);
-	return (moved);
+	tmp_x = data->player.dir_x;
+	data->player.dir_x = data->player.dir_x * cos(-ROTATE_SPEED)
+		- data->player.dir_y * sin(-ROTATE_SPEED);
+	data->player.dir_y = tmp_x * sin(-ROTATE_SPEED) + data->player.dir_y
+		* cos(-ROTATE_SPEED);
+	tmp_x = data->player.plane_x;
+	data->player.plane_x = data->player.plane_x * cos(-ROTATE_SPEED)
+		- data->player.plane_y * sin(-ROTATE_SPEED);
+	data->player.plane_y = tmp_x * sin(-ROTATE_SPEED) + data->player.plane_y
+		* cos(-ROTATE_SPEED);
+	return (1);
 }
 
 int	player_movement(t_data *data)
@@ -118,8 +131,12 @@ int	player_movement(t_data *data)
 		moved += move_left(data);
 	if (data->player.moved_x == 1)
 		moved += move_right(data);
-	if (data->player.rotated != 0)
-		moved += rotate_player(data, data->player.rotated);
+	//if (data->player.rotated != 0)
+	//	moved += rotate_player(data, data->player.rotated);
+	if (data->player.rotated >= 0) //if rotate number more than 0
+		moved += rotate_left(data);
+	if (data->player.rotated <= 0) //if rotate number less than 0
+		moved += rotate_right(data);
 	return (moved);
 }
 

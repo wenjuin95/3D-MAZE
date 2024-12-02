@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_and_dda.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/01 00:28:31 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/02 10:54:08 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,6 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 		tex->position += tex->step; //Advances the texture position by the step size.
 		color = data->tex_data[tex->texture_index][tex->texture_size
 			* tex->tex_y + tex->tex_x]; //Retrieves the color from the texture at the calculated coordinates
-
-		//darken the color if the texture is from the north or east wall
-		if (tex->texture_index == NORTH || tex->texture_index == EAST) //Checks if the texture is from the north or east wall.
-			color = (color >> 1) & 8355711; //Darkens the color if the texture is from the north or east wall.
-
 		if (color > 0) //Checks if the color is not transparent.
 			data->tex_pixel[y][x] = color;  //set the pixel color on the screen.
 		y++; //Advances to the next y-coordinate.
