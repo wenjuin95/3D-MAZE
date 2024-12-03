@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 13:47:30 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:44:18 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ typedef struct s_data
 	t_tex		texture;
 }	t_data;
 
+//initialize_player_position.c
+void	init_north_south(t_data *data);
+void	init_east_west(t_data *data);
+void	init_player_dir(t_data *data);
+
 //print_struct.c
 void	print_arg_struct(t_data *arg);
 
@@ -117,7 +122,8 @@ void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 int		raycasting(t_player *player, t_data *data);
 
 //parsing.c
-int		parsing(t_data *data, char **file_name);
+void check_player_position(t_data *data);
+// int		parsing(t_data *data, char **file_name);
 
 //control.c
 int		handle_key_press(int keycode, t_data *data);

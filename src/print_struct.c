@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:37:15 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 13:48:31 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:28:58 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void print_map_struct(t_map *map)
     else
         printf("(null)\n");
     printf("North Texture: (%s)\n", map->north ? map->north : "(null)");
-    printf("South Texture: (%s)\n", map->sout ? map->sout : "(null)");
+    printf("South Texture: (%s)\n", map->south ? map->south : "(null)");
     printf("West Texture: (%s)\n", map->west ? map->west : "(null)");
     printf("East Texture: (%s)\n", map->east ? map->east : "(null)");
     printf("Sprite: (%s)\n", map->sprite ? map->sprite : "(null)");

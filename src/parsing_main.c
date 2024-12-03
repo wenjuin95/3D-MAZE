@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 23:12:41 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:43:22 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_map	*parse_width(t_data *data)
 	tmp = &data->map;
 	if (tmp->map_layout == NULL)
 		ft_error("Fail to allocate memory");
+	//NOTE: i need map_width in int
 	tmp->map_width = (int *)malloc(sizeof(int) * tmp->mapl_len);
 	if (!tmp->map_width)
 		ft_error("Fail to allocate memory for map_width");
@@ -88,7 +89,7 @@ t_map	*parse_width(t_data *data)
 
 int	parse(int ac, char **av, t_data *data)
 {
-	take_data(ac, av, data);
+	take_arg(ac, av, data);
 	check_valid_map_name(data->map_add, ".cub");
 	data->map.map_height = get_line_nb(data->map_add);
 	if (data->map.map_height == -1)

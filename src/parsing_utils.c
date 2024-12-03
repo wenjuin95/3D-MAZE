@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 13:54:04 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:42:48 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	error_handling(t_map *map)
 {
-	if (!map->north || !map->sout || !map->west || !map->east || !map->sprite
+	if (!map->north || !map->south || !map->west || !map->east || !map->sprite
 		|| !map->floor || !map->ceiling || !map->map_layout)
 		ft_error("Fail to allocate memory");
 }
@@ -23,7 +23,7 @@ int	parse_struct(t_map *map)
 {
 	map->mapl_len = map->map_height - 8;
 	map->north = ft_substr(map->map[0], 3, ft_strlen(map->map[0]));
-	map->sout = ft_substr(map->map[1], 3, ft_strlen(map->map[1]));
+	map->south = ft_substr(map->map[1], 3, ft_strlen(map->map[1]));
 	map->west = ft_substr(map->map[2], 3, ft_strlen(map->map[2]));
 	map->east = ft_substr(map->map[3], 3, ft_strlen(map->map[3]));
 	map->sprite = ft_substr(map->map[4], 2, ft_strlen(map->map[4]));
@@ -32,6 +32,7 @@ int	parse_struct(t_map *map)
 	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
+	//note: need player position
 	error_handling(map);
 	return (0);
 }
