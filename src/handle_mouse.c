@@ -6,12 +6,21 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:47:05 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 11:09:28 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 11:22:06 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+/**
+ * @brief get the mouse move to a location when it is out of the window
+ * @param x the x position of the mouse
+ * @param y the y position of the mouse
+ * @param data the data
+ * @note 1. if mouse is out of edge right, move the mouse to the left
+ * @note 2. if mouse is out of edge left, move the mouse to the right
+ * @note 3. "mlx_mouse_move" is to move the mouse to the new position
+ */
 void	get_mouse_pos(int x, int y, t_data *data)
 {
 	if (x > data->win_width - (WIN_WIDTH / 2))
@@ -26,7 +35,13 @@ void	get_mouse_pos(int x, int y, t_data *data)
 	}
 }
 
-
+/**
+ * @brief handle the mouse movement
+ * @param x the x position of the mouse
+ * @param y the y position of the mouse
+ * @param data the data
+ * @note 1. get the pos_x to different where left or right
+*/
 int	handle_mouse(int x, int y, t_data *data)
 {
 	static int	pos_x = WIN_WIDTH / 2;
