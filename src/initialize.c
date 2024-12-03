@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 15:46:55 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 11:06:58 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	initialize_mlx_hook(t_data *data)
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_press, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, handle_key_release, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse, data);
+	mlx_mouse_hide(data->mlx, data->win);
 	mlx_loop_hook(data->mlx, update_image, data);
 }
 

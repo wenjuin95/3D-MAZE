@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 16:20:26 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 10:56:40 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-////laptop
-//# define MOVE_SPEED 0.011
-//# define ROTATE_SPEED 0.03
 
 //campus
 # define MOVE_SPEED 0.1
@@ -39,9 +36,21 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 1024
 
+////full screen
+//# define WIN_WIDTH 3840
+//# define WIN_HEIGHT 2160
+
+////full screen
+//# define MOVE_SPEED 1
+//# define ROTATE_SPEED 0.1
+
 ////laptop
 //# define WIN_WIDTH 640
 //# define WIN_HEIGHT 480
+
+////laptop
+//# define MOVE_SPEED 0.011
+//# define ROTATE_SPEED 0.03
 
 # define TEXTURE_SIZE 64
 
