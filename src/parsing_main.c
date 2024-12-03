@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 13:35:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:12:41 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ static char	**read_map_file(char *file, int lines_num)
 	return (map);
 }
 
-t_map	*parse_width(t_arg *arg)
+t_map	*parse_width(t_data *data)
 {
 	t_map *tmp;
 	int i;
 
 	i = 0;
-	tmp = &arg->map;
+	tmp = &data->map;
 	if (tmp->map_layout == NULL)
 		ft_error("Fail to allocate memory");
 	tmp->map_width = (int *)malloc(sizeof(int) * tmp->mapl_len);
@@ -80,23 +80,23 @@ t_map	*parse_width(t_arg *arg)
 		ft_error("Fail to allocate memory for map_width");
 	while(i < tmp->mapl_len)
 	{
-		tmp->map_width[i] = ft_strlen(arg->map.map_layout[i]);
+		tmp->map_width[i] = ft_strlen(data->map.map_layout[i]);
 		i++;
 	}
 	return (tmp);
 }
 
-int	parse(int ac, char **av, t_arg *arg)
+int	parse(int ac, char **av, t_data *data)
 {
-	take_arg(ac, av, arg);
-	check_valid_map_name(arg->map_add, ".cub");
-	arg->map.map_height = get_line_nb(arg->map_add);
-	if (arg->map.map_height == -1)
+	take_data(ac, av, data);
+	check_valid_map_name(data->map_add, ".cub");
+	data->map.map_height = get_line_nb(data->map_add);
+	if (data->map.map_height == -1)
 		return (1);
-	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
-	check_valid_element(arg);
-	// check_map_wall(&arg->map);
-	parse_struct(&arg->map);
-	arg->map = *parse_width(arg);
+	data->map.map = read_map_file(data->map_add, data->map.map_height);
+	check_valid_element(data);
+	// check_map_wall(&data->map);
+	parse_struct(&data->map);
+	data->map = *parse_width(data);
 	return (0);
 }

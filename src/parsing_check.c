@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 13:35:15 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:13:25 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	check_map_wall(t_map *map)
 	}
 }
 
-void	check_valid_element(t_arg *arg)
+void	check_valid_element(t_data *data)
 {
 	t_map	*temp;
 	char	**tmp;
@@ -88,7 +88,7 @@ void	check_valid_element(t_arg *arg)
 	int	j;
 
 	i = 0;
-	temp = &arg->map;
+	temp = &data->map;
 	tmp = temp->map_layout;
 	while (i < temp->mapl_len)
 	{
