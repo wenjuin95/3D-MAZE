@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 23:43:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:50:31 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	main(int ac, char **av)
 		return (1);
 	// print_arg_struct(&data);
 	debug_parsing(&data);
-	check_player_position(&data);
 	if (initialize_mlx(&data) == 1)
 		return (1);
 	initialize_texture(&data);

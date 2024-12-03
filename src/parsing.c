@@ -6,35 +6,35 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 00:31:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 23:45:36 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:50:03 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void check_player_position(t_data *data)
-{
-	int i;
-	int j;
+// void check_player_position(t_data *data)
+// {
+// 	int i;
+// 	int j;
 
-	i = 0;
-	while (i < data->map.map_height)
-	{
-		j = 0;
-		while (j < data->map.map_width)
-		{
-			if (ft_strchr("NSEW", data->map.map_layout[i][j]))
-			{
-				data->player.dir = data->map.map_layout[i][j];
-				data->player.pos_x = j + 0.5;
-				data->player.pos_y = i + 0.5;
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < data->map.map_height)
+// 	{
+// 		j = 0;
+// 		while (j < data->map.map_width)
+// 		{
+// 			if (ft_strchr("NSEW", data->map.map_layout[i][j]))
+// 			{
+// 				data->player.dir = data->map.map_layout[i][j];
+// 				data->player.pos_x = j + 0.5;
+// 				data->player.pos_y = i + 0.5;
+// 				return ;
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 // void	init_north_south(t_data *data)
 // {

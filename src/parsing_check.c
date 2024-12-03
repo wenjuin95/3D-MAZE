@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 23:41:28 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:53:13 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ void	check_valid_element(t_data *data)
 		}
 		i++;
 	}
-	free_2d(tmp);
+	free_array((void **)tmp);
 }

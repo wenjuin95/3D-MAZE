@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 23:25:47 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 23:52:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	free_array(void **array)
 {
 	int	i;
 
+	if (array == NULL)
+		return ;
 	i = 0;
 	while (array[i] != NULL)
 	{
