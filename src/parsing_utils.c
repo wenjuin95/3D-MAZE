@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 13:35:29 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 13:54:04 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ char	*cut_first3(char *s, int len, int start)
 /**
  * the function is parse the arg to the struct
  */
-void	take_arg(int ac, char **av, t_arg *arg)
+void	take_arg(int ac, char **av, t_data *data)
 {
 	if (ac != 2)
 		ft_error("Wrong number of arguments");
-	arg->map_add = ft_strdup(av[1]);
+	data->map_add = ft_strdup(av[1]);
 }

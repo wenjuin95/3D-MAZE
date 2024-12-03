@@ -38,6 +38,12 @@ endif
 
 all: $(NAME)
 
+fsan : fclean $(OBJ_SRC)
+	make -C $(MINILIBX)
+	make -C libft
+	$(CC) $(CFLAGS) $(FSANITIZE) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
+	@echo "${GREEN}-----COMPILED FSAN DONE-----\n${RESET}"
+
 $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
@@ -68,4 +74,7 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
-.PHONY : all clean fclean re bonus
+leak:
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) map
+
+.PHONY : all clean fclean re bonus norm leak fsan

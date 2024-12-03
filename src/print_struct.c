@@ -6,13 +6,13 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:37:15 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 13:38:34 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 13:48:31 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void print_map_struct(const t_map *map)
+static void print_map_struct(t_map *map)
 {
     if (!map)
       return;
@@ -61,13 +61,13 @@ static void print_map_struct(const t_map *map)
     printf("Ceiling Hex: (0x%zx)\n", map->ceiling_hex);
 }
 
-void print_arg_struct(const t_arg *arg)
+void print_arg_struct(t_data *data)
 {
-    if (!arg)
+    if (!data)
         return;
-    printf("\033[1;31mPrinting arg struct:\n\n\n\033[0m");
-    printf("Map Address: (%s)\n", arg->map_add ? arg->map_add : "(null)");
+    printf("\033[1;31mPrinting data struct:\n\n\n\033[0m");
+    printf("Map Address: (%s)\n", data->map_add ? data->map_add : "(null)");
     printf("Map Struct:\n");
-    print_map_struct(&arg->map);
+    print_map_struct(&data->map);
     printf("printng end\n");
 }

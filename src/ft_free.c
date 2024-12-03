@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:41:39 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/03 13:35:00 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/03 13:51:04 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void	free_map(t_map *map)
 	free(map->map_width);
 }
 
-void	free_arg(t_arg *arg)
+void	free_arg(t_data *data)
 {
-	if (arg->map_add != NULL)
-		free(arg->map_add);
-	free_map(&arg->map);
+	if (data->map_add != NULL)
+		free(data->map_add);
+	free_map(&data->map);
 }
