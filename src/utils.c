@@ -1,30 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 13:37:11 by welow            ###   ########.fr       */
+/*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
+/*   Updated: 2024/12/03 13:35:36 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-
-
-int	main(int argc, char **argv)
+void	ft_error(char *str)
 {
-	t_arg	arg;
-
-	if (argc == 1)
-		return (ft_error("wrong argument/ without argument"), 1);
-	initialize_arg(&arg);
-	parse(argc, argv, &arg);
-	 print_arg_struct(&arg);
-    // if (arg.map.map_layout == NULL)
-    //     printf("parsing okay\n");
-	free_arg(&arg);
-	return (0);
+	printf("Error : %s\n", str);
 }
+
+void	free_2d(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return ;
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+// bool	skip_ispace(char *str)
+// {
+// 	while (*str != ' ' || *str != '\t' || *str != '\n'
+// 			|| *str != '\v' || *str != '\f' || *str != '\r')
+// 	{
+// 		if (*str == '\0')
+// 			return (false);
+// 		str++;
+// 	}
+// 	return (true);
+// }

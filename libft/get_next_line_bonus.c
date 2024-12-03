@@ -3,115 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:38:28 by welow             #+#    #+#             */
-/*   Updated: 2024/06/09 14:33:56 by welow            ###   ########.fr       */
+/*   Updated: 2024/11/25 15:01:58 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_free(char *line, char *buffer)
+char	*ft_free(char *buffer, char *buf)
 {
-	char	*tmp;
+	char	*temp;
 
-	tmp = ft_strjoin(line, buffer);
-	free(line);
-	return (tmp);
+	temp = ft_strjoin(buffer, buf);
+	free(buffer);
+	return (temp);
 }
 
-char	*create_line(int fd, char *line)
+char	*ft_next(char *buffer)
 {
-	char	*buffer;
-	int		read_byte;
+	int		i;
+	int		j;
+	char	*line;
 
-	if (!line)
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
 	{
-		line = malloc(1);
-		line[0] = '\0';
-	}
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+		free(buffer);
 		return (NULL);
-	read_byte = 1;
-	while (!ft_strchr(line, '\n') && read_byte != 0)
-	{
-		read_byte = read(fd, buffer, BUFFER_SIZE);
-		if (read_byte == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[read_byte] = '\0';
-		line = ft_strjoin_free(line, buffer);
 	}
+	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	i++;
+	j = 0;
+	while (buffer[i])
+		line[j++] = buffer[i++];
 	free(buffer);
 	return (line);
 }
 
-char	*get_only_next_line(char *line)
+char	*ft_line(char *buffer)
 {
+	char	*line;
 	int		i;
-	char	*line_with_nl;
 
 	i = 0;
-	if (!line[i])
+	if (!buffer[i])
 		return (NULL);
-	while (line[i] && line [i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line_with_nl = ft_substr(line, 0, i + 1);
-	if (!line_with_nl)
-	{
-		free(line_with_nl);
-		return (NULL);
-	}
-	return (line_with_nl);
-}
-
-char	*new_line(char *line)
-{
-	int		i;
-	int		j;
-	char	*str;
-
+	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
-	while (line[i] && line[i] != '\n')
-		i++;
-	if (!line[i])
+	while (buffer[i] && buffer[i] != '\n')
 	{
-		free(line);
-		return (NULL);
+		line[i] = buffer[i];
+		i++;
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(line) - i + 1));
-	if (!str)
-		return (NULL);
-	i++;
-	j = 0;
-	while (line[i])
-		str[j++] = line[i++];
-	str[j] = '\0';
-	free(line);
-	return (str);
+	if (buffer[i] && buffer[i] == '\n')
+		line[i++] = '\n';
+	return (line);
 }
 
-/*
-*	@brief	read a line from a file descriptor
-*	@param	fd :: the file descriptor to read from
-*	@return	char* :: the line read
-*	@note	need to free the returned string
-*/
+char	*read_file(int fd, char *res)
+{
+	char	*buffer;
+	int		byte_read;
+
+	if (!res)
+		res = ft_calloc (1, 1);
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	byte_read = 1;
+	while (byte_read > 0)
+	{
+		byte_read = read(fd, buffer, BUFFER_SIZE);
+		if (byte_read == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[byte_read] = 0;
+		res = ft_free(res, buffer);
+		if (ft_strchr(buffer, '\n'))
+			break ;
+	}
+	free(buffer);
+	return (res);
+}
+
 char	*get_next_line(int fd)
 {
-	static char	*line[1024];
-	char		*next_line;
+	static char	*buffer[_SC_OPEN_MAX];
+	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line[fd], 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (0);
+	buffer[fd] = read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line[fd] = create_line(fd, line[fd]);
-	if (line[fd] == NULL)
-		return (NULL);
-	next_line = get_only_next_line(line[fd]);
-	line[fd] = new_line(line[fd]);
-	return (next_line);
+	line = ft_line(buffer[fd]);
+	buffer[fd] = ft_next(buffer[fd]);
+	return (line);
 }
