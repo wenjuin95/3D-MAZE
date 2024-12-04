@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 12:17:17 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 10:21:22 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_map
 	char	**map;
 	int		map_height;
 	int		*map_width;
+	int		map_width_max;
 	char	*north;
 	char	*sout;
 	char	*west;
