@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 18:15:02 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 18:32:03 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	check_valid_element(t_arg *arg)
 				&& temp->map_layout[i][j] != ' '
 				&& temp->map_layout[i][j] != 'W'
 				&& temp->map_layout[i][j] != '\n')
+			{
 				ft_error("invalid char in map!");
+				return ;
+			}
 			j++;
 		}
 		i++;
