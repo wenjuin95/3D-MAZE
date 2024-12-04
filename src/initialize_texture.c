@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/04 19:54:16 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/04 22:03:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,25 @@
 static void	get_xpm_data(t_data *data, char *path)
 {
 	data->img.img = mlx_xpm_file_to_image(data->mlx, path,
-			&data->texture.texture_size, &data->texture.texture_size);
+			&data->texture.texture_size,
+			&data->texture.texture_size);
 	if (data->img.img == NULL)
 		clean_and_exit(data);
 	data->img.img_addr = (int *)mlx_get_data_addr(data->img.img,
-			&data->img.pixel_bits, &data->img.size_line, &data->img.endian);
+			&data->img.pixel_bits,
+			&data->img.size_line,
+			&data->img.endian);
 }
 
 /**
- * @brief take the each image address and assign it to each pointer buffer
+ * @brief copy the data from the xpm file to the texture buffer
  * @param data the data to be converted
  * @param path the path to the xpm file
  * @return int* the buffer of the image for each texture
- * @note 1. purpose for create another (xpm_to_img) function is to
- * 			copy the different buffer to each texture buffer
- * 			like NORTH, SOUTH, WEST, EAST
+ * @note 1. "y * data->texture.texture_size + x" is the formula to get the
+ * 			pixel data from the xpm file
 */
-static int	*init_texture_data(t_data *data, char *path)
+static int	*ft_strdup_data(t_data *data, char *path)
 {
 	int		*texture_buffer;
 	int		x;
@@ -77,10 +79,10 @@ void	initialize_texture(t_data *data)
 	data->tex_data = ft_calloc(5, sizeof * data->tex_data);
 	if (data->tex_data == NULL)
 		clean_and_exit(data);
-	data->tex_data[NORTH] = init_texture_data(data, data->texture.north);
-	data->tex_data[SOUTH] = init_texture_data(data, data->texture.south);
-	data->tex_data[WEST] = init_texture_data(data, data->texture.west);
-	data->tex_data[EAST] = init_texture_data(data, data->texture.east);
+	data->tex_data[NORTH] = ft_strdup_data(data, data->texture.north);
+	data->tex_data[SOUTH] = ft_strdup_data(data, data->texture.south);
+	data->tex_data[WEST] = ft_strdup_data(data, data->texture.west);
+	data->tex_data[EAST] = ft_strdup_data(data, data->texture.east);
 }
 
 /**

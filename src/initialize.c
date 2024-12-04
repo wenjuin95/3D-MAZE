@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2024/12/04 19:50:51 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/04 21:46:25 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	initialize_mlx_hook(t_data *data)
 }
 
 /**
- * @brief initialize the image
+ * @brief create a image memory
  * @param data get mlx pointer
  * @param img get img pointer
  * @param width get the window width

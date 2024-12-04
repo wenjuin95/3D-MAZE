@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:52:22 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/04 22:04:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @note 1. "img->size_line / 4" is convert the size_line to pixel
  * @note 2. "y * (img->size_line / 4)" is to get total pixel in y axis
  * @note 3. "+ x" is to get the final pixel
- * @note 4. "y * (img->size_line / 4) + x" mean beginner of the pixel
+ * @note 4. "y * (img->size_line / 4) + x" mean index of the pixel
  * @note 5. "img->img_addr[pixel] = color" is to set the pixel to the color
 */
 static void	set_image_pixel(t_img *img, int x, int y, int color)
