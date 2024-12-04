@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 18:06:18 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 18:15:02 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	is_directory(char *file)
 	return (ret);
 }
 
-static int skip_space(char *str, int i)
+static int	skip_space(char *str, int i)
 {
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
@@ -61,9 +61,9 @@ void	check_map_wall(t_map *map)
 	int	i;
 	int	j;
 	int	width;
-	
+
 	i = 0;
-	while (i < map->mapl_len)
+	while (i < map->maply_height)
 	{
 		j = skip_space(map->map_layout[i], 0);
 		width = ft_strlen(map->map_layout[i]);
@@ -83,19 +83,22 @@ void	check_map_wall(t_map *map)
 void	check_valid_element(t_arg *arg)
 {
 	t_map	*temp;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	temp = &arg->map;
-	while (i < temp->mapl_len)
+	while (i < temp->maply_height)
 	{
 		j = 0;
 		while (temp->map_layout[i][j] != '\0')
 		{
-			if (temp->map_layout[i][j] != '1' && temp->map_layout[i][j] != '0' &&
-			temp->map_layout[i][j] != 'N' && temp->map_layout[i][j] != 'S' && temp->map_layout[i][j] != 'E'
-				&& temp->map_layout[i][j] != ' ' && temp->map_layout[i][j] != 'W'
+			if (temp->map_layout[i][j] != '1'
+			&& temp->map_layout[i][j] != '0'
+			&& temp->map_layout[i][j] != 'N' && temp->map_layout[i][j] != 'S'
+				&& temp->map_layout[i][j] != 'E'
+				&& temp->map_layout[i][j] != ' '
+				&& temp->map_layout[i][j] != 'W'
 				&& temp->map_layout[i][j] != '\n')
 				ft_error("invalid char in map!");
 			j++;

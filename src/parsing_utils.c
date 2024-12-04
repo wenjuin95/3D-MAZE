@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 17:54:10 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 18:11:33 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	error_handling(t_map *map)
 
 int	parse_struct(t_map *map)
 {
-	map->mapl_len = map->map_height - 8;
+	map->maply_height = map->map_height - 8;
 	map->north = ft_substr(map->map[0], 3, ft_strlen(map->map[0]));
 	map->sout = ft_substr(map->map[1], 3, ft_strlen(map->map[1]));
 	map->west = ft_substr(map->map[2], 3, ft_strlen(map->map[2]));

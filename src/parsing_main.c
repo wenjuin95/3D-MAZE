@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 17:54:05 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 18:16:26 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,17 @@ static char	**read_map_file(char *file, int lines_num)
 
 t_map	*parse_width(t_arg *arg)
 {
-	t_map *tmp;
-	int i;
+	t_map	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = &arg->map;
 	if (tmp->map_layout == NULL)
 		ft_error("Fail to allocate memory");
-	tmp->array_width = (int *)malloc(sizeof(int) * tmp->mapl_len);
+	tmp->array_width = (int *)malloc(sizeof(int) * tmp->maply_height);
 	if (!tmp->array_width)
 		ft_error("Fail to allocate memory for map_width");
-	while(i < tmp->mapl_len)
+	while (i < tmp->maply_height)
 	{
 		tmp->array_width[i] = ft_strlen(arg->map.map_layout[i]);
 		i++;
@@ -88,18 +88,14 @@ t_map	*parse_width(t_arg *arg)
 
 int	get_width(t_map *map)
 {
-	int i;
+	int	i;
 	int	j;
 
-	if (!map->map_layout || map->map_layout[0] == NULL) 
-    	return (ft_error("Invalid ument structure"), 1);
-	for(int i = 0; i < 	map->mapl_len; i++)
-	{
-		printf("%s\n", map->map_layout[i]);
-	}
+	if (!map->map_layout || map->map_layout[0] == NULL)
+		return (ft_error("Invalid ument structure"), 1);
 	i = ft_strlen(map->map_layout[0]);
 	j = 1;
-	while (j < map->mapl_len)
+	while (j < map->maply_height)
 	{
 		if (i < ft_strlen(map->map_layout[j]))
 			i = ft_strlen(map->map_layout[j]);
@@ -107,6 +103,7 @@ int	get_width(t_map *map)
 	}
 	return (i);
 }
+
 /**
  * this function is the main function of parsing
  * first parse the argument into struct (map address)
