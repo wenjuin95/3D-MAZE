@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:57:58 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/04 19:54:16 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @brief convert xpm to image and get the data
  * @param data the data to be initialized
  * @param path the path to the xpm file
+ * @note 1. mlx_xpm_file_to_image is a function to convert xpm to an image
 */
 static void	get_xpm_data(t_data *data, char *path)
 {

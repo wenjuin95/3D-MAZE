@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 11:15:28 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/04 19:50:51 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int	initialize_mlx(t_data *data)
 /**
  * @brief initialize key and image rendering
  * @param data data to initialize
+ * @note 1. mlx_hook is a function to handle the event
+ * @note 2. mlx_mouse_hide is a function to hide the mouse cursor
+ * @note 3. mlx_loop_hook is a function to keep load the function
 */
 void	initialize_mlx_hook(t_data *data)
 {
@@ -60,7 +63,7 @@ void	initialize_mlx_hook(t_data *data)
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_press, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, handle_key_release, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse, data);
-	//mlx_mouse_hide(data->mlx, data->win);
+	mlx_mouse_hide(data->mlx, data->win);
 	mlx_loop_hook(data->mlx, update_image, data);
 }
 
@@ -71,8 +74,8 @@ void	initialize_mlx_hook(t_data *data)
  * @param width get the window width
  * @param height get the window height
  * @note 1. initialize all the img struct to 0 to prevent garbage value
- * @note 2. create a new image with mlx_new_image
- * @note 3. use mlx_get_data_addr to get the address of the image
+ * @note 4. mlx_new_image is a function to allocate memory for a image
+ * @note 5. mlx_get_data_addr is a function to get the address of the image
 */
 void	initialize_image(t_data *data, t_img *img, int w_width, int w_height)
 {
