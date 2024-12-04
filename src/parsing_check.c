@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 18:52:30 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 19:31:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,77 @@ bool	is_directory(char *file)
 	return (ret);
 }
 
-static int	skip_space(char *str, int i)
-{
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	return (i);
-}
+// static int	skip_space(char *str, int i)
+// {
+// 	while (str[i] == ' ' || str[i] == '\t')
+// 		i++;
+// 	return (i);
+// }
 
 /***
  * @brief Check if the map is surrounded by wall
  * will need to use map_layout height and array of width
  */
-void	check_map_wall(t_map *map)
+static int	check_top_or_bottom(char **map_tab, int i, int j)
+{
+	if (!map_tab || !map_tab[i] || !map_tab[i][j])
+		return (1);
+	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
+	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
+	|| map_tab[i][j] == '\f')
+		j++;
+	while (map_tab[i][j])
+	{
+		if (map_tab[i][j] != '1')
+			return (1);
+		j++;
+	}
+	return (0);
+}
+
+int	check_map_sides(t_map *map, char **map_tab)
 {
 	int	i;
 	int	j;
-	int	width;
 
-	i = 0;
-	while (i < map->maply_height)
+	if (check_top_or_bottom(map_tab, 0, 0) == 1)
+		return (1);
+	i = 1;
+	while (i < (map->maply_height - 1))
 	{
-		j = skip_space(map->map_layout[i], 0);
-		width = ft_strlen(map->map_layout[i]);
-		while (j < width)
-		{
-			if (i == 0 || i == map->map_height - 1 || j == 0 || j == width - 1)
-			{
-				if (map->map_layout[i][j] != '1')
-					ft_error("map not surrounded by wall!");
-			}
-			j++;
-		}
+		j = ft_strlen(map_tab[i]) - 1;
+		if (map_tab[i][j] != '1')
+			return (1);
 		i++;
 	}
+	if (check_top_or_bottom(map_tab, i, 0) == 1)
+		return (1);
+	return (0);
 }
+
+// void	check_map_wall(t_map *map)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	width;
+
+// 	i = 0;
+// 	while (i < map->maply_height)
+// 	{
+// 		j = skip_space(map->map_layout[i], 0);
+// 		width = ft_strlen(map->map_layout[i]);
+// 		while (j < width)
+// 		{
+// 			if (i == 0 || i == map->map_height - 1 || j == 0 || j == width - 1)
+// 			{
+// 				if (map->map_layout[i][j] != '1')
+// 					ft_error("map not surrounded by wall!");
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	check_valid_element(t_arg *arg)
 {
