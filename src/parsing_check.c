@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 18:32:03 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 18:52:30 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,22 @@ void	check_map_wall(t_map *map)
 
 void	check_valid_element(t_arg *arg)
 {
-	t_map	*temp;
 	int		i;
 	int		j;
 
 	i = 0;
-	temp = &arg->map;
-	while (i < temp->maply_height)
+	while (i < arg->map.maply_height)
 	{
 		j = 0;
-		while (temp->map_layout[i][j] != '\0')
+		while (arg->map.map_layout[i][j] != '\0')
 		{
-			if (temp->map_layout[i][j] != '1'
-			&& temp->map_layout[i][j] != '0'
-			&& temp->map_layout[i][j] != 'N' && temp->map_layout[i][j] != 'S'
-				&& temp->map_layout[i][j] != 'E'
-				&& temp->map_layout[i][j] != ' '
-				&& temp->map_layout[i][j] != 'W'
-				&& temp->map_layout[i][j] != '\n')
+			if (arg->map.map_layout[i][j] != '1'
+			&& arg->map.map_layout[i][j] != '0'
+			&& arg->map.map_layout[i][j] != 'N' && arg->map.map_layout[i][j] != 'S'
+				&& arg->map.map_layout[i][j] != 'E'
+				&& arg->map.map_layout[i][j] != ' '
+				&& arg->map.map_layout[i][j] != 'W'
+				&& arg->map.map_layout[i][j] != '\n')
 			{
 				ft_error("invalid char in map!");
 				return ;
