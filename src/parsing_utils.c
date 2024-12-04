@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 11:37:45 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:54:10 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	parse_struct(t_map *map)
 	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
+	map->map_width = get_width(map);
 	error_handling(map);
-	printf("map_layout %d\n", map->mapl_len);
 	return (0);
 }
 
@@ -82,4 +82,5 @@ void	take_arg(int ac, char **av, t_arg *arg)
 	if (ac != 2)
 		ft_error("Wrong number of arguments");
 	arg->map_add = ft_strdup(av[1]);
+	check_valid_map_name(arg->map_add, ".cub");
 }

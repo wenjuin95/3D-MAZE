@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 11:38:30 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:54:05 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,38 @@ t_map	*parse_width(t_arg *arg)
 	return (tmp);
 }
 
-static int width(t_arg *arg)
+int	get_width(t_map *map)
 {
 	int i;
 	int	j;
 
-	i = ft_strlen(arg->map.map_layout[0]);
-	j = 1;
-	while (j < arg->map.mapl_len)
+	if (!map->map_layout || map->map_layout[0] == NULL) 
+    	return (ft_error("Invalid ument structure"), 1);
+	for(int i = 0; i < 	map->mapl_len; i++)
 	{
-		if (i < ft_strlen(arg->map.map_layout[j]))
-			i = ft_strlen(arg->map.map_layout[j]);
+		printf("%s\n", map->map_layout[i]);
+	}
+	i = ft_strlen(map->map_layout[0]);
+	j = 1;
+	while (j < map->mapl_len)
+	{
+		if (i < ft_strlen(map->map_layout[j]))
+			i = ft_strlen(map->map_layout[j]);
 		j++;
 	}
 	return (i);
 }
-
+/**
+ * this function is the main function of parsing
+ * first parse the argument into struct (map address)
+ * check the file name (need to end with .cub)
+ * then read the file and store the map in a 2d array
+ * lastly read the 2d array and parse each line into different variable
+ * error handling
+ */
 int	parse(int ac, char **av, t_arg *arg)
 {
 	take_arg(ac, av, arg);
-	check_valid_map_name(arg->map_add, ".cub");
 	arg->map.map_height = get_line_nb(arg->map_add);
 	if (arg->map.map_height == -1)
 		return (1);
@@ -113,7 +125,5 @@ int	parse(int ac, char **av, t_arg *arg)
 	// check_map_wall(&arg->map);
 	parse_struct(&arg->map);
 	check_valid_element(arg);
-	arg->map = *parse_width(arg);
-	arg->map.map_width = width(arg);
 	return (0);
 }

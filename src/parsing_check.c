@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 11:33:29 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 17:54:19 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,29 +83,24 @@ void	check_map_wall(t_map *map)
 void	check_valid_element(t_arg *arg)
 {
 	t_map	*temp;
-	char	**tmp;
 	int	i;
 	int	j;
 
 	i = 0;
 	temp = &arg->map;
-	tmp = temp->map_layout;
-			printf("map layout length %d\n", temp->mapl_len);
-	// if (tmp->mapl_len < 3 || )
-	// 	ft_error("map is too small!");
 	while (i < temp->mapl_len)
 	{
 		j = 0;
-		while (tmp[i][j] != '\0')
+		while (temp->map_layout[i][j] != '\0')
 		{
-			// if (tmp[i][j] != '1' && tmp[i][j] != '0' &&
-			// tmp[i][j] != 'N' && tmp[i][j] != 'S' && tmp[i][j] != 'E'
-			// 	&& tmp[i][j] != ' ' && tmp[i][j] != 'W'
-			// 	&& tmp[i][j] != '\n')
-			// 	ft_error("invalid char in map!");
+			if (temp->map_layout[i][j] != '1' && temp->map_layout[i][j] != '0' &&
+			temp->map_layout[i][j] != 'N' && temp->map_layout[i][j] != 'S' && temp->map_layout[i][j] != 'E'
+				&& temp->map_layout[i][j] != ' ' && temp->map_layout[i][j] != 'W'
+				&& temp->map_layout[i][j] != '\n')
+				ft_error("invalid char in map!");
 			j++;
 		}
 		i++;
 	}
-	free_2d(tmp);
+	free_2d(temp->map_layout);
 }
