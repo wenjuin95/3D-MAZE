@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:41:39 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 16:38:19 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 11:21:35 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	free_map(t_map *map)
 	while (++i < map->map_height - 8)
 		free(map->map_layout[i]);
 	free(map->map_layout);
-	free(map->map_width);
+	free(map->array_width);
 }
 
 void	free_arg(t_arg *arg)

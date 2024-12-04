@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 10:21:34 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 11:38:30 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ t_map	*parse_width(t_arg *arg)
 	tmp = &arg->map;
 	if (tmp->map_layout == NULL)
 		ft_error("Fail to allocate memory");
-	tmp->map_width = (int *)malloc(sizeof(int) * tmp->mapl_len);
-	if (!tmp->map_width)
+	tmp->array_width = (int *)malloc(sizeof(int) * tmp->mapl_len);
+	if (!tmp->array_width)
 		ft_error("Fail to allocate memory for map_width");
 	while(i < tmp->mapl_len)
 	{
-		tmp->map_width[i] = ft_strlen(arg->map.map_layout[i]);
+		tmp->array_width[i] = ft_strlen(arg->map.map_layout[i]);
 		i++;
 	}
 	return (tmp);
@@ -110,10 +110,10 @@ int	parse(int ac, char **av, t_arg *arg)
 	if (arg->map.map_height == -1)
 		return (1);
 	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
-	check_valid_element(arg);
 	// check_map_wall(&arg->map);
 	parse_struct(&arg->map);
+	check_valid_element(arg);
 	arg->map = *parse_width(arg);
-	arg->map.map_width_max = width(arg);
+	arg->map.map_width = width(arg);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 16:39:20 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/04 11:31:32 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 //     printf("Map Layout Length: (%d) but (%d)\n", map->mapl_len,
 //         map->mapl_len - 1);
 //     printf("Map Height: (%d)\n", map->map_height);
+// 	printf("map layout width %d", map->map_width);
 //     printf("Map Width: ");
 //     if (map->map_width)
 //     {
 //         for (int i = 0; i < map->mapl_len; i++)
 //         {
-//             printf("(%d)", map->map_width[i]);
+//             printf("(%d)", map->array_width[i]);
 //             if (i < map->mapl_len - 1)
 //                 printf(", ");
 //         }
