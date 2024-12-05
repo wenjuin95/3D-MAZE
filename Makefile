@@ -68,7 +68,7 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
-leak:
+leak: re
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
 
 .PHONY : all clean fclean re bonus norm leak fsan
