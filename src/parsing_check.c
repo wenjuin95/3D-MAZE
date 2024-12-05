@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 19:31:48 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 15:47:41 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	check_top_or_bottom(char **map_tab, int i, int j)
 		j++;
 	while (map_tab[i][j])
 	{
-		if (map_tab[i][j] != '1')
+		if (map_tab[i][j] != '1' && map_tab[i][j] != ' ')
 			return (1);
 		j++;
 	}
@@ -83,7 +83,18 @@ int	check_map_sides(t_map *map, char **map_tab)
 	i = 1;
 	while (i < (map->maply_height - 1))
 	{
+		j = 0;
+		while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
+		|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
+		|| map_tab[i][j] == '\f')
+			j++;
+		if (map_tab[i][j] != '1')
+			return (1);
 		j = ft_strlen(map_tab[i]) - 1;
+		while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
+		|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
+		|| map_tab[i][j] == '\f')
+			j--;
 		if (map_tab[i][j] != '1')
 			return (1);
 		i++;

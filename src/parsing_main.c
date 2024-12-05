@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 07:43:55 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 15:45:28 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	**read_map_file(char *file, int lines_num)
 		perror("Fail to open file");
 	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
 	if (!map)
-		ft_error("Fail to allocate memory");
+		perror("Fail to allocate memory");
 	i = 0;
 	while (i < lines_num)
 	{
@@ -74,7 +74,7 @@ t_map	*parse_width(t_arg *arg)
 	i = 0;
 	tmp = &arg->map;
 	if (tmp->map_layout == NULL)
-		ft_error("Fail to allocate memory");
+		ft_error("Fail to allocate memory12");
 	tmp->array_width = (int *)malloc(sizeof(int) * tmp->maply_height);
 	if (!tmp->array_width)
 		ft_error("Fail to allocate memory for map_width");

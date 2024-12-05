@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 14:59:26 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 15:46:27 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	error_handling(t_map *map)
 {
-	if (!map->north || !map->south || !map->west || !map->east || !map->sprite
+	if (!map->north || !map->south || !map->west || !map->east
 		|| !map->floor || !map->ceiling || !map->map_layout)
-		ft_error("Fail to allocate memory");
+		ft_error("Fail to allocate memory56");
 }
 
 char	**copy_2d_array(char **src, int start, int src_height)
@@ -117,16 +117,13 @@ char	*remove_nl(char *src)
 	char	*str;
 
 	i = 0;
-	str = malloc(sizeof(char) * ft_strlen(src) - 1);
-	while (i < ft_strlen(src))
+	str = ft_strdup(src);
+	while (i < ft_strlen(str))
 	{
 		if (src[i] == '\n')
 			str[i] = '\0';
-		else
-			str[i] = src[i];
 		i++;
 	}
-	// free (src);
 	return (str);
 }
 
@@ -143,8 +140,6 @@ int	parse_struct(t_map *map)
 		|| search(map->map, map->map_height, "WE") == -1
 		|| search(map->map, map->map_height, "EA") == -1)
 		ft_error("Invalid map");
-	else
-		printf("Valid map\n\n");
 	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "NO")], 3, ft_len(map->map[search2(map->map, map->map_height, "NO")])));
 	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "SO")], 3, ft_len(map->map[search2(map->map, map->map_height, "SO")])));
 	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "WE")], 3, ft_len(map->map[search2(map->map, map->map_height, "WE")])));
