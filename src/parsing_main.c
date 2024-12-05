@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 19:32:39 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 07:43:55 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_line_nb(char *file)
 
 	lines_num = 0;
 	if (is_directory(file))
-		perror("File is a directory ");
+		return (perror("File is a directory "), -1);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (perror("Fail to open file "), -1);
@@ -112,10 +112,13 @@ int	get_width(t_map *map)
  * lastly read the 2d array and parse each line into different variable
  * error handling
  */
-int	parse(int ac, char **av, t_arg *arg)
+int	parse(char **av, t_arg *arg)
 {
-	take_arg(ac, av, arg);
+	arg->map_add = ft_strdup(av[1]);
+	check_valid_map_name(arg->map_add, ".cub");
 	arg->map.map_height = get_line_nb(arg->map_add);
+	if(arg->map.map_height == -1)
+		return (ft_error("Fail to get line number"), 1);
 	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
 	parse_struct(&arg->map);
 	check_valid_element(arg);

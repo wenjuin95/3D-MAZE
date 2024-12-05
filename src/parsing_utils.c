@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 18:11:33 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 10:59:44 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,6 @@ static void	error_handling(t_map *map)
 	if (!map->north || !map->sout || !map->west || !map->east || !map->sprite
 		|| !map->floor || !map->ceiling || !map->map_layout)
 		ft_error("Fail to allocate memory");
-}
-
-int	parse_struct(t_map *map)
-{
-	map->maply_height = map->map_height - 8;
-	map->north = ft_substr(map->map[0], 3, ft_strlen(map->map[0]));
-	map->sout = ft_substr(map->map[1], 3, ft_strlen(map->map[1]));
-	map->west = ft_substr(map->map[2], 3, ft_strlen(map->map[2]));
-	map->east = ft_substr(map->map[3], 3, ft_strlen(map->map[3]));
-	map->sprite = ft_substr(map->map[4], 2, ft_strlen(map->map[4]));
-	map->floor = set_rgb(ft_substr(map->map[5], 2, ft_strlen(map->map[5])));
-	map->ceiling = set_rgb(ft_substr(map->map[6], 2, ft_strlen(map->map[6])));
-	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
-	map->floor_hex = convert_rgb_to_hex(map->floor);
-	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
-	map->map_width = get_width(map);
-	error_handling(map);
-	return (0);
 }
 
 char	**copy_2d_array(char **src, int start, int src_height)
@@ -74,13 +56,62 @@ char	*cut_first3(char *s, int len, int start)
 	return (str);
 }
 
-/**
- * the function is parse the arg to the struct
- */
-void	take_arg(int ac, char **av, t_arg *arg)
+// static int	check_true(t_map *map, int i)
+// {
+// 		bool res;
+
+// 		res = false;
+// }
+
+static int search(char **array, int rows, char *target)
 {
-	if (ac != 2)
-		ft_error("Wrong number of arguments");
-	arg->map_add = ft_strdup(av[1]);
-	check_valid_map_name(arg->map_add, ".cub");
+    int i;
+	int j;
+
+	i = 0;
+    while (i < rows)
+    {
+        j = 0;
+        while (array[i][j])
+        {
+            if (array[i][j] == target[0] && array[i][j + 1] == target[1])
+            {
+                printf("Found %s at row %d, column %d\n",target, i, j);
+                return (i);
+            }
+            j++;
+        }
+        i++;
+    }
+    return (-1);
+}
+
+/**
+ * the variable i here is the index of the whole map
+ * it's like a global variable for parsing
+ */
+int	parse_struct(t_map *map)
+{
+
+	map->maply_height = map->map_height - 8;
+	if (search(map->map, map->map_height, "NO") == -1
+		|| search(map->map, map->map_height, "SO") == -1
+		|| search(map->map, map->map_height, "WE") == -1
+		|| search(map->map, map->map_height, "EA") == -1)
+		ft_error("Invalid map");
+	else
+		printf("Valid map\n\n");
+	map->north = ft_substr(map->map[search(map->map, map->map_height, "NO")], 3, ft_strlen(search(map->map, map->map_height, "NO")));
+	map->sout = ft_substr(map->map[search(map->map, map->map_height, "SO")], 3, ft_strlen(map->map[1]));
+	map->west = ft_substr(map->map[search(map->map, map->map_height, "WE")], 3, ft_strlen(map->map[2]));
+	map->east = ft_substr(map->map[search(map->map, map->map_height, "EA")], 3, ft_strlen(map->map[3]));
+	// map->sprite = ft_substr(map->map[search(map->map, map->map_height, "S ")], 2, ft_strlen(map->map[4]));
+	map->floor = set_rgb(ft_substr(map->map[5], 2, ft_strlen(map->map[5])));
+	map->ceiling = set_rgb(ft_substr(map->map[6], 2, ft_strlen(map->map[6])));
+	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
+	map->floor_hex = convert_rgb_to_hex(map->floor);
+	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
+	map->map_width = get_width(map);
+	error_handling(map);
+	return (0);
 }

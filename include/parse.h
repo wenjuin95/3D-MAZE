@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 19:32:02 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 07:40:13 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void	free_2d(char **str);
 void	initialize_arg(t_arg *arg);
 
 // parsing
-void	take_arg(int argc, char **argv, t_arg *arg);
-int		parse(int ac, char **av, t_arg *arg);
+int		parse(char **av, t_arg *arg);
 int		parse_struct(t_map *map);
 char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_arg *arg);
