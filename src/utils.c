@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 17:22:18 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 17:51:20 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,12 @@ size_t	ft_len(char *s)
 
 char	*remove_nl(char *src)
 {
-	int		i;
-	char	*str;
+	int	len;
 
-	i = 0;
-	str = ft_strdup(src);
-	if (!str)
-		ft_error("Fail to allocate memoryabc");
-	while (i < ft_strlen(str))
-	{
-		if (src[i] == '\n')
-			str[i] = '\0';
-		i++;
-	}
-	return (str);
+	len = ft_strlen(src);
+	if (src[len - 1] == '\n')
+		src[len - 1] = '\0';
+	return (src);
 }
 
 char	**copy_2d_array(char **src, int start, int src_height)
@@ -74,7 +66,6 @@ char	**copy_2d_array(char **src, int start, int src_height)
 		j++;
 	}
 	dest[j] = NULL;
-	free_2d(src);
 	return (dest);
 }
 

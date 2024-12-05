@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 17:17:48 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 17:42:25 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_valid_map_name(char *file, char *type)
 	char	*extension;
 
 	i = ft_strlen(file) - 4;
-	extension = ft_strdup(ft_substr(file, i, 4));
+	extension = ft_substr(file, i, 4);
 	if (ft_strncmp(type, extension, 4) != 0)
 	{
 		free(extension);

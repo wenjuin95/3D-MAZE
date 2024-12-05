@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 16:48:11 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 18:04:43 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	**read_map_file(char *file, int lines_num)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		perror("Fail to open file");
-	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
+	map = (char **)malloc(sizeof(char *) * (lines_num +1));
 	if (!map)
 		perror("Fail to allocate memory");
 	i = 0;
