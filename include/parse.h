@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 13:17:49 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 14:45:13 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		parse_struct(t_map *map);
 char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_arg *arg);
 int		get_width(t_map *map);
+char	*remove_nl(char *src);
 
 //check
 void	check_valid_map_name(char *file, char *type);
@@ -74,6 +75,6 @@ int		*set_rgb(char *line);
 size_t	convert_rgb_to_hex(int *rgb_tab);
 char	**copy_2d_array(char **src, int start, int src_height);
 
-//tmp
+//utils
 
 #endif

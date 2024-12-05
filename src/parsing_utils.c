@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 13:27:11 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 14:59:26 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int search(char **array, int rows, char *target)
         {
             if (array[i][j] == target[0] && array[i][j + 1] == target[1])
             {
-                printf("Found %s at row %d, column %d\n",target, i, j);
+                // printf("Found %s at row %d, column %d\n",target, i, j);
                 return (i);
             }
             j++;
@@ -101,7 +101,7 @@ static size_t search2(char **array, int row, char *target)
         {
             if (array[i][j] == target[0] && array[i][j + 1] == target[1])
             {
-                printf("Found %s at row %d, column %d\n",target, i, j);
+                // printf("Found %s at row %d, column %d\n",target, i, j);
                 return (i);
             }
             j++;
@@ -111,7 +111,7 @@ static size_t search2(char **array, int row, char *target)
     return (-1);
 }
 
-static char *remove_nl(char *src)
+char	*remove_nl(char *src)
 {
 	int		i;
 	char	*str;
@@ -126,7 +126,7 @@ static char *remove_nl(char *src)
 			str[i] = src[i];
 		i++;
 	}
-	free (src);
+	// free (src);
 	return (str);
 }
 
@@ -145,10 +145,10 @@ int	parse_struct(t_map *map)
 		ft_error("Invalid map");
 	else
 		printf("Valid map\n\n");
-	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "NO")], 3, ft_len(search2(map->map, map->map_height, "NO"))));
-	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "SO")], 3, ft_len(search2(map->map, map->map_height, "SO"))));
-	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "WE")], 3, ft_len(search2(map->map, map->map_height, "WE"))));
-	map->east = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "EA")], 3, ft_len(search2(map->map, map->map_height, "EA"))));
+	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "NO")], 3, ft_len(map->map[search2(map->map, map->map_height, "NO")])));
+	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "SO")], 3, ft_len(map->map[search2(map->map, map->map_height, "SO")])));
+	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "WE")], 3, ft_len(map->map[search2(map->map, map->map_height, "WE")])));
+	map->east = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "EA")], 3, ft_len(map->map[search2(map->map, map->map_height, "EA")])));
 	// map->sprite = ft_substr(map->map[search(map->map, map->map_height, "S ")], 2, ft_strlen(map->map[4]));
 	map->floor = set_rgb(remove_nl(ft_substr(map->map[5], 2, ft_strlen(map->map[5]))));
 	map->ceiling = set_rgb(remove_nl(ft_substr(map->map[6], 2, ft_strlen(map->map[6]))));
