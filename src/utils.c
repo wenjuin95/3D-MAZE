@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/02 11:34:54 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 13:24:05 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void	free_2d(char **str)
 		i++;
 	}
 	free(str);
+}
+
+size_t	ft_len(char *s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 // bool	skip_ispace(char *str)

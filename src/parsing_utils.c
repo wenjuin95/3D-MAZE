@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 10:59:44 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 13:27:11 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	error_handling(t_map *map)
 {
-	if (!map->north || !map->sout || !map->west || !map->east || !map->sprite
+	if (!map->north || !map->south || !map->west || !map->east || !map->sprite
 		|| !map->floor || !map->ceiling || !map->map_layout)
 		ft_error("Fail to allocate memory");
 }
@@ -28,7 +28,7 @@ char	**copy_2d_array(char **src, int start, int src_height)
 	dest = malloc(sizeof(char *) * (src_height - start + 1));
 	while (start < src_height)
 	{
-		dest[j] = ft_strdup(src[start]);
+		dest[j] = remove_nl(src[start]);
 		start++;
 		j++;
 	}
@@ -86,6 +86,50 @@ static int search(char **array, int rows, char *target)
     return (-1);
 }
 
+static size_t search2(char **array, int row, char *target)
+{
+    size_t	i;
+	size_t	j;
+	size_t	rows;
+
+	i = 0;
+	rows = (size_t)row; 
+    while (i < rows)
+    {
+        j = 0;
+        while (array[i][j])
+        {
+            if (array[i][j] == target[0] && array[i][j + 1] == target[1])
+            {
+                printf("Found %s at row %d, column %d\n",target, i, j);
+                return (i);
+            }
+            j++;
+        }
+        i++;
+    }
+    return (-1);
+}
+
+static char *remove_nl(char *src)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = malloc(sizeof(char) * ft_strlen(src) - 1);
+	while (i < ft_strlen(src))
+	{
+		if (src[i] == '\n')
+			str[i] = '\0';
+		else
+			str[i] = src[i];
+		i++;
+	}
+	free (src);
+	return (str);
+}
+
 /**
  * the variable i here is the index of the whole map
  * it's like a global variable for parsing
@@ -101,13 +145,13 @@ int	parse_struct(t_map *map)
 		ft_error("Invalid map");
 	else
 		printf("Valid map\n\n");
-	map->north = ft_substr(map->map[search(map->map, map->map_height, "NO")], 3, ft_strlen(search(map->map, map->map_height, "NO")));
-	map->sout = ft_substr(map->map[search(map->map, map->map_height, "SO")], 3, ft_strlen(map->map[1]));
-	map->west = ft_substr(map->map[search(map->map, map->map_height, "WE")], 3, ft_strlen(map->map[2]));
-	map->east = ft_substr(map->map[search(map->map, map->map_height, "EA")], 3, ft_strlen(map->map[3]));
+	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "NO")], 3, ft_len(search2(map->map, map->map_height, "NO"))));
+	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "SO")], 3, ft_len(search2(map->map, map->map_height, "SO"))));
+	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "WE")], 3, ft_len(search2(map->map, map->map_height, "WE"))));
+	map->east = remove_nl(ft_substr(map->map[search(map->map, map->map_height, "EA")], 3, ft_len(search2(map->map, map->map_height, "EA"))));
 	// map->sprite = ft_substr(map->map[search(map->map, map->map_height, "S ")], 2, ft_strlen(map->map[4]));
-	map->floor = set_rgb(ft_substr(map->map[5], 2, ft_strlen(map->map[5])));
-	map->ceiling = set_rgb(ft_substr(map->map[6], 2, ft_strlen(map->map[6])));
+	map->floor = set_rgb(remove_nl(ft_substr(map->map[5], 2, ft_strlen(map->map[5]))));
+	map->ceiling = set_rgb(remove_nl(ft_substr(map->map[6], 2, ft_strlen(map->map[6]))));
 	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);

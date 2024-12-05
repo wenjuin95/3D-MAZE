@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:41:39 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/04 11:21:35 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 13:17:49 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_map(t_map *map)
 	int	i;
 
 	free(map->north);
-	free(map->sout);
+	free(map->south);
 	free(map->west);
 	free(map->east);
 	free(map->sprite);

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/05 07:41:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/05 13:17:49 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void print_map_struct(const t_map *map)
 	printf("map layout width %d", map->map_width);
     printf("Map Width: ");
     printf("North Texture: (%s)\n", map->north ? map->north : "(null)");
-    printf("South Texture: (%s)\n", map->sout ? map->sout : "(null)");
+    printf("southh Texture: (%s)\n", map->south ? map->south : "(null)");
     printf("West Texture: (%s)\n", map->west ? map->west : "(null)");
     printf("East Texture: (%s)\n", map->east ? map->east : "(null)");
     printf("Sprite: (%s)\n", map->sprite ? map->sprite : "(null)");
