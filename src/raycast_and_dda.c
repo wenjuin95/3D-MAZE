@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:54:45 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/05 11:03:30 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param ray the ray to be calculated
  * @param player the player to be calculated
  * @note 1. calculate the ray direction from the player to the wall
- * @note 	a. camera_x: calculate how far left or right this ray is from the center of the camera
+ * @note 	a. camera: calculate how far left or right this ray is from the center of the camera
  * @note 	b. dir_x: calculate the ray direction of x
  * @note 2. calculate the delta distance ( determine the distance the ray has to travel
  * 			to go from one x-side to the next x-side, or one y-side to the next y-side)
@@ -26,12 +26,12 @@
 */
 void	calculate_ray_and_grid(int x, t_raycast *ray, t_player *player)
 {
-	//calculate the ray position and direction
+	//calculate the ray direction
 	ray->camera = 2 * x / (double)WIN_WIDTH - 1; //representing the horizontal position on the camera plane
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera; //Sets the x-direction of the ray.
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera; //Sets the y-direction of the ray.
 
-	//calculate length of ray from one x or y-side to next x or y-side
+	//calculate length of ray from "one x or y-side" to "next x or y-side"
 	ray->map_x = (int)player->pos_x; //Sets the x-coordinate of the map square the player is currently in.
 	ray->map_y = (int)player->pos_y; //Sets the y-coordinate of the map square the player is currently in.
 	ray->delta_dist_x = fabs(1 / ray->dir_x);//Sets the distance the ray has to travel in the x-direction to move from one x-side to the next.
