@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 18:04:43 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 09:16:08 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,24 @@ static char	**read_map_file(char *file, int lines_num)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		perror("Fail to open file");
-	map = (char **)malloc(sizeof(char *) * (lines_num +1));
+	if (fd == -1 || lines_num <= 0)
+		return (perror("Fail to open file"), (NULL));
+	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
 	if (!map)
-		perror("Fail to allocate memory");
+		return (perror("Fail to allocate memory"), (NULL));
 	i = 0;
 	while (i < lines_num)
 	{
 		map[i] = get_next_line(fd);
+		if (!map[i])
+		{
+			perror("Fail to read file");
+			break ;
+		}
 		i++;
 	}
 	map[i] = NULL;
+	close(fd);
 	return (map);
 }
 
@@ -120,6 +126,8 @@ int	parse(char **av, t_arg *arg)
 	if(arg->map.map_height == -1)
 		return (ft_error("Fail to get line number"), 1);
 	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
+	if (!arg->map.map)
+		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&arg->map);
 	check_valid_element(arg);
 	if (check_map_sides(&arg->map, arg->map.map_layout) == 1)

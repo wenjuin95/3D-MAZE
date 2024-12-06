@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/05 18:01:16 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 09:21:22 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,21 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_error("wrong argument!!!"), 1);
 	initialize_arg(&arg);
-	parse(argv, &arg);
+	if (parse(argv, &arg) == 1)
+        ft_error("Fail to parse\n");
 	// print_arg_struct(&arg);
     // printf("MAP\n");
     // printf("map_height (int): (%d)\n", arg.map.map_height);
     // printf("map_width (int): (%d)\n", arg.map.map_width);
     // printf("map floor_hex (size_t): (#%lx)\n", arg.map.floor_hex);
     // printf("map ceiling_hex (size_t): (#%lx)\n", arg.map.ceiling_hex);
-    // printf("map texture north (char *): %s$$\n", arg.map.north);
-    // printf("map texture south (char *): %s$$\n", arg.map.south);
-    // printf("map texture east (char *): %s$$\n", arg.map.east);
-    // printf("map texture west (char *): %s$$\n", arg.map.west);
+    // printf("map texture north (char *): (%s)\n", arg.map.north);
+    // printf("map texture south (char *): (%s)\n", arg.map.south);
+    // printf("map texture east (char *): (%s)\n", arg.map.east);
+    // printf("map texture west (char *): (%s)\n", arg.map.west);
     // printf("\n");
     // for(int i = 0; arg.map.map_layout[i]; i++)
-    //     printf("%s$$\n", arg.map.map_layout[i]);
+    //     printf("(%s)\n", arg.map.map_layout[i]);
     // printf("\n");
 	// printf("end of main\n");
     free_arg(&arg);
