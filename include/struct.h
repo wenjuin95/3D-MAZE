@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 18:23:00 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 22:19:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ enum	e_direction
 	EAST = 3,
 };
 
-typedef struct s_minimap
-{
-	char	**map;
-	t_img	*img;
-	int		minimap_size;
-	int		offset_x;
-	int		offset_y;
-	int		view_distance;
-	int		texture_size;
-}	t_minimap;
 
 typedef struct s_img
 {

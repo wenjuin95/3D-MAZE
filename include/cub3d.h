@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:30 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 22:20:23 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_data
 	t_raycast	ray;
 	t_img		img;
 	t_tex		texture;
-	t_minimap	minimap;
 }	t_data;
 
 void	debuger(t_data *data);
