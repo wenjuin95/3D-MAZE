@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 16:37:02 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/06 13:41:45 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 	}
 	i = 0;
 	free(rgb_to_convert);
+	if (check_valid_rgb(rgb) == 1)
+		return (0);
 	return (rgb);
 }
 
