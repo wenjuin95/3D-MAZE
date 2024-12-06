@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 17:51:20 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 13:38:02 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ char	**copy_2d_array(char **src, int start, int src_height)
 	dest = malloc(sizeof(char *) * (src_height - start + 1));
 	while (start < src_height)
 	{
-		dest[j] = remove_nl(src[start]);
+		dest[j] = ft_strdup(remove_nl(src[start]));
 		start++;
 		j++;
 	}
+	free_2d(src);
 	dest[j] = NULL;
 	return (dest);
 }
