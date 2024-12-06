@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:40:06 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:39:22 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ int	rotate_left(t_data *data)
 int	update_image(t_data *data)
 {
 	if (player_movement(data) != 0)
+	{
 		render_the_image(data);
+		//debug_raycast(&data->ray); //debug
+	}
 	return (0);
 }

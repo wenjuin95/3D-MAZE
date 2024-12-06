@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/05 11:03:30 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 18:11:08 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,13 @@ void	calculate_line_height_to_draw(t_raycast *ray, t_data *data, t_player *playe
 	//calculate height of line to draw on screen
 	ray->line_height = (int)(data->win_height / ray->wall_dis); //calculate the line height to be draw on screen
 
-	//calculate lowest and highest pixel to fill in current stripe
+	//calculate lowest and highest pixel to fill in current line
 	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2; //calculate the start point to draw the line
 	if (ray->draw_start < 0) //ensure the starting point is not above the window
 		ray->draw_start = 0; //Sets the starting position to the top of the window if it is
 	ray->draw_end = ray->line_height / 2 + data->win_height / 2; //calculate the end point to draw the line
 	if (ray->draw_end >= data->win_height) //Ensures the ending position is not below the window.
 		ray->draw_end = data->win_height - 1; //Sets the ending position to the bottom of the window if it exceeds the window height
-	(void)player;
 
 	//calculate value of wall_x
 	if (ray->side == VERTICAL_WALL) //Checks if the ray hit a horizontal wall.

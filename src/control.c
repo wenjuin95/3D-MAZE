@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 06:00:51 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 12:12:40 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 18:18:47 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ int	handle_key_press(int keycode, t_data *data)
 		data->player.rotated -= 1;
 	if (keycode == RIGHT)
 		data->player.rotated += 1;
+	if (keycode == MAP)
+	{
+		if (data->on_map == 1)
+			data->on_map = 0;
+		else
+			data->on_map = 1;
+	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/04 22:03:45 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 16:14:15 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	get_xpm_data(t_data *data, char *path)
  * @return int* the buffer of the image for each texture
  * @note 1. "y * data->texture.texture_size + x" is the formula to get the
  * 			pixel data from the xpm file
+ * @note 2. mlx_destroy_image is to free the unused image data
 */
 static int	*ft_strdup_data(t_data *data, char *path)
 {
@@ -50,7 +51,7 @@ static int	*ft_strdup_data(t_data *data, char *path)
 	get_xpm_data(data, path);
 	texture_buffer = ft_calloc(1, sizeof * texture_buffer
 			* data->texture.texture_size * data->texture.texture_size);
-	if (!texture_buffer)
+	if (texture_buffer == NULL)
 		clean_and_exit(data);
 	y = 0;
 	while (y < data->texture.texture_size)

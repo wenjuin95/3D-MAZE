@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/03 10:56:40 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 18:26:30 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
-
+# define MAP 109
 
 //campus
 # define MOVE_SPEED 0.1
@@ -71,13 +71,20 @@ typedef struct s_data
 	int			map_height;
 	int			**tex_pixel;
 	int			**tex_data;
+	int			on_map;
 	t_player	player;
 	t_raycast	ray;
 	t_img		img;
 	t_tex		texture;
+	t_minimap	minimap;
 }	t_data;
 
 void	debuger(t_data *data);
+void	debug_data(t_data *data);
+void	debug_image(t_img *img);
+void	debug_texture(t_tex *texture);
+void	debug_raycast(t_raycast *ray);
+void	debug_player(t_player *player);
 void	debug_parsing(t_data *data);
 
 //initialize.c

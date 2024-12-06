@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:58:30 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/06 17:28:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ int	main(int ac, char **av)
 	render_the_image(&data);
 	initialize_mlx_hook(&data);
 	mlx_loop(data.mlx);
-	debuger(&data);
 }
