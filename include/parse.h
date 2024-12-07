@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/06 11:14:38 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/07 12:21:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ bool	is_directory(char *file);
 int		check_map_sides(t_map *map, char **map_tab);
 void	check_valid_element(t_arg *arg);
 int		check_valid_rgb(int *rgb);
+int		check_map_closed(char **map, int rows);
 
 //convert
 int		*set_rgb(char *line);
@@ -77,5 +78,6 @@ size_t	convert_rgb_to_hex(int *rgb_tab);
 char	**copy_2d_array(char **src, int start, int src_height);
 
 //utils
+int	ft_strspn(const char *s, const char *accept);
 
 #endif

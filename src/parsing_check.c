@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 17:42:25 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/07 12:26:45 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,4 +154,31 @@ void	check_valid_element(t_arg *arg)
 		}
 		i++;
 	}
+}
+
+int	check_map_closed(char **map, int rows)
+{
+	int	i;
+	int	prev;
+	int	cur;
+
+	i = 0;
+	prev = ft_strlen(map[0]);
+	if (ft_strspn(map[0], "1") != prev
+		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows]))
+		return (1);
+	while (++i < rows - 1)
+	{
+		cur = ft_strlen(map[i]);
+		if (map[i][0] != '1' || map[i][cur - 1] != '1')
+			return (1);
+		if (cur > prev
+			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
+			return (1);
+		if (cur < prev
+			&& ft_strspn(map[i - 1] + cur - 1, "1") != prev - cur + 1)
+			return (1);
+		prev = cur;
+	}
+	return (0);
 }

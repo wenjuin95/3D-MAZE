@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/06 09:16:08 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/07 12:21:54 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ int	parse(char **av, t_arg *arg)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&arg->map);
 	check_valid_element(arg);
-	if (check_map_sides(&arg->map, arg->map.map_layout) == 1)
+	if (check_map_closed(arg->map.map_layout, arg->map.maply_height))
+	{
 		ft_error("Map not surrounded by wall");
+		exit(1);
+	}
 	return (0);
 }

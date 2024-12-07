@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 18:02:38 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/07 11:42:59 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@ static void	error_handling(t_map *map)
 	if (!map->north || !map->south || !map->west || !map->east
 		|| !map->floor || !map->ceiling || !map->map_layout)
 		ft_error("Fail to allocate memory56");
-}
-
-char	*cut_first3(char *s, int len, int start)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = start;
-	j = 0;
-	str = malloc(sizeof(char) * (len - start + 1));
-	while (i < len)
-	{
-		str[j] = s[i];
-		j++;
-		i++;
-	}
-	str[j] = '\0';
-	return (str);
 }
 
 // static int	check_true(t_map *map, int i)
@@ -87,18 +68,8 @@ static size_t	search2(char **array, int row, char *target)
 	return (-1);
 }
 
-/**
- * the variable i here is the index of the whole map
- * it's like a global variable for parsing
- */
-int	parse_struct(t_map *map)
+static t_map *p_struct(t_map * map)
 {
-	map->maply_height = map->map_height - 8;
-	if (search(map->map, map->map_height, "NO") == -1
-		|| search(map->map, map->map_height, "SO") == -1
-		|| search(map->map, map->map_height, "WE") == -1
-		|| search(map->map, map->map_height, "EA") == -1)
-		ft_error("Invalid map");
 	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
 					"NO")], 3, ft_len(map->map[search2(map->map,
 						map->map_height, "NO")])));
@@ -120,6 +91,22 @@ int	parse_struct(t_map *map)
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);
+	return (map);
+}
+
+/**
+ * the variable i here is the index of the whole map
+ * it's like a global variable for parsing
+ */
+int	parse_struct(t_map *map)
+{
+	map->maply_height = map->map_height - 8;
+	if (search(map->map, map->map_height, "NO") == -1
+		|| search(map->map, map->map_height, "SO") == -1
+		|| search(map->map, map->map_height, "WE") == -1
+		|| search(map->map, map->map_height, "EA") == -1)
+		ft_error("Invalid map");
+	map = p_struct(map);
 	error_handling(map);
 	return (0);
 }
