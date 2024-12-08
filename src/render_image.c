@@ -165,14 +165,28 @@ char	**get_minimap(t_data *data)
 	}
 	return (map);
 }
-
+/**
+ * @brief get the map offset
+ * @param data get the minimap view distance and minimap size
+ * @param size get the size of the map
+ * @param pos get the position of the player
+ * @return the offset of the map
+ * @note 1. The first if statement ensures the minimap is centered around the player when they are not too close to the edges of the map.
+ * @note 2. The second if statement ensures the minimap shows the end of the map when the player is near the end.
+ * @note 3. If the player is near the start of the map, the minimap starts from the beginning.
+*/
 int	get_map_offset(t_data *data, int size, int pos)
 {
+	//Condition: This checks if the player's position (pos) is greater than the minimap_view_distance and if the remaining distance to the end of the map (size - pos) is greater than minimap_view_distance + 1.
+	//Meaning for the Player: If the player is far enough from both the start and the end of the map, the minimap will be centered around the player's position. The offset is calculated as pos - minimap_view_distance, which means the minimap will start showing from a point that is minimap_view_distance units before the player's position.
 	if (pos > data->minimap_view_distance
 		&& size - pos > data->minimap_view_distance + 1)
-		return (pos - data->minimap_view_distance);
+		return (pos - data->minimap_view_distance); 
+
+	//Condition: This checks if the player's position (pos) is greater than the minimap_view_distance and if the remaining distance to the end of the map (size - pos) is less than or equal to minimap_view_distance + 1.
+	//Meaning for the Player: If the player is close to the end of the map, the minimap will shift to show the end of the map. The offset is calculated as size - minimap_size, which means the minimap will start showing from a point that ensures the end of the map is visible.
 	if (pos > data->minimap_view_distance
-		&& size - pos <= data->minimap_view_distance + 1)
+		&& size - pos <= data->minimap_view_distance + 1) 
 		return (size - data->minimap_size);
 	return (0);
 }
@@ -267,15 +281,33 @@ void	render_minimap(t_data *data)
 	mlx_destroy_image(data->mlx, data->img.img);
 }
 
+/**
+ * @brief put minimap to the window
+ * @param data get minimap_view_distance, minimap_size, minimap_texture_size,
+ * 			   minimap_offset_x, minimap_offset_y and minimap_map
+ * @note 1. get the minimap view distance
+ * @note 2. get the minimap size (width and height)
+ * @note 3. get the minimap texture size
+ * @note 4. get the minimap offset x and y
+ * @note 5. get the minimap map
+*/
 void	put_minimap(t_data *data)
 {
-	data->minimap_view_distance = MAP_VIEW;
-	data->minimap_size = (2 * data->minimap_view_distance) + 1;
+	data->minimap_view_distance = MAP_VIEW; //map view distance means how far the map can be seen
+	
+	//"2 * data->minimap_view_distance" is to get the width and height of the minimap
+	//"+1" is to get the center of the minimap
+	data->minimap_size = (2 * data->minimap_view_distance) + 1; 
+	
+	//MAP_PIXEL is the size of the minimap
+	//"/ (2 * data->minimap_view_distance)" is to get the size of the minimap texture
 	data->minimap_texture_size = MAP_PIXEL / (2 * data->minimap_view_distance);
-	// data->minimap_offset_x = get_map_offset(data, data->map_width, (int)data->player.pos_x);
-	// data->minimap_offset_y = get_map_offset(data, data->map_height, (int)data->player.pos_y);
-	data->minimap_offset_x = 0;
-	data->minimap_offset_y = 0;
+
+	//get the offset x and y of the minimap
+	data->minimap_offset_x = get_map_offset(data, data->map_width, (int)data->player.pos_x);
+	data->minimap_offset_y = get_map_offset(data, data->map_height, (int)data->player.pos_y);
+	
+	//get the minimap map and render the minimap
 	data->minimap_map = get_minimap(data);
 	if (data->minimap_map == NULL)
 		return ;
