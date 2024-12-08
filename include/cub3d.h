@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/08 21:40:45 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/09 00:01:24 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define RIGHT 65363
 # define MAP 109
 
-// //campus
-// # define MOVE_SPEED 0.1
-// # define ROTATE_SPEED 0.1
+//campus
+# define MOVE_SPEED 0.1
+# define ROTATE_SPEED 0.1
 
-// //campus
-// # define WIN_WIDTH 1280
-// # define WIN_HEIGHT 1024
+//campus
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1024
 
 ////full screen
 //# define WIN_WIDTH 3840
@@ -44,21 +44,26 @@
 //# define MOVE_SPEED 1
 //# define ROTATE_SPEED 0.1
 
-//laptop
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+// //laptop
+// # define WIN_WIDTH 640
+// # define WIN_HEIGHT 480
 
-//laptop
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.1
+// //laptop
+// # define MOVE_SPEED 0.1
+// # define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
 
-# define MAP_PIXEL 128
-# define MAP_VIEW 4
+# define MAP_PIXEL 200
+# define MAP_VIEW 5
 
 # define VERTICAL_WALL 0
 # define HORIZONTAL_WALL 1
+
+#define MAP_COLOR_PLAYER 0x00FF00 // Green
+#define MAP_COLOR_WALL 0x000000 // black
+#define MAP_COLOR_FLOOR 0xE6E6E6 // Light Gray
+#define MAP_COLOR_SPACE 0x000000 // black
 
 typedef struct s_data
 {
@@ -108,21 +113,24 @@ int		clean_and_exit(t_data *data);
 int		close_win(t_data *data);
 
 // render_image.c
+void	set_color_to_pixel(t_img *img, int x, int y, int color);
 void	put_image(t_data *data);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
-//minimap
-void	render_minimap(t_data *data);
-void	draw_minimap(t_data *data);
-void	set_minimap_border(t_data *data, int color);
+//render_minimap.c
+// void	set_minimap_border(t_data *data, int color);
 void	draw_minimap_tile(t_data *data, int x, int y);
 void	set_minimap_pixel(t_data *data, int x, int y, int color);
-int		get_map_offset(t_data *data, int size, int pos);
+void	draw_minimap(t_data *data);
+void	render_minimap(t_data *data);
+
+//init_minimap.c
 char	*add_minimap_line(t_data *data, int y);
 char	**get_minimap(t_data *data);
-bool	valid_map_coordinate(int coord, int size);
+// int		get_map_offset(t_data *data, int size, int pos);
 void	put_minimap(t_data *data);
+
 //raycast_and_dda.c
 void	calculate_ray_and_grid(int x, t_raycast *ray, t_player *player);
 void	set_dda(t_raycast *ray, t_player *player);

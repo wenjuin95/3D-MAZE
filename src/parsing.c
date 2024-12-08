@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 00:31:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 10:53:31 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/08 23:55:10 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ int parsing(t_data *data, char **file_name)
 		perror("map memory");
 		exit(1);
 	}
+
+	//first map
 	data->map[0] = ft_strdup("1111111111");
 	data->map[1] = ft_strdup("1000000001");
 	data->map[2] = ft_strdup("1000000001");
@@ -136,6 +138,19 @@ int parsing(t_data *data, char **file_name)
 	data->map[8] = ft_strdup("1000000001");
 	data->map[9] = ft_strdup("1111111111");
 	data->map[10] = NULL;
+
+	// //second map
+	// data->map[0] = ft_strdup("   1111   ");
+	// data->map[1] = ft_strdup("   1001   ");
+	// data->map[2] = ft_strdup("  100001  ");
+	// data->map[3] = ft_strdup("   1001   ");
+	// data->map[4] = ft_strdup("1110000111");
+	// data->map[5] = ft_strdup("10000S0001");
+	// data->map[6] = ft_strdup("1000000001");
+	// data->map[7] = ft_strdup("1000000001");
+	// data->map[8] = ft_strdup("1000000001");
+	// data->map[9] = ft_strdup("1111111111");
+	// data->map[10] = NULL;
 
 
 	data->texture.north = ft_strdup("src/wood.xpm");
