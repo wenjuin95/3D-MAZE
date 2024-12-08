@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_movement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 17:39:22 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/08 21:49:40 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
  * @param move_x the x position to move
  * @param move_y the y position to move
  * @return 1 if player move, 0 if player not move
+ * @note 1. check if the player chg position the current position is '0'
 */
 int	check_move(t_data *data, double move_x, double move_y)
 {
@@ -26,11 +27,13 @@ int	check_move(t_data *data, double move_x, double move_y)
 	moved = 0;
 	if (data->map[(int)data->player.pos_y][(int)move_x] != '1')
 	{
+		data->map[(int)data->player.pos_y][(int)move_x] = '0';
 		data->player.pos_x = move_x;
 		moved = 1;
 	}
 	if (data->map[(int)move_y][(int)data->player.pos_x] != '1')
 	{
+		data->map[(int)move_y][(int)data->player.pos_x] = '0';
 		data->player.pos_y = move_y;
 		moved = 1;
 	}

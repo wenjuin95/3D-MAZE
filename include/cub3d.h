@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 22:20:23 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/08 21:40:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,7 @@ typedef struct s_data
 	int			**tex_pixel;
 	int			**tex_data;
 	int			on_map;
-
-	int			minimap_view_distance;
-	int			minimap_size;
-	int			minimap_texture_size;
-	int			minimap_offset_x;
-	int			minimap_offset_y;
-	char		**minimap_map;
-
+	t_minimap	minimap;
 	t_player	player;
 	t_raycast	ray;
 	t_img		img;
@@ -88,6 +81,7 @@ typedef struct s_data
 
 void	debuger(t_data *data);
 void	debug_data(t_data *data);
+void	debug_map(t_minimap *minimap);
 void	debug_image(t_img *img);
 void	debug_texture(t_tex *texture);
 void	debug_raycast(t_raycast *ray);

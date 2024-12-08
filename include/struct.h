@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 22:19:45 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/08 21:34:44 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ enum	e_direction
 	WEST = 2,
 	EAST = 3,
 };
+
+typedef struct s_minimap
+{
+	int			view_distance;
+	int			size;
+	int			texture_size;
+	int			offset_x;
+	int			offset_y;
+	char		**map;
+}	t_minimap;
 
 
 typedef struct s_img

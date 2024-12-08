@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 17:31:09 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/08 21:42:57 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ void	debug_data(t_data *data)
 	printf("win: %p\n", data->win);
 	printf("win_width: %d\n", data->win_width);
 	printf("win_height: %d\n", data->win_height);
+}
+
+void	debug_map(t_minimap *minimap)
+{
+	printf("\nDEBUG MINIMAP DATA\n");
+	printf("view_distance: %d\n", minimap->view_distance);
+	printf("size: %d\n", minimap->size);
+	printf("texture_size: %d\n", minimap->texture_size);
+	printf("offset_x: %d\n", minimap->offset_x);
+	printf("offset_y: %d\n", minimap->offset_y);
+    for (int i = 0; i < minimap->size; i++) {
+        for (int j = 0; j < minimap->size; j++) {
+            printf("%c", minimap->map[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 void	debug_image(t_img *img)
