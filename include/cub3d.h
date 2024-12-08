@@ -28,13 +28,13 @@
 # define RIGHT 65363
 # define MAP 109
 
-//campus
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.1
+// //campus
+// # define MOVE_SPEED 0.1
+// # define ROTATE_SPEED 0.1
 
-//campus
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 1024
+// //campus
+// # define WIN_WIDTH 1280
+// # define WIN_HEIGHT 1024
 
 ////full screen
 //# define WIN_WIDTH 3840
@@ -44,13 +44,13 @@
 //# define MOVE_SPEED 1
 //# define ROTATE_SPEED 0.1
 
-////laptop
-//# define WIN_WIDTH 640
-//# define WIN_HEIGHT 480
+//laptop
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
 
-////laptop
-//# define MOVE_SPEED 0.011
-//# define ROTATE_SPEED 0.03
+//laptop
+# define MOVE_SPEED 0.1
+# define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
 
@@ -72,6 +72,14 @@ typedef struct s_data
 	int			**tex_pixel;
 	int			**tex_data;
 	int			on_map;
+
+	int			minimap_view_distance;
+	int			minimap_size;
+	int			minimap_texture_size;
+	int			minimap_offset_x;
+	int			minimap_offset_y;
+	char		**minimap_map;
+
 	t_player	player;
 	t_raycast	ray;
 	t_img		img;
@@ -110,6 +118,17 @@ void	put_image(t_data *data);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
+//minimap
+void	render_minimap(t_data *data);
+void	draw_minimap(t_data *data);
+void	set_minimap_border(t_data *data, int color);
+void	draw_minimap_tile(t_data *data, int x, int y);
+void	set_minimap_pixel(t_data *data, int x, int y, int color);
+int		get_map_offset(t_data *data, int size, int pos);
+char	*add_minimap_line(t_data *data, int y);
+char	**get_minimap(t_data *data);
+bool	valid_map_coordinate(int coord, int size);
+void	put_minimap(t_data *data);
 //raycast_and_dda.c
 void	calculate_ray_and_grid(int x, t_raycast *ray, t_player *player);
 void	set_dda(t_raycast *ray, t_player *player);

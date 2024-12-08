@@ -63,7 +63,7 @@ void	initialize_mlx_hook(t_data *data)
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_press, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, handle_key_release, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse, data);
-	mlx_mouse_hide(data->mlx, data->win);
+	// mlx_mouse_hide(data->mlx, data->win);
 	mlx_loop_hook(data->mlx, update_image, data);
 }
 

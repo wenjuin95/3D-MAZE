@@ -112,8 +112,176 @@ void	init_map_size_for_texture(t_data *data)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define MAP_COLOR_PLAYER 0x00FF00 // Green
+#define MAP_COLOR_WALL 0x000000 // black
+#define MAP_COLOR_FLOOR 0xE6E6E6 // Light Gray
+#define MAP_COLOR_SPACE 0x000000 // black
 
+char	*add_minimap_line(t_data *data, int y)
+{
+	char	*line;
+	int		x;
 
+	line = ft_calloc(data->minimap_size + 1, sizeof * line);
+	if (line == NULL)
+		return (NULL);
+	x = 0;
+	while (x < data->minimap_size && x < data->map_width)
+	{
+		if ((int)data->player.pos_x == (x + data->minimap_offset_x)
+			&& (int)data->player.pos_y == (y + data->minimap_offset_y))
+		{
+			line[x] = 'P';
+		}
+		else if (data->map[y + data->minimap_offset_y][x + data->minimap_offset_x] == '1')
+			line[x] = '1';
+		else if (data->map[y + data->minimap_offset_y][x + data->minimap_offset_x] == '0')
+			line[x] = '0';
+		else
+			line[x] = '\0';
+		x++;
+	}
+	return (line);
+}
+
+char	**get_minimap(t_data *data)
+{
+	char	**map;
+	int		y;
+
+	map = ft_calloc(data->minimap_size + 1, sizeof * map);
+	if (map == NULL)
+		return (NULL);
+	y = 0;
+	while (y < data->minimap_size && y < data->map_height)
+	{
+		map[y] = add_minimap_line(data, y);
+		if (map[y] == NULL)
+		{
+			free_array((void **)map);
+			return (NULL);
+		}
+		y++;
+	}
+	return (map);
+}
+
+int	get_map_offset(t_data *data, int size, int pos)
+{
+	if (pos > data->minimap_view_distance
+		&& size - pos > data->minimap_view_distance + 1)
+		return (pos - data->minimap_view_distance);
+	if (pos > data->minimap_view_distance
+		&& size - pos <= data->minimap_view_distance + 1)
+		return (size - data->minimap_size);
+	return (0);
+}
+
+void	set_minimap_pixel(t_data *data, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < data->minimap_texture_size)
+	{
+		j = 0;
+		while (j < data->minimap_texture_size)
+		{
+			set_color_to_pixel(&data->img, x + j, i + y, color);
+			j++;
+		}
+		i++;
+	}	
+}
+
+void	draw_minimap_tile(t_data *data, int x, int y)
+{
+	if (data->minimap_map[y][x] == 'P')
+		set_minimap_pixel(data, x * data->minimap_texture_size,
+			y * data->minimap_texture_size, MAP_COLOR_PLAYER);
+	if (data->minimap_map[y][x] == '1')
+		set_minimap_pixel(data, x * data->minimap_texture_size,
+			y * data->minimap_texture_size, MAP_COLOR_WALL);
+	if (data->minimap_map[y][x] == '0')
+		set_minimap_pixel(data, x * data->minimap_texture_size,
+			y * data->minimap_texture_size, MAP_COLOR_FLOOR);
+	if (data->minimap_map[y][x] == ' ')
+		set_minimap_pixel(data, x * data->minimap_texture_size,
+			y * data->minimap_texture_size, MAP_COLOR_SPACE);
+
+}
+
+void	set_minimap_border(t_data *data, int color)
+{
+	int	size;
+	int	x;
+	int	y;
+
+	size = MAP_PIXEL + data->minimap_texture_size;
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x <= size)
+		{
+			if (x < 5 || x > size - 5 || y < 5 || y > size - 5)
+				set_color_to_pixel(&data->img, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_minimap(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->minimap_size)
+	{
+		x = 0;
+		while (x < data->minimap_size)
+		{
+			if (!data->minimap_map[y] || !data->minimap_map[y][x] 
+				|| data->minimap_map[y][x] == '\0')
+				break;
+			draw_minimap_tile(data, x, y);
+			x++;
+		}
+		y++;
+	}
+	set_minimap_border(data, MAP_COLOR_SPACE);
+}
+
+void	render_minimap(t_data *data)
+{
+	int	img_size;
+
+	img_size = MAP_PIXEL + data->minimap_texture_size;
+	initialize_image(data, &data->img, img_size, img_size);
+	draw_minimap(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img,
+		data->minimap_texture_size, data->minimap_texture_size);
+	mlx_destroy_image(data->mlx, data->img.img);
+}
+
+void	put_minimap(t_data *data)
+{
+	data->minimap_view_distance = MAP_VIEW;
+	data->minimap_size = (2 * data->minimap_view_distance) + 1;
+	data->minimap_texture_size = MAP_PIXEL / (2 * data->minimap_view_distance);
+	// data->minimap_offset_x = get_map_offset(data, data->map_width, (int)data->player.pos_x);
+	// data->minimap_offset_y = get_map_offset(data, data->map_height, (int)data->player.pos_y);
+	data->minimap_offset_x = 0;
+	data->minimap_offset_y = 0;
+	data->minimap_map = get_minimap(data);
+	if (data->minimap_map == NULL)
+		return ;
+	render_minimap(data);
+	free_array((void **)data->minimap_map);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,8 +295,5 @@ void	render_the_image(t_data *data)
 	raycasting(&data->player, data);
 	put_image(data);
 	if (data->on_map == 1)
-	{
-		mlx_string_put(data->mlx, data->win, data->win_width / 2 - 50,
-			data->win_height / 2 - 10, 0x00FF0000, "YOU ARE ON THE MAP");
-	}
+		put_minimap(data);
 }
