@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 10:27:15 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 10:51:17 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ void	check_valid_map_name(char *file, char *type)
 	i = ft_strlen(file) - 4;
 	extension = ft_substr(file, i, 4);
 	if (ft_strncmp(type, extension, 4) != 0)
-	{
-		free(extension);
 		ft_error("wrong file type");
-	}
-	// free(extension);
+	free(extension);
 }
 
 bool	is_directory(char *file)
