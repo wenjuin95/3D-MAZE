@@ -3,4 +3,5 @@ object_files/
 *.a
 cub3d
 *.txt
-.vscode
+.vscode.vscode/
+raycating/*.o

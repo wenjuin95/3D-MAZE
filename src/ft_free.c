@@ -6,11 +6,11 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:41:39 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 23:03:26 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 00:06:18 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parse.h"
+#include "../include/cub3d.h"
 
 static void	free_map(t_map *map)
 {
