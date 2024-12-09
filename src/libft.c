@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 12:20:06 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 08:07:39 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 20:20:17 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parse.h"
+#include "../include/cub3d.h"
 
 int ft_strspn(const char *s, const char *accept)
 {

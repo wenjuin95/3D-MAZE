@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 09:47:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 20:58:04 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parse.h"
+#include "../include/cub3d.h"
 
 /**
  * @brief print error message
@@ -71,12 +71,12 @@ char	**copy_2d_array(char **src, int start, int src_height)
 	dest = malloc(sizeof(char *) * (src_height - start + 1));
 	while (start < src_height)
 	{
-		dest[j] = ft_strdup(remove_nl(src[start]));
+		dest[j] = remove_nl(ft_strdup(src[start]));
 		start++;
 		j++;
 	}
-	free_2d(src);
 	dest[j] = NULL;
+	free_array((void **)src);
 	return (dest);
 }
 

@@ -4,7 +4,7 @@ CC = gcc
 
 FSANITIZE = -fsanitize=address
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3
 
 SRC = $(wildcard src/*.c)
 
@@ -68,7 +68,7 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
-leak: re
+leak:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
 
 .PHONY : all clean fclean re bonus norm leak fsan
