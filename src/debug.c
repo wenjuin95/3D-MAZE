@@ -38,8 +38,6 @@ void	debug_map(t_minimap *minimap)
 	printf("view_distance: %d\n", minimap->view_distance);
 	printf("size: %d\n", minimap->size);
 	printf("texture_size: %d\n", minimap->texture_size);
-	printf("offset_x: %d\n", minimap->offset_x);
-	printf("offset_y: %d\n", minimap->offset_y);
     for (int i = 0; i < minimap->size; i++) {
         for (int j = 0; j < minimap->size; j++) {
             printf("%c", minimap->map[i][j]);

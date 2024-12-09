@@ -166,7 +166,7 @@ int parsing(t_data *data, char **file_name)
 	check_player_position(data);
 	init_player_dir(data);
 
-	// debug_parsing(data);
+	debug_parsing(data);
 
 	return (0);
 }

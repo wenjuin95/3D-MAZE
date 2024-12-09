@@ -28,13 +28,13 @@
 # define RIGHT 65363
 # define MAP 109
 
-//campus
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.1
+// //campus
+// # define MOVE_SPEED 0.1
+// # define ROTATE_SPEED 0.1
 
-//campus
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 1024
+// //campus
+// # define WIN_WIDTH 1280
+// # define WIN_HEIGHT 1024
 
 ////full screen
 //# define WIN_WIDTH 3840
@@ -44,13 +44,13 @@
 //# define MOVE_SPEED 1
 //# define ROTATE_SPEED 0.1
 
-// //laptop
-// # define WIN_WIDTH 640
-// # define WIN_HEIGHT 480
+//laptop
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
 
-// //laptop
-// # define MOVE_SPEED 0.1
-// # define ROTATE_SPEED 0.1
+//laptop
+# define MOVE_SPEED 0.1
+# define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
 
@@ -119,9 +119,8 @@ void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
 //render_minimap.c
-// void	set_minimap_border(t_data *data, int color);
-void	draw_minimap_tile(t_data *data, int x, int y);
-void	set_minimap_pixel(t_data *data, int x, int y, int color);
+void	draw_a_square(t_data *data, int x, int y, int color);
+void	draw_line(t_data *data, int x, int y);
 void	draw_minimap(t_data *data);
 void	render_minimap(t_data *data);
 

@@ -28,8 +28,6 @@ typedef struct s_minimap
 	int			view_distance;
 	int			size;
 	int			texture_size;
-	int			offset_x;
-	int			offset_y;
 	char		**map;
 }	t_minimap;
 
@@ -94,6 +92,7 @@ typedef struct s_player
 	int		moved_x;
 	int		moved_y;
 	int		rotated;
+	float	angle;
 }	t_player;
 
 
