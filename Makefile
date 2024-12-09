@@ -4,7 +4,7 @@ CC = gcc
 
 FSANITIZE = -fsanitize=address
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRC = $(wildcard src/*.c)
 

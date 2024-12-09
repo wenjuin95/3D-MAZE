@@ -6,12 +6,15 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/06 13:38:02 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 09:47:27 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parse.h"
 
+/**
+ * @brief print error message
+ */
 void	ft_error(char *str)
 {
 	printf("Error : %s\n", str);
@@ -42,6 +45,9 @@ size_t	ft_len(char *s)
 	return (i);
 }
 
+/**
+ * @brief copy a string that without newline
+ */
 char	*remove_nl(char *src)
 {
 	int	len;
@@ -52,6 +58,10 @@ char	*remove_nl(char *src)
 	return (src);
 }
 
+/**
+ * @brief copy a 2d array to the other 2d array
+ * got a start index is to skip the first few lines
+ */
 char	**copy_2d_array(char **src, int start, int src_height)
 {
 	int		j;

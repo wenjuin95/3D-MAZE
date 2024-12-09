@@ -6,12 +6,15 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/06 13:41:45 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 09:46:48 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parse.h"
 
+/**
+ * @brief convert the rgb value to hex
+ */
 size_t	convert_rgb_to_hex(int *rgb_tab)
 {
 	size_t	result;
@@ -26,6 +29,10 @@ size_t	convert_rgb_to_hex(int *rgb_tab)
 	return (result);
 }
 
+/**
+ * @brief atoi the rgb value
+ * @brief check if the rgb value is valid
+ */
 static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 {
 	int	i;
@@ -44,6 +51,9 @@ static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 	return (rgb);
 }
 
+/**
+ * @brief set the rgb value to the struct
+ */
 int	*set_rgb(char *line)
 {
 	char	**rgb_to_convert;

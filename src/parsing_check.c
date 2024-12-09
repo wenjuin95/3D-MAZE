@@ -6,14 +6,14 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/07 12:26:45 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 10:27:15 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parse.h"
 
 /**
- * @brief Check map to make sure it is a .cub file
+ * @brief Check map to make sure it is a .cub file or tetxure file
  */
 void	check_valid_map_name(char *file, char *type)
 {
@@ -27,7 +27,7 @@ void	check_valid_map_name(char *file, char *type)
 		free(extension);
 		ft_error("wrong file type");
 	}
-	free(extension);
+	// free(extension);
 }
 
 bool	is_directory(char *file)
@@ -159,26 +159,25 @@ void	check_valid_element(t_arg *arg)
 int	check_map_closed(char **map, int rows)
 {
 	int	i;
-	int	prev;
-	int	cur;
+	int	j;
 
-	i = 0;
-	prev = ft_strlen(map[0]);
-	if (ft_strspn(map[0], "1") != prev
-		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows]))
+	// Check top and bottom rows
+	if (check_top_or_bottom(map, 0, 0) == 1 || check_top_or_bottom(map, rows - 1, 0) == 1)
 		return (1);
-	while (++i < rows - 1)
+
+	// Check left and right sides of each row
+	for (i = 1; i < rows - 1; i++)
 	{
-		cur = ft_strlen(map[i]);
-		if (map[i][0] != '1' || map[i][cur - 1] != '1')
+		j = 0;
+		while (map[i][j] == ' ' || map[i][j] == '\t')
+			j++;
+		if (map[i][j] != '1')
 			return (1);
-		if (cur > prev
-			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
+		j = ft_strlen(map[i]) - 1;
+		while (map[i][j] == ' ' || map[i][j] == '\t')
+			j--;
+		if (map[i][j] != '1')
 			return (1);
-		if (cur < prev
-			&& ft_strspn(map[i - 1] + cur - 1, "1") != prev - cur + 1)
-			return (1);
-		prev = cur;
 	}
 	return (0);
 }

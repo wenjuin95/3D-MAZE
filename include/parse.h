@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/07 12:21:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 09:25:33 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		check_map_sides(t_map *map, char **map_tab);
 void	check_valid_element(t_arg *arg);
 int		check_valid_rgb(int *rgb);
 int		check_map_closed(char **map, int rows);
+// int		check_top_or_bottom(char **map_tab, int i, int j);
 
 //convert
 int		*set_rgb(char *line);
