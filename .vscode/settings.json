@@ -2,6 +2,10 @@
 	"files.associations": {
 		"cub3d.h": "c",
 		"parse.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"struct.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }

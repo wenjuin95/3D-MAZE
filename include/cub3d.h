@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:12:57 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 03:46:02 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@
 # define RIGHT 65363
 # define MAP 109
 
-// //campus
-// # define MOVE_SPEED 0.1
-// # define ROTATE_SPEED 0.1
+//campus
+# define MOVE_SPEED 0.09
+# define ROTATE_SPEED 0.1
 
-// //campus
-// # define WIN_WIDTH 1280
-// # define WIN_HEIGHT 1024
+//campus
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1024
 
 ////full screen
 //# define WIN_WIDTH 3840
@@ -45,18 +45,18 @@
 //# define MOVE_SPEED 1
 //# define ROTATE_SPEED 0.1
 
-//laptop
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+// //laptop
+// # define WIN_WIDTH 640
+// # define WIN_HEIGHT 480
 
-//laptop
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.1
+// //laptop
+// # define MOVE_SPEED 0.1
+// # define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
 
 # define MAP_PIXEL 200
-# define MAP_VIEW 5
+# define MAP_VIEW 4
 
 # define VERTICAL_WALL 0
 # define HORIZONTAL_WALL 1

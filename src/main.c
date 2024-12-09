@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:22:50 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 03:04:02 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,19 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	(void)av;
 	if (ac != 2)
 		return (printf("Wrong argument"), 1);
 	initialize_data(&data);
 	if (parse(av, &data) == 1)
 		return (1);
 	debug_parsing(&data);
-	// if (initialize_mlx(&data) == 1)
-	// 	return (1);
-	// initialize_texture(&data);
-	// render_the_image(&data);
-	// initialize_mlx_hook(&data);
-	// mlx_loop(data.mlx);
-	// clean_and_exit(&data);
+	if (initialize_mlx(&data) == 1)
+		return (1);
+	initialize_texture(&data);
+	render_the_image(&data);
+	initialize_mlx_hook(&data);
+	mlx_loop(data.mlx);
+	clean_and_exit(&data);
 }
 
 // static void print_map_struct(const t_map *map)

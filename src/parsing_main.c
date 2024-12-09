@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:07:17 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 03:08:27 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,11 @@ static char	**read_map_file(char *file, int lines_num)
 	if (!map)
 		return (perror("Fail to allocate memory"), (NULL));
 	i = 0;
-	while (i < lines_num)
+	while (i <= lines_num)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
-		{
-			perror("Fail to read file");
 			break ;
-		}
 		i++;
 	}
 	map[i] = NULL;
@@ -120,7 +117,7 @@ void check_player_position(t_data *data)
 	while (i < data->map.maply_height)
 	{
 		j = 0;
-		while (j < data->map.map_width)
+		while (data->map.map_layout[i][j])
 		{
 			if (data->map.map_layout[i][j] == 'N'
 				|| data->map.map_layout[i][j] == 'S'
@@ -210,9 +207,9 @@ int	parse(char **av, t_data *data)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&data->map);
 	check_valid_element(data);
-	if (check_map_sides(&data->map, data->map.map_layout) == 1)
-		ft_error("Map not surrounded by wall");
 	check_player_position(data);
 	init_player_dir(data);
+	if (check_map_sides(&data->map, data->map.map_layout) == 1)
+		ft_error("Map not surrounded by wall");
 	return (0);
 }

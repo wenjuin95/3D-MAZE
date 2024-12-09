@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:16:18 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 02:33:17 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	clean_mlx(t_data *data)
 
 static void	free_map(t_map *map)
 {
-	int	i;
+	// int	i;
 
 	free(map->north);
 	free(map->south);
@@ -78,10 +78,8 @@ static void	free_map(t_map *map)
 	free(map->sprite);
 	free(map->floor);
 	free(map->ceiling);
-	i = -1;
-	while (++i < map->map_height - 8)
-		free(map->map_layout[i]);
-	free(map->map_layout);
+	free_array((void **)map->map_layout);
+	// free(map->map_layout);
 	// free(map->array_width);
 }
 
@@ -92,16 +90,13 @@ static void	free_map(t_map *map)
 */
 void	clean_data(t_data *data)
 {
-	// if (data->tex_data)
-	// 	free_array((void **)data->tex_data);
-	// if (data->tex_pixel != NULL)
-	// 	free_array((void **)data->tex_pixel);
+	if (data->tex_data)
+		free_array((void **)data->tex_data);
+	if (data->tex_pixel != NULL)
+		free_array((void **)data->tex_pixel);
 	if (data->map_add != NULL)
 		free(data->map_add);
 	free_map(&data->map);
-	// if (data->map != NULL)
-	// 	free_array((void **)data->map);
-	// free_texture(&data->texture);
 }
 
 /**
@@ -113,7 +108,7 @@ int	clean_and_exit(t_data *data)
 {
 	if (data == NULL)
 		exit(EXIT_SUCCESS);
-	// clean_mlx(data);
+	clean_mlx(data);
 	clean_data(data);
 	exit(EXIT_SUCCESS);
 }

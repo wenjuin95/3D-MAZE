@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:07:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 02:30:21 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**copy_2d_array(char **src, int start, int src_height)
 		start++;
 		j++;
 	}
-	free_2d(src);
+	free_array((void **)src);
 	dest[j] = NULL;
 	return (dest);
 }
