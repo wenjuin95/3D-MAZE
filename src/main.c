@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 14:02:44 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 23:09:37 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,35 @@
 
 int	main(int argc, char **argv)
 {
-	t_arg	arg;
+	t_data	data;
 
 	if (argc != 2)
 		return (ft_error("wrong argument!!!"), 1);
-	initialize_arg(&arg);
-	if (parse(argv, &arg) == 1)
+	initialize_arg(&data);
+	if (parse(argv, &data) == 1)
         ft_error("Fail to parse\n");
-	// print_arg_struct(&arg);
-    // printf("MAP\n");
-    // printf("map_height (int): (%d)\n", arg.map.map_height);
-    // printf("map_width (int): (%d)\n", arg.map.map_width);
-    // printf("map floor_hex (size_t): (#%lx)\n", arg.map.floor_hex);
-    // printf("map ceiling_hex (size_t): (#%lx)\n", arg.map.ceiling_hex);
-    // printf("map texture north (char *): (%s)\n", arg.map.north);
-    // printf("map texture south (char *): (%s)\n", arg.map.south);
-    // printf("map texture east (char *): (%s)\n", arg.map.east);
-    // printf("map texture west (char *): (%s)\n", arg.map.west);
-    // printf("\n");
-    // for(int i = 0; arg.map.map_layout[i]; i++)
-    //     printf("(%s)\n", arg.map.map_layout[i]);
-    // printf("\n");
-	// printf("end of main\n");
-    free_arg(&arg);
+	// print_arg_struct(&data);
+
+    printf("MAP\n");
+    printf("map_height (int): (%d)\n", data.map.maply_height);
+    printf("map_width (int): (%d)\n", data.map.map_width);
+    printf("map floor_hex (size_t): (#%lx)\n", data.map.floor_hex);
+    printf("map ceiling_hex (size_t): (#%lx)\n", data.map.ceiling_hex);
+    printf("map texture north (char *): (%s)\n", data.map.north);
+    printf("map texture south (char *): (%s)\n", data.map.south);
+    printf("map texture east (char *): (%s)\n", data.map.east);
+    printf("map texture west (char *): (%s)\n", data.map.west);
+    printf("\n");
+    for(int i = 0; data.map.map_layout[i]; i++)
+        printf("(%s)\n", data.map.map_layout[i]);
+    printf("\n");
+	printf("\nPLAYER\n");
+	printf("player direction: %c\n", data.player.dir);
+	printf("player position x: %f\n", data.player.pos_x);
+	printf("player position y: %f\n", data.player.pos_y);
+	printf("player direction x: %f\n", data.player.dir_x);
+	printf("player direction y: %f\n", data.player.dir_y);
+	printf("end of main\n");
+    free_arg(&data);
 	return (0);
 }

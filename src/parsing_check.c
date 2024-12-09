@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 17:42:25 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/09 23:05:05 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,24 +128,24 @@ int	check_map_sides(t_map *map, char **map_tab)
 // 	}
 // }
 
-void	check_valid_element(t_arg *arg)
+void	check_valid_element(t_data *data)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while (i < arg->map.maply_height)
+	while (i < data->map.maply_height)
 	{
 		j = 0;
-		while (arg->map.map_layout[i][j] != '\0')
+		while (data->map.map_layout[i][j] != '\0')
 		{
-			if (arg->map.map_layout[i][j] != '1'
-			&& arg->map.map_layout[i][j] != '0'
-			&& arg->map.map_layout[i][j] != 'N' && arg->map.map_layout[i][j] != 'S'
-				&& arg->map.map_layout[i][j] != 'E'
-				&& arg->map.map_layout[i][j] != ' '
-				&& arg->map.map_layout[i][j] != 'W'
-				&& arg->map.map_layout[i][j] != '\n')
+			if (data->map.map_layout[i][j] != '1'
+			&& data->map.map_layout[i][j] != '0'
+			&& data->map.map_layout[i][j] != 'N' && data->map.map_layout[i][j] != 'S'
+				&& data->map.map_layout[i][j] != 'E'
+				&& data->map.map_layout[i][j] != ' '
+				&& data->map.map_layout[i][j] != 'W'
+				&& data->map.map_layout[i][j] != '\n')
 			{
 				ft_error("invalid char in map!");
 				return ;

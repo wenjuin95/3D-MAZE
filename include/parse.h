@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/06 11:14:38 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 23:08:30 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,36 @@ typedef struct s_map
 	size_t	ceiling_hex;
 }	t_map;
 
-typedef struct s_arg
+typedef struct s_player
+{
+	char	dir;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
+
+typedef struct s_data
 {
 	char	*map_add;
 	t_map	map;
-}	t_arg;
+	t_player	player;
+}	t_data;
 
 // Free functions
-void	free_arg(t_arg *arg);
+void	free_arg(t_data *data);
 void	free_2d(char **str);
 
 //initialize
-void	initialize_arg(t_arg *arg);
+void	initialize_arg(t_data *data);
 
 // parsing
-int		parse(char **av, t_arg *arg);
+int		parse(char **av, t_data *data);
 int		parse_struct(t_map *map);
 char	*cut_first3(char *s, int len, int start);
-t_map	*parse_width(t_arg *arg);
+t_map	*parse_width(t_data *data);
 int		get_width(t_map *map);
 char	*remove_nl(char *src);
 
@@ -68,7 +80,7 @@ char	*remove_nl(char *src);
 void	check_valid_map_name(char *file, char *type);
 bool	is_directory(char *file);
 int		check_map_sides(t_map *map, char **map_tab);
-void	check_valid_element(t_arg *arg);
+void	check_valid_element(t_data *data);
 int		check_valid_rgb(int *rgb);
 
 //convert

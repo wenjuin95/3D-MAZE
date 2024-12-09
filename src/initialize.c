@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:24:56 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/05 13:17:49 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 23:03:46 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	initialize_map(t_map *map)
 	map->map_layout = NULL;
 }
 
-void	initialize_arg(t_arg *arg)
+void	initialize_arg(t_data *data)
 {
-	if (!arg)
+	if (!data)
 		return ;
-	arg->map_add = NULL;
-	initialize_map(&arg->map);
+	data->map_add = NULL;
+	initialize_map(&data->map);
 }

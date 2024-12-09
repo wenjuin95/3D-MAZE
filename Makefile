@@ -6,8 +6,14 @@ FSANITIZE = -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-SRC = $(wildcard src/*.c)
+# directory that contains source files
+FILE_DIR = src src/parse
 
+# specify the directory where make should look for files
+vpath %.c $(FILE_DIR)
+
+# list all ".c" in the specified directories
+SRC = $(foreach dir, $(FILE_DIR), $(wildcard $(dir)/*.c))
 INC = -I include
 
 OBJ_FOLDER = object_files
@@ -68,7 +74,7 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
-leak: re
+leak:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
 
 .PHONY : all clean fclean re bonus norm leak fsan

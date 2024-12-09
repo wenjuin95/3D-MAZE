@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/06 09:16:08 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 23:15:05 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ static char	**read_map_file(char *file, int lines_num)
 	return (map);
 }
 
-t_map	*parse_width(t_arg *arg)
+t_map	*parse_width(t_data *data)
 {
 	t_map	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = &arg->map;
+	tmp = &data->map;
 	if (tmp->map_layout == NULL)
 		ft_error("Fail to allocate memory12");
 	tmp->array_width = (int *)malloc(sizeof(int) * tmp->maply_height);
@@ -86,7 +86,7 @@ t_map	*parse_width(t_arg *arg)
 		ft_error("Fail to allocate memory for map_width");
 	while (i < tmp->maply_height)
 	{
-		tmp->array_width[i] = ft_strlen(arg->map.map_layout[i]);
+		tmp->array_width[i] = ft_strlen(data->map.map_layout[i]);
 		i++;
 	}
 	return (tmp);
@@ -110,6 +110,86 @@ int	get_width(t_map *map)
 	return (i);
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void check_player_position(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < data->map.maply_height)
+	{
+		j = 0;
+		while (j < data->map.map_width)
+		{
+			if (data->map.map_layout[i][j] == 'N'
+				|| data->map.map_layout[i][j] == 'S'
+				|| data->map.map_layout[i][j] == 'W'
+				|| data->map.map_layout[i][j] == 'E')
+			{
+				data->player.dir = data->map.map_layout[i][j];
+				data->player.pos_x = j + 0.5;
+				data->player.pos_y = i + 0.5;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	init_north_south(t_data *data)
+{
+	if (data->player.dir == 'N')
+	{
+		//player direction face up
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
+		//player camera plane from left
+		data->player.plane_x = 0.66;
+		data->player.plane_y = 0;
+	}
+	else if (data->player.dir == 'S')
+	{
+		//player direction face down
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
+		//player camera plane from left
+		data->player.plane_x = -0.66;
+		data->player.plane_y = 0;
+	}
+}
+
+void	init_east_west(t_data *data)
+{
+	if (data->player.dir == 'E')
+	{
+		//player direction face right
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+		//player camera plane from left
+		data->player.plane_x = 0;
+		data->player.plane_y = 0.66;
+	}
+	else if (data->player.dir == 'W')
+	{
+		//player direction face left
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
+		//player camera plane from left
+		data->player.plane_x = 0;
+		data->player.plane_y = -0.66;
+	}
+}
+
+void	init_player_dir(t_data *data)
+{
+	init_north_south(data);
+	init_east_west(data);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * this function is the main function of parsing
  * first parse the argument into struct (map address)
@@ -118,19 +198,21 @@ int	get_width(t_map *map)
  * lastly read the 2d array and parse each line into different variable
  * error handling
  */
-int	parse(char **av, t_arg *arg)
+int	parse(char **av, t_data *data)
 {
-	arg->map_add = ft_strdup(av[1]);
-	check_valid_map_name(arg->map_add, ".cub");
-	arg->map.map_height = get_line_nb(arg->map_add);
-	if(arg->map.map_height == -1)
+	data->map_add = ft_strdup(av[1]);
+	check_valid_map_name(data->map_add, ".cub");
+	data->map.map_height = get_line_nb(data->map_add);
+	if(data->map.map_height == -1)
 		return (ft_error("Fail to get line number"), 1);
-	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
-	if (!arg->map.map)
+	data->map.map = read_map_file(data->map_add, data->map.map_height);
+	if (!data->map.map)
 		return (ft_error("Fail to read map file"), 1);
-	parse_struct(&arg->map);
-	check_valid_element(arg);
-	if (check_map_sides(&arg->map, arg->map.map_layout) == 1)
+	parse_struct(&data->map);
+	check_valid_element(data);
+	if (check_map_sides(&data->map, data->map.map_layout) == 1)
 		ft_error("Map not surrounded by wall");
+	check_player_position(data);
+	init_player_dir(data);
 	return (0);
 }
