@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 10:04:43 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:39:01 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	error_handling(t_map *map)
 	if (!map->north || !map->south || !map->west || !map->east
 		|| !map->floor || !map->ceiling || !map->map_layout)
 		ft_error("Fail to allocate memory56");
-	check_valid_map_name(map->north, ".xpm");
-	check_valid_map_name(map->south, ".xpm");
-	check_valid_map_name(map->west, ".xpm");
-	check_valid_map_name(map->east, ".xpm");
+	check_valid_file_name(map->north, ".xpm");
+	check_valid_file_name(map->south, ".xpm");
+	check_valid_file_name(map->west, ".xpm");
+	check_valid_file_name(map->east, ".xpm");
 }
 
 /**

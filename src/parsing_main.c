@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/07 12:21:54 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:39:01 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	get_width(t_map *map)
 int	parse(char **av, t_arg *arg)
 {
 	arg->map_add = ft_strdup(av[1]);
-	check_valid_map_name(arg->map_add, ".cub");
+	check_valid_file_name(arg->map_add, ".cub");
 	arg->map.map_height = get_line_nb(arg->map_add);
 	if(arg->map.map_height == -1)
 		return (ft_error("Fail to get line number"), 1);

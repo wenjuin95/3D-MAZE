@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 10:51:17 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/09 12:56:13 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @brief Check map to make sure it is a .cub file or tetxure file
  */
-void	check_valid_map_name(char *file, char *type)
+void	check_valid_file_name(char *file, char *type)
 {
 	int		i;
 	char	*extension;
@@ -153,28 +153,55 @@ void	check_valid_element(t_arg *arg)
 	}
 }
 
+// int	check_map_closed(char **map, int rows)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	// Check top and bottom rows
+// 	if (check_top_or_bottom(map, 0, 0) == 1 || check_top_or_bottom(map, rows - 1, 0) == 1)
+// 		return (1);
+
+// 	// Check left and right sides of each row
+// 	for (i = 1; i < rows - 1; i++)
+// 	{
+// 		j = 0;
+// 		while (map[i][j] == ' ' || map[i][j] == '\t')
+// 			j++;
+// 		if (map[i][j] != '1')
+// 			return (1);
+// 		j = ft_strlen(map[i]) - 1;
+// 		while (map[i][j] == ' ' || map[i][j] == '\t')
+// 			j--;
+// 		if (map[i][j] != '1')
+// 			return (1);
+// 	}
+// 	return (0);
+// }
+
 int	check_map_closed(char **map, int rows)
 {
 	int	i;
-	int	j;
+	int	prev;
+	int	cur;
 
-	// Check top and bottom rows
-	if (check_top_or_bottom(map, 0, 0) == 1 || check_top_or_bottom(map, rows - 1, 0) == 1)
+	i = 0;
+	prev = ft_strlen(map[0]);
+	if (ft_strspn(map[0], "1") != prev
+		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
 		return (1);
-
-	// Check left and right sides of each row
-	for (i = 1; i < rows - 1; i++)
+	while (++i < rows - 1)
 	{
-		j = 0;
-		while (map[i][j] == ' ' || map[i][j] == '\t')
-			j++;
-		if (map[i][j] != '1')
+		cur = ft_strlen(map[i]);
+		if (map[i][0] != '1' || map[i][cur - 1] != '1')
 			return (1);
-		j = ft_strlen(map[i]) - 1;
-		while (map[i][j] == ' ' || map[i][j] == '\t')
-			j--;
-		if (map[i][j] != '1')
+		if (cur > prev
+			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (1);
+		if (cur < prev
+			&& ft_strspn(map[i - 1] + cur - 1, "1") != prev - cur + 1)
+			return (1);
+		prev = cur;
 	}
 	return (0);
 }
