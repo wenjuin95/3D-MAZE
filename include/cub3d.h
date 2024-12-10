@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/09 00:01:24 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:01:23 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <X11/X.h>
+#include "parse.h"
 
 # define ESC 65307
 # define W 119
@@ -28,13 +29,13 @@
 # define RIGHT 65363
 # define MAP 109
 
-// //campus
-// # define MOVE_SPEED 0.1
-// # define ROTATE_SPEED 0.1
+ //campus
+ # define MOVE_SPEED 0.1
+ # define ROTATE_SPEED 0.1
 
-// //campus
-// # define WIN_WIDTH 1280
-// # define WIN_HEIGHT 1024
+ //campus
+ # define WIN_WIDTH 1280
+ # define WIN_HEIGHT 1024
 
 ////full screen
 //# define WIN_WIDTH 3840
@@ -44,21 +45,26 @@
 //# define MOVE_SPEED 1
 //# define ROTATE_SPEED 0.1
 
-//laptop
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+////laptop
+//# define WIN_WIDTH 640
+//# define WIN_HEIGHT 480
 
-//laptop
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.1
+////laptop
+//# define MOVE_SPEED 0.1
+//# define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
 
 # define MAP_PIXEL 200
-# define MAP_VIEW 5
+# define MAP_VIEW 4
 
 # define VERTICAL_WALL 0
 # define HORIZONTAL_WALL 1
+
+#define MAP_COLOR_PLAYER 0x00FF00 // Green
+#define MAP_COLOR_WALL 0x000000 // black
+#define MAP_COLOR_FLOOR 0xE6E6E6 // Light Gray
+#define MAP_COLOR_SPACE 0x000000 // black
 
 #define MAP_COLOR_PLAYER 0x00FF00 // Green
 #define MAP_COLOR_WALL 0x000000 // black
@@ -71,12 +77,14 @@ typedef struct s_data
 	void		*win;
 	int			win_width;
 	int			win_height;
-	char		**map;
-	int			map_width;
-	int			map_height;
+	char		*map_add;
+	// char		**map;
+	// int			map_width;
+	// int			map_height;
 	int			**tex_pixel;
 	int			**tex_data;
 	int			on_map;
+	t_map		map;
 	t_minimap	minimap;
 	t_player	player;
 	t_raycast	ray;
@@ -110,7 +118,6 @@ void	free_array(void **array);
 void	clean_mlx(t_data *data);
 void	clean_data(t_data *data);
 int		clean_and_exit(t_data *data);
-int		close_win(t_data *data);
 
 // render_image.c
 void	set_color_to_pixel(t_img *img, int x, int y, int color);
@@ -160,5 +167,8 @@ int		player_movement(t_data *data);
 
 //handle_mouse.c
 int	handle_mouse(int x, int y, t_data *data);
+
+void	ft_error(char *str);
+size_t	ft_len(char *s);
 
 #endif

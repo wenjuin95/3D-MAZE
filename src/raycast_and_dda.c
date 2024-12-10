@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 18:11:08 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 10:59:30 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	perform_dda(t_data *data, t_raycast *ray)
 		}
 
 		//if next map square is a wall
-		if (data->map[ray->map_y][ray->map_x] == '1') //Checks if the ray has hit a wall.
+		if (data->map.map_layout[ray->map_y][ray->map_x] == '1') //Checks if the ray has hit a wall.
 			hit_wall = 1; //Sets the hit_wall variable to 1 to indicate that the ray has hit a wall.
 	}
 }

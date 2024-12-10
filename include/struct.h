@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/08 21:34:44 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 10:54:06 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,32 @@ enum	e_direction
 
 typedef struct s_minimap
 {
+	int			offset_x;
+	int			offset_y;
 	int			view_distance;
 	int			size;
 	int			texture_size;
 	char		**map;
 }	t_minimap;
+
+typedef struct s_map
+{
+	int		maply_height;
+	char	**map;
+	int		map_height;
+	int		*array_width;
+	int		map_width;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*sprite;
+	int		*floor;
+	int		*ceiling;
+	char	**map_layout;
+	size_t	floor_hex;
+	size_t	ceiling_hex;
+}	t_map;
 
 
 typedef struct s_img
@@ -43,14 +64,6 @@ typedef struct s_img
 
 typedef struct s_tex
 {
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-	int		*floor;
-	int		*ceiling;
-	size_t	hex_floor;
-	size_t	hex_ceiling;
 	int		texture_size;
 	int		texture_index;
 	double	step;

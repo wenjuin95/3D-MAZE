@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/06 16:14:15 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 10:58:01 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	initialize_texture(t_data *data)
 	data->tex_data = ft_calloc(5, sizeof * data->tex_data);
 	if (data->tex_data == NULL)
 		clean_and_exit(data);
-	data->tex_data[NORTH] = ft_strdup_data(data, data->texture.north);
-	data->tex_data[SOUTH] = ft_strdup_data(data, data->texture.south);
-	data->tex_data[WEST] = ft_strdup_data(data, data->texture.west);
-	data->tex_data[EAST] = ft_strdup_data(data, data->texture.east);
+	data->tex_data[NORTH] = ft_strdup_data(data, data->map.north);
+	data->tex_data[SOUTH] = ft_strdup_data(data, data->map.south);
+	data->tex_data[WEST] = ft_strdup_data(data, data->map.west);
+	data->tex_data[EAST] = ft_strdup_data(data, data->map.east);
 }
 
 /**

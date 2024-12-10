@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/08 23:29:53 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 10:59:53 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	set_image(t_data *data, t_img *img, int x, int y)
 	if (data->tex_pixel[y][x] > 0)
 		set_color_to_pixel(img, x, y, data->tex_pixel[y][x]);
 	else if (y < data->win_height / 2)
-		set_color_to_pixel(img, x, y, data->texture.hex_ceiling);
+		set_color_to_pixel(img, x, y, data->map.ceiling_hex);
 	else if (y < data->win_height - 1)
-		set_color_to_pixel(img, x, y, data->texture.hex_floor);
+		set_color_to_pixel(img, x, y, data->map.floor_hex);
 }
 
 /**

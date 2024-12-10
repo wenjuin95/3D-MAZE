@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 12:09:25 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 02:33:17 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ void	free_array(void **array)
  * @brief free the north, south, west, east, floor, and ceiling texture
  * @param texture the north, south, west, east, floor, and ceiling texture
 */
-void	free_texture(t_tex *texture)
-{
-	if (texture->north != NULL)
-		free(texture->north);
-	if (texture->south != NULL)
-		free(texture->south);
-	if (texture->west != NULL)
-		free(texture->west);
-	if (texture->east != NULL)
-		free(texture->east);
-	if (texture->floor != NULL)
-		free(texture->floor);
-	if (texture->ceiling != NULL)
-		free(texture->ceiling);
-}
+// void	free_texture(t_tex *texture)
+// {
+// 	if (texture->north != NULL)
+// 		free(texture->north);
+// 	if (texture->south != NULL)
+// 		free(texture->south);
+// 	if (texture->west != NULL)
+// 		free(texture->west);
+// 	if (texture->east != NULL)
+// 		free(texture->east);
+// 	if (texture->floor != NULL)
+// 		free(texture->floor);
+// 	if (texture->ceiling != NULL)
+// 		free(texture->ceiling);
+// }
 
 /**
  * @brief free the mlx and win
@@ -67,6 +67,22 @@ void	clean_mlx(t_data *data)
 	}
 }
 
+static void	free_map(t_map *map)
+{
+	// int	i;
+
+	free(map->north);
+	free(map->south);
+	free(map->west);
+	free(map->east);
+	free(map->sprite);
+	free(map->floor);
+	free(map->ceiling);
+	free_array((void **)map->map_layout);
+	// free(map->map_layout);
+	// free(map->array_width);
+}
+
 /**
  * @brief free the data struct
  * @param data the data to free
@@ -74,13 +90,13 @@ void	clean_mlx(t_data *data)
 */
 void	clean_data(t_data *data)
 {
-	if (data->map != NULL)
-		free_array((void **)data->map);
 	if (data->tex_data)
 		free_array((void **)data->tex_data);
 	if (data->tex_pixel != NULL)
 		free_array((void **)data->tex_pixel);
-	free_texture(&data->texture);
+	if (data->map_add != NULL)
+		free(data->map_add);
+	free_map(&data->map);
 }
 
 /**
