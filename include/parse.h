@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 14:21:51 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@
 
 typedef struct s_map
 {
+	char	**file;
+	int		file_height;
+	int		map_start;
 	int		map_height;
 	char	**map;
-	int		map_file_height;
-	int		*array_width;
-	int		map_width;
+	int		*map_width;
+	int		width;
 	char	*north;
 	char	*south;
 	char	*west;
@@ -38,7 +40,6 @@ typedef struct s_map
 	char	*sprite;
 	int		*floor;
 	int		*ceiling;
-	char	**map_layout;
 	size_t	floor_hex;
 	size_t	ceiling_hex;
 }	t_map;
@@ -61,7 +62,7 @@ int		parse(char **av, t_arg *arg);
 int		parse_struct(t_map *map);
 char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_arg *arg);
-int		get_width(t_map *map);
+void		get_width(t_map *map);
 char	*remove_nl(char *src);
 
 //check

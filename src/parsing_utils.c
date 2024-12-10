@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 14:17:30 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	error_handling(t_map *map)
 {
 	if (!map->north || !map->south || !map->west || !map->east
-		|| !map->floor || !map->ceiling || !map->map_layout)
+		|| !map->floor || !map->ceiling || !map->map)
 		ft_error("Fail to allocate memory56");
 	check_valid_file_name(map->north, ".xpm");
 	check_valid_file_name(map->south, ".xpm");
@@ -73,29 +73,40 @@ static size_t	search2(char **array, int row, char *target)
 	return (-1);
 }
 
-static t_map *p_struct(t_map * map)
+static t_map *p_struct(t_map *map)
 {
-	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_file_height,
-					"NO")], 3, ft_len(map->map[search2(map->map,
-						map->map_file_height, "NO")])));
-	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_file_height,
-					"SO")], 3, ft_len(map->map[search2(map->map,
-						map->map_file_height, "SO")])));
-	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_file_height,
-					"WE")], 3, ft_len(map->map[search2(map->map,
-						map->map_file_height, "WE")])));
-	map->east = remove_nl(ft_substr(map->map[search(map->map, map->map_file_height,
-					"EA")], 3, ft_len(map->map[search2(map->map,
-						map->map_file_height, "EA")])));
-	// map->sprite = ft_substr(map->map[search(map->map, map->map_file_height, "S ")], 2, ft_strlen(map->map[4]));
-	map->floor = set_rgb(remove_nl(ft_substr(map->map[5], 2,
-					ft_strlen(map->map[5]))));
-	map->ceiling = set_rgb(remove_nl(ft_substr(map->map[6], 2,
-					ft_strlen(map->map[6]))));
-	map->map_layout = copy_2d_array(map->map, 8, map->map_file_height);
+	map->north = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"NO")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "NO")])));
+	map->south = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"SO")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "SO")])));
+	map->west = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"WE")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "WE")])));
+	map->east = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"EA")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "EA")])));
+	// map->sprite = ft_substr(map->map[search(map->map, map->file_height, "S ")], 2, ft_strlen(map->map[4]));
+	map->floor = set_rgb(remove_nl(ft_substr(map->file[search(map->file, map->file_height, "F ")], 2,
+					ft_strlen(map->file[search(map->file, map->file_height, "F ")]))));
+	map->ceiling = set_rgb(remove_nl(ft_substr(map->file[search(map->file, map->file_height, "C ")], 2,
+					ft_strlen(map->file[search(map->file, map->file_height, "C ")]))));
+	for (int i = 0; i < map->file_height; i++)
+	{
+		for (int j = 0; j < ft_strlen(map->file[i]); j++)
+		{
+			if (map->file[i][j] == '1' && map->file[i][j + 1] == '1' && map->file[i][j + 2] == '1')
+			{
+				map->map_start = i;
+				break;
+			}
+		}
+	}
+	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
-	map->map_width = get_width(map);
+	get_width(map);
 	return (map);
 }
 
@@ -104,11 +115,11 @@ static t_map *p_struct(t_map * map)
  */
 int	parse_struct(t_map *map)
 {
-	map->map_height = map->map_file_height - 8;
-	if (search(map->map, map->map_file_height, "NO") == -1
-		|| search(map->map, map->map_file_height, "SO") == -1
-		|| search(map->map, map->map_file_height, "WE") == -1
-		|| search(map->map, map->map_file_height, "EA") == -1)
+	map->map_height = map->file_height - 8;
+	if (search(map->file, map->file_height, "NO") == -1
+		|| search(map->file, map->file_height, "SO") == -1
+		|| search(map->file, map->file_height, "WE") == -1
+		|| search(map->file, map->file_height, "EA") == -1)
 		ft_error("Invalid map");
 	map = p_struct(map);
 	error_handling(map);

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:11:43 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 09:25:31 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 14:05:23 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_valid_rgb(int *rgb)
 // 	int i = 0;
 // 	int j = 0;
 
-// 	tmp = copy_2d_array(map->map_layout, 0, rows);
+// 	tmp = copy_2d_array(map->map, 0, rows);
 // 	while (i < rows)
 // 	{
 // 		while (tmp[i][j] != '\0')

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 14:05:23 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	is_directory(char *file)
 
 /***
  * @brief Check if the map is surrounded by wall
- * will need to use map_layout height and array of width
+ * will need to use map height and array of width
  */
 static int	check_top_or_bottom(char **map_tab, int i, int j)
 {
@@ -110,13 +110,13 @@ int	check_map_sides(t_map *map, char **map_tab)
 // 	i = 0;
 // 	while (i < map->map_height)
 // 	{
-// 		j = skip_space(map->map_layout[i], 0);
-// 		width = ft_strlen(map->map_layout[i]);
+// 		j = skip_space(map->map[i], 0);
+// 		width = ft_strlen(map->map[i]);
 // 		while (j < width)
 // 		{
-// 			if (i == 0 || i == map->map_file_height - 1 || j == 0 || j == width - 1)
+// 			if (i == 0 || i == map->file_height - 1 || j == 0 || j == width - 1)
 // 			{
-// 				if (map->map_layout[i][j] != '1')
+// 				if (map->map[i][j] != '1')
 // 					ft_error("map not surrounded by wall!");
 // 			}
 // 			j++;
@@ -134,15 +134,15 @@ void	check_valid_element(t_arg *arg)
 	while (i < arg->map.map_height)
 	{
 		j = 0;
-		while (arg->map.map_layout[i][j] != '\0')
+		while (arg->map.map[i][j] != '\0')
 		{
-			if (arg->map.map_layout[i][j] != '1'
-			&& arg->map.map_layout[i][j] != '0'
-			&& arg->map.map_layout[i][j] != 'N' && arg->map.map_layout[i][j] != 'S'
-				&& arg->map.map_layout[i][j] != 'E'
-				&& arg->map.map_layout[i][j] != ' '
-				&& arg->map.map_layout[i][j] != 'W'
-				&& arg->map.map_layout[i][j] != '\n')
+			if (arg->map.map[i][j] != '1'
+			&& arg->map.map[i][j] != '0'
+			&& arg->map.map[i][j] != 'N' && arg->map.map[i][j] != 'S'
+				&& arg->map.map[i][j] != 'E'
+				&& arg->map.map[i][j] != ' '
+				&& arg->map.map[i][j] != 'W'
+				&& arg->map.map[i][j] != '\n')
 			{
 				ft_error("invalid char in map!");
 				return ;

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 14:23:31 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,30 @@ static int	get_line_nb(char *file)
  */
 static char	**read_map_file(char *file, int lines_num)
 {
-	char	**map;
+	char	**file_map;
 	int		i;
 	int		fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || lines_num <= 0)
 		return (perror("Fail to open file"), (NULL));
-	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
-	if (!map)
+	file_map = (char **)malloc(sizeof(char *) * (lines_num + 1));
+	if (!file_map)
 		return (perror("Fail to allocate memory"), (NULL));
 	i = 0;
 	while (i < lines_num)
 	{
-		map[i] = get_next_line(fd);
-		if (!map[i])
+		file_map[i] = get_next_line(fd);
+		if (!file_map[i])
 		{
 			perror("Fail to read file");
 			break ;
 		}
 		i++;
 	}
-	map[i] = NULL;
+	file_map[i] = NULL;
 	close(fd);
-	return (map);
+	return (file_map);
 }
 
 t_map	*parse_width(t_arg *arg)
@@ -79,35 +79,37 @@ t_map	*parse_width(t_arg *arg)
 
 	i = 0;
 	tmp = &arg->map;
-	if (tmp->map_layout == NULL)
+	if (tmp->map == NULL)
 		ft_error("Fail to allocate memory12");
-	tmp->array_width = (int *)malloc(sizeof(int) * tmp->map_height);
-	if (!tmp->array_width)
+	tmp->map_width = (int *)malloc(sizeof(int) * tmp->map_height);
+	if (!tmp->map_width)
 		ft_error("Fail to allocate memory for map_width");
 	while (i < tmp->map_height)
 	{
-		tmp->array_width[i] = ft_strlen(arg->map.map_layout[i]);
+		tmp->map_width[i] = ft_strlen(arg->map.map[i]);
 		i++;
 	}
 	return (tmp);
 }
 
-int	get_width(t_map *map)
+void	get_width(t_map *map)
 {
+	int len;
 	int	i;
-	int	j;
 
-	if (!map->map_layout || map->map_layout[0] == NULL)
-		return (ft_error("Invalid ument structure"), 1);
-	i = ft_strlen(map->map_layout[0]);
-	j = 1;
-	while (j < map->map_height)
+	for(i = 0; i < map->map_height; i++)
 	{
-		if (i < ft_strlen(map->map_layout[j]))
-			i = ft_strlen(map->map_layout[j]);
-		j++;
+		printf("width[%d] = %d\n", i, map->map_width[i]);
 	}
-	return (i);
+	len = map->map_width[0];
+	i = 1;
+	while (i < map->map_height)
+	{
+		if (map->map_width[i] > len)
+			len = map->map_width[i];
+		i++;
+	}
+	map->width = len;
 }
 
 /**
@@ -122,15 +124,15 @@ int	parse(char **av, t_arg *arg)
 {
 	arg->map_add = ft_strdup(av[1]);
 	check_valid_file_name(arg->map_add, ".cub");
-	arg->map.map_file_height = get_line_nb(arg->map_add);
-	if(arg->map.map_file_height == -1)
+	arg->map.file_height = get_line_nb(arg->map_add);
+	if(arg->map.file_height == -1)
 		return (ft_error("Fail to get line number"), 1);
-	arg->map.map = read_map_file(arg->map_add, arg->map.map_file_height);
-	if (!arg->map.map)
+	arg->map.file = read_map_file(arg->map_add, arg->map.file_height);
+	if (!arg->map.file)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&arg->map);
 	check_valid_element(arg);
-	if (check_map_closed(arg->map.map_layout, arg->map.map_height))
+	if (check_map_closed(arg->map.map, arg->map.map_height))
 	{
 		ft_error("Map not surrounded by wall");
 		exit(1);
