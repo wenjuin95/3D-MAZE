@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:27:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 11:32:09 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 13:58:53 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,14 @@ void	draw_minimap(t_data *data)
 
 void	render_minimap(t_data *data)
 {
-	int	img_size;
+	//int	img_size;
 
-	img_size = MAP_PIXEL + data->minimap.texture_size; //minimap width / height
-	initialize_image(data, &data->img, img_size, img_size);
+	//img_size = MAP_PIXEL + data->minimap.texture_size; //minimap width / height
+	int img_height = MAP_PIXEL + data->minimap.texture_size;
+	int img_width = MAP_PIXEL + data->minimap.texture_size;
+	printf("img_height: %d\n", img_height);
+	printf("img_width: %d\n", img_width);
+	initialize_image(data, &data->img, img_width, img_height);
 	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img,
 		data->minimap.texture_size, data->minimap.texture_size);
