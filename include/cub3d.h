@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 11:01:23 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:36:05 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ typedef struct s_data
 	int			win_width;
 	int			win_height;
 	char		*map_add;
-	// char		**map;
-	// int			map_width;
-	// int			map_height;
 	int			**tex_pixel;
 	int			**tex_data;
 	int			on_map;
@@ -92,6 +89,7 @@ typedef struct s_data
 	t_tex		texture;
 }	t_data;
 
+//debug.c
 void	debuger(t_data *data);
 void	debug_data(t_data *data);
 void	debug_map(t_minimap *minimap);
@@ -126,7 +124,7 @@ void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
 //render_minimap.c
-void	draw_a_square(t_data *data, int x, int y, int color);
+void	draw_square(t_data *data, int x, int y, int color);
 void	draw_line(t_data *data, int x, int y);
 void	draw_minimap(t_data *data);
 void	render_minimap(t_data *data);
@@ -146,7 +144,7 @@ void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 int		raycasting(t_player *player, t_data *data);
 
 //parsing.c
-int		parsing(t_data *data, char **file_name);
+//int		parsing(t_data *data, char **file_name);
 
 //control.c
 int		handle_key_press(int keycode, t_data *data);
@@ -166,7 +164,7 @@ int		move_right(t_data *data);
 int		player_movement(t_data *data);
 
 //handle_mouse.c
-int	handle_mouse(int x, int y, t_data *data);
+int		handle_mouse(int x, int y, t_data *data);
 
 void	ft_error(char *str);
 size_t	ft_len(char *s);

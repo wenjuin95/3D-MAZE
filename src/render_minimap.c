@@ -6,13 +6,13 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:27:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 11:00:13 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:32:09 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	set_minimap_pixel(t_data *data, int x, int y, int color)
+void	draw_square(t_data *data, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -30,19 +30,19 @@ void	set_minimap_pixel(t_data *data, int x, int y, int color)
 	}
 }
 
-void	draw_minimap_tile(t_data *data, int x, int y)
+void	draw_line(t_data *data, int x, int y)
 {
 	if (data->minimap.map[y][x] == 'P')
-		set_minimap_pixel(data, x * data->minimap.texture_size,
+		draw_square(data, x * data->minimap.texture_size,
 			y * data->minimap.texture_size, MAP_COLOR_PLAYER);
 	if (data->minimap.map[y][x] == '1')
-		set_minimap_pixel(data, x * data->minimap.texture_size,
+		draw_square(data, x * data->minimap.texture_size,
 			y * data->minimap.texture_size, MAP_COLOR_WALL);
 	if (data->minimap.map[y][x] == '0')
-		set_minimap_pixel(data, x * data->minimap.texture_size,
+		draw_square(data, x * data->minimap.texture_size,
 			y * data->minimap.texture_size, MAP_COLOR_FLOOR);
 	if (data->minimap.map[y][x] == ' ')
-		set_minimap_pixel(data, x * data->minimap.texture_size,
+		draw_square(data, x * data->minimap.texture_size,
 			y * data->minimap.texture_size, MAP_COLOR_SPACE);
 
 }
@@ -82,7 +82,7 @@ void	draw_minimap(t_data *data)
 			if (!data->minimap.map[y] || !data->minimap.map[y][x]
 				|| data->minimap.map[y][x] == '\0')
 				break;
-			draw_minimap_tile(data, x, y);
+			draw_line(data, x, y);
 			x++;
 		}
 		y++;

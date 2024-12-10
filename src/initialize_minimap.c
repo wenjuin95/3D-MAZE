@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:24:23 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 10:57:41 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/10 11:35:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	put_minimap(t_data *data)
 
 	//MAP_PIXEL is the size of the minimap
 	//"/ (2 * data->minimap_view_distance)" is to get the size of the minimap texture
-	data->minimap.texture_size = MAP_PIXEL / (2 * data->minimap.view_distance);
+	data->minimap.texture_size = MAP_PIXEL / data->minimap.size;
 
 	//get the offset x and y of the minimap
 	data->minimap.offset_x = get_map_offset(data, data->map.map_width, (int)data->player.pos_x);
@@ -133,7 +133,7 @@ void	put_minimap(t_data *data)
 	data->minimap.map = get_minimap(data);
 	if (data->minimap.map == NULL)
 		return ;
-	// debug_map(&data->minimap); //debug the minimap
+	 debug_map(&data->minimap); //debug the minimap
 	render_minimap(data);
 	free_array((void **)data->minimap.map);
 }
