@@ -5,3 +5,4 @@ cub3d
 *.txt
 .vscode.vscode/
 raycating/*.o
+minilibx-linux/
