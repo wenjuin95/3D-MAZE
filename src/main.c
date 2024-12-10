@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/07 11:23:52 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // {
 //     if (!map)
 //       return;
-//     printf("Map Layout Length: (%d)\n", map->maply_height);
-//     printf("Map Height: (%d)\n", map->map_height);
+//     printf("Map Layout Length: (%d)\n", map->map_height);
+//     printf("Map Height: (%d)\n", map->map_file_height);
 // 	printf("map layout width %d\n", map->map_width);
 //     printf("Map Width: \n");
 //     printf("North Texture: (%s)\n", map->north ? map->north : "(null)");
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
         ft_error("Fail to parse\n");
 	// print_arg_struct(&arg);
     printf("MAP\n");
-    printf("map_height (int): (%d)\n", arg.map.map_height);
+    printf("map_file_height (int): (%d)\n", arg.map.map_file_height);
     printf("map_width (int): (%d)\n", arg.map.map_width);
     printf("map floor_hex (size_t): (#%lx)\n", arg.map.floor_hex);
     printf("map ceiling_hex (size_t): (#%lx)\n", arg.map.ceiling_hex);

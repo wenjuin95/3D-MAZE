@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 12:56:13 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_map_sides(t_map *map, char **map_tab)
 	if (check_top_or_bottom(map_tab, 0, 0) == 1)
 		return (1);
 	i = 1;
-	while (i < (map->maply_height - 1))
+	while (i < (map->map_height - 1))
 	{
 		j = 0;
 		while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
@@ -108,13 +108,13 @@ int	check_map_sides(t_map *map, char **map_tab)
 // 	int	width;
 
 // 	i = 0;
-// 	while (i < map->maply_height)
+// 	while (i < map->map_height)
 // 	{
 // 		j = skip_space(map->map_layout[i], 0);
 // 		width = ft_strlen(map->map_layout[i]);
 // 		while (j < width)
 // 		{
-// 			if (i == 0 || i == map->map_height - 1 || j == 0 || j == width - 1)
+// 			if (i == 0 || i == map->map_file_height - 1 || j == 0 || j == width - 1)
 // 			{
 // 				if (map->map_layout[i][j] != '1')
 // 					ft_error("map not surrounded by wall!");
@@ -131,7 +131,7 @@ void	check_valid_element(t_arg *arg)
 	int		j;
 
 	i = 0;
-	while (i < arg->map.maply_height)
+	while (i < arg->map.map_height)
 	{
 		j = 0;
 		while (arg->map.map_layout[i][j] != '\0')

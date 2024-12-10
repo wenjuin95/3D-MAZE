@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 11:39:01 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/10 08:32:27 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ t_map	*parse_width(t_arg *arg)
 	tmp = &arg->map;
 	if (tmp->map_layout == NULL)
 		ft_error("Fail to allocate memory12");
-	tmp->array_width = (int *)malloc(sizeof(int) * tmp->maply_height);
+	tmp->array_width = (int *)malloc(sizeof(int) * tmp->map_height);
 	if (!tmp->array_width)
 		ft_error("Fail to allocate memory for map_width");
-	while (i < tmp->maply_height)
+	while (i < tmp->map_height)
 	{
 		tmp->array_width[i] = ft_strlen(arg->map.map_layout[i]);
 		i++;
@@ -101,7 +101,7 @@ int	get_width(t_map *map)
 		return (ft_error("Invalid ument structure"), 1);
 	i = ft_strlen(map->map_layout[0]);
 	j = 1;
-	while (j < map->maply_height)
+	while (j < map->map_height)
 	{
 		if (i < ft_strlen(map->map_layout[j]))
 			i = ft_strlen(map->map_layout[j]);
@@ -122,15 +122,15 @@ int	parse(char **av, t_arg *arg)
 {
 	arg->map_add = ft_strdup(av[1]);
 	check_valid_file_name(arg->map_add, ".cub");
-	arg->map.map_height = get_line_nb(arg->map_add);
-	if(arg->map.map_height == -1)
+	arg->map.map_file_height = get_line_nb(arg->map_add);
+	if(arg->map.map_file_height == -1)
 		return (ft_error("Fail to get line number"), 1);
-	arg->map.map = read_map_file(arg->map_add, arg->map.map_height);
+	arg->map.map = read_map_file(arg->map_add, arg->map.map_file_height);
 	if (!arg->map.map)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&arg->map);
 	check_valid_element(arg);
-	if (check_map_closed(arg->map.map_layout, arg->map.maply_height))
+	if (check_map_closed(arg->map.map_layout, arg->map.map_height))
 	{
 		ft_error("Map not surrounded by wall");
 		exit(1);
