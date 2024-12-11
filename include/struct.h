@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 20:07:48 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/11 19:48:49 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ typedef struct s_minimap
 	int			offset_x;
 	int			offset_y;
 	int			view_distance;
-	//int			size;
-	int 		size_width;
-	int			size_height;
-	//int			texture_size;
+	int			size;
+	int			texture_size;
 	char		**map;
 }	t_minimap;
 
