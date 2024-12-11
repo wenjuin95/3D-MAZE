@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/09 09:47:27 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/11 14:01:07 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	free_2d(char **str)
 	free(str);
 }
 
+/**
+ * this function is exactly same as ft_strlen
+ * just change the variable type to size_t
+ */
 size_t	ft_len(char *s)
 {
 	size_t i;

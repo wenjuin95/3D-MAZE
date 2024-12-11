@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 14:17:30 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/11 14:24:56 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,13 @@ static t_map *p_struct(t_map *map)
 	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
-	get_width(map);
+	for(int i = 0; i < map->file_height; i++)
+	{
+		if (!map->map[i] || !map->map)
+			break ;
+		printf("%s\n", map->map[i]);
+	}
+	map->width = get_width(map);
 	return (map);
 }
 

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 14:23:31 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/11 14:24:08 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,43 @@ t_map	*parse_width(t_arg *arg)
 	return (tmp);
 }
 
-void	get_width(t_map *map)
+int	get_width(t_map *map)
 {
-	int len;
 	int	i;
+	int	j;
 
-	for(i = 0; i < map->map_height; i++)
+	if (!map->map_layout || map->map_layout[0] == NULL)
+		return (ft_error("Invalid ument structure"), 1);
+	i = ft_strlen(map->map_layout[0]);
+	j = 1;
+	while (j < map->maply_height)
 	{
-		printf("width[%d] = %d\n", i, map->map_width[i]);
+		if (i < ft_strlen(map->map_layout[j]))
+			i = ft_strlen(map->map_layout[j]);
+		j++;
 	}
-	len = map->map_width[0];
-	i = 1;
-	while (i < map->map_height)
-	{
-		if (map->map_width[i] > len)
-			len = map->map_width[i];
-		i++;
-	}
-	map->width = len;
+	return (i);
 }
+
+// void	get_width(t_map *map)
+// {
+// 	int len;
+// 	int	i;
+
+// 	for(i = 0; i < map->map_height; i++)
+// 	{
+// 		printf("width[%d] = %d\n", i, map->map_width[i]);
+// 	}
+// 	len = map->map_width[0];
+// 	i = 1;
+// 	while (i < map->map_height)
+// 	{
+// 		if (map->map_width[i] > len)
+// 			len = map->map_width[i];
+// 		i++;
+// 	}
+// 	map->width = len;
+// }
 
 /**
  * this function is the main function of parsing
