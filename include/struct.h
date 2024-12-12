@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/11 19:48:49 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:24:48 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ enum	e_direction
 
 typedef struct s_minimap
 {
-	int			offset_x;
-	int			offset_y;
+	int			visible_x;
+	int			visible_y;
 	int			view_distance;
 	int			size;
 	int			texture_size;

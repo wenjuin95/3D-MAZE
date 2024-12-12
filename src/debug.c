@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/11 19:51:18 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:25:21 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	debug_data(t_data *data)
 void	debug_map(t_minimap *minimap)
 {
 	printf("\nDEBUG MINIMAP DATA\n");
-	printf("view_distance: %d\n", minimap->view_distance);
-	printf("size: %d\n", minimap->size);
+	printf("image size: %d\n", minimap->view_distance);
+	printf("square size (w x h): %d\n", minimap->size);
 	printf("texture_size: %d\n", minimap->texture_size);
-	printf("offset_x: %d\n", minimap->offset_x);
-	printf("offset_y: %d\n", minimap->offset_y);
+	printf("offset_x: %d\n", minimap->visible_x);
+	printf("offset_y: %d\n", minimap->visible_y);
     for (int i = 0; i < minimap->size; i++) {
         for (int j = 0; j < minimap->size; j++) {
             printf("%c", minimap->map[i][j]);

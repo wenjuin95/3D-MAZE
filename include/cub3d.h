@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 13:43:31 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:22:18 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	render_minimap(t_data *data);
 //init_minimap.c
 char	*add_minimap_line(t_data *data, int y);
 char	**get_minimap(t_data *data);
- int	get_map_offset(t_data *data, int minimap_size, int pos);
+ int	get_visible_map(t_data *data, int minimap_size, int pos);
 void	put_minimap(t_data *data);
 
 //raycast_and_dda.c
