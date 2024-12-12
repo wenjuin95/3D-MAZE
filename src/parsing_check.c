@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:07:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	is_directory(char *file)
 
 /***
  * @brief Check if the map is surrounded by wall
- * will need to use map_layout height and array of width
+ * will need to use map height and array of width
  */
 static int	check_top_or_bottom(char **map_tab, int i, int j)
 {
@@ -81,7 +81,7 @@ int	check_map_sides(t_map *map, char **map_tab)
 	if (check_top_or_bottom(map_tab, 0, 0) == 1)
 		return (1);
 	i = 1;
-	while (i < (map->maply_height - 1))
+	while (i < (map->map_height - 1))
 	{
 		j = 0;
 		while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
@@ -111,15 +111,15 @@ int	check_map_sides(t_map *map, char **map_tab)
 // 	int	width;
 
 // 	i = 0;
-// 	while (i < map->maply_height)
+// 	while (i < map->map_height)
 // 	{
-// 		j = skip_space(map->map_layout[i], 0);
-// 		width = ft_strlen(map->map_layout[i]);
+// 		j = skip_space(map->map[i], 0);
+// 		width = ft_strlen(map->map[i]);
 // 		while (j < width)
 // 		{
-// 			if (i == 0 || i == map->map_height - 1 || j == 0 || j == width - 1)
+// 			if (i == 0 || i == map->file_height - 1 || j == 0 || j == width - 1)
 // 			{
-// 				if (map->map_layout[i][j] != '1')
+// 				if (map->map[i][j] != '1')
 // 					ft_error("map not surrounded by wall!");
 // 			}
 // 			j++;
@@ -134,18 +134,18 @@ void	check_valid_element(t_data *data)
 	int		j;
 
 	i = 0;
-	while (i < data->map.maply_height)
+	while (i < data->map.map_height)
 	{
 		j = 0;
-		while (data->map.map_layout[i][j] != '\0')
+		while (data->map.map[i][j] != '\0')
 		{
-			if (data->map.map_layout[i][j] != '1'
-			&& data->map.map_layout[i][j] != '0'
-			&& data->map.map_layout[i][j] != 'N' && data->map.map_layout[i][j] != 'S'
-				&& data->map.map_layout[i][j] != 'E'
-				&& data->map.map_layout[i][j] != ' '
-				&& data->map.map_layout[i][j] != 'W'
-				&& data->map.map_layout[i][j] != '\n')
+			if (data->map.map[i][j] != '1'
+			&& data->map.map[i][j] != '0'
+			&& data->map.map[i][j] != 'N' && data->map.map[i][j] != 'S'
+				&& data->map.map[i][j] != 'E'
+				&& data->map.map[i][j] != ' '
+				&& data->map.map[i][j] != 'W'
+				&& data->map.map[i][j] != '\n')
 			{
 				ft_error("invalid char in map!");
 				return ;

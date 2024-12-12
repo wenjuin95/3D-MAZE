@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 01:24:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ typedef struct s_minimap
 
 typedef struct s_map
 {
-	int		maply_height;
-	char	**map;
 	int		map_height;
+	char	**file;
+	int		file_height;
 	int		*array_width;
 	int		map_width;
+	int		map_start;
 	char	*north;
 	char	*south;
 	char	*west;
@@ -47,7 +48,7 @@ typedef struct s_map
 	char	*sprite;
 	int		*floor;
 	int		*ceiling;
-	char	**map_layout;
+	char	**map;
 	size_t	floor_hex;
 	size_t	ceiling_hex;
 }	t_map;

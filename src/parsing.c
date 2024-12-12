@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 00:31:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:12:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/11 21:20:07 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // 	int j;
 
 // 	i = 0;
-// 	while (i < data->map_height)
+// 	while (i < data->file_height)
 // 	{
 // 		j = 0;
 // 		while (j < data->map_width)
@@ -116,10 +116,10 @@
 // int parsing(t_data *data, char **file_name)
 // {
 // 	(void)file_name;
-// 	data->map_height = 10;
+// 	data->file_height = 10;
 // 	data->map_width = 10;
 
-// 	data->map = malloc(sizeof(char *) * (data->map_height + 1));
+// 	data->map = malloc(sizeof(char *) * (data->file_height + 1));
 // 	if (data->map == NULL)
 // 	{
 // 		perror("map memory");

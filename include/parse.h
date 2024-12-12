@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:09:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:45:54 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 typedef struct s_data	t_data;
 // typedef struct s_map
 // {
-// 	int		maply_height;
-// 	char	**map;
 // 	int		map_height;
+// 	char	**map;
+// 	int		file_height;
 // 	int		*array_width;
 // 	int		map_width;
 // 	char	*north;
@@ -39,7 +39,7 @@ typedef struct s_data	t_data;
 // 	char	*sprite;
 // 	int		*floor;
 // 	int		*ceiling;
-// 	char	**map_layout;
+// 	char	**map;
 // 	size_t	floor_hex;
 // 	size_t	ceiling_hex;
 // }	t_map;
@@ -71,7 +71,8 @@ void	initialize_arg(t_data *data);
 
 // parsing
 int		parse(char **av, t_data *data);
-int		parse_struct(t_map *map);
+int parse_struct(t_map *map);
+void NewFunction(t_map *map);
 char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_data *data);
 int		get_width(t_map *map);

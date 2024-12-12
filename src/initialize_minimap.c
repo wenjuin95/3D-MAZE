@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_minimap.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:24:23 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 03:48:14 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ char	*add_minimap_line(t_data *data, int y)
 		if ((int)data->player.pos_x == (x + data->minimap.offset_x)
 			&& (int)data->player.pos_y == (y + data->minimap.offset_y))
 			line[x] = 'P';
-		else if (data->map.map_layout[y + data->minimap.offset_y][x + data->minimap.offset_x] == '1')
+		else if (data->map.map[y + data->minimap.offset_y][x + data->minimap.offset_x] == '1')
 			line[x] = '1';
-		else if (data->map.map_layout[y + data->minimap.offset_y][x + data->minimap.offset_x] == '0')
+		else if (data->map.map[y + data->minimap.offset_y][x + data->minimap.offset_x] == '0')
 			line[x] = '0';
-		else if (data->map.map_layout[y + data->minimap.offset_y][x + data->minimap.offset_x] == ' ')
+		else if (data->map.map[y + data->minimap.offset_y][x + data->minimap.offset_x] == ' ')
 			line[x] = ' ';
 		else
 			line[x] = '\0';
@@ -64,7 +64,7 @@ char	**get_minimap(t_data *data)
 	if (map == NULL)
 		return (NULL);
 	y = 0;
-	while (y < data->minimap.size && y < data->map.maply_height)
+	while (y < data->minimap.size && y < data->map.map_height)
 	{
 		map[y] = add_minimap_line(data, y);
 		if (map[y] == NULL)
@@ -127,7 +127,7 @@ void	put_minimap(t_data *data)
 
 	//get the offset x and y of the minimap
 	data->minimap.offset_x = get_map_offset(data, data->map.map_width, (int)data->player.pos_x);
-	data->minimap.offset_y = get_map_offset(data, data->map.maply_height, (int)data->player.pos_y);
+	data->minimap.offset_y = get_map_offset(data, data->map.map_height, (int)data->player.pos_y);
 
 	//get the minimap map and render the minimap
 	data->minimap.map = get_minimap(data);

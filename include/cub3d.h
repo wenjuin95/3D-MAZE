@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 03:46:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/11 21:20:07 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_data
 	char		*map_add;
 	// char		**map;
 	// int			map_width;
-	// int			map_height;
+	// int			file_height;
 	int			**tex_pixel;
 	int			**tex_data;
 	int			on_map;

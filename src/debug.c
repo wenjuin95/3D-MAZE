@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:19:47 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	debug_player(t_player *player)
 void	debug_parsing(t_data *data)
 {
 	printf("MAP\n");
-    printf("map_height (int): (%d)\n", data->map.maply_height);
+    printf("file_height (int): (%d)\n", data->map.map_height);
     printf("map_width (int): (%d)\n", data->map.map_width);
     printf("map floor_hex (size_t): (#%lx)\n", data->map.floor_hex);
     printf("map ceiling_hex (size_t): (#%lx)\n", data->map.ceiling_hex);
@@ -117,8 +117,8 @@ void	debug_parsing(t_data *data)
     printf("map texture east (char *): (%s)\n", data->map.east);
     printf("map texture west (char *): (%s)\n", data->map.west);
     printf("\n");
-    for(int i = 0; data->map.map_layout[i]; i++)
-        printf("(%s)\n", data->map.map_layout[i]);
+    for(int i = 0; data->map.map[i]; i++)
+        printf("(%s)\n", data->map.map[i]);
     printf("\n");
 	printf("\nPLAYER\n");
 	printf("player direction: %c\n", data->player.dir);

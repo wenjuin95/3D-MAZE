@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:20:47 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ static void	initialize_map(t_map *map)
 {
 	if (!map)
 		return ;
-	map->maply_height = 0;
 	map->map_height = 0;
+	map->file_height = 0;
 	map->map_width = 0;
 	map->map = NULL;
 	map->north = NULL;
@@ -101,7 +101,7 @@ static void	initialize_map(t_map *map)
 	map->sprite = NULL;
 	map->floor = NULL;
 	map->ceiling = NULL;
-	map->map_layout = NULL;
+	map->map = NULL;
 }
 
 void	initialize_arg(t_data *data)

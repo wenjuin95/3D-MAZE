@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 03:04:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	main(int ac, char **av)
 // {
 //     if (!map)
 //       return;
-//     printf("Map Layout Length: (%d)\n", map->maply_height);
-//     printf("Map Height: (%d)\n", map->map_height);
+//     printf("Map Layout Length: (%d)\n", map->map_height);
+//     printf("Map Height: (%d)\n", map->file_height);
 // 	printf("map layout width %d\n", map->map_width);
 //     printf("Map Width: \n");
 //     printf("North Texture: (%s)\n", map->north ? map->north : "(null)");
@@ -56,10 +56,10 @@ int	main(int ac, char **av)
 //     else
 //         printf("(null)\n");
 //     printf("Map Layout:\n");
-//     if (map->map_layout)
+//     if (map->map)
 //     {
-//         for (int i = 0; map->map_layout[i] != NULL; i++)
-//             printf("%s$$\n", map->map_layout[i]);
+//         for (int i = 0; map->map[i] != NULL; i++)
+//             printf("%s$$\n", map->map[i]);
 //     }
 //     else
 //         printf("  (null)\n");
@@ -91,7 +91,7 @@ int	main(int ac, char **av)
 // 	// print_arg_struct(&data);
 
 //     printf("MAP\n");
-//     printf("map_height (int): (%d)\n", data.map.maply_height);
+//     printf("file_height (int): (%d)\n", data.map.map_height);
 //     printf("map_width (int): (%d)\n", data.map.map_width);
 //     printf("map floor_hex (size_t): (#%lx)\n", data.map.floor_hex);
 //     printf("map ceiling_hex (size_t): (#%lx)\n", data.map.ceiling_hex);
@@ -100,8 +100,8 @@ int	main(int ac, char **av)
 //     printf("map texture east (char *): (%s)\n", data.map.east);
 //     printf("map texture west (char *): (%s)\n", data.map.west);
 //     printf("\n");
-//     for(int i = 0; data.map.map_layout[i]; i++)
-//         printf("(%s)\n", data.map.map_layout[i]);
+//     for(int i = 0; data.map.map[i]; i++)
+//         printf("(%s)\n", data.map.map[i]);
 //     printf("\n");
 // 	printf("\nPLAYER\n");
 // 	printf("player direction: %c\n", data.player.dir);

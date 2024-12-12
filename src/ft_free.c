@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 10:41:39 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:06:18 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	free_map(t_map *map)
 	free(map->floor);
 	free(map->ceiling);
 	i = -1;
-	while (++i < map->map_height - 8)
-		free(map->map_layout[i]);
-	free(map->map_layout);
+	while (++i < map->file_height - 8)
+		free(map->map[i]);
+	free(map->map);
 	// free(map->array_width);
 }
 

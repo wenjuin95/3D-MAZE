@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_and_dda.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 00:13:20 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	perform_dda(t_data *data, t_raycast *ray)
 		}
 
 		//if next map square is a wall
-		if (data->map.map_layout[ray->map_y][ray->map_x] == '1') //Checks if the ray has hit a wall.
+		if (data->map.map[ray->map_y][ray->map_x] == '1') //Checks if the ray has hit a wall.
 			hit_wall = 1; //Sets the hit_wall variable to 1 to indicate that the ray has hit a wall.
 	}
 }

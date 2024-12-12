@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 02:33:17 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static void	free_map(t_map *map)
 	free(map->sprite);
 	free(map->floor);
 	free(map->ceiling);
-	free_array((void **)map->map_layout);
-	// free(map->map_layout);
+	free_array((void **)map->map);
+	// free(map->map);
 	// free(map->array_width);
 }
 

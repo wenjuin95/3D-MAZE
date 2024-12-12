@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 02:19:16 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:33:31 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	error_handling(t_map *map)
 {
 	if (!map->north || !map->south || !map->west || !map->east
-		|| !map->floor || !map->ceiling || !map->map_layout)
+		|| !map->floor || !map->ceiling || !map->map)
 		ft_error("Fail to allocate memory56");
 }
 
@@ -87,36 +87,63 @@ static size_t	search2(char **array, int row, char *target)
 	return (-1);
 }
 
+static void find(t_map *map, int file_height)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < file_height)
+	{
+		j = 0;
+		while (j < ft_strlen(map->file[i + 1]))
+		{
+			if (map->file[i][j] == '1' && map->file[i][j + 1] == '1' && map->file[i][j + 2] == '1')
+			{
+				map->map_start = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	error_handling2(t_map *map)
+{
+		if (search(map->file, map->file_height, "NO") == -1
+		|| search(map->file, map->file_height, "SO") == -1
+		|| search(map->file, map->file_height, "WE") == -1
+		|| search(map->file, map->file_height, "EA") == -1)
+		ft_error("Invalid map"), exit(1);
+}
 /**
  * the variable i here is the index of the whole map
  * it's like a global variable for parsing
  */
 int	parse_struct(t_map *map)
 {
-	map->maply_height = map->map_height - 8;
-	if (search(map->map, map->map_height, "NO") == -1
-		|| search(map->map, map->map_height, "SO") == -1
-		|| search(map->map, map->map_height, "WE") == -1
-		|| search(map->map, map->map_height, "EA") == -1)
-		ft_error("Invalid map");
-	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"NO")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "NO")])));
-	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"SO")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "SO")])));
-	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"WE")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "WE")])));
-	map->east = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"EA")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "EA")])));
-	// map->sprite = ft_substr(map->map[search(map->map, map->map_height, "S ")], 2, ft_strlen(map->map[4]));
-	map->floor = set_rgb(remove_nl(ft_substr(map->map[5], 2,
-					ft_strlen(map->map[5]))));
-	map->ceiling = set_rgb(remove_nl(ft_substr(map->map[6], 2,
-					ft_strlen(map->map[6]))));
-	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
+	error_handling2(map);
+	map->north = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"NO")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "NO")])));
+	map->south = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"SO")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "SO")])));
+	map->west = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"WE")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "WE")])));
+	map->east = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					"EA")], 3, ft_len(map->file[search2(map->file,
+						map->file_height, "EA")])));
+	map->floor = set_rgb(remove_nl(ft_substr(map->file[5], 2,
+					ft_strlen(map->file[5]))));
+	map->ceiling = set_rgb(remove_nl(ft_substr(map->file[6], 2,
+					ft_strlen(map->file[6]))));
+	find(map, map->file_height);
+	printf("%d\n", map->map_start);
+	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);
