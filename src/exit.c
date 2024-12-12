@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:57:33 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static void	free_map(t_map *map)
 	free(map->floor);
 	free(map->ceiling);
 	free_array((void **)map->map);
+	free_2d(map->file);
 	// free(map->map);
 	// free(map->array_width);
 }

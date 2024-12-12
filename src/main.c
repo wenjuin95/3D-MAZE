@@ -6,30 +6,11 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:50:09 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int	main(int ac, char **av)
-{
-	t_data	data;
-
-	if (ac != 2)
-		return (printf("Wrong argument"), 1);
-	initialize_data(&data);
-	if (parse(av, &data) == 1)
-		return (1);
-	debug_parsing(&data);
-	if (initialize_mlx(&data) == 1)
-		return (1);
-	initialize_texture(&data);
-	render_the_image(&data);
-	initialize_mlx_hook(&data);
-	mlx_loop(data.mlx);
-	clean_and_exit(&data);
-}
 
 // static void print_map_struct(const t_map *map)
 // {
@@ -68,7 +49,7 @@ int	main(int ac, char **av)
 //     printf("Ceiling Hex: (0x%zx)\n", map->ceiling_hex);
 // }
 
-// static void print_arg_struct(const t_arg *arg)
+// static void print_arg_struct(t_data *arg)
 // {
 //     if (!arg)
 //         return;
@@ -78,38 +59,23 @@ int	main(int ac, char **av)
 //     print_map_struct(&arg->map);
 //     printf("printng end\n");
 // }
+int	main(int ac, char **av)
+{
+	t_data	data;
 
-// int	main(int argc, char **argv)
-// {
-// 	t_data	data;
+	if (ac != 2)
+		return (printf("Wrong argument"), 1);
+	initialize_data(&data);
+	if (parse(av, &data) == 1)
+		return (1);
+	// print_arg_struct(&data);
+	debug_parsing(&data);
+	if (initialize_mlx(&data) == 1)
+		return (1);
+	initialize_texture(&data);
+	render_the_image(&data);
+	initialize_mlx_hook(&data);
+	mlx_loop(data.mlx);
+	clean_and_exit(&data);
+}
 
-// 	if (argc != 2)
-// 		return (ft_error("wrong argument!!!"), 1);
-// 	initialize_arg(&data);
-// 	if (parse(argv, &data) == 1)
-//         ft_error("Fail to parse\n");
-// 	// print_arg_struct(&data);
-
-//     printf("MAP\n");
-//     printf("file_height (int): (%d)\n", data.map.map_height);
-//     printf("map_width (int): (%d)\n", data.map.map_width);
-//     printf("map floor_hex (size_t): (#%lx)\n", data.map.floor_hex);
-//     printf("map ceiling_hex (size_t): (#%lx)\n", data.map.ceiling_hex);
-//     printf("map texture north (char *): (%s)\n", data.map.north);
-//     printf("map texture south (char *): (%s)\n", data.map.south);
-//     printf("map texture east (char *): (%s)\n", data.map.east);
-//     printf("map texture west (char *): (%s)\n", data.map.west);
-//     printf("\n");
-//     for(int i = 0; data.map.map[i]; i++)
-//         printf("(%s)\n", data.map.map[i]);
-//     printf("\n");
-// 	printf("\nPLAYER\n");
-// 	printf("player direction: %c\n", data.player.dir);
-// 	printf("player position x: %f\n", data.player.pos_x);
-// 	printf("player position y: %f\n", data.player.pos_y);
-// 	printf("player direction x: %f\n", data.player.dir_x);
-// 	printf("player direction y: %f\n", data.player.dir_y);
-// 	printf("end of main\n");
-//     free_arg(&data);
-// 	return (0);
-// }

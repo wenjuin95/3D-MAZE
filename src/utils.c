@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/12 11:39:13 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:56:50 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**copy_2d_array(char **src, int start, int src_height)
 	char	**dest;
 
 	j = 0;
-	printf("%d\n", start);
 	dest = malloc(sizeof(char *) * (src_height - start + 1));
 	while (start < src_height)
 	{
@@ -66,7 +65,7 @@ char	**copy_2d_array(char **src, int start, int src_height)
 		start++;
 		j++;
 	}
-	free_array((void **)src);
+	// free_array((void **)src);
 	dest[j] = NULL;
 	return (dest);
 }

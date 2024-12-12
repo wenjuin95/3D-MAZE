@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/12 11:33:31 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:57:56 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,12 @@ static void	error_handling2(t_map *map)
 int	parse_struct(t_map *map)
 {
 	error_handling2(map);
+	find(map, map->file_height);
+	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
+	// for(int l = 0; map->map[l]; l++)
+	// {
+	// 	printf("(%s)\n", map->map[l]);
+	// }
 	map->north = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
 					"NO")], 3, ft_len(map->file[search2(map->file,
 						map->file_height, "NO")])));
@@ -141,9 +147,6 @@ int	parse_struct(t_map *map)
 					ft_strlen(map->file[5]))));
 	map->ceiling = set_rgb(remove_nl(ft_substr(map->file[6], 2,
 					ft_strlen(map->file[6]))));
-	find(map, map->file_height);
-	printf("%d\n", map->map_start);
-	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);
