@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/12 11:22:18 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:24:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x);
 // exit.c
 int		close_win(t_data *data);
 void	free_array(void **array);
-void	clean_mlx(t_data *data);
 void	clean_data(t_data *data);
 int		clean_and_exit(t_data *data);
 
@@ -123,21 +122,21 @@ void	put_image(t_data *data);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
-//render_minimap.c
-void	draw_square(t_data *data, int x, int y, int color);
-void	draw_line(t_data *data, int x, int y);
-void	draw_minimap(t_data *data);
-void	render_minimap(t_data *data);
+////render_minimap.c
+//void	draw_square(t_data *data, int x, int y, int color);
+//void	draw_line(t_data *data, int x, int y);
+//void	draw_minimap(t_data *data);
+//void	render_minimap(t_data *data);
 
-//init_minimap.c
-char	*add_minimap_line(t_data *data, int y);
-char	**get_minimap(t_data *data);
- int	get_visible_map(t_data *data, int minimap_size, int pos);
-void	put_minimap(t_data *data);
+////init_minimap.c
+//char	*add_minimap_line(t_data *data, int y);
+//char	**get_minimap(t_data *data);
+// int	get_visible_map(t_data *data, int minimap_size, int pos);
+//void	put_minimap(t_data *data);
 
 //raycast_and_dda.c
-void	calculate_ray_and_grid(int x, t_raycast *ray, t_player *player);
-void	set_dda(t_raycast *ray, t_player *player);
+void	initialize_ray(int x, t_raycast *ray, t_player *player);
+void	initialize_dda(t_raycast *ray, t_player *player);
 void	perform_dda(t_data *data, t_raycast *ray);
 void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 			t_player *player);

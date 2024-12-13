@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 02:33:17 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:24:27 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,47 +30,8 @@ void	free_array(void **array)
 		free(array);
 }
 
-/**
- * @brief free the north, south, west, east, floor, and ceiling texture
- * @param texture the north, south, west, east, floor, and ceiling texture
-*/
-// void	free_texture(t_tex *texture)
-// {
-// 	if (texture->north != NULL)
-// 		free(texture->north);
-// 	if (texture->south != NULL)
-// 		free(texture->south);
-// 	if (texture->west != NULL)
-// 		free(texture->west);
-// 	if (texture->east != NULL)
-// 		free(texture->east);
-// 	if (texture->floor != NULL)
-// 		free(texture->floor);
-// 	if (texture->ceiling != NULL)
-// 		free(texture->ceiling);
-// }
-
-/**
- * @brief free the mlx and win
- * @param data the data
- * @note 1. mlx_destroy_display : free the display
- * @note 2. mlx_destroy_window : free the window
-*/
-void	clean_mlx(t_data *data)
-{
-	if (data->win != NULL)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx != NULL)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-}
-
 static void	free_map(t_map *map)
 {
-	// int	i;
-
 	free(map->north);
 	free(map->south);
 	free(map->west);
@@ -79,8 +40,6 @@ static void	free_map(t_map *map)
 	free(map->floor);
 	free(map->ceiling);
 	free_array((void **)map->map_layout);
-	// free(map->map_layout);
-	// free(map->array_width);
 }
 
 /**
@@ -107,10 +66,16 @@ void	clean_data(t_data *data)
 int	clean_and_exit(t_data *data)
 {
 	if (data == NULL)
-		exit(EXIT_SUCCESS);
-	clean_mlx(data);
+		exit(1);
+	if (data->win != NULL)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx != NULL)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 	clean_data(data);
-	exit(EXIT_SUCCESS);
+	exit(1);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 00:31:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 10:59:06 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:27:10 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@
 // 	// data->map[8] = ft_strdup("1000000001");
 // 	// data->map[9] = ft_strdup("1111111111");
 // 	// data->map[10] = NULL;
-
 
 // 	data->texture.north = ft_strdup("src/wood.xpm");
 // 	data->texture.south = ft_strdup("src/wood.xpm");

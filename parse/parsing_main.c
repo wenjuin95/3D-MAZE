@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 03:08:27 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:20:33 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	get_width(t_map *map)
 	return (i);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void check_player_position(t_data *data)
 {
 	int i;
@@ -139,20 +138,16 @@ void	init_north_south(t_data *data)
 {
 	if (data->player.dir == 'N')
 	{
-		//player direction face up
 		data->player.dir_x = 0;
 		data->player.dir_y = -1;
-		//player camera plane from left
-		data->player.plane_x = 0.66;
+		data->player.plane_x = 0.6;
 		data->player.plane_y = 0;
 	}
 	else if (data->player.dir == 'S')
 	{
-		//player direction face down
 		data->player.dir_x = 0;
 		data->player.dir_y = 1;
-		//player camera plane from left
-		data->player.plane_x = -0.66;
+		data->player.plane_x = -0.6;
 		data->player.plane_y = 0;
 	}
 }
@@ -161,21 +156,17 @@ void	init_east_west(t_data *data)
 {
 	if (data->player.dir == 'E')
 	{
-		//player direction face right
 		data->player.dir_x = 1;
 		data->player.dir_y = 0;
-		//player camera plane from left
 		data->player.plane_x = 0;
-		data->player.plane_y = 0.66;
+		data->player.plane_y = 0.6;
 	}
 	else if (data->player.dir == 'W')
 	{
-		//player direction face left
 		data->player.dir_x = -1;
 		data->player.dir_y = 0;
-		//player camera plane from left
 		data->player.plane_x = 0;
-		data->player.plane_y = -0.66;
+		data->player.plane_y = -0.6;
 	}
 }
 

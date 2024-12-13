@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 10:58:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:26:51 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int ac, char **av)
 	initialize_data(&data);
 	if (parse(av, &data) == 1)
 		return (1);
-	debug_parsing(&data);
 	if (initialize_mlx(&data) == 1)
 		return (1);
 	initialize_texture(&data);
@@ -46,7 +45,8 @@ int	main(int ac, char **av)
 //     printf("Sprite: (%s)\n", map->sprite ? map->sprite : "(null)");
 //     printf("Floor RGB: ");
 //     if (map->floor)
-//         printf("(%d), (%d), (%d)\n", map->floor[0], map->floor[1], map->floor[2]);
+//         printf("(%d), (%d), (%d)\n", map->floor[0], map->floor[1],
+//			map->floor[2]);
 //     else
 //         printf("(null)\n");
 //     printf("Ceiling RGB: ");

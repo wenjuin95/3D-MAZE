@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 10:58:18 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:25:19 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	initialize_mlx_hook(t_data *data)
 	mlx_hook(data->win, KeyPress, KeyPressMask, handle_key_press, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, handle_key_release, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, handle_mouse, data);
-	// mlx_mouse_hide(data->mlx, data->win);
 	mlx_loop_hook(data->mlx, update_image, data);
 }
 
@@ -86,28 +85,28 @@ void	initialize_image(t_data *data, t_img *img, int w_width, int w_height)
 			&img->size_line, &img->endian);
 }
 
-static void	initialize_map(t_map *map)
-{
-	if (!map)
-		return ;
-	map->maply_height = 0;
-	map->map_height = 0;
-	map->map_width = 0;
-	map->map = NULL;
-	map->north = NULL;
-	map->south = NULL;
-	map->west = NULL;
-	map->east = NULL;
-	map->sprite = NULL;
-	map->floor = NULL;
-	map->ceiling = NULL;
-	map->map_layout = NULL;
-}
+//static void	initialize_map(t_map *map)
+//{
+//	if (!map)
+//		return ;
+//	map->maply_height = 0;
+//	map->map_height = 0;
+//	map->map_width = 0;
+//	map->map = NULL;
+//	map->north = NULL;
+//	map->south = NULL;
+//	map->west = NULL;
+//	map->east = NULL;
+//	map->sprite = NULL;
+//	map->floor = NULL;
+//	map->ceiling = NULL;
+//	map->map_layout = NULL;
+//}
 
-void	initialize_arg(t_data *data)
-{
-	if (!data)
-		return ;
-	data->map_add = NULL;
-	initialize_map(&data->map);
-}
+//void	initialize_arg(t_data *data)
+//{
+//	if (!data)
+//		return ;
+//	data->map_add = NULL;
+//	initialize_map(&data->map);
+//}

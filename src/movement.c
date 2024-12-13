@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 07:51:06 by welow             #+#    #+#             */
-/*   Updated: 2024/12/02 14:39:59 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:22:44 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int	move_right(t_data *data)
 	return (check_move(data, move_x, move_y));
 }
 
-
-
 /**
  * @brief execute player move when button is pressed
  * @param data the data
@@ -100,5 +98,3 @@ int	player_movement(t_data *data)
 		moved += rotate_right(data);
 	return (moved);
 }
-
-

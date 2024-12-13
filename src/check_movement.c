@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/10 10:56:25 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:15:59 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
  * @param move_x the x position to move
  * @param move_y the y position to move
  * @return 1 if player move, 0 if player not move
- * @note 1. check if the player chg position the current position is '0'
+ * @note 1. check if the player chg position the current position will
+ * 			replace '0'
 */
 int	check_move(t_data *data, double move_x, double move_y)
 {
@@ -41,9 +42,11 @@ int	check_move(t_data *data, double move_x, double move_y)
 }
 
 /**
- * @brief rotate the player right (before is left)
+ * @brief rotate the player right
  * @param data the data
- * @return 1 if player rotate, 0 if player not rotate
+ * @return 1 for player rotate right
+ * @note 1. dir_x and dir_y calculate using rotation matrix to get x and y
+ * @note 2. plane_x and plane_y calculate using rotation matrix to get x and y
 */
 int	rotate_right(t_data *data)
 {
@@ -63,9 +66,9 @@ int	rotate_right(t_data *data)
 }
 
 /**
- * @brief rotate the player left (before is right)
+ * @brief rotate the player left
  * @param data the data
- * @return 1 if player rotate, 0 if player not rotate
+ * @return 1 for player rotate left
 */
 int	rotate_left(t_data *data)
 {
@@ -94,7 +97,6 @@ int	update_image(t_data *data)
 	if (player_movement(data) != 0)
 	{
 		render_the_image(data);
-		//debug_raycast(&data->ray); //debug
 	}
 	return (0);
 }
