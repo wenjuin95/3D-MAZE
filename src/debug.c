@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/13 12:14:01 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	debug_player(t_player *player)
 void	debug_parsing(t_data *data)
 {
 	printf("MAP\n");
-    printf("file_height (int): (%d)\n", data->map.map_height);
+    printf("map_height (int): (%d)\n", data->map.map_height);
     printf("map_width (int): (%d)\n", data->map.map_width);
     printf("map floor_hex (size_t): (#%lx)\n", data->map.floor_hex);
     printf("map ceiling_hex (size_t): (#%lx)\n", data->map.ceiling_hex);
