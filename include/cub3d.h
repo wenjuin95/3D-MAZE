@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:24:35 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:57:02 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	clean_data(t_data *data);
 int		clean_and_exit(t_data *data);
 
 // render_image.c
-void	set_color_to_pixel(t_img *img, int x, int y, int color);
+void	color_pixel_put(t_img *img, int x, int y, int color);
 void	put_image(t_data *data);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);

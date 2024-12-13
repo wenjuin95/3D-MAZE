@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:27:16 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/13 11:56:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @note 4. "y * (img->size_line / 4) + x" mean index of the pixel
  * @note 5. "img->img_addr[pixel] = color" is to set the pixel to the color
 */
-void	set_color_to_pixel(t_img *img, int x, int y, int color)
+void	color_pixel_put(t_img *img, int x, int y, int color)
 {
 	int	pixel;
 
@@ -47,11 +47,11 @@ void	set_color_to_pixel(t_img *img, int x, int y, int color)
 static void	set_image(t_data *data, t_img *img, int x, int y)
 {
 	if (data->tex_pixel[y][x] > 0)
-		set_color_to_pixel(img, x, y, data->tex_pixel[y][x]);
+		color_pixel_put(img, x, y, data->tex_pixel[y][x]);
 	else if (y < data->win_height / 2)
-		set_color_to_pixel(img, x, y, data->map.ceiling_hex);
+		color_pixel_put(img, x, y, data->map.ceiling_hex);
 	else if (y < data->win_height - 1)
-		set_color_to_pixel(img, x, y, data->map.floor_hex);
+		color_pixel_put(img, x, y, data->map.floor_hex);
 }
 
 /**
