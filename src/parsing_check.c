@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/14 10:20:36 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,51 +56,47 @@ bool	is_directory(char *file)
  * @brief Check if the map is surrounded by wall
  * will need to use map height and array of width
  */
-static int	check_top_or_bottom(char **map_tab, int i, int j)
-{
-	if (!map_tab || !map_tab[i] || !map_tab[i][j])
-		return (1);
-	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
-	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
-	|| map_tab[i][j] == '\f')
-		j++;
-	while (map_tab[i][j])
-	{
-		if (map_tab[i][j] != '1' && map_tab[i][j] != ' ')
-			return (1);
-		j++;
-	}
-	return (0);
-}
+// static int	check_top_or_bottom(char **map_tab, int i, int j)
+// {
+// 	if (!map_tab || !map_tab[i] || !map_tab[i][j])
+// 		return (1);
+// 	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
+// 	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
+// 	|| map_tab[i][j] == '\f')
+// 		j++;
+// 	while (map_tab[i][j])
+// 	{
+// 		if (map_tab[i][j] != '1' && map_tab[i][j] != ' ')
+// 			return (1);
+// 		j++;
+// 	}
+// 	return (0);
+// }
 
-int	check_map_sides(t_map *map, char **map_tab)
+int	check_map_closed(char **map, int rows)
 {
 	int	i;
-	int	j;
+	int	prev;
+	int	cur;
 
-	if (check_top_or_bottom(map_tab, 0, 0) == 1)
-		return (1);
-	i = 1;
-	while (i < (map->map_height - 1))
+	i = 0;
+	prev = ft_strlen(map[0]);
+	// if (ft_strspn(map[0], "1") != prev
+	// 	|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
+	// 	return (1);
+	while (++i < rows - 1)
 	{
-		j = 0;
-		while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
-		|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
-		|| map_tab[i][j] == '\f')
-			j++;
-		if (map_tab[i][j] != '1')
+		cur = ft_strlen(map[i]);
+		// if (map[i][0] != '1' || map[i][cur - 1] != '1')
+		// 	return (1);
+		if (cur > prev
+			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (1);
-		j = ft_strlen(map_tab[i]) - 1;
-		while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
-		|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
-		|| map_tab[i][j] == '\f')
-			j--;
-		if (map_tab[i][j] != '1')
+		if (cur < prev
+			&& ft_strspn(map[i - 1] + cur - 1, "1") != prev - cur + 1)
 			return (1);
-		i++;
+		prev = cur;
 	}
-	if (check_top_or_bottom(map_tab, i, 0) == 1)
-		return (1);
 	return (0);
 }
 

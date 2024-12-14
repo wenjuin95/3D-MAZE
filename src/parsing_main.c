@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/12 12:45:59 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/14 11:13:31 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,16 @@ void	init_player_dir(t_data *data)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+static int check_file(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (ft_error("Fail to open file"), 1);
+	return (0);
+}
+
 /**
  * this function is the main function of parsing
  * first parse the argument into struct (map address)
@@ -209,10 +219,14 @@ int	parse(char **av, t_data *data)
 	if (!data->map.file)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&data->map);
+	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
+		|| check_file(data->map.east) == 1
+		|| check_file(data->map.west) == 1)
+		return (1);
 	check_valid_element(data);
 	check_player_position(data);
 	init_player_dir(data);
-	// if (check_map_sides(&data->map, data->map.map) == 1)
-	// 	ft_error("Map not surrounded by wall");
+	// if (check_map_closed(&data->map.map, data->map.map_height) == 1)
+	// 	return (ft_error("Map not surrounded by wall"), 1);
 	return (0);
 }

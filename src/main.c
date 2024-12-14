@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/12 13:50:09 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/14 10:01:37 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 	if (parse(av, &data) == 1)
 		return (1);
 	// print_arg_struct(&data);
-	debug_parsing(&data);
+	// debug_parsing(&data);
 	if (initialize_mlx(&data) == 1)
 		return (1);
 	initialize_texture(&data);

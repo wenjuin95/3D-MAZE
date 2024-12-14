@@ -6,20 +6,20 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/12 10:45:54 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/14 10:22:49 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-// # include <stdlib.h>
-// # include <stdio.h>
-// # include <unistd.h>
-// # include <errno.h>
-// # include <stdbool.h>
-// # include "cub3d.h"
-
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <errno.h>
+# include <stdbool.h>
+# include "cub3d.h"
+# include <stddef.h>
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
 # endif
@@ -70,9 +70,8 @@ void	free_2d(char **str);
 void	initialize_arg(t_data *data);
 
 // parsing
-int		parse(char **av, t_data *data);
+int parse(char **av, t_data *data);
 int parse_struct(t_map *map);
-void NewFunction(t_map *map);
 char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_data *data);
 int		get_width(t_map *map);
@@ -89,6 +88,8 @@ int		check_valid_rgb(int *rgb);
 int		*set_rgb(char *line);
 size_t	convert_rgb_to_hex(int *rgb_tab);
 char	**copy_2d_array(char **src, int start, int src_height);
+int ft_strspn(const char *s, const char *accept);
+int	check_map_closed(char **map, int rows);
 
 //utils
 
