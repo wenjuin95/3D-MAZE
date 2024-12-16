@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/16 13:41:15 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/16 13:52:13 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,10 @@ void	perform_dda(t_data *data, t_raycast *ray)
 void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 		t_player *player)
 {
-	//if (ray->side == 0)
-	//	ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x) / cos(ray->camera);
-	//else
-	//	ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y) / cos(ray->camera);
+	if (ray->side == 0)
+		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x);
+	else
+		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y);
 	ray->line_height = (int)(data->win_height / ray->wall_dis);
 	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
 	if (ray->draw_start < 0)
