@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:26:22 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/16 11:09:04 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ static void	get_xpm_data(t_data *data, char *path)
 */
 static int	*ft_strdup_data(t_data *data, char *path)
 {
-	int		*texture_buffer;
+	int		*texture_data;
 	int		x;
 	int		y;
 
 	if (path == NULL)
 		clean_and_exit(data);
 	get_xpm_data(data, path);
-	texture_buffer = ft_calloc(1, sizeof * texture_buffer
+	texture_data = ft_calloc(1, sizeof * texture_data
 			* data->texture.texture_size * data->texture.texture_size);
-	if (texture_buffer == NULL)
+	if (texture_data == NULL)
 		clean_and_exit(data);
 	y = 0;
 	while (y < data->texture.texture_size)
@@ -59,14 +59,14 @@ static int	*ft_strdup_data(t_data *data, char *path)
 		x = 0;
 		while (x < data->texture.texture_size)
 		{
-			texture_buffer[y * data->texture.texture_size + x]
+			texture_data[y * data->texture.texture_size + x]
 				= data->img.img_addr[y * data->texture.texture_size + x];
 			++x;
 		}
 		y++;
 	}
 	mlx_destroy_image(data->mlx, data->img.img);
-	return (texture_buffer);
+	return (texture_data);
 }
 
 /**
