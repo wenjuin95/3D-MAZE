@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/14 11:13:31 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:39:15 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,10 @@ int	parse(char **av, t_data *data)
 	if (!data->map.file)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&data->map);
+	printf("%d\n", data->map.map_start);
+	// if (check_map_closed(copy_2d_array(data->map.file, data->map.map_start, data->map.file_height),
+	// 		data->map.map_height) == 1)
+		// return (ft_error("Map not surrounded by wall"), 1);
 	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)
@@ -226,7 +230,5 @@ int	parse(char **av, t_data *data)
 	check_valid_element(data);
 	check_player_position(data);
 	init_player_dir(data);
-	// if (check_map_closed(&data->map.map, data->map.map_height) == 1)
-	// 	return (ft_error("Map not surrounded by wall"), 1);
 	return (0);
 }

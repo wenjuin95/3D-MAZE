@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/13 12:25:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/16 13:13:16 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static size_t	search2(char **array, int row, char *target)
 	return (-1);
 }
 
-static void find(t_map *map, int file_height)
+static void find(t_map *map, int file_height, char **file)
 {
 	int	i;
 	int	j;
@@ -97,11 +97,12 @@ static void find(t_map *map, int file_height)
 	while (i < file_height)
 	{
 		j = 0;
-		while (j < ft_strlen(map->file[i + 1]))
+		while (j < ft_strlen(file[i]))
 		{
-			if (map->file[i][j] == '1' && map->file[i][j + 1] == '1' && map->file[i][j + 2] == '1')
+			if (file[i][j] == '1' && file[i][j + 1] == '1' && file[i][j + 2] == '1')
 			{
 				map->map_start = i;
+				free_2d(file);
 				return ;
 			}
 			j++;
@@ -125,7 +126,7 @@ static void	error_handling2(t_map *map)
 int	parse_struct(t_map *map)
 {
 	error_handling2(map);
-	find(map, map->file_height);
+	find(map, map->file_height, map->file);
 	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
 	// for(int l = 0; map->map[l]; l++)
 	// {

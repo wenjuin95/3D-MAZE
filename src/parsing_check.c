@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/14 10:20:36 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/16 10:33:18 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ int	check_map_closed(char **map, int rows)
 
 	i = 0;
 	prev = ft_strlen(map[0]);
-	// if (ft_strspn(map[0], "1") != prev
-	// 	|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
-	// 	return (1);
+	if (ft_strspn(map[0], "1") != prev
+		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
+		return (1);
 	while (++i < rows - 1)
 	{
 		cur = ft_strlen(map[i]);
-		// if (map[i][0] != '1' || map[i][cur - 1] != '1')
-		// 	return (1);
+		if (map[i][0] != '1' || map[i][cur - 1] != '1')
+			return (1);
 		if (cur > prev
 			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (1);
