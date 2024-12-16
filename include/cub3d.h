@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:57:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/16 13:05:05 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@
 
 # define TEXTURE_SIZE 64
 
-# define MAP_PIXEL 200
-# define MAP_VIEW 4
-
-# define VERTICAL_WALL 0
-# define HORIZONTAL_WALL 1
+//# define MAP_PIXEL 200
+//# define MAP_VIEW 4
 
 #define MAP_COLOR_PLAYER 0x00FF00 // Green
 #define MAP_COLOR_WALL 0x000000 // black

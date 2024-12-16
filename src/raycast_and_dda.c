@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:27:32 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/16 13:41:15 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@
  * @param x the x coordinate of the screen width
  * @param ray the ray to be calculated
  * @param player the player to be calculated
- * @note 1. calculate the ray direction
- * @note 	a. calculate the camera plane x coordinate (left: -1 to right: 1)
- * @note	b. calculate the direction x and y of the ray
- * @note 2. calculate the length of ray from "x or y side" to
+ * @note 1. calculate the ray position and direction
+ * @note 2. calculate the length of ray form current position to
  * 			"next x or y side"
- * 			a. calculate the delta distance x and y
 */
 void	initialize_ray(int x, t_raycast *ray, t_player *player)
 {
@@ -85,11 +82,9 @@ void	initialize_dda(t_raycast *ray, t_player *player)
  * @note 1. if next grid crossing in x is closer than y
  * @note 	a. move the ray to the next x-side
  * @note 	b. update the map x coordinate
- * @note 	c. set the side to vertical wall
  * @note 2. if next grid crossing in y is closer than x
  * @note 	a. move the ray to the next y-side
  * @note 	b. update the map y coordinate
- * @note 	c. set the side to horizontal wall
 */
 void	perform_dda(t_data *data, t_raycast *ray)
 {
@@ -102,13 +97,13 @@ void	perform_dda(t_data *data, t_raycast *ray)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = VERTICAL_WALL;
+			ray->side = 0;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->side = HORIZONTAL_WALL;
+			ray->side = 1;
 		}
 		if (data->map.map_layout[ray->map_y][ray->map_x] == '1')
 			hit_wall = 1;
@@ -120,36 +115,22 @@ void	perform_dda(t_data *data, t_raycast *ray)
  * @param ray the ray to be calculated
  * @param data the data to be calculated
  * @param player the player to be calculated
- * @note 1. calculate the distance of the perpendicular ray
- * @note	a. if the ray hit a vertical wall
- * @note		i. calculate the perpendicular distance to the wall
- * 				   for a horizontal hit
- * @note	b. if the ray hit a horizontal wall
- * @note		i. calculate the perpendicular distance to the wall
- * 				   for a vertical hit
- * @note 2. calculate the line height to draw on screen
- * @note 3. calculate the starting point to draw the line
- * @note	b. if the starting point is above the window
- * @note		i. set the starting point to the top of the window
- * @note 4. calculate the ending point to draw the line
- * @note	a. if the ending point is below the window
- * @note		i. set the ending point to the bottom of the window
- * @note 5. calculate the value of wall_x
- * @note	a. if the ray hit a horizontal wall
- * @note		i. calculate the x-coordinate of the wall hit
- * @note			for a horizontal hit
- * @note	b. if the ray hit a vertical wall
- * @note		i. calculate the x-coordinate of the wall hit
- * @note			for a vertical hit
- * @note 6. normalize the wall_x and ensure it is between 0 and 1
+ * @note 1. get the distance between the intersection
+ * 			of the ray and the camera plane with the wall
+ * @note 2. get the line height to draw
+ * @note 3. get the start and end point to draw
+ * @note 4. calculate the wall_x which is the exact position of the wall
+ * 			hit by the ray and set the texture x coordinate to the wall_x
+ * @note 5. "floor" is to ensure the texture coord are accurate and display
+ * 			the texture correctly
 */
 void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 		t_player *player)
 {
-	if (ray->side == VERTICAL_WALL)
-		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x);
-	else
-		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y);
+	//if (ray->side == 0)
+	//	ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x) / cos(ray->camera);
+	//else
+	//	ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y) / cos(ray->camera);
 	ray->line_height = (int)(data->win_height / ray->wall_dis);
 	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
 	if (ray->draw_start < 0)
@@ -157,7 +138,7 @@ void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
 	if (ray->draw_end >= data->win_height)
 		ray->draw_end = data->win_height - 1;
-	if (ray->side == VERTICAL_WALL)
+	if (ray->side == 0)
 		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y;
 	else
 		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;

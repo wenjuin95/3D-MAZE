@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/16 11:09:04 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/16 13:04:53 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	initialize_texture(t_data *data)
 */
 void	get_texture_index(t_data *data, t_raycast *ray)
 {
-	if (ray->side == VERTICAL_WALL)
+	if (ray->side == 0)
 	{
 		if (ray->dir_x < 0)
 			data->texture.texture_index = WEST;
@@ -143,8 +143,8 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 
 	get_texture_index(data, ray);
 	tex->tex_x = (int)(ray->wall_x * tex->texture_size);
-	if ((ray->side == VERTICAL_WALL && ray->dir_x < 0)
-		|| (ray->side == HORIZONTAL_WALL && ray->dir_y > 0))
+	if ((ray->side == 0 && ray->dir_x < 0)
+		|| (ray->side == 1 && ray->dir_y > 0))
 		tex->tex_x = tex->texture_size - tex->tex_x - 1;
 	tex->step = 1.0 * tex->texture_size / ray->line_height;
 	tex->position = (ray->draw_start - data->win_height / 2
@@ -156,7 +156,7 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 		tex->position += tex->step;
 		color = data->tex_data[tex->texture_index][tex->texture_size
 			* tex->tex_y + tex->tex_x];
-		if (ray->side == HORIZONTAL_WALL)
+		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
 		data->tex_pixel[y][x] = color;
 		y++;
