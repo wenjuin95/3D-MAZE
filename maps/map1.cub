@@ -1,7 +1,7 @@
-NO ./src/wood.xpm
-SO ./src/wood.xpm
-WE ./src/wood.xpm
-EA ./src/wood.xpm
+NO ./texture/wood.xpm
+SO ./texture/wood.xpm
+WE ./texture/wood.xpm
+EA ./texture/wood.xpm
 
 F 220,100,0
 C 225,30,0
