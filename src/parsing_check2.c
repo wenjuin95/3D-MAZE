@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:11:43 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:07:08 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:37:13 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_valid_rgb(int *rgb)
 	while (i < 3)
 	{
 		if (rgb[i] < 0 || rgb[i] > 255)
-			return (ft_error("Invalid RGB value"), 1);
+			ft_error("Invalid RGB value"), exit(1);
 		i++;
 	}
 	return (0);

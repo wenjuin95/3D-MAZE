@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_rgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:04:59 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:37:04 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 	}
 	i = 0;
 	free(rgb_to_convert);
-	if (check_valid_rgb(rgb) == 1)
-		return (0);
+	check_valid_rgb(rgb);
 	return (rgb);
 }
 

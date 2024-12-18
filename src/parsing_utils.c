@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 17:30:06 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:33:33 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,29 @@ static int	search(char **array, int rows, char *target)
 	return (-1);
 }
 
-static size_t	search2(char **array, int row, char *target)
-{
-	size_t	i;
-	size_t	j;
-	size_t	rows;
+// static size_t	search2(char **array, int row, char *target)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	size_t	rows;
 
-	i = 0;
-	rows = (size_t)row;
-	if (!array)
-		ft_error("Fail to allocate memory"), exit(1);
-	while (i < rows)
-	{
-		j = 0;
-		while (array[i][j])
-		{
-			if (array[i][j] == target[0] && array[i][j + 1] == target[1])
-				return (i);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
-}
+// 	i = 0;
+// 	rows = (size_t)row;
+// 	if (!array)
+// 		ft_error("Fail to allocate memory"), exit(1);
+// 	while (i < rows)
+// 	{
+// 		j = 0;
+// 		while (array[i][j])
+// 		{
+// 			if (array[i][j] == target[0] && array[i][j + 1] == target[1])
+// 				return (i);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (-1);
+// }
 
 static void find(t_map *map, int file_height, char **file)
 {
@@ -127,9 +127,6 @@ static char *combine(t_map *map, char *type, int len)
 {
 	char *str;
 	
-	printf("type: %s\n", type);
-	printf("search: %d\n", search(map->file, map->file_height, type));
-	printf("search2: %zu\n", search2(map->file, map->file_height, type));
 	str = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
 					type)], len, ft_len(map->file[search(map->file,
 						map->file_height, type)])));
