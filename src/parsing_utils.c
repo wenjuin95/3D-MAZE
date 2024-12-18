@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/16 13:13:16 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/18 14:46:52 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static size_t	search2(char **array, int row, char *target)
 
 	i = 0;
 	rows = (size_t)row;
+	if (!array)
+		ft_error("Fail to allocate memory"), exit(1);
 	while (i < rows)
 	{
 		j = 0;
@@ -94,6 +96,8 @@ static void find(t_map *map, int file_height, char **file)
 
 	i = 0;
 	j = 0;
+	if (!file)
+		ft_error("Fail to allocate memory"), exit(1);
 	while (i < file_height)
 	{
 		j = 0;
@@ -128,10 +132,10 @@ int	parse_struct(t_map *map)
 	error_handling2(map);
 	find(map, map->file_height, map->file);
 	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
-	// for(int l = 0; map->map[l]; l++)
-	// {
-	// 	printf("(%s)\n", map->map[l]);
-	// }
+	for(int i = 0; i < map->map_height; i++)
+	{
+		printf("%s\n", map->map[i]);
+	}
 	map->north = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
 					"NO")], 3, ft_len(map->file[search2(map->file,
 						map->file_height, "NO")])));
