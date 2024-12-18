@@ -6,14 +6,14 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/17 11:08:53 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:44:22 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 /**
- * @brief set color to each pixel in the image
+ * @brief pixel put the color to the image
  * @param img get the image struct
  * @param x get the x coordinate
  * @param y get the y coordinate
@@ -33,20 +33,20 @@ void	color_pixel_put(t_img *img, int x, int y, int color)
 }
 
 /**
- * @brief after set color to each pixel then set the image to each position
+ * @brief set image or color according the position of the window
  * @param data get teture_pixel, win_height, win_width and hex_ceiling
  * 			   and hex_floor
  * @param img get the image struct
  * @param x get the x coordinate
  * @param y get the y coordinate
- * @note 1. if the texture pixel coordinate is more than 0 then set the image
+ * @note 1. if the texture pixel coordinate is not 0 then set the image
  * @note 2. if the y is less than half of the window height then set
  * 			the color ceiling
  * @note 3. if the y is less than the window height then set the color floor
 */
 static void	set_image(t_data *data, t_img *img, int x, int y)
 {
-	if (data->tex_pixel[y][x] > 0)
+	if (data->tex_pixel[y][x] != 0)
 		color_pixel_put(img, x, y, data->tex_pixel[y][x]);
 	else if (y < data->win_height / 2)
 		color_pixel_put(img, x, y, data->map.ceiling_hex);

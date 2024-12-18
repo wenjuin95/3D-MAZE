@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/16 13:52:13 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/18 18:06:11 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,20 +117,27 @@ void	perform_dda(t_data *data, t_raycast *ray)
  * @param player the player to be calculated
  * @note 1. get the distance between the intersection
  * 			of the ray and the camera plane with the wall
- * @note 2. get the line height to draw
- * @note 3. get the start and end point to draw
- * @note 4. calculate the wall_x which is the exact position of the wall
+ * @note 2. calculate the wall_x which is the exact position of the wall
  * 			hit by the ray and set the texture x coordinate to the wall_x
- * @note 5. "floor" is to ensure the texture coord are accurate and display
+ * @note 3. "floor" is to ensure the texture coord are accurate and display
  * 			the texture correctly
+ * @note 4. get the line height to draw
+ * @note 5. get the start and end point to draw
 */
 void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 		t_player *player)
 {
 	if (ray->side == 0)
+	{
 		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x);
+		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y;
+	}
 	else
+	{
 		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y);
+		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;
+	}
+	ray->wall_x -= floor(ray->wall_x);
 	ray->line_height = (int)(data->win_height / ray->wall_dis);
 	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
 	if (ray->draw_start < 0)
@@ -138,11 +145,6 @@ void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
 	if (ray->draw_end >= data->win_height)
 		ray->draw_end = data->win_height - 1;
-	if (ray->side == 0)
-		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y;
-	else
-		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;
-	ray->wall_x -= floor(ray->wall_x);
 }
 
 int	raycasting(t_player *player, t_data *data)
