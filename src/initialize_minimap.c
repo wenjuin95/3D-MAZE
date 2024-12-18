@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:24:23 by welow             #+#    #+#             */
-/*   Updated: 2024/12/17 13:47:40 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/18 13:19:55 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,13 +140,12 @@ void	put_minimap(t_data *data)
 	data->minimap.size = (2 * data->minimap.view_distance);
 	data->minimap.texture_size = MAP_PIXEL / data->minimap.size;
 	data->minimap.visible_x = get_visible_map(data,
-		data->map.map_width, (int)data->player.pos_x);
+			data->map.map_width, (int)data->player.pos_x);
 	data->minimap.visible_y = get_visible_map(data,
-		data->map.maply_height, (int)data->player.pos_y);
+			data->map.maply_height, (int)data->player.pos_y);
 	data->minimap.map = get_minimap(data);
 	if (data->minimap.map == NULL)
 		return ;
-	// debug_map(&data->minimap); //debug the minimap
 	render_minimap(data);
 	free_array((void **)data->minimap.map);
 }

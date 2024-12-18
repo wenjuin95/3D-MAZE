@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:27:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/17 13:51:41 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/18 13:21:10 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	draw_line(t_data *data, int x, int y)
 	if (data->minimap.map[y][x] == ' ')
 		draw_square(data, x * data->minimap.texture_size,
 			y * data->minimap.texture_size, MAP_COLOR_SPACE);
-
 }
 
 /**
@@ -83,7 +82,7 @@ void	draw_minimap(t_data *data)
 		{
 			if (!data->minimap.map[y] || !data->minimap.map[y][x]
 				|| data->minimap.map[y][x] == '\0')
-				break;
+				break ;
 			draw_line(data, x, y);
 			x++;
 		}
