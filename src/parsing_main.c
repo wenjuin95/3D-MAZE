@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 14:11:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:44:02 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	get_line_nb(char *file)
 		return (perror("File is a directory "), -1);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (perror("Fail to open file "), -1);
+		perror("Fail to open file"), exit(1);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -36,7 +36,7 @@ static int	get_line_nb(char *file)
 		line = get_next_line(fd);
 	}
 	if (lines_num == 0)
-		return (perror("Map file is empty "), -1);
+		perror("Map file is empty"), exit(1);
 	close(fd);
 	return (lines_num);
 }
@@ -52,7 +52,7 @@ static char	**read_map_file(char *file, int lines_num)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || lines_num <= 0)
-		return (perror("Fail to open file"), (NULL));
+		perror("Fail to open file"), exit(1);
 	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
 	if (!map)
 		return (perror("Fail to allocate memory"), (NULL));
@@ -196,7 +196,7 @@ static int check_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (ft_error("Fail to open file"), 1);
+		ft_error("Fail to open file1"), exit(1);
 	return (0);
 }
 
@@ -233,7 +233,7 @@ int	parse(char **av, t_data *data)
 	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)
-		return (1);
+		exit(1);
 	check_valid_element(data);
 	check_player_position(data);
 	init_player_dir(data);

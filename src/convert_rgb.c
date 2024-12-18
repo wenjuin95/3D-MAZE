@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 17:37:04 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:45:26 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	*set_rgb(char *line)
 	int		count;
 	int		*rgb;
 
+	if (!line)
+		ft_error("rgb is null"), exit(1);
 	count = 0;
 	rgb_to_convert = ft_split(line, ',');
 	free(line);
