@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:56:35 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/17 11:08:53 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,6 @@ void	render_the_image(t_data *data)
 	init_map_size_for_texture(data);
 	raycasting(&data->player, data);
 	put_image(data);
+	if (data->on_map == 1)
+		put_minimap(data);
 }

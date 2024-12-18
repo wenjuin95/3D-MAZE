@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/16 13:05:05 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/17 11:08:46 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@
 
 # define TEXTURE_SIZE 64
 
-//# define MAP_PIXEL 200
-//# define MAP_VIEW 4
+# define MAP_PIXEL 200
+# define MAP_VIEW 4
 
 #define MAP_COLOR_PLAYER 0x00FF00 // Green
 #define MAP_COLOR_WALL 0x000000 // black
@@ -119,17 +119,17 @@ void	put_image(t_data *data);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
-////render_minimap.c
-//void	draw_square(t_data *data, int x, int y, int color);
-//void	draw_line(t_data *data, int x, int y);
-//void	draw_minimap(t_data *data);
-//void	render_minimap(t_data *data);
+//render_minimap.c
+void	draw_square(t_data *data, int x, int y, int color);
+void	draw_line(t_data *data, int x, int y);
+void	draw_minimap(t_data *data);
+void	render_minimap(t_data *data);
 
-////init_minimap.c
-//char	*add_minimap_line(t_data *data, int y);
-//char	**get_minimap(t_data *data);
-// int	get_visible_map(t_data *data, int minimap_size, int pos);
-//void	put_minimap(t_data *data);
+//init_minimap.c
+char	*add_minimap_line(t_data *data, int y);
+char	**get_minimap(t_data *data);
+ int	get_visible_map(t_data *data, int minimap_size, int pos);
+void	put_minimap(t_data *data);
 
 //raycast_and_dda.c
 void	initialize_ray(int x, t_raycast *ray, t_player *player);
