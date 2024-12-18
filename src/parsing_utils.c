@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 14:46:52 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/18 17:30:06 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ static void find(t_map *map, int file_height, char **file)
 			if (file[i][j] == '1' && file[i][j + 1] == '1' && file[i][j + 2] == '1')
 			{
 				map->map_start = i;
-				free_2d(file);
 				return ;
 			}
 			j++;
@@ -123,6 +122,22 @@ static void	error_handling2(t_map *map)
 		|| search(map->file, map->file_height, "EA") == -1)
 		ft_error("Invalid map"), exit(1);
 }
+
+static char *combine(t_map *map, char *type, int len)
+{
+	char *str;
+	
+	printf("type: %s\n", type);
+	printf("search: %d\n", search(map->file, map->file_height, type));
+	printf("search2: %zu\n", search2(map->file, map->file_height, type));
+	str = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
+					type)], len, ft_len(map->file[search(map->file,
+						map->file_height, type)])));
+	if (!str)
+		ft_error("Fail to allocate memory"), exit(1);
+	return (str);
+}
+
 /**
  * the variable i here is the index of the whole map
  * it's like a global variable for parsing
@@ -132,26 +147,12 @@ int	parse_struct(t_map *map)
 	error_handling2(map);
 	find(map, map->file_height, map->file);
 	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
-	for(int i = 0; i < map->map_height; i++)
-	{
-		printf("%s\n", map->map[i]);
-	}
-	map->north = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
-					"NO")], 3, ft_len(map->file[search2(map->file,
-						map->file_height, "NO")])));
-	map->south = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
-					"SO")], 3, ft_len(map->file[search2(map->file,
-						map->file_height, "SO")])));
-	map->west = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
-					"WE")], 3, ft_len(map->file[search2(map->file,
-						map->file_height, "WE")])));
-	map->east = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
-					"EA")], 3, ft_len(map->file[search2(map->file,
-						map->file_height, "EA")])));
-	map->floor = set_rgb(remove_nl(ft_substr(map->file[5], 2,
-					ft_strlen(map->file[5]))));
-	map->ceiling = set_rgb(remove_nl(ft_substr(map->file[6], 2,
-					ft_strlen(map->file[6]))));
+	map->north = combine(map, "NO", 3);
+	map->south = combine(map, "SO", 3);
+	map->west = combine(map, "WE", 3);
+	map->east = combine(map, "EA", 3);
+	map->floor = set_rgb(combine(map, "F ", 2));
+	map->ceiling =	set_rgb(combine(map, "C ", 2));
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);
