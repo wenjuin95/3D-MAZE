@@ -97,13 +97,13 @@ void	perform_dda(t_data *data, t_raycast *ray)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0;
+			ray->side = VERTICAL;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->side = 1;
+			ray->side = HORIZONTAL;
 		}
 		if (data->map.map_layout[ray->map_y][ray->map_x] == '1')
 			hit_wall = 1;
@@ -127,12 +127,12 @@ void	perform_dda(t_data *data, t_raycast *ray)
 void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
 		t_player *player)
 {
-	if (ray->side == 0)
+	if (ray->side == VERTICAL)
 	{
 		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x);
 		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y;
 	}
-	else
+	else if (ray->side == HORIZONTAL)
 	{
 		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y);
 		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;

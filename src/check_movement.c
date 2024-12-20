@@ -69,21 +69,34 @@ int	rotate_right(t_data *data)
  * @brief rotate the player left
  * @param data the data
  * @return 1 for player rotate left
+ * @note 1. store the dir_x in tmp_x for prevent overwrite 
+ * 			the value before calculation
+ * @note 2. dir_x and dir_y calculate using rotation matrix to get x and y
+ * @note 	vector(x, y) is rotated by angle using:
+ * 				x' = x * cos(angle) - y * sin(angle)
+ * 				y' = x * sin(angle) + y * cos(angle)
+ * 			"ROTATE_SPEED" is the angle to rotate (0.1 is the angle of
+ * 			1 degree)
+ * @note 3. tmp_x store the plane_x to prevent overwrite the
+ * 			value before calculation
+ * @note 4. plane_x and plane_y calculate also using rotation matrix to get x
+ * 			and y
 */
 int	rotate_left(t_data *data)
 {
-	double	tmp_x;
+	double	tmp_dir_x;
+	double	tmp_plane_x;
 
-	tmp_x = data->player.dir_x;
+	tmp_dir_x = data->player.dir_x;
 	data->player.dir_x = data->player.dir_x * cos(-ROTATE_SPEED)
 		- data->player.dir_y * sin(-ROTATE_SPEED);
-	data->player.dir_y = tmp_x * sin(-ROTATE_SPEED) + data->player.dir_y
+	data->player.dir_y = tmp_dir_x * sin(-ROTATE_SPEED) + data->player.dir_y
 		* cos(-ROTATE_SPEED);
-	tmp_x = data->player.plane_x;
+	tmp_plane_x = data->player.plane_x;
 	data->player.plane_x = data->player.plane_x * cos(-ROTATE_SPEED)
 		- data->player.plane_y * sin(-ROTATE_SPEED);
-	data->player.plane_y = tmp_x * sin(-ROTATE_SPEED) + data->player.plane_y
-		* cos(-ROTATE_SPEED);
+	data->player.plane_y = tmp_plane_x * sin(-ROTATE_SPEED)
+		+ data->player.plane_y * cos(-ROTATE_SPEED);
 	return (1);
 }
 
@@ -95,8 +108,6 @@ int	rotate_left(t_data *data)
 int	update_image(t_data *data)
 {
 	if (player_movement(data) != 0)
-	{
 		render_the_image(data);
-	}
 	return (0);
 }

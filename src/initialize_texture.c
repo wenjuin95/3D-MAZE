@@ -17,6 +17,8 @@
  * @param data the data to be initialized
  * @param path the path to the xpm file
  * @note 1. mlx_xpm_file_to_image is a function to convert xpm to an image
+ * @note 2. mlx_get_data_addr is a function to get the
+ * 			data of the image
 */
 static void	get_xpm_data(t_data *data, char *path)
 {
@@ -99,14 +101,14 @@ void	initialize_texture(t_data *data)
 */
 void	get_texture_index(t_data *data, t_raycast *ray)
 {
-	if (ray->side == 0)
+	if (ray->side == VERTICAL)
 	{
 		if (ray->dir_x < 0)
 			data->texture.texture_index = WEST;
 		else
 			data->texture.texture_index = EAST;
 	}
-	else
+	else if (ray->side == HORIZONTAL)
 	{
 		if (ray->dir_y < 0)
 			data->texture.texture_index = NORTH;
@@ -125,16 +127,19 @@ void	get_texture_index(t_data *data, t_raycast *ray)
  * @note	a. if the ray hit horizontal wall or the ray hit vertical wall
  * @note		i. calculate the x-coordinate on the texture based on the
  * 				   wall hit position
- * @note 2. calculate how much to increase the texture coordinate per screen
- * 			pixel
- * @note	a. calculate the step size for the texture
- * @note 3. initialize the texture position for the first pixel to be drawn
- * @note 4. initialize the y-coordinate to the starting point of the line to
- * 			be drawn
- * @note	a. loop through and calculate the y-coordinate on the texture
- * @note 5. if the ray hit horizontal wall
- * @note	a. darken the color for the horizontal wall
- * @note 6. set each pixel color on the screen
+ * @note 2. Defines how much to move in the texture for each pixel on the
+ * 			screen.
+ * @note 3. Aligns the texture with the slice being drawn
+ * @note 4. Loops through each vertical pixel (y) within the wall slice
+ * @note 5. calculate the y coordinate on the texture
+ * 			"tex_possition" is the current vertical position of the texture 
+ * 			"& (tex->texture_size - 1)" to ensure the coordinate is within
+ * 			the texture size
+ * @note 6. update pixel color
+ * 			"tex->texture_index" is the chosen texture
+ * 			"data->text_data" is the pointer that stores the texture data
+ * 			"tex->tex_y + tex->tex_x" get the correct pixel from the texture
+ * @note 7. move to the next vertical pixel
 */
 void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 {
@@ -143,22 +148,20 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 
 	get_texture_index(data, ray);
 	tex->tex_x = (int)(ray->wall_x * tex->texture_size);
-	if ((ray->side == 0 && ray->dir_x < 0)
-		|| (ray->side == 1 && ray->dir_y > 0))
+	if ((ray->side == VERTICAL && ray->dir_x < 0)
+		|| (ray->side == HORIZONTAL && ray->dir_y > 0))
 		tex->tex_x = tex->texture_size - tex->tex_x - 1;
-	tex->step = 1.0 * tex->texture_size / ray->line_height;
+	tex->step = (double)tex->texture_size / ray->line_height;
 	tex->position = (ray->draw_start - data->win_height / 2
 			+ ray->line_height / 2) * tex->step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
 		tex->tex_y = (int)tex->position & (tex->texture_size - 1);
-		tex->position += tex->step;
 		color = data->tex_data[tex->texture_index][tex->texture_size
 			* tex->tex_y + tex->tex_x];
-		if (ray->side == 1)
-			color = (color >> 1) & 8355711;
 		data->tex_pixel[y][x] = color;
+		tex->position += tex->step;
 		y++;
 	}
 }

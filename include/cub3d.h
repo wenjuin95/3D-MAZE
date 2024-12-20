@@ -54,6 +54,8 @@
 //# define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
+# define HORIZONTAL 1
+# define VERTICAL 0
 
 # define MAP_PIXEL 200
 # define MAP_VIEW 4
