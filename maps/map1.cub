@@ -3,7 +3,7 @@ SO ./src/wood.xpm
 WE ./src/wood.xpm
 EA ./src/wood.xpm
 
-F 220,100,0
+F 220,100,000
 C 225,30,0
 
         1111111111111111111111111

@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 17:44:02 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/19 16:38:58 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,8 +228,8 @@ int	parse(char **av, t_data *data)
 	// {
 	// 	printf("%s\n", data->map.map[m]);
 	// }
-	// if (check_map_closed(data->map.map, data->map.map_height) == 1)
-	// 	return (ft_error("Map not surrounded by wall"), 1);
+	if (check_map_closed(data->map.map, data->map.map_height) == 1)
+		return (ft_error("Map not surrounded by wall"), 1);
 	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)

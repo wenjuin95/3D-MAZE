@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 17:33:33 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/19 16:45:24 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,17 @@ static void	error_handling2(t_map *map)
 		ft_error("Invalid map"), exit(1);
 }
 
+/**
+ * the len is not constant, need to change
+ * create a function to skip is_space
+ */
 static char *combine(t_map *map, char *type, int len)
 {
-	char *str;
+	int		i;
+	char	*str;
 	
-	str = remove_nl(ft_substr(map->file[search(map->file, map->file_height,
-					type)], len, ft_len(map->file[search(map->file,
-						map->file_height, type)])));
+	i = search(map->file, map->file_height, type);
+	str = remove_nl(ft_substr(map->file[i], len, ft_len(map->file[i])));
 	if (!str)
 		ft_error("Fail to allocate memory"), exit(1);
 	return (str);
