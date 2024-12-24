@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 12:39:20 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/24 12:31:00 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,14 @@ int	check_map_closed(char **map, int rows)
 
 	i = 0;
 	prev = ft_strlen(map[0]);
+	if (ft_strspn(map[0], "1") != prev
+		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
+		return (1);
 	while (++i < rows - 1)
 	{
 		cur = ft_strlen(map[i]);
+		if (map[i][0] != '1' || map[i][cur - 1] != '1')
+			return (1);
 		if (cur > prev
 			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (1);
@@ -145,4 +150,27 @@ void	check_valid_element(t_data *data)
 		}
 		i++;
 	}
+}
+
+int	check_num_players(char **map)
+{
+	int	i;
+	int	j;
+	int	num_players;
+
+	i = -1;
+	num_players = 0;
+	while (map[++i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("NSEW", map[i][j]))
+				num_players++;
+			j++;
+		}
+	}
+	if (num_players != 1)
+		return (1);
+	return (0);
 }

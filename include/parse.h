@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/18 17:36:45 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/24 12:35:30 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ bool	is_directory(char *file);
 int		check_map_sides(t_map *map, char **map_tab);
 void	check_valid_element(t_data *data);
 int		check_valid_rgb(int *rgb);
+int     check_num_players(char **map);
+int     parse_check(t_data *data);
 
 //convert
 int		*set_rgb(char *line);

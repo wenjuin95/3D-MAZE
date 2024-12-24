@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/19 16:38:58 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/24 12:47:04 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,21 @@ static int check_file(char *file)
 	return (0);
 }
 
+int parse_check(t_data *data)
+{
+	if (check_map_closed(data->map.map, data->map.map_height) == 1)
+		return (ft_error("Map not surrounded by wall"), 1);
+	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
+		|| check_file(data->map.east) == 1
+		|| check_file(data->map.west) == 1)
+		exit(1);
+	if (check_num_players(data->map.map) == 1)
+		return (ft_error("Invalid number of players"), 1);
+	check_valid_element(data);
+	check_player_position(data);
+	return (0);
+}
+
 /**
  * this function is the main function of parsing
  * first parse the argument into struct (map address)
@@ -218,24 +233,8 @@ int	parse(char **av, t_data *data)
 	data->map.file = read_map_file(data->map_add, data->map.file_height);
 	if (!data->map.file)
 		return (ft_error("Fail to read map file"), 1);
-	for(int i = 0; i < data->map.file_height; i++)
-	{
-		printf("%s\n", data->map.file[i]);
-	}
 	parse_struct(&data->map);
-	// printf("%d\n", data->map.map_start);
-	// for(int m = 0; m < data->map.map_height; m++)
-	// {
-	// 	printf("%s\n", data->map.map[m]);
-	// }
-	if (check_map_closed(data->map.map, data->map.map_height) == 1)
-		return (ft_error("Map not surrounded by wall"), 1);
-	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
-		|| check_file(data->map.east) == 1
-		|| check_file(data->map.west) == 1)
-		exit(1);
-	check_valid_element(data);
-	check_player_position(data);
+	// parse_check(data);
 	init_player_dir(data);
 	return (0);
 }
