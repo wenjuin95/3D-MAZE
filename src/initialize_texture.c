@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/18 17:35:39 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/24 21:58:52 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,82 +86,4 @@ void	initialize_texture(t_data *data)
 	data->tex_data[SOUTH] = ft_strdup_data(data, data->map.south);
 	data->tex_data[WEST] = ft_strdup_data(data, data->map.west);
 	data->tex_data[EAST] = ft_strdup_data(data, data->map.east);
-}
-
-/**
- * @brief determines which texture to use based on the direction the ray is
- *		  coming from and which side of the wall was hit.
- * @param data the data to be calculated
- * @param ray the ray to be calculated
- * @note 1. if the ray hit a vertical wall
- * @note	a. if the ray is moving to the left
- * @note		i. set the texture index to west
- * @note	b. if the ray is moving to the right
- * @note		i. set the texture index to east
-*/
-void	get_texture_index(t_data *data, t_raycast *ray)
-{
-	if (ray->side == VERTICAL)
-	{
-		if (ray->dir_x < 0)
-			data->texture.texture_index = WEST;
-		else
-			data->texture.texture_index = EAST;
-	}
-	else if (ray->side == HORIZONTAL)
-	{
-		if (ray->dir_y < 0)
-			data->texture.texture_index = NORTH;
-		else
-			data->texture.texture_index = SOUTH;
-	}
-}
-
-/**
- * @brief update the texture pixel based on raycast result
- * @param data the data to be calculated
- * @param tex the texture to be calculated
- * @param ray the ray to be calculated
- * @param x the x coordinate of the screen width
- * @note 1. calculate the x coordinate on the texture
- * @note	a. if the ray hit horizontal wall or the ray hit vertical wall
- * @note		i. calculate the x-coordinate on the texture based on the
- * 				   wall hit position
- * @note 2. Defines how much to move in the texture for each pixel on the
- * 			screen.
- * @note 3. Aligns the texture with the slice being drawn
- * @note 4. Loops through each vertical pixel (y) within the wall slice
- * @note 5. calculate the y coordinate on the texture
- * 			"tex_possition" is the current vertical position of the texture 
- * 			"& (tex->texture_size - 1)" to ensure the coordinate is within
- * 			the texture size
- * @note 6. update pixel color
- * 			"tex->texture_index" is the chosen texture
- * 			"data->text_data" is the pointer that stores the texture data
- * 			"tex->tex_y + tex->tex_x" get the correct pixel from the texture
- * @note 7. move to the next vertical pixel
-*/
-void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
-{
-	int	y;
-	int	color;
-
-	get_texture_index(data, ray);
-	tex->tex_x = (int)(ray->wall_x * tex->texture_size);
-	if ((ray->side == VERTICAL && ray->dir_x < 0)
-		|| (ray->side == HORIZONTAL && ray->dir_y > 0))
-		tex->tex_x = tex->texture_size - tex->tex_x - 1;
-	tex->step = (double)tex->texture_size / ray->line_height;
-	tex->position = (ray->draw_start - data->win_height / 2
-			+ ray->line_height / 2) * tex->step;
-	y = ray->draw_start;
-	while (y < ray->draw_end)
-	{
-		tex->tex_y = (int)tex->position & (tex->texture_size - 1);
-		color = data->tex_data[tex->texture_index][tex->texture_size
-			* tex->tex_y + tex->tex_x];
-		data->tex_pixel[y][x] = color;
-		tex->position += tex->step;
-		y++;
-	}
 }

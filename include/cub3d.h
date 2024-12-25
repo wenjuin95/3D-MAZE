@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/17 11:08:46 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/24 21:50:53 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,13 @@
 //# define ROTATE_SPEED 0.1
 
 # define TEXTURE_SIZE 64
-# define HORIZONTAL 1
 # define VERTICAL 0
+# define HORIZONTAL 1
 
-# define MAP_PIXEL 200
-# define MAP_VIEW 4
-
-#define MAP_COLOR_PLAYER 0x00FF00 // Green
-#define MAP_COLOR_WALL 0x000000 // black
-#define MAP_COLOR_FLOOR 0xE6E6E6 // Light Gray
-#define MAP_COLOR_SPACE 0x000000 // black
-
-#define MAP_COLOR_PLAYER 0x00FF00 // Green
-#define MAP_COLOR_WALL 0x000000 // black
-#define MAP_COLOR_FLOOR 0xE6E6E6 // Light Gray
-#define MAP_COLOR_SPACE 0x000000 // black
+# define MINIMAP_SIZE 20
+# define MINIMAP_PLAYER 0x00FF00 // Green
+# define MINIMAP_WALL 0x000000 // black
+# define MINIMAP_FLOOR 0xE6E6E6 // Light Gray
 
 typedef struct s_data
 {
@@ -91,7 +83,7 @@ typedef struct s_data
 //debug.c
 void	debuger(t_data *data);
 void	debug_data(t_data *data);
-void	debug_map(t_minimap *minimap);
+void	debug_minimap(t_data *data);
 void	debug_image(t_img *img);
 void	debug_texture(t_tex *texture);
 void	debug_raycast(t_raycast *ray);
@@ -106,8 +98,6 @@ void	initialize_image(t_data *data, t_img *img, int w_width, int w_height);
 
 //initialize_texture.c
 void	initialize_texture(t_data *data);
-void	get_texture_index(t_data *data, t_raycast *ray);
-void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x);
 
 // exit.c
 int		close_win(t_data *data);
@@ -121,25 +111,23 @@ void	put_image(t_data *data);
 void	init_map_size_for_texture(t_data *data);
 void	render_the_image(t_data *data);
 
-//render_minimap.c
+////render_minimap.c
 void	draw_square(t_data *data, int x, int y, int color);
-void	draw_line(t_data *data, int x, int y);
-void	draw_minimap(t_data *data);
 void	render_minimap(t_data *data);
-
-//init_minimap.c
-char	*add_minimap_line(t_data *data, int y);
-char	**get_minimap(t_data *data);
- int	get_visible_map(t_data *data, int minimap_size, int pos);
 void	put_minimap(t_data *data);
 
 //raycast_and_dda.c
 void	initialize_ray(int x, t_raycast *ray, t_player *player);
-void	initialize_dda(t_raycast *ray, t_player *player);
+void	get_step(t_raycast *ray, t_player *player);
 void	perform_dda(t_data *data, t_raycast *ray);
-void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
-			t_player *player);
 int		raycasting(t_player *player, t_data *data);
+
+//draw.c
+void	get_texture_index(t_data *data, t_raycast *ray);
+void	define_line_height(t_raycast *ray , t_data *data);
+void	define_texture(t_raycast *ray, t_data *data, t_player *player);
+void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x);
+
 
 //parsing.c
 //int		parsing(t_data *data, char **file_name);

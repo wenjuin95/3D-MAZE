@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:15:59 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/24 21:10:55 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,17 @@ int	check_move(t_data *data, double move_x, double move_y)
 	moved = 0;
 	if (data->map.map_layout[(int)data->player.pos_y][(int)move_x] != '1')
 	{
-		data->map.map_layout[(int)data->player.pos_y][(int)move_x] = '0';
+		data->map.map_layout[(int)data->player.pos_y][(int)data->player.pos_x]
+			= '0';
+		data->map.map_layout[(int)data->player.pos_y][(int)move_x] = 'P';
 		data->player.pos_x = move_x;
 		moved = 1;
 	}
 	if (data->map.map_layout[(int)move_y][(int)data->player.pos_x] != '1')
 	{
-		data->map.map_layout[(int)move_y][(int)data->player.pos_x] = '0';
+		data->map.map_layout[(int)data->player.pos_y][(int)data->player.pos_x]
+			= '0';
+		data->map.map_layout[(int)move_y][(int)data->player.pos_x] = 'P';
 		data->player.pos_y = move_y;
 		moved = 1;
 	}

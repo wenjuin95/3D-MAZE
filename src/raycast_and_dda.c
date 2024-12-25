@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/18 18:06:11 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/24 13:23:37 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	initialize_ray(int x, t_raycast *ray, t_player *player)
  * @note 	a. ray move up
  * @note 	b. calculate the initial side distance in the y-direction
 */
-void	initialize_dda(t_raycast *ray, t_player *player)
+void	get_step(t_raycast *ray, t_player *player)
 {
 	if (ray->dir_x < 0)
 	{
@@ -111,42 +111,15 @@ void	perform_dda(t_data *data, t_raycast *ray)
 }
 
 /**
- * @brief calculate the line height to draw
- * @param ray the ray to be calculated
- * @param data the data to be calculated
+ * @brief perform raycasting
  * @param player the player to be calculated
- * @note 1. get the distance between the intersection
- * 			of the ray and the camera plane with the wall
- * @note 2. calculate the wall_x which is the exact position of the wall
- * 			hit by the ray and set the texture x coordinate to the wall_x
- * @note 3. "floor" is to ensure the texture coord are accurate and display
- * 			the texture correctly
- * @note 4. get the line height to draw
- * @note 5. get the start and end point to draw
+ * @param data the data to be calculated
+ * @note 1. initialize the ray
+ * @note 2. get the step
+ * @note 3. perform DDA
+ * @note 4. calculate the wall distance according to the side
+ * @note 5. update the texture pixel
 */
-void	calculate_line_height_to_draw(t_raycast *ray, t_data *data,
-		t_player *player)
-{
-	if (ray->side == VERTICAL)
-	{
-		ray->wall_dis = (ray->side_dist_x - ray->delta_dist_x);
-		ray->wall_x = player->pos_y + ray->wall_dis * ray->dir_y;
-	}
-	else if (ray->side == HORIZONTAL)
-	{
-		ray->wall_dis = (ray->side_dist_y - ray->delta_dist_y);
-		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;
-	}
-	ray->wall_x -= floor(ray->wall_x);
-	ray->line_height = (int)(data->win_height / ray->wall_dis);
-	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
-	if (ray->draw_end >= data->win_height)
-		ray->draw_end = data->win_height - 1;
-}
-
 int	raycasting(t_player *player, t_data *data)
 {
 	int		x;
@@ -155,9 +128,14 @@ int	raycasting(t_player *player, t_data *data)
 	while (x < data->win_width)
 	{
 		initialize_ray(x, &data->ray, player);
-		initialize_dda(&data->ray, player);
+		get_step(&data->ray, player);
 		perform_dda(data, &data->ray);
-		calculate_line_height_to_draw(&data->ray, data, player);
+		if (data->ray.side == VERTICAL)
+			data->ray.wall_dis = (data->ray.side_dist_x
+					- data->ray.delta_dist_x);
+		else if (data->ray.side == HORIZONTAL)
+			data->ray.wall_dis = (data->ray.side_dist_y
+					- data->ray.delta_dist_y);
 		update_texture_pixel(data, &data->texture, &data->ray, x);
 		x++;
 	}

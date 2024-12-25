@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/18 13:19:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/24 21:28:31 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,20 @@
 //	printf("win_height: %d\n", data->win_height);
 //}
 
-//void	debug_map(t_minimap *minimap)
-//{
-//	printf("\nDEBUG MINIMAP DATA\n");
-//	printf("image size: %d\n", minimap->view_distance);
-//	printf("square size (w x h): %d\n", minimap->size);
-//	printf("texture_size: %d\n", minimap->texture_size);
-//	printf("offset_x: %d\n", minimap->visible_x);
-//	printf("offset_y: %d\n", minimap->visible_y);
-//    for (int i = 0; i < minimap->size; i++) {
-//        for (int j = 0; j < minimap->size; j++) {
-//            printf("%c", minimap->map[i][j]);
-//        }
-//        printf("\n");
-//    }
-//}
+// void	debug_minimap(t_data *data)
+// {
+// 	system("clear");
+// 	printf("\nDEBUG MINIMAP DATA\n");
+// 	for (int i = 0; i < data->map.maply_height; i++)
+// 	{
+// 		for (int j = 0; j < data->map.map_width; j++)
+// 		{
+// 			printf("%c", data->map.map_layout[i][j]);
+// 		}
+// 		printf("\n");
+// 	}
+// 	printf("\n");
+// }
 
 //void	debug_image(t_img *img)
 //{
