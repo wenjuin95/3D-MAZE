@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 07:51:06 by welow             #+#    #+#             */
-/*   Updated: 2024/12/13 11:22:44 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/26 14:52:27 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	move_backward(t_data *data)
  * @brief move the player left
  * @param data the data
  * @return 1 if player move, 0 if player not move
+ * @note 1. move_x :: pos[some nb] + dir[1] so it will move to left chg x pos
+ * @note 2. move_y :: pos[some nb] - dir[0] so it will move to left no chg y pos
 */
 int	move_left(t_data *data)
 {
@@ -61,6 +63,8 @@ int	move_left(t_data *data)
  * @brief move the player right
  * @param data the data
  * @return 1 if player move, 0 if player not move
+ * @note 1. move_x :: pos[some nb] - dir[1] so it will move to right chg x pos
+ * @note 2. move_y :: pos[some nb] + dir[0] so it will move to right no chg y pos
 */
 int	move_right(t_data *data)
 {

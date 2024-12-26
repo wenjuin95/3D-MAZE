@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/24 21:10:55 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/26 14:40:02 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,18 @@ int	check_move(t_data *data, double move_x, double move_y)
 */
 int	rotate_right(t_data *data)
 {
-	double	tmp_x;
+	double	tmp_dir_x;
+	double	tmp_plane_x;
 
-	tmp_x = data->player.dir_x;
+	tmp_dir_x = data->player.dir_x;
 	data->player.dir_x = data->player.dir_x * cos(ROTATE_SPEED)
 		- data->player.dir_y * sin(ROTATE_SPEED);
-	data->player.dir_y = tmp_x * sin(ROTATE_SPEED) + data->player.dir_y
+	data->player.dir_y = tmp_dir_x * sin(ROTATE_SPEED) + data->player.dir_y
 		* cos(ROTATE_SPEED);
-	tmp_x = data->player.plane_x;
+	tmp_plane_x = data->player.plane_x;
 	data->player.plane_x = data->player.plane_x * cos(ROTATE_SPEED)
 		- data->player.plane_y * sin(ROTATE_SPEED);
-	data->player.plane_y = tmp_x * sin(ROTATE_SPEED) + data->player.plane_y
+	data->player.plane_y = tmp_plane_x * sin(ROTATE_SPEED) + data->player.plane_y
 		* cos(ROTATE_SPEED);
 	return (1);
 }
@@ -73,7 +74,7 @@ int	rotate_right(t_data *data)
  * @brief rotate the player left
  * @param data the data
  * @return 1 for player rotate left
- * @note 1. store the dir_x in tmp_x for prevent overwrite 
+ * @note 1. store the dir_x in tmp_x for prevent overwrite
  * 			the value before calculation
  * @note 2. dir_x and dir_y calculate using rotation matrix to get x and y
  * @note 	vector(x, y) is rotated by angle using:
