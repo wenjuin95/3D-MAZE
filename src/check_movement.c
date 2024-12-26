@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_movement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 16:23:49 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 00:06:16 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ int	check_move(t_data *data, double move_x, double move_y)
 	int	moved;
 
 	moved = 0;
-	if (data->map.map_layout[(int)data->player.pos_y][(int)move_x] != '1')
+	if (data->map.map[(int)data->player.pos_y][(int)move_x] != '1')
 	{
-		data->map.map_layout[(int)data->player.pos_y][(int)data->player.pos_x]
+		data->map.map[(int)data->player.pos_y][(int)data->player.pos_x]
 			= '0';
-		data->map.map_layout[(int)data->player.pos_y][(int)move_x] = 'P';
+		data->map.map[(int)data->player.pos_y][(int)move_x] = 'P';
 		data->player.pos_x = move_x;
 		moved = 1;
 	}
-	if (data->map.map_layout[(int)move_y][(int)data->player.pos_x] != '1')
+	if (data->map.map[(int)move_y][(int)data->player.pos_x] != '1')
 	{
-		data->map.map_layout[(int)data->player.pos_y][(int)data->player.pos_x]
+		data->map.map[(int)data->player.pos_y][(int)data->player.pos_x]
 			= '0';
-		data->map.map_layout[(int)move_y][(int)data->player.pos_x] = 'P';
+		data->map.map[(int)move_y][(int)data->player.pos_x] = 'P';
 		data->player.pos_y = move_y;
 		moved = 1;
 	}

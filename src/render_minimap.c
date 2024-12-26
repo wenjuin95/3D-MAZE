@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:48:19 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 16:15:59 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 00:07:57 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ void	render_minimap(t_data *data)
 
 	i = 0;
 	j = 0;
-	while (data->map.map_layout[i])
+	while (data->map.map[i])
 	{
 		j = 0;
-		while (data->map.map_layout[i][j])
+		while (data->map.map[i][j])
 		{
-			if (data->map.map_layout[i][j] == '1')
+			if (data->map.map[i][j] == '1')
 				draw_square(data, j * MINIMAP_SIZE, i * MINIMAP_SIZE,
 					MINIMAP_WALL);
-			else if (data->map.map_layout[i][j] == '0')
+			else if (data->map.map[i][j] == '0')
 				draw_square(data, j * MINIMAP_SIZE, i * MINIMAP_SIZE,
 					MINIMAP_FLOOR);
 			else if (((int)data->player.pos_x == j && (int)data->player.pos_y
 					== i)
-				|| data->map.map_layout[i][j] == 'P')
+				|| data->map.map[i][j] == 'P')
 				draw_square(data, j * MINIMAP_SIZE, i * MINIMAP_SIZE,
 					MINIMAP_PLAYER);
 			j++;
@@ -88,7 +88,7 @@ void	render_minimap(t_data *data)
 void	put_minimap(t_data *data)
 {
 	data->img.img = mlx_new_image(data->mlx, data->map.map_width
-			* MINIMAP_SIZE, data->map.maply_height * MINIMAP_SIZE);
+			* MINIMAP_SIZE, data->map.map_height * MINIMAP_SIZE);
 	data->img.img_addr = (int *)mlx_get_data_addr(data->img.img,
 			&data->img.pixel_bits,
 			&data->img.size_line,

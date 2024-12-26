@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_and_dda.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/24 13:23:37 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 00:07:36 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	perform_dda(t_data *data, t_raycast *ray)
 			ray->map_y += ray->step_y;
 			ray->side = HORIZONTAL;
 		}
-		if (data->map.map_layout[ray->map_y][ray->map_x] == '1')
+		if (data->map.map[ray->map_y][ray->map_x] == '1')
 			hit_wall = 1;
 	}
 }

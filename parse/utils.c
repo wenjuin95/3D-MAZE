@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 02:30:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 00:09:34 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,29 @@ char	**copy_2d_array(char **src, int start, int src_height)
 		start++;
 		j++;
 	}
-	free_array((void **)src);
+	// free_array((void **)src);
 	dest[j] = NULL;
 	return (dest);
+}
+
+int ft_strspn(const char *s, const char *accept)
+{
+    int count;
+    int i;
+
+    count = 0;
+    i = 0;
+    while (*s)
+    {
+        while (accept[i] && *s != accept[i])
+            i++;
+        if (accept[i] == '\0')
+            return (count);
+        i = 0;
+        count++;
+        s++;
+    }
+    return (count);
 }
 
 // bool	skip_ispace(char *str)

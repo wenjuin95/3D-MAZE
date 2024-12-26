@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 00:09:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 00:12:30 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_data *data);
 int		get_width(t_map *map);
 char	*remove_nl(char *src);
+int ft_strspn(const char *s, const char *accept);
 
 //check
 void	check_valid_map_name(char *file, char *type);
@@ -83,6 +84,9 @@ bool	is_directory(char *file);
 int		check_map_sides(t_map *map, char **map_tab);
 void	check_valid_element(t_data *data);
 int		check_valid_rgb(int *rgb);
+int     check_num_players(char **map);
+int     parse_check(t_data *data);
+int	check_map_closed(char **map, int rows);
 
 //convert
 int		*set_rgb(char *line);

@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/10 02:19:16 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 00:13:10 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	error_handling(t_map *map)
 {
 	if (!map->north || !map->south || !map->west || !map->east
-		|| !map->floor || !map->ceiling || !map->map_layout)
+		|| !map->floor || !map->ceiling || !map->map)
 		ft_error("Fail to allocate memory56");
 }
 
@@ -45,19 +45,35 @@ char	*cut_first3(char *s, int len, int start)
 // 		res = false;
 // }
 
+/**
+ * the function will serch the target(keyword) in the 2d array
+ * and return the index of the row
+ * else return -1 means error / not found
+ */
 static int	search(char **array, int rows, char *target)
 {
 	int	i;
 	int	j;
-
+	int	tg;
+	char *tmp;
 	i = 0;
+	tg = ft_strlen(target);
+	if (tg == 1)
+	{
+		tmp = malloc(sizeof(char) * 2);
+		tmp[0] = target[0];
+		tmp[1] = ' ';
+		// tmp[2] = '\0';
+	}
+	else
+		tmp = ft_strdup(target);
 	while (i < rows)
 	{
 		j = 0;
 		while (array[i][j])
 		{
-			if (array[i][j] == target[0] && array[i][j + 1] == target[1])
-				return (i);
+			if (array[i][j] ==  tmp[0] && array[i][j + 1] == tmp[1])
+				return (free(tmp), i);
 			j++;
 		}
 		i++;
@@ -65,26 +81,86 @@ static int	search(char **array, int rows, char *target)
 	return (-1);
 }
 
-static size_t	search2(char **array, int row, char *target)
+// static size_t	search2(char **array, int row, char *target)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	size_t	rows;
+
+// 	i = 0;
+// 	rows = (size_t)row;
+// 	if (!array)
+// 		ft_error("Fail to allocate memory"), exit(1);
+// 	while (i < rows)
+// 	{
+// 		j = 0;
+// 		while (array[i][j])
+// 		{
+// 			if (array[i][j] == target[0] && array[i][j + 1] == target[1])
+// 				return (i);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (-1);
+// }
+
+/**
+ * the function is to find where is the map start
+ * the map start is the first row of the map
+ */
+static void find(t_map *map, int file_height, char **file)
 {
-	size_t	i;
-	size_t	j;
-	size_t	rows;
+	int	i;
+	int	j;
 
 	i = 0;
-	rows = (size_t)row;
-	while (i < rows)
+	j = 0;
+	if (!file)
+		ft_error("Fail to allocate memory"), exit(1);
+	while (i < file_height)
 	{
 		j = 0;
-		while (array[i][j])
+		while (j < ft_strlen(file[i]))
 		{
-			if (array[i][j] == target[0] && array[i][j + 1] == target[1])
-				return (i);
+			if (file[i][j] == '1' && file[i][j + 1] == '1' && file[i][j + 2] == '1')
+			{
+				map->map_start = i;
+				return ;
+			}
 			j++;
 		}
 		i++;
 	}
-	return (-1);
+}
+
+/**
+ *  all the elements here is neccessary so if any of them is missing
+ *	it will return an error and exit
+ */
+static void	error_handling2(t_map *map)
+{
+		if (search(map->file, map->file_height, "NO") == -1
+		|| search(map->file, map->file_height, "SO") == -1
+		|| search(map->file, map->file_height, "WE") == -1
+		|| search(map->file, map->file_height, "EA") == -1)
+		ft_error("Invalid map"), exit(1);
+}
+
+/**
+ * the len is not constant, need to change
+ * create a function to skip is_space
+ */
+static char *combine(t_map *map, char *type, int len)
+{
+	int		i;
+	char	*str;
+
+	i = search(map->file, map->file_height, type);
+	str = remove_nl(ft_substr(map->file[i], len, ft_len(map->file[i])));
+	if (!str)
+		ft_error("Fail to allocate memory"), exit(1);
+	return (str);
 }
 
 /**
@@ -93,33 +169,19 @@ static size_t	search2(char **array, int row, char *target)
  */
 int	parse_struct(t_map *map)
 {
-	map->maply_height = map->map_height - 8;
-	if (search(map->map, map->map_height, "NO") == -1
-		|| search(map->map, map->map_height, "SO") == -1
-		|| search(map->map, map->map_height, "WE") == -1
-		|| search(map->map, map->map_height, "EA") == -1)
-		ft_error("Invalid map");
-	map->north = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"NO")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "NO")])));
-	map->south = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"SO")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "SO")])));
-	map->west = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"WE")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "WE")])));
-	map->east = remove_nl(ft_substr(map->map[search(map->map, map->map_height,
-					"EA")], 3, ft_len(map->map[search2(map->map,
-						map->map_height, "EA")])));
-	// map->sprite = ft_substr(map->map[search(map->map, map->map_height, "S ")], 2, ft_strlen(map->map[4]));
-	map->floor = set_rgb(remove_nl(ft_substr(map->map[5], 2,
-					ft_strlen(map->map[5]))));
-	map->ceiling = set_rgb(remove_nl(ft_substr(map->map[6], 2,
-					ft_strlen(map->map[6]))));
-	map->map_layout = copy_2d_array(map->map, 8, map->map_height);
+	error_handling2(map);
+	find(map, map->file_height, map->file);
+	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
+	map->north = combine(map, "NO", 3);
+	map->south = combine(map, "SO", 3);
+	map->west = combine(map, "WE", 3);
+	map->east = combine(map, "EA", 3);
+	map->floor = set_rgb(combine(map, "F", 1));
+	map->ceiling =	set_rgb(combine(map, "C", 1));
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);
+	map->map_height = map->file_height - map->map_start;
 	error_handling(map);
 	return (0);
 }
