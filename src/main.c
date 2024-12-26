@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:57:52 by welow             #+#    #+#             */
-/*   Updated: 2024/12/18 13:17:26 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/26 21:14:42 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 	if (initialize_mlx(&data) == 1)
 		return (1);
 	initialize_texture(&data);
-	render_the_image(&data);
 	initialize_mlx_hook(&data);
 	mlx_loop(data.mlx);
 	clean_and_exit(&data);

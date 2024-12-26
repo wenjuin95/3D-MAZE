@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 14:40:02 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/26 16:23:49 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	rotate_right(t_data *data)
 	tmp_plane_x = data->player.plane_x;
 	data->player.plane_x = data->player.plane_x * cos(ROTATE_SPEED)
 		- data->player.plane_y * sin(ROTATE_SPEED);
-	data->player.plane_y = tmp_plane_x * sin(ROTATE_SPEED) + data->player.plane_y
-		* cos(ROTATE_SPEED);
+	data->player.plane_y = tmp_plane_x * sin(ROTATE_SPEED)
+		+ data->player.plane_y * cos(ROTATE_SPEED);
 	return (1);
 }
 

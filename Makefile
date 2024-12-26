@@ -74,6 +74,12 @@ norm:
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
 
+run:
+	@bash run.sh
+
+error:
+	@bash error.sh
+
 leak:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
 

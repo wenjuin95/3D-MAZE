@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/24 21:50:53 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/26 22:03:01 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <X11/X.h>
-#include "parse.h"
+# include "parse.h"
 
 # define ESC 65307
 # define W 119
@@ -29,20 +29,23 @@
 # define RIGHT 65363
 # define MAP 109
 
- //campus
- # define MOVE_SPEED 0.1
- # define ROTATE_SPEED 0.1
+//campus
+# define MOVE_SPEED 0.1
+# define ROTATE_SPEED 0.1
 
- //campus
- # define WIN_WIDTH 1280
- # define WIN_HEIGHT 1024
+//mouse sensitivity
+//# define ROTATE_SPEED 0.015
+
+//campus
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1024
 
 ////full screen
-//# define WIN_WIDTH 3840
-//# define WIN_HEIGHT 2160
+//# define WIN_WIDTH 1920
+//# define WIN_HEIGHT 1200
 
 ////full screen
-//# define MOVE_SPEED 1
+//# define MOVE_SPEED 0.9
 //# define ROTATE_SPEED 0.1
 
 ////laptop
@@ -124,10 +127,9 @@ int		raycasting(t_player *player, t_data *data);
 
 //draw.c
 void	get_texture_index(t_data *data, t_raycast *ray);
-void	define_line_height(t_raycast *ray , t_data *data);
+void	define_line_height(t_raycast *ray, t_data *data);
 void	define_texture(t_raycast *ray, t_data *data, t_player *player);
 void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x);
-
 
 //parsing.c
 //int		parsing(t_data *data, char **file_name);

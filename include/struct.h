@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/17 11:07:47 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/26 15:14:36 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_map
 	size_t	floor_hex;
 	size_t	ceiling_hex;
 }	t_map;
-
 
 typedef struct s_img
 {
@@ -107,6 +106,5 @@ typedef struct s_player
 	int		rotated;
 	float	angle;
 }	t_player;
-
 
 #endif
