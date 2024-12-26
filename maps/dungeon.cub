@@ -1,7 +1,7 @@
-NO ./texture/wood.xpm
-SO ./texture/wood.xpm
-WE ./texture/wood.xpm
-EA ./texture/wood.xpm
+NO ./texture/dungeon.xpm
+SO ./texture/dungeon.xpm
+WE ./texture/dungeon.xpm
+EA ./texture/dungeon.xpm
 
 F 76,76,76
 C 99,99,99
