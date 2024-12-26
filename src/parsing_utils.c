@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/24 12:54:50 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/26 16:38:09 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,35 @@ char	*cut_first3(char *s, int len, int start)
 // 		res = false;
 // }
 
+/**
+ * the function will serch the target(keyword) in the 2d array
+ * and return the index of the row
+ * else return -1 means error / not found
+ */
 static int	search(char **array, int rows, char *target)
 {
 	int	i;
 	int	j;
-
+	int	tg;
+	char *tmp;
 	i = 0;
+	tg = ft_strlen(target);
+	if (tg == 1)
+	{
+		tmp = malloc(sizeof(char) * 2);
+		tmp[0] = target[0];
+		tmp[1] = ' ';
+		tmp[2] = '\0';
+	}
+	else
+		tmp = ft_strdup(target);
 	while (i < rows)
 	{
 		j = 0;
 		while (array[i][j])
 		{
-			if (array[i][j] == target[0] && array[i][j + 1] == target[1])
-				return (i);
+			if (array[i][j] ==  tmp[0] && array[i][j + 1] == tmp[1])
+				return (free(tmp), i);
 			j++;
 		}
 		i++;
@@ -89,6 +105,10 @@ static int	search(char **array, int rows, char *target)
 // 	return (-1);
 // }
 
+/**
+ * the function is to find where is the map start
+ * the map start is the first row of the map
+ */
 static void find(t_map *map, int file_height, char **file)
 {
 	int	i;
@@ -114,6 +134,10 @@ static void find(t_map *map, int file_height, char **file)
 	}
 }
 
+/**
+ *  all the elements here is neccessary so if any of them is missing
+ *	it will return an error and exit
+ */
 static void	error_handling2(t_map *map)
 {
 		if (search(map->file, map->file_height, "NO") == -1
@@ -152,8 +176,8 @@ int	parse_struct(t_map *map)
 	map->south = combine(map, "SO", 3);
 	map->west = combine(map, "WE", 3);
 	map->east = combine(map, "EA", 3);
-	map->floor = set_rgb(combine(map, "F ", 2));
-	map->ceiling =	set_rgb(combine(map, "C ", 2));
+	map->floor = set_rgb(combine(map, "F", 1));
+	map->ceiling =	set_rgb(combine(map, "C", 1));
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);

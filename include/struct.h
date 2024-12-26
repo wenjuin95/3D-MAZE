@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/12 10:22:24 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/26 23:12:32 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ typedef struct s_minimap
 
 typedef struct s_map
 {
-	int		map_height;
-	char	**file;
-	int		file_height;
-	int		*array_width;
-	int		map_width;
-	int		map_start;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*sprite;
-	int		*floor;
-	int		*ceiling;
-	char	**map;
-	size_t	floor_hex;
-	size_t	ceiling_hex;
+	char	**file; // result of gnl
+	int		file_height; // number of rows in the file
+	int		*array_width; //cause the map is not a rectangle
+	int		map_width; // the largest width of the map
+	int		map_start; // the index offirst row of the map
+	int		map_height; // number of rows in the map
+	char	**map; // 2D array of the map
+	char	*north; // path to the north texture
+	char	*south; // path to the south texture
+	char	*west; // path to the west texture
+	char	*east; // path to the east texture
+	char	*sprite; //	path to the sprite texture
+	int		*floor; // RGB value of the floor
+	int		*ceiling; // RGB value of the ceiling
+	size_t	floor_hex; // hex value of the floor
+	size_t	ceiling_hex; // hex value of the ceiling
 }	t_map;
 
 
