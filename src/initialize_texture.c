@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2024/12/24 21:58:52 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:30:56 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 static void	get_xpm_data(t_data *data, char *path)
 {
 	data->img.img = mlx_xpm_file_to_image(data->mlx, path,
-			&data->texture.texture_size,
-			&data->texture.texture_size);
+			&data->texture.size,
+			&data->texture.size);
 	if (data->img.img == NULL)
 		clean_and_exit(data);
 	data->img.img_addr = (int *)mlx_get_data_addr(data->img.img,
@@ -38,7 +38,7 @@ static void	get_xpm_data(t_data *data, char *path)
  * @param data the data to be converted
  * @param path the path to the xpm file
  * @return int* the buffer of the image for each texture
- * @note 1. "y * data->texture.texture_size + x" is the formula to get the
+ * @note 1. "y * data->texture.size + x" is the formula to get the
  * 			pixel data from the xpm file
  * @note 2. mlx_destroy_image is to free the unused image data
 */
@@ -52,17 +52,17 @@ static int	*ft_strdup_data(t_data *data, char *path)
 		clean_and_exit(data);
 	get_xpm_data(data, path);
 	texture_data = ft_calloc(1, sizeof * texture_data
-			* data->texture.texture_size * data->texture.texture_size);
+			* data->texture.size * data->texture.size);
 	if (texture_data == NULL)
 		clean_and_exit(data);
 	y = 0;
-	while (y < data->texture.texture_size)
+	while (y < data->texture.size)
 	{
 		x = 0;
-		while (x < data->texture.texture_size)
+		while (x < data->texture.size)
 		{
-			texture_data[y * data->texture.texture_size + x]
-				= data->img.img_addr[y * data->texture.texture_size + x];
+			texture_data[y * data->texture.size + x]
+				= data->img.img_addr[y * data->texture.size + x];
 			++x;
 		}
 		y++;
@@ -79,11 +79,11 @@ static int	*ft_strdup_data(t_data *data, char *path)
 */
 void	initialize_texture(t_data *data)
 {
-	data->tex_data = ft_calloc(5, sizeof * data->tex_data);
-	if (data->tex_data == NULL)
+	data->texture.data = ft_calloc(5, sizeof * data->texture.data);
+	if (data->texture.data == NULL)
 		clean_and_exit(data);
-	data->tex_data[NORTH] = ft_strdup_data(data, data->map.north);
-	data->tex_data[SOUTH] = ft_strdup_data(data, data->map.south);
-	data->tex_data[WEST] = ft_strdup_data(data, data->map.west);
-	data->tex_data[EAST] = ft_strdup_data(data, data->map.east);
+	data->texture.data[NORTH] = ft_strdup_data(data, data->map.north);
+	data->texture.data[SOUTH] = ft_strdup_data(data, data->map.south);
+	data->texture.data[WEST] = ft_strdup_data(data, data->map.west);
+	data->texture.data[EAST] = ft_strdup_data(data, data->map.east);
 }

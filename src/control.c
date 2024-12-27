@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 06:00:51 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 14:55:35 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:32:10 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	handle_key_release(int keycode, t_data *data)
 		data->player.moved_x = 0;
 	if (keycode == D && data->player.moved_x == 1)
 		data->player.moved_x = 0;
-	if (keycode == LEFT && data->player.rotated <= 1)
+	if (keycode == LEFT && data->player.rotated == -1)
 		data->player.rotated = 0;
-	if (keycode == RIGHT && data->player.rotated >= -1)
+	if (keycode == RIGHT && data->player.rotated == 1)
 		data->player.rotated = 0;
 	return (0);
 }

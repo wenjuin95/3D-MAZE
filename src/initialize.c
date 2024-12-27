@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 16:23:46 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:30:42 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	initialize_data(t_data *data)
 	ft_bzero(data, sizeof(t_data));
 	data->win_width = WIN_WIDTH;
 	data->win_height = WIN_HEIGHT;
-	data->texture.texture_size = TEXTURE_SIZE;
+	data->texture.size = TEXTURE_SIZE;
 }
 
 /**

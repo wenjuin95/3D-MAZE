@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 22:03:01 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:25:39 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ typedef struct s_data
 	int			win_width;
 	int			win_height;
 	char		*map_add;
-	int			**tex_pixel;
-	int			**tex_data;
 	int			on_map;
 	t_map		map;
 	t_minimap	minimap;
@@ -153,6 +151,10 @@ int		player_movement(t_data *data);
 
 //handle_mouse.c
 int		handle_mouse(int x, int y, t_data *data);
+
+//parse/utils2.c
+void	check_player_position(t_data *data);
+void	init_player_dir(t_data *data);
 
 void	ft_error(char *str);
 size_t	ft_len(char *s);

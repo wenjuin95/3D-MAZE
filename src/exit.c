@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 00:07:26 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:27:36 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static void	free_map(t_map *map)
 */
 void	clean_data(t_data *data)
 {
-	if (data->tex_data)
-		free_array((void **)data->tex_data);
-	if (data->tex_pixel != NULL)
-		free_array((void **)data->tex_pixel);
+	if (data->texture.data)
+		free_array((void **)data->texture.data);
+	if (data->texture.pixel != NULL)
+		free_array((void **)data->texture.pixel);
 	if (data->map_add != NULL)
 		free(data->map_add);
 	free_map(&data->map);
