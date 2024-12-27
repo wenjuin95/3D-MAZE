@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 00:00:55 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:30:03 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ typedef struct s_img
 
 typedef struct s_tex
 {
-	int		texture_size;
-	int		texture_index;
+	int		**pixel;
+	int		**data;
+	int		size;
+	int		direction;
 	double	step;
 	double	position;
 	int		tex_x;

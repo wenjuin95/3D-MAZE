@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/26 16:23:53 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:34:47 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	color_pixel_put(t_img *img, int x, int y, int color)
 */
 static void	set_image(t_data *data, t_img *img, int x, int y)
 {
-	if (data->tex_pixel[y][x] != 0)
-		color_pixel_put(img, x, y, data->tex_pixel[y][x]);
+	if (data->texture.pixel[y][x] != 0)
+		color_pixel_put(img, x, y, data->texture.pixel[y][x]);
 	else if (y < data->win_height / 2)
 		color_pixel_put(img, x, y, data->map.ceiling_hex);
 	else if (y < data->win_height - 1)
@@ -95,17 +95,17 @@ void	init_map_size_for_texture(t_data *data)
 {
 	int	i;
 
-	if (data->tex_pixel != NULL)
-		free_array((void **)data->tex_pixel);
-	data->tex_pixel = ft_calloc(data->win_height + 1, sizeof * data->tex_pixel);
-	if (data->tex_pixel == NULL)
+	if (data->texture.pixel != NULL)
+		free_array((void **)data->texture.pixel);
+	data->texture.pixel = ft_calloc(data->win_height + 1, sizeof * data->texture.pixel);
+	if (data->texture.pixel == NULL)
 		clean_and_exit(data);
 	i = 0;
 	while (i < data->win_height)
 	{
-		data->tex_pixel[i] = ft_calloc(data->win_width + 1,
-				sizeof * data->tex_pixel);
-		if (data->tex_pixel[i] == NULL)
+		data->texture.pixel[i] = ft_calloc(data->win_width + 1,
+				sizeof * data->texture.pixel);
+		if (data->texture.pixel[i] == NULL)
 			clean_and_exit(data);
 		i++;
 	}
@@ -121,5 +121,10 @@ void	render_the_image(t_data *data)
 	raycasting(&data->player, data);
 	put_image(data);
 	if (data->on_map == 1)
+	{
 		put_minimap(data);
+		mlx_mouse_hide(data->mlx, data->win);
+	}
+	else
+		mlx_mouse_show(data->mlx, data->win);
 }

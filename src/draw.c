@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 11:17:49 by welow             #+#    #+#             */
-/*   Updated: 2024/12/24 13:25:33 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:30:32 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ void	get_texture_index(t_data *data, t_raycast *ray)
 	if (ray->side == 0)
 	{
 		if (ray->dir_x < 0)
-			data->texture.texture_index = WEST;
+			data->texture.direction = WEST;
 		else
-			data->texture.texture_index = EAST;
+			data->texture.direction = EAST;
 	}
 	else
 	{
 		if (ray->dir_y < 0)
-			data->texture.texture_index = NORTH;
+			data->texture.direction = NORTH;
 		else
-			data->texture.texture_index = SOUTH;
+			data->texture.direction = SOUTH;
 	}
 }
 
@@ -85,12 +85,12 @@ void	define_texture(t_raycast *ray, t_data *data, t_player *player)
 	else if (ray->side == HORIZONTAL)
 		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;
 	ray->wall_x -= floor(ray->wall_x);
-	data->texture.tex_x = (int)(ray->wall_x * data->texture.texture_size);
+	data->texture.tex_x = (int)(ray->wall_x * data->texture.size);
 	if ((ray->side == VERTICAL && ray->dir_x < 0)
 		|| (ray->side == HORIZONTAL && ray->dir_y > 0))
-		data->texture.tex_x = data->texture.texture_size
+		data->texture.tex_x = data->texture.size
 			- data->texture.tex_x - 1;
-	data->texture.step = (double)data->texture.texture_size / ray->line_height;
+	data->texture.step = (double)data->texture.size / ray->line_height;
 	data->texture.position = (ray->draw_start - data->win_height / 2
 			+ ray->line_height / 2) * data->texture.step;
 }
@@ -122,11 +122,11 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex->tex_y = (int)tex->position & (tex->texture_size - 1);
+		tex->tex_y = (int)tex->position & (tex->size - 1);
 		tex->position += tex->step;
-		color = data->tex_data[tex->texture_index][tex->texture_size
+		color = data->texture.data[tex->direction][tex->size
 			* tex->tex_y + tex->tex_x];
-		data->tex_pixel[y][x] = color;
+		data->texture.pixel[y][x] = color;
 		y++;
 	}
 }
