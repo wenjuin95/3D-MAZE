@@ -2,8 +2,8 @@
 
 # Run the program
 echo "+----------------Control------------------+"
-echo "| W: Move forward         Left arrow : <- |"
-echo "| A: Move left            Right arrow: -> |"
+echo "| W: Move forward         <-: turn left   |"
+echo "| A: Move left            ->: turn right  |"
 echo "| S: Move backward        ESC: Exit       |"
 echo "| D: Move right           M: Show minimap |"
 echo "+-----------------------------------------+"

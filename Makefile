@@ -12,12 +12,16 @@ FILE_DIR = src parse
 # specify the directory where make should look for files
 vpath %.c $(FILE_DIR)
 
-# list all ".c" in the specified directories
-SRC = $(foreach dir, $(FILE_DIR), $(wildcard $(dir)/*.c))
+# use shell to find all files in the specified directories
+SRC = $(shell find $(FILE_DIR) -name '*.c')
+
 INC = -I include
 
 OBJ_FOLDER = object_files
 
+# create a list of object files
+# addprefix: add the path to the front of each file
+# notdir: remove the path from each file
 OBJ_SRC = $(addprefix $(OBJ_FOLDER)/, $(notdir $(SRC:.c=.o)))
 
 LIBFT_DIR = libft/libft.a
@@ -67,12 +71,12 @@ fclean : clean
 re : fclean all
 
 norm:
-	@echo "${BLUE}\n-----CHECK SRC-----${RESET}"
-	@norminette src/*.c
-	@echo "${BLUE}\n-----CHECK INCLUDE-----${RESET}"
-	@norminette include/*.h
 	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
 	@norminette libft/*.c libft/*.h
+	@echo "${BLUE}\n-----CHECK INCLUDE-----${RESET}"
+	@norminette include/*.h
+	@echo "${BLUE}\n-----CHECK SRC-----${RESET}"
+	@norminette src/*.c
 
 run:
 	@bash run.sh
