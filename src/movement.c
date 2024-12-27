@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 07:51:06 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 10:47:07 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 12:02:04 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int	player_movement(t_data *data)
 		moved = move_left(data);
 	if (data->player.moved_x == 1)
 		moved = move_right(data);
-	if (data->player.rotated == -1)
+	if (data->player.rotated <= 0)
 		moved = rotate_left(data);
-	if (data->player.rotated == 1)
+	if (data->player.rotated >= 0)
 		moved = rotate_right(data);
 	return (moved);
 }
