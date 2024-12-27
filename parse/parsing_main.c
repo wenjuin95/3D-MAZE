@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 10:24:36 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 11:21:21 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static int	get_line_nb(char *file)
 
 	lines_num = 0;
 	if (is_directory(file))
-		return (perror("File is a directory "), -1);
+		return (ft_error("File is a directory "), -1);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		perror("Fail to open file"), exit(1);
+		ft_error("Fail to open file"), exit(1);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -36,7 +36,7 @@ static int	get_line_nb(char *file)
 		line = get_next_line(fd);
 	}
 	if (lines_num == 0)
-		perror("Map file is empty"), exit(1);
+		ft_error("Map file is empty"), exit(1);
 	close(fd);
 	return (lines_num);
 }
@@ -52,10 +52,10 @@ static char	**read_map_file(char *file, int lines_num)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || lines_num <= 0)
-		perror("Fail to open file"), exit(1);
+		ft_error("Fail to open file"), exit(1);
 	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
 	if (!map)
-		return (perror("Fail to allocate memory"), (NULL));
+		return (ft_error("Fail to allocate memory"), (NULL));
 	i = 0;
 	while (i <= lines_num)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_rgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:46 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 00:22:55 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/27 10:59:02 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	*copy_to_rgb_array(char **rgb_to_convert, int *rgb)
 	i = 0;
 	free(rgb_to_convert);
 	if (check_valid_rgb(rgb) == 1)
-		return (0);
+		exit(EXIT_FAILURE);
 	return (rgb);
 }
 
@@ -56,7 +56,10 @@ int	*set_rgb(char *line)
 	while (rgb_to_convert[count])
 		count++;
 	if (count != 3)
-		return (0);
+	{
+		ft_error("Invalid RGB format");
+		exit(EXIT_FAILURE);
+	}
 	rgb = malloc(sizeof(int) * 3);
 	return (copy_to_rgb_array(rgb_to_convert, rgb));
 }
