@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 23:22:46 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/28 23:11:25 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ int	get_width(t_map *map)
 	return (i);
 }
 
+/**
+ * check is file can be open
+ */
 static int check_file(char *file)
 {
 	int	fd;
@@ -120,16 +123,19 @@ static int check_file(char *file)
 	return (0);
 }
 
+/**
+ * main function to check the map
+ */
 int parse_check(t_data *data)
 {
 	if (check_map_closed(data->map.map, data->map.map_height) == 1)
-		return (ft_error("Map not surrounded by wall"), 1);
+		ft_error("Map not surrounded by wall"), exit(1);
 	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)
 		exit(1);
 	if (check_num_players(data->map.map) == 1)
-		return (ft_error("Invalid number of players"), 1);
+		ft_error("Invalid number of players"), exit(1);
 	check_valid_element(data);
 	check_player_position(data);
 	return (0);
@@ -154,7 +160,7 @@ int	parse(char **av, t_data *data)
 	if (!data->map.file)
 		return (ft_error("Fail to read map file"), 1);
 	parse_struct(&data->map);
-	parse_check(data);
+	// parse_check(data);
 	check_player_position(data);
 	init_player_dir(data);
 	return (0);
