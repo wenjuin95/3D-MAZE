@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 00:12:30 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 19:59:12 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,13 @@ void	check_valid_element(t_data *data);
 int		check_valid_rgb(int *rgb);
 int     check_num_players(char **map);
 int     parse_check(t_data *data);
-int	check_map_closed(char **map, int rows);
+int     check_map_closed(char **map, int rows);
+void    check_map(t_data *data);
+int     check_map_details(t_data *data);
+void	flood_fill_recursive(char **map, int i, int j, int height);
+int     flood_fill(char **map, int height);
+int	    check_enclosed_space(char **map, int rows);
+int     scan_map(char **map, int height);
 
 //convert
 int		*set_rgb(char *line);
@@ -94,5 +100,6 @@ size_t	convert_rgb_to_hex(int *rgb_tab);
 char	**copy_2d_array(char **src, int start, int src_height);
 
 //utils
+char	**duplicate_map(char **map, int rows);
 
 #endif

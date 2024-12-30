@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 14:52:01 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/30 19:33:29 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,9 @@ int parse_check(t_data *data)
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)
 		clean_and_exit(data);
-	if (check_num_players(data->map.map) == 1)
-		ft_error("Invalid number of players"), clean_and_exit(data);
 	check_valid_element(data);
 	check_player_position(data);
+	check_map(data);
 	return (0);
 }
 

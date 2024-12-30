@@ -6,13 +6,13 @@
 /*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 14:51:20 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/30 16:58:34 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	error_handling(t_map *map)
+static void	error_handling2(t_map *map)
 {
 	if (!map->north || !map->south || !map->west || !map->east
 		|| !map->floor || !map->ceiling || !map->map)
@@ -138,7 +138,7 @@ static void find(t_map *map, int file_height, char **file)
  *  all the elements here is neccessary so if any of them is missing
  *	it will return an error and exit
  */
-static void	error_handling2(t_map *map)
+static void	error_handling(t_map *map)
 {
 		if (search(map->file, map->file_height, "NO") == -1
 		|| search(map->file, map->file_height, "SO") == -1
@@ -153,7 +153,7 @@ static void	error_handling2(t_map *map)
  * this function is to skip keywords && spaces && tabs
  * and return the index of the first character of address
  */
-static int find_len(char *s, char *type)
+static int find_index(char *s, char *type)
 {
 	int	i;
 
@@ -178,7 +178,7 @@ static char *combine(t_map *map, char *type)
 	int		len;
 
 	i = search(map->file, map->file_height, type);
-	len = find_len(map->file[i], type);
+	len = find_index(map->file[i], type);
 	str = remove_nl(ft_substr(map->file[i], len, ft_len(map->file[i])));
 	if (!str)
 		ft_error("Fail to allocate memory"), exit(1);
@@ -191,19 +191,19 @@ static char *combine(t_map *map, char *type)
  */
 int	parse_struct(t_map *map)
 {
-	error_handling2(map);
+	error_handling(map);
 	find(map, map->file_height, map->file);
 	map->map = copy_2d_array(map->file, map->map_start, map->file_height);
 	map->north = combine(map, "NO");
 	map->south = combine(map, "SO");
 	map->west = combine(map, "WE");
 	map->east = combine(map, "EA");
-	map->floor = set_rgb(combine(map, "F"));
-	map->ceiling =	set_rgb(combine(map, "C"));
+	map->floor = set_rgb(combine(map, "F "));
+	map->ceiling =	set_rgb(combine(map, "C "));
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);
 	map->map_height = map->file_height - map->map_start;
-	error_handling(map);
+	error_handling2(map);
 	return (0);
 }

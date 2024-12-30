@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 10:39:06 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 17:28:09 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,10 @@ bool	is_directory(char *file)
 	return (ret);
 }
 
-// static int	skip_space(char *str, int i)
-// {
-// 	while (str[i] == ' ' || str[i] == '\t')
-// 		i++;
-// 	return (i);
-// }
-
 /***
  * @brief Check if the map is surrounded by wall
  * will need to use map height and array of width
  */
-// static int	check_top_or_bottom(char **map_tab, int i, int j)
-// {
-// 	if (!map_tab || !map_tab[i] || !map_tab[i][j])
-// 		return (1);
-// 	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
-// 	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
-// 	|| map_tab[i][j] == '\f')
-// 		j++;
-// 	while (map_tab[i][j])
-// 	{
-// 		if (map_tab[i][j] != '1' && map_tab[i][j] != ' ')
-// 			return (1);
-// 		j++;
-// 	}
-// 	return (0);
-// }
-
 int	check_map_closed(char **map, int rows)
 {
 	int	i;
@@ -85,12 +61,12 @@ int	check_map_closed(char **map, int rows)
 	if (ft_strspn(map[0], "1") != prev
 		|| ft_strspn(map[rows - 1], "1") != (int)ft_strlen(map[rows - 1]))
 		return (1);
-	while (++i < rows - 1)
+	while (++i < rows)
 	{
 		cur = ft_strlen(map[i]);
 		if (map[i][0] != '1' || map[i][cur - 1] != '1')
 			return (1);
-		if (cur > prev
+		if (cur >= prev
 			&& ft_strspn(map[i] + prev - 1, "1") != cur - prev + 1)
 			return (1);
 		if (cur < prev

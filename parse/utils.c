@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 14:54:04 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/30 20:00:12 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,28 @@ int ft_strspn(const char *s, const char *accept)
         s++;
     }
     return (count);
+}
+
+char	**duplicate_map(char **map, int rows)
+{
+	char	**temp_map;
+	int		i;
+
+	i = 0;
+	temp_map = ft_calloc(rows + 1, sizeof(char *));
+	if (temp_map == NULL)
+		return (NULL);
+	while (map[i])
+	{
+		temp_map[i] = ft_strdup(map[i]);
+		if (temp_map[i] == NULL)
+		{
+			free_2d(temp_map);
+			return (NULL);
+		}
+		i++;
+	}
+	return (temp_map);
 }
 
 // bool	skip_ispace(char *str)
