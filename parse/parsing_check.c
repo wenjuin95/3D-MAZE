@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 10:50:40 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 10:39:06 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	check_valid_element(t_data *data)
 				&& data->map.map[i][j] != '\n')
 			{
 				ft_error("invalid char in map!");
-				return ;
+				clean_and_exit(data);
 			}
 			j++;
 		}
