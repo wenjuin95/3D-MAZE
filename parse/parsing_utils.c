@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 11:08:30 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 14:51:20 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ int	parse_struct(t_map *map)
 	map->south = combine(map, "SO");
 	map->west = combine(map, "WE");
 	map->east = combine(map, "EA");
-	map->floor = set_rgb(combine(map, "F "));
-	map->ceiling =	set_rgb(combine(map, "C "));
+	map->floor = set_rgb(combine(map, "F"));
+	map->ceiling =	set_rgb(combine(map, "C"));
 	map->floor_hex = convert_rgb_to_hex(map->floor);
 	map->ceiling_hex = convert_rgb_to_hex(map->ceiling);
 	map->map_width = get_width(map);

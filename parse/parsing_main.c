@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 10:38:57 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 14:52:01 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,10 +155,10 @@ int	parse(char **av, t_data *data)
 	check_valid_map_name(data->map_add, ".cub");
 	data->map.file_height = get_line_nb(data->map_add);
 	if(data->map.file_height == -1)
-		return (ft_error("Fail to get line number"), 1);
+		ft_error("Fail to get line number"), exit(1);
 	data->map.file = read_map_file(data->map_add, data->map.file_height);
 	if (!data->map.file)
-		return (ft_error("Fail to read map file"), 1);
+		ft_error("Fail to read map file"), exit(1);
 	parse_struct(&data->map);
 	parse_check(data);
 	init_player_dir(data);
