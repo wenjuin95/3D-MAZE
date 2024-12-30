@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:11:43 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 19:59:28 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/30 21:01:23 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int	check_enclosed_space(char **map, int rows)
 		return (1);
 	if (flood_fill(temp_map, rows) == 1)
 	{
-		free_2d(temp_map);
+		free_array((void **)temp_map);
 		return (1);
 	}
-	free_2d(temp_map);
+	free_array((void **)temp_map);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 20:00:12 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/30 21:02:03 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**duplicate_map(char **map, int rows)
 		temp_map[i] = ft_strdup(map[i]);
 		if (temp_map[i] == NULL)
 		{
-			free_2d(temp_map);
+			free_array((void **)temp_map);
 			return (NULL);
 		}
 		i++;
