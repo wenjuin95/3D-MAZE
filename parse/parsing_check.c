@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:40:48 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 17:28:09 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:52:44 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,30 +76,6 @@ int	check_map_closed(char **map, int rows)
 	}
 	return (0);
 }
-
-// void	check_map_wall(t_map *map)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	width;
-
-// 	i = 0;
-// 	while (i < map->map_height)
-// 	{
-// 		j = skip_space(map->map[i], 0);
-// 		width = ft_strlen(map->map[i]);
-// 		while (j < width)
-// 		{
-// 			if (i == 0 || i == map->file_height - 1 || j == 0 || j == width - 1)
-// 			{
-// 				if (map->map[i][j] != '1')
-// 					ft_error("map not surrounded by wall!");
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
 
 void	check_valid_element(t_data *data)
 {

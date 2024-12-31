@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/31 10:37:01 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 11:46:12 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	get_line_nb(char *file)
 		return (ft_error("File is a directory "), -1);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		ft_error("Fail to open file"), exit(1);
+		(ft_error("Fail to open file"), exit(1));
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -36,7 +36,7 @@ static int	get_line_nb(char *file)
 		line = get_next_line(fd);
 	}
 	if (lines_num == 0)
-		ft_error("Map file is empty"), exit(1);
+		(ft_error("Map file is empty"), exit(1));
 	close(fd);
 	return (lines_num);
 }
@@ -52,7 +52,7 @@ static char	**read_map_file(char *file, int lines_num)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || lines_num <= 0)
-		ft_error("Fail to open file"), exit(1);
+		(ft_error("Fail to open file"), exit(1));
 	map = (char **)malloc(sizeof(char *) * (lines_num + 1));
 	if (!map)
 		return (ft_error("Fail to allocate memory"), (NULL));
@@ -89,55 +89,6 @@ t_map	*parse_width(t_data *data)
 	return (tmp);
 }
 
-int	get_width(t_map *map)
-{
-	int	i;
-	int	j;
-
-	if (!map->map || map->map[0] == NULL)
-		return (ft_error("Invalid ument structure"), 1);
-	i = ft_strlen(map->map[0]);
-	j = 0;
-	for(int k = 0; k < map->map_height; k++)
-	{
-		printf("%s\n", map->map[k]);
-	}
-	while (++j < map->map_height)
-	{
-		if (i < ft_strlen(map->map[j]))
-			i = ft_strlen(map->map[j]);
-	}
-	return (i);
-}
-
-/**
- * check is file can be open
- */
-static int check_file(char *file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		ft_error("Fail to open file1"), exit(1);
-	return (0);
-}
-
-/**
- * main function to check the map
- */
-int parse_check(t_data *data)
-{
-	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
-		|| check_file(data->map.east) == 1
-		|| check_file(data->map.west) == 1)
-		clean_and_exit(data);
-	check_valid_element(data);
-	check_player_position(data);
-	check_map(data);
-	return (0);
-}
-
 /**
  * this function is the main function of parsing
  * first parse the argument into struct (map address)
@@ -151,11 +102,11 @@ int	parse(char **av, t_data *data)
 	data->map_add = ft_strdup(av[1]);
 	check_valid_map_name(data->map_add, ".cub");
 	data->map.file_height = get_line_nb(data->map_add);
-	if(data->map.file_height == -1)
-		ft_error("Fail to get line number"), exit(1);
+	if (data->map.file_height == -1)
+		(ft_error("Fail to get line number"), clean_and_exit(data));
 	data->map.file = read_map_file(data->map_add, data->map.file_height);
 	if (!data->map.file)
-		ft_error("Fail to read map file"), exit(1);
+		(ft_error("Fail to read map file"), clean_and_exit(data));
 	parse_struct(&data->map);
 	parse_check(data);
 	init_player_dir(data);

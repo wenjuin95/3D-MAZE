@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/31 10:54:14 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 12:48:40 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,58 +25,15 @@
 # endif
 
 typedef struct s_data	t_data;
-// typedef struct s_map
-// {
-// 	int		maply_height;
-// 	char	**map;
-// 	int		map_height;
-// 	int		*array_width;
-// 	int		map_width;
-// 	char	*north;
-// 	char	*south;
-// 	char	*west;
-// 	char	*east;
-// 	char	*sprite;
-// 	int		*floor;
-// 	int		*ceiling;
-// 	char	**map_layout;
-// 	size_t	floor_hex;
-// 	size_t	ceiling_hex;
-// }	t_map;
-
-// typedef struct s_player
-// {
-// 	char	dir;
-// 	double	pos_x;
-// 	double	pos_y;
-// 	double	dir_x;
-// 	double	dir_y;
-// 	double	plane_x;
-// 	double	plane_y;
-// }	t_player;
-
-// typedef struct s_data
-// {
-// 	char	*map_add;
-// 	t_map	map;
-// 	t_player	player;
-// }	t_data;
-
-// Free functions
-void	free_arg(t_data *data);
-void	free_2d(char **str);
-
-//initialize
-void	initialize_arg(t_data *data);
 
 // parsing
 int		parse(char **av, t_data *data);
 int		parse_struct(t_map *map);
-char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_data *data);
 int		get_width(t_map *map);
 char	*remove_nl(char *src);
 int		ft_strspn(const char *s, const char *accept);
+int		search(char **array, int rows, char *target);
 
 //check
 void	check_valid_map_name(char *file, char *type);
@@ -92,7 +49,9 @@ int		check_map_details(t_data *data);
 void	flood_fill_recursive(char **map, int i, int j, int height);
 int		flood_fill(char **map, int height);
 int		check_enclosed_space(char **map, int rows);
-int		scan_map(char **map, int height);
+int		check_file(char *file);
+void	error_handling(t_map *map);
+void	error_handling2(t_map *map);
 
 //convert
 int		*set_rgb(char *line);

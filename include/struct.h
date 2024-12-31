@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 10:30:03 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 12:49:32 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,21 @@ typedef struct s_minimap
 
 typedef struct s_map
 {
-	char	**file; // result of gnl
-	int		file_height; // number of rows in the file
-	int		*array_width; //cause the map is not a rectangle
-	int		map_width; // the largest width of the map
-	int		map_start; // the index offirst row of the map
-	int		map_height; // number of rows in the map
-	char	**map; // 2D array of the map
-	char	*north; // path to the north texture
-	char	*south; // path to the south texture
-	char	*west; // path to the west texture
-	char	*east; // path to the east texture
-	char	*sprite; //	path to the sprite texture
-	int		*floor; // RGB value of the floor
-	int		*ceiling; // RGB value of the ceiling
-	size_t	floor_hex; // hex value of the floor
-	size_t	ceiling_hex; // hex value of the ceiling
+	char	**file;
+	int		file_height;
+	int		*array_width;
+	int		map_width;
+	int		map_start;
+	int		map_height;
+	char	**map;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	int		*floor;
+	int		*ceiling;
+	size_t	floor_hex;
+	size_t	ceiling_hex;
 }	t_map;
 
 typedef struct s_img
