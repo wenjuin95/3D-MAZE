@@ -89,44 +89,6 @@ t_map	*parse_width(t_data *data)
 	return (tmp);
 }
 
-int	get_width(t_map *map)
-{
-	int	i;
-	int	j;
-
-	if (!map->map || map->map[0] == NULL)
-		return (ft_error("Invalid ument structure"), 1);
-	i = ft_strlen(map->map[0]);
-	j = 0;
-	for(int k = 0; k < map->map_height; k++)
-	{
-		printf("%s\n", map->map[k]);
-	}
-	while (++j < map->map_height)
-	{
-		if (i < ft_strlen(map->map[j]))
-			i = ft_strlen(map->map[j]);
-	}
-	return (i);
-}
-
-/**
- * main function to check the map
- */
-int parse_check(t_data *data)
-{
-	if (check_map_closed(data->map.map, data->map.map_height) == 1)
-		ft_error("Map not surrounded by wall"), clean_and_exit(data);
-	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
-		|| check_file(data->map.east) == 1
-		|| check_file(data->map.west) == 1)
-		clean_and_exit(data);
-	check_valid_element(data);
-	check_player_position(data);
-	check_map(data);
-	return (0);
-}
-
 /**
  * this function is the main function of parsing
  * first parse the argument into struct (map address)
