@@ -6,7 +6,7 @@
 /*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 10:23:38 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/31 11:18:42 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/31 12:51:51 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int	check_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		(ft_error("Fail to open file1"), exit(1));
+		(ft_error("Fail to open texture file"), exit(1));
 	return (0);
 }
