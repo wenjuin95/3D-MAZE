@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:19:29 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 10:24:31 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 11:32:29 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
  * @param data get player struct
  * @note 1. position + 0.5 is to get the center of the block
 */
-void check_player_position(t_data *data)
+void	check_player_position(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < data->map.map_height)
@@ -104,4 +104,11 @@ void	init_player_dir(t_data *data)
 {
 	init_north_south(data);
 	init_east_west(data);
+}
+
+void	error_handling2(t_map *map)
+{
+	if (!map->north || !map->south || !map->west || !map->east
+		|| !map->floor || !map->ceiling || !map->map)
+		ft_error("Fail to allocate memory56");
 }
