@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:48:19 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 00:07:57 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:50:04 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	render_minimap(t_data *data)
 		i++;
 	}
 }
-
 
 /**
  * @brief put minimap to the window

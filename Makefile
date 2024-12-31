@@ -67,12 +67,7 @@ fclean : clean
 re : fclean all
 
 norm:
-	@echo "${BLUE}\n-----CHECK SRC-----${RESET}"
-	@norminette src/*.c
-	@echo "${BLUE}\n-----CHECK INCLUDE-----${RESET}"
-	@norminette include/*.h
-	@echo "${BLUE}\n-----CHECK LIBFT-----${RESET}"
-	@norminette libft/*.c libft/*.h
+	@bash norm.sh
 
 run:
 	@bash run.sh

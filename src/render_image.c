@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 10:34:47 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:49:56 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	init_map_size_for_texture(t_data *data)
 
 	if (data->texture.pixel != NULL)
 		free_array((void **)data->texture.pixel);
-	data->texture.pixel = ft_calloc(data->win_height + 1, sizeof * data->texture.pixel);
+	data->texture.pixel = ft_calloc(data->win_height + 1, sizeof
+			* data->texture.pixel);
 	if (data->texture.pixel == NULL)
 		clean_and_exit(data);
 	i = 0;
