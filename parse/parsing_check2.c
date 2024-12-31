@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_check2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:11:43 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 21:01:23 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:27:26 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+/**
+ * make sure all the rgb values are valid between 0 and 255
+ */
 int	check_valid_rgb(int *rgb)
 {
 	int	i;
@@ -26,6 +29,9 @@ int	check_valid_rgb(int *rgb)
 	return (0);
 }
 
+/**
+ * just change all the space to 1
+ */
 static void replace_space_to_1(char **map, int map_height)
 {
 	int	i;
@@ -43,36 +49,6 @@ static void replace_space_to_1(char **map, int map_height)
 		}
 		i++;
 	}
-}
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_validity_utils_2.c                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qtay <qtay@student.42kl.edu.my>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 14:28:25 by nchok             #+#    #+#             */
-/*   Updated: 2024/12/18 17:18:20 by qtay             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/cub3d.h"
-
-int	check_enclosed_space(char **map, int rows)
-{
-	char	**temp_map;
-
-	temp_map = duplicate_map(map, rows);
-	if (temp_map == NULL)
-		return (1);
-	if (flood_fill(temp_map, rows) == 1)
-	{
-		free_array((void **)temp_map);
-		return (1);
-	}
-	free_array((void **)temp_map);
-	return (0);
 }
 
 // int	check_surrounding(char **map, int i, int j, int max_h)
@@ -123,63 +99,25 @@ int	scan_map(char **map, int height)
 	return (0);
 }
 
-int	flood_fill(char **map, int height)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == ' ')
-				flood_fill_recursive(map, i, j, height);
-			j++;
-		}
-		i++;
-	}
-	// if (scan_map(map, height) == 1)
-	// 	return (1);
-	return (0);
-}
-
-void	flood_fill_recursive(char **map, int i, int j, int height)
-{
-	if (i < 0 || i >= height || j < 0 || j >= (int)ft_strlen(map[i])
-		|| map[i][j] == '1')
-		return ;
-	if (map[i][j] == ' ')
-	{
-		map[i][j] = 'X';
-		flood_fill_recursive(map, i + 1, j, height);
-		flood_fill_recursive(map, i - 1, j, height);
-		flood_fill_recursive(map, i, j + 1, height);
-		flood_fill_recursive(map, i, j - 1, height);
-	}
-	if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
-		|| map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == '\0')
-		return ;
-}
-
+/**
+ * first the map row should biigger or equal to the 3
+ * then flood filll to check is it the map is closed by wall
+ */
 void check_map(t_data *data)
 {
 	if (data->map.map_height < 3)
-	{
-		clean_and_exit(data);
-		ft_error("blah"), exit(1);
-	}
+		ft_error("hello!"), clean_and_exit(data);
 	if (check_enclosed_space(data->map.map, data->map.map_height) == 1)
-	{
-		clean_and_exit(data);
-		ft_error("blah"), exit(1);
-	}
+		ft_error("hello world!!"), clean_and_exit(data);
 	replace_space_to_1(data->map.map, data->map.map_height);
 	if (check_map_details(data) == 1)
-		ft_error("blah"), clean_and_exit(data), exit(1);
+		ft_error("blah"), clean_and_exit(data);
 }
 
+/**
+ * check is it the map is closed by wall again
+ * check is it the map has valid element and only one player
+ */
 int	check_map_details(t_data *data)
 {
 	if (check_map_closed(data->map.map, data->map.map_height) == 1)

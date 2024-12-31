@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:54 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 16:58:34 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:28:39 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ static void	error_handling(t_map *map)
 		|| search(map->file, map->file_height, "SO") == -1
 		|| search(map->file, map->file_height, "WE") == -1
 		|| search(map->file, map->file_height, "EA") == -1
-		|| search(map->file, map->file_height, "F") == -1
-		|| search(map->file, map->file_height, "C") == -1)
+		|| search(map->file, map->file_height, "F ") == -1
+		|| search(map->file, map->file_height, "C ") == -1)
 		ft_error("Invalid map"), exit(1);
 }
 
