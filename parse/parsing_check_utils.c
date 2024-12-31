@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 10:23:38 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/31 11:58:16 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 12:45:45 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	flood_fill(char **map, int height)
 		}
 		i++;
 	}
-	// if (scan_map(map, height) == 1)
-	// 	return (1);
 	return (0);
 }
 
@@ -70,4 +68,34 @@ void	flood_fill_recursive(char **map, int i, int j, int height)
 	if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
 		|| map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == '\0')
 		return ;
+}
+
+int	get_width(t_map *map)
+{
+	int	i;
+	int	j;
+
+	if (!map->map || map->map[0] == NULL)
+		return (ft_error("Invalid ument structure"), 1);
+	i = ft_strlen(map->map[0]);
+	j = 0;
+	while (++j < map->map_height)
+	{
+		if (i < ft_strlen(map->map[j]))
+			i = ft_strlen(map->map[j]);
+	}
+	return (i);
+}
+
+/**
+ * check is file can be open
+ */
+int	check_file(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		(ft_error("Fail to open file1"), exit(1));
+	return (0);
 }

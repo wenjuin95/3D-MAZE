@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:56:20 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/31 10:54:14 by welow            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/12/31 12:41:08 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PARSE_H
 # define PARSE_H
@@ -62,21 +63,17 @@ typedef struct s_data	t_data;
 // 	t_player	player;
 // }	t_data;
 
-// Free functions
-void	free_arg(t_data *data);
-void	free_2d(char **str);
-
 //initialize
 void	initialize_arg(t_data *data);
 
 // parsing
 int		parse(char **av, t_data *data);
 int		parse_struct(t_map *map);
-char	*cut_first3(char *s, int len, int start);
 t_map	*parse_width(t_data *data);
 int		get_width(t_map *map);
 char	*remove_nl(char *src);
-int		ft_strspn(const char *s, const char *accept);
+int     ft_strspn(const char *s, const char *accept);
+int     search(char **array, int rows, char *target);
 
 //check
 void	check_valid_map_name(char *file, char *type);
@@ -90,9 +87,11 @@ int		check_map_closed(char **map, int rows);
 void	check_map(t_data *data);
 int		check_map_details(t_data *data);
 void	flood_fill_recursive(char **map, int i, int j, int height);
-int		flood_fill(char **map, int height);
-int		check_enclosed_space(char **map, int rows);
-int		scan_map(char **map, int height);
+int     flood_fill(char **map, int height);
+int	    check_enclosed_space(char **map, int rows);
+int     check_file(char *file);
+void	error_handling(t_map *map);
+void	error_handling2(t_map *map);
 
 //convert
 int		*set_rgb(char *line);
