@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 11:21:21 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:37:01 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ int	get_width(t_map *map)
 	return (i);
 }
 
+/**
+ * check is file can be open
+ */
 static int check_file(char *file)
 {
 	int	fd;
@@ -120,18 +123,18 @@ static int check_file(char *file)
 	return (0);
 }
 
+/**
+ * main function to check the map
+ */
 int parse_check(t_data *data)
 {
-	if (check_map_closed(data->map.map, data->map.map_height) == 1)
-		return (ft_error("Map not surrounded by wall"), 1);
 	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)
-		exit(1);
-	if (check_num_players(data->map.map) == 1)
-		return (ft_error("Invalid number of players"), 1);
+		clean_and_exit(data);
 	check_valid_element(data);
 	check_player_position(data);
+	check_map(data);
 	return (0);
 }
 
@@ -149,13 +152,12 @@ int	parse(char **av, t_data *data)
 	check_valid_map_name(data->map_add, ".cub");
 	data->map.file_height = get_line_nb(data->map_add);
 	if(data->map.file_height == -1)
-		return (ft_error("Fail to get line number"), 1);
+		ft_error("Fail to get line number"), exit(1);
 	data->map.file = read_map_file(data->map_add, data->map.file_height);
 	if (!data->map.file)
-		return (ft_error("Fail to read map file"), 1);
+		ft_error("Fail to read map file"), exit(1);
 	parse_struct(&data->map);
-	// parse_check(data);
-	check_player_position(data);
+	parse_check(data);
 	init_player_dir(data);
 	return (0);
 }

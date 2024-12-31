@@ -1,6 +1,16 @@
 #!/bin/bash
 
-# Run the program
+clear
+
+echo -e "  _______  __   __  _______  _______  ______  "
+echo -e " |       ||  | |  ||  _    ||       ||      | "
+echo -e " |       ||  | |  || |_|   ||___    ||  _    |"
+echo -e " |       ||  |_|  ||       | ___|   || | |   |"
+echo -e " |      _||       ||  _   | |___    || |_|   |"
+echo -e " |     |_ |       || |_|   | ___|   ||       |"
+echo -e " |_______||_______||_______||_______||______| "
+echo -e "                                              "
+
 echo "+----------------Control------------------+"
 echo "| W: Move forward         <-: turn left   |"
 echo "| A: Move left            ->: turn right  |"
@@ -9,11 +19,12 @@ echo "| D: Move right           M: Show minimap |"
 echo "+-----------------------------------------+"
 echo ""
 echo "+---------------CHOOSE MAP----------------+"
-echo "| 0. exit                                 |"
 echo "| 1. black_map.cub                        |"
 echo "| 2. map1.cub                             |"
 echo "| 3. map2.cub                             |"
 echo "| 4. dungeon.cub                          |"
+echo "|                                         |"
+echo "| 0. exit                                 |"
 echo "+-----------------------------------------+"
 echo -n "choose map: "
 

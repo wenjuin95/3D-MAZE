@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 10:27:36 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 22:26:34 by chtan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	clean_and_exit(t_data *data)
 		free(data->mlx);
 	}
 	clean_data(data);
-	exit(1);
+	exit(0);
 }
 
 /**

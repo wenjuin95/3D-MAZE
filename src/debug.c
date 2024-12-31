@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:56:11 by welow             #+#    #+#             */
-/*   Updated: 2024/12/24 21:28:31 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:36:41 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 // {
 // 	system("clear");
 // 	printf("\nDEBUG MINIMAP DATA\n");
-// 	for (int i = 0; i < data->map.maply_height; i++)
+// 	for (int i = 0; i < data->map.map_height; i++)
 // 	{
 // 		for (int j = 0; j < data->map.map_width; j++)
 // 		{
-// 			printf("%c", data->map.map_layout[i][j]);
+// 			printf("%c", data->map.map[i][j]);
 // 		}
 // 		printf("\n");
 // 	}
@@ -59,8 +59,8 @@
 //void	debug_texture(t_tex *texture)
 //{
 //	printf("\nDEBUG TEXTURE DATA\n");
-//	printf("tex_size: %d\n", texture->texture_size);
-//	printf("tex_index: %d\n", texture->texture_index);
+//	printf("tex_size: %d\n", texture->size);
+//	printf("tex_index: %d\n", texture->direction);
 //	printf("step: %f\n", texture->step);
 //	printf("position: %f\n", texture->position);
 //	printf("tex_x: %d\n", texture->tex_x);
@@ -108,7 +108,7 @@
 //void	debug_parsing(t_data *data)
 //{
 //	printf("MAP\n");
-//    printf("map_height (int): (%d)\n", data->map.maply_height);
+//    printf("map_height (int): (%d)\n", data->map.map_height);
 //    printf("map_width (int): (%d)\n", data->map.map_width);
 //    printf("map floor_hex (size_t): (#%lx)\n", data->map.floor_hex);
 //    printf("map ceiling_hex (size_t): (#%lx)\n", data->map.ceiling_hex);
@@ -117,8 +117,8 @@
 //    printf("map texture east (char *): (%s)\n", data->map.east);
 //    printf("map texture west (char *): (%s)\n", data->map.west);
 //    printf("\n");
-//    for(int i = 0; data->map.map_layout[i]; i++)
-//        printf("(%s)\n", data->map.map_layout[i]);
+//    for(int i = 0; data->map.map[i]; i++)
+//        printf("(%s)\n", data->map.map[i]);
 //    printf("\n");
 //	printf("\nPLAYER\n");
 //	printf("player direction: %c\n", data->player.dir);

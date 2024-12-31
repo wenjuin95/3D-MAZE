@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:21:52 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/27 10:18:32 by welow            ###   ########.fr       */
+/*   Updated: 2024/12/30 21:02:03 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(char *str)
 {
-	printf("Error : %s\n", str);
+	printf("\033[0;32mError : %s\033[0m\n", str);
 }
 
 size_t	ft_len(char *s)
@@ -73,6 +73,28 @@ int ft_strspn(const char *s, const char *accept)
         s++;
     }
     return (count);
+}
+
+char	**duplicate_map(char **map, int rows)
+{
+	char	**temp_map;
+	int		i;
+
+	i = 0;
+	temp_map = ft_calloc(rows + 1, sizeof(char *));
+	if (temp_map == NULL)
+		return (NULL);
+	while (map[i])
+	{
+		temp_map[i] = ft_strdup(map[i]);
+		if (temp_map[i] == NULL)
+		{
+			free_array((void **)temp_map);
+			return (NULL);
+		}
+		i++;
+	}
+	return (temp_map);
 }
 
 // bool	skip_ispace(char *str)
