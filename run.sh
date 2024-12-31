@@ -23,6 +23,7 @@ echo "| 1. black_map.cub                        |"
 echo "| 2. map1.cub                             |"
 echo "| 3. map2.cub                             |"
 echo "| 4. dungeon.cub                          |"
+echo "| 5. red.cub                              |"
 echo "|                                         |"
 echo "| 0. exit                                 |"
 echo "+-----------------------------------------+"
@@ -41,6 +42,8 @@ if [[ $nb =~ ^[0-9]+$ ]]; then
         ./cub3d maps/map2.cub
 	elif [ $nb -eq 4 ]; then
 		./cub3d maps/dungeon.cub
+	elif [ $nb -eq 5 ]; then
+		./cub3d maps/red.cub
 	elif [ $nb -eq 0 ]; then
 		echo "GOODBYE"
 		exit 0
