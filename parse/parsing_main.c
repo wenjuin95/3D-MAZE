@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chtan <chtan@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:33:34 by chtan             #+#    #+#             */
-/*   Updated: 2024/12/30 19:33:29 by chtan            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:37:01 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,6 @@ static int check_file(char *file)
  */
 int parse_check(t_data *data)
 {
-	if (check_map_closed(data->map.map, data->map.map_height) == 1)
-		ft_error("Map not surrounded by wall"), clean_and_exit(data);
 	if (check_file(data->map.south) == 1 || check_file(data->map.north) == 1
 		|| check_file(data->map.east) == 1
 		|| check_file(data->map.west) == 1)
