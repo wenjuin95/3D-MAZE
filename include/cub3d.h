@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 10:25:39 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/07 13:04:08 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	render_the_image(t_data *data);
 ////render_minimap.c
 void	draw_square(t_data *data, int x, int y, int color);
 void	render_minimap(t_data *data);
-void	put_minimap(t_data *data);
+int	put_minimap(t_data *data);
 
 //raycast_and_dda.c
 void	initialize_ray(int x, t_raycast *ray, t_player *player);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_movement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 00:06:16 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/07 13:51:39 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,15 @@ int	rotate_left(t_data *data)
 */
 int	update_image(t_data *data)
 {
-	if (player_movement(data) != 0)
+	//if (player_movement(data) != 0)
+	//{
+		//sleep(1);
+		player_movement(data);
 		render_the_image(data);
+	//}
+	//if (player_movement(data) != 0)
+	//{
+	//	put_minimap(data);
+	//}
 	return (0);
 }

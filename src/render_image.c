@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2024/12/31 12:54:18 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/07 14:12:06 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	color_pixel_put(t_img *img, int x, int y, int color)
 	int	pixel;
 
 	pixel = y * (img->size_line / 4) + x;
+	//printf("%d\n", pixel);
 	img->img_addr[pixel] = color;
 }
 
@@ -65,24 +66,26 @@ static void	set_image(t_data *data, t_img *img, int x, int y)
 */
 void	put_image(t_data *data)
 {
-	t_img	img;
+	//t_img	img;
 	int		x;
 	int		y;
 
-	initialize_image(data, &img, data->win_width, data->win_height);
+	//initialize_image(data, &img, data->win_width, data->win_height);
+	//data->img = img;
 	y = 0;
 	while (y < data->win_height)
 	{
 		x = 0;
 		while (x < data->win_width)
 		{
-			set_image(data, &img, x, y);
+			set_image(data, &data->img, x, y);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
-	mlx_destroy_image(data->mlx, img.img);
+	render_minimap(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
+	//mlx_destroy_image(data->mlx, img.img);
 }
 
 /**
@@ -121,11 +124,12 @@ void	render_the_image(t_data *data)
 	init_map_size_for_texture(data);
 	raycasting(&data->player, data);
 	put_image(data);
-	if (data->on_map == 1)
-	{
-		put_minimap(data);
-		mlx_mouse_hide(data->mlx, data->win);
-	}
-	else
-		mlx_mouse_show(data->mlx, data->win);
+	//put_minimap(data);
+	//if (data->on_map == 1)
+	//{
+		//put_minimap(data);
+	//	mlx_mouse_hide(data->mlx, data->win);
+	//}
+	//else
+	//	mlx_mouse_show(data->mlx, data->win);
 }

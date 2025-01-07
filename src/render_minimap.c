@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:48:19 by welow             #+#    #+#             */
-/*   Updated: 2024/12/31 10:54:39 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/07 14:05:55 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	render_minimap(t_data *data)
  * @note 3. put the minimap to the window
  * @note 4. destroy the image container (prevent memory leak)
 */
-void	put_minimap(t_data *data)
+int	put_minimap(t_data *data)
 {
 	data->img.img = mlx_new_image(data->mlx, data->map.map_width
 			* MINIMAP_SIZE, data->map.map_height * MINIMAP_SIZE);
@@ -96,4 +96,5 @@ void	put_minimap(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->img.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
+	return (0);
 }
