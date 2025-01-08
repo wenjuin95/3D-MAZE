@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2025/01/08 15:21:35 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:14:18 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ void	render_the_image(t_data *data)
 	if (data->on_map == 1)
 	{
 		render_minimap(data);
-		//mlx_mouse_hide(data->mlx, data->win);
+		mlx_mouse_hide(data->mlx, data->win);
 	}
-	//else
-	//	mlx_mouse_show(data->mlx, data->win);
+	else
+		mlx_mouse_show(data->mlx, data->win);
 }

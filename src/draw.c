@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 11:17:49 by welow             #+#    #+#             */
-/*   Updated: 2025/01/07 12:59:27 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:19:36 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 		tex->position += tex->step;
 		color = data->texture.data[tex->direction][tex->size
 			* tex->tex_y + tex->tex_x];
+		//if (ray->side == HORIZONTAL)
+		//	color = (color >> 1) & 8355711;
 		data->texture.pixel[y][x] = color;
 		y++;
 	}

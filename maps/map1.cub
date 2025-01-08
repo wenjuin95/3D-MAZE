@@ -1,6 +1,6 @@
 NO ./texture/wood.xpm
-SO ./texture/wood.xpm
-WE ./texture/wood.xpm
+SO ./texture/dungeon.xpm
+WE ./texture/matrix.xpm
 EA ./texture/wood.xpm
 
 F 220,100,0
