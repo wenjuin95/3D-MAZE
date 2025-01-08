@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:38:25 by welow             #+#    #+#             */
-/*   Updated: 2025/01/07 13:51:39 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:02:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,22 @@ int	rotate_right(t_data *data)
 {
 	double	tmp_dir_x;
 	double	tmp_plane_x;
+	double	rotate_angle;
 
+	if (data->mouse == 1)
+		rotate_angle = MOUSE_ROTATE;
+	else
+		rotate_angle = ROTATE_SPEED;
 	tmp_dir_x = data->player.dir_x;
-	data->player.dir_x = data->player.dir_x * cos(ROTATE_SPEED)
-		- data->player.dir_y * sin(ROTATE_SPEED);
-	data->player.dir_y = tmp_dir_x * sin(ROTATE_SPEED) + data->player.dir_y
-		* cos(ROTATE_SPEED);
+	data->player.dir_x = data->player.dir_x * cos(rotate_angle)
+		- data->player.dir_y * sin(rotate_angle);
+	data->player.dir_y = tmp_dir_x * sin(rotate_angle) + data->player.dir_y
+		* cos(rotate_angle);
 	tmp_plane_x = data->player.plane_x;
-	data->player.plane_x = data->player.plane_x * cos(ROTATE_SPEED)
-		- data->player.plane_y * sin(ROTATE_SPEED);
-	data->player.plane_y = tmp_plane_x * sin(ROTATE_SPEED)
-		+ data->player.plane_y * cos(ROTATE_SPEED);
+	data->player.plane_x = data->player.plane_x * cos(rotate_angle)
+		- data->player.plane_y * sin(rotate_angle);
+	data->player.plane_y = tmp_plane_x * sin(rotate_angle)
+		+ data->player.plane_y * cos(rotate_angle);
 	return (1);
 }
 
@@ -91,17 +96,22 @@ int	rotate_left(t_data *data)
 {
 	double	tmp_dir_x;
 	double	tmp_plane_x;
+	double	rotate_angle;
 
+	if (data->mouse == 1)
+		rotate_angle = MOUSE_ROTATE;
+	else
+		rotate_angle = ROTATE_SPEED;
 	tmp_dir_x = data->player.dir_x;
-	data->player.dir_x = data->player.dir_x * cos(-ROTATE_SPEED)
-		- data->player.dir_y * sin(-ROTATE_SPEED);
-	data->player.dir_y = tmp_dir_x * sin(-ROTATE_SPEED) + data->player.dir_y
-		* cos(-ROTATE_SPEED);
+	data->player.dir_x = data->player.dir_x * cos(-rotate_angle)
+		- data->player.dir_y * sin(-rotate_angle);
+	data->player.dir_y = tmp_dir_x * sin(-rotate_angle) + data->player.dir_y
+		* cos(-rotate_angle);
 	tmp_plane_x = data->player.plane_x;
-	data->player.plane_x = data->player.plane_x * cos(-ROTATE_SPEED)
-		- data->player.plane_y * sin(-ROTATE_SPEED);
-	data->player.plane_y = tmp_plane_x * sin(-ROTATE_SPEED)
-		+ data->player.plane_y * cos(-ROTATE_SPEED);
+	data->player.plane_x = data->player.plane_x * cos(-rotate_angle)
+		- data->player.plane_y * sin(-rotate_angle);
+	data->player.plane_y = tmp_plane_x * sin(-rotate_angle)
+		+ data->player.plane_y * cos(-rotate_angle);
 	return (1);
 }
 
@@ -112,15 +122,7 @@ int	rotate_left(t_data *data)
 */
 int	update_image(t_data *data)
 {
-	//if (player_movement(data) != 0)
-	//{
-		//sleep(1);
-		player_movement(data);
-		render_the_image(data);
-	//}
-	//if (player_movement(data) != 0)
-	//{
-	//	put_minimap(data);
-	//}
+	player_movement(data);
+	render_the_image(data);
 	return (0);
 }

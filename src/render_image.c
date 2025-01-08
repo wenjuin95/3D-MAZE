@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:09:40 by welow             #+#    #+#             */
-/*   Updated: 2025/01/07 14:12:06 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/08 15:21:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ void	put_image(t_data *data)
 		}
 		y++;
 	}
-	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
-	//mlx_destroy_image(data->mlx, img.img);
 }
 
 /**
@@ -124,12 +122,11 @@ void	render_the_image(t_data *data)
 	init_map_size_for_texture(data);
 	raycasting(&data->player, data);
 	put_image(data);
-	//put_minimap(data);
-	//if (data->on_map == 1)
-	//{
-		//put_minimap(data);
-	//	mlx_mouse_hide(data->mlx, data->win);
-	//}
+	if (data->on_map == 1)
+	{
+		render_minimap(data);
+		//mlx_mouse_hide(data->mlx, data->win);
+	}
 	//else
 	//	mlx_mouse_show(data->mlx, data->win);
 }

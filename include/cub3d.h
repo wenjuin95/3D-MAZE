@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2025/01/07 13:04:08 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:00:27 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define ROTATE_SPEED 0.1
 
 //mouse sensitivity
-//# define ROTATE_SPEED 0.015
+# define MOUSE_ROTATE 0.025
 
 //campus
 # define WIN_WIDTH 1280
@@ -73,6 +73,7 @@ typedef struct s_data
 	int			win_height;
 	char		*map_add;
 	int			on_map;
+	int			mouse;
 	t_map		map;
 	t_minimap	minimap;
 	t_player	player;

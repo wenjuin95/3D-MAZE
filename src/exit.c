@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 21:31:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/31 12:49:42 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/08 15:26:31 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	clean_and_exit(t_data *data)
 */
 int	close_win(t_data *data)
 {
+	if (data->img.img != NULL)
+		mlx_destroy_image(data->mlx, data->img.img);
 	clean_and_exit(data);
 	return (0);
 }
