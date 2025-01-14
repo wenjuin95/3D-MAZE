@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-/*
+/**
 *	@brief	input all the bytes of a string to zero
 *	@param	s :: the string to input zero
 *	@param	n :: the number of bytes to input zero
@@ -30,7 +30,7 @@ void	ft_bzero(void *s, size_t n)
 }
 
 // #include <stdio.h>
-// #include <strings.h> 
+// #include <strings.h>
 // int main() {
 //     char buffer1[10];
 // 	char buffer2[10];

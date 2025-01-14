@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_and_dda.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:28:44 by welow             #+#    #+#             */
-/*   Updated: 2024/12/27 00:07:36 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/10 13:02:22 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,14 @@ void	initialize_ray(int x, t_raycast *ray, t_player *player)
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera;
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
-	ray->delta_dist_x = fabs(1 / ray->dir_x);
-	ray->delta_dist_y = fabs(1 / ray->dir_y);
+	if (ray->dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->dir_x);
+	if (ray->dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
 
 /**

@@ -283,20 +283,20 @@ int draw_loop(t_data *game)
 	//draw_player_view(player, game, player->angle, 0);
 
 	 //this for draw a player view (in 3d)
-	 float fraction = ((PI / 3) / WIDTH) * 10; //calculate how much angle per line
+	 float fraction = ((PI / 3) / WIDTH) * 1; //calculate how much angle per line
 	 //"PI / 3" is the angle of the triangle view
 	 // "WIDTH" is the number of line to draw
-	 printf("\nfraction: %f\n", fraction);
+	// printf("\nfraction: %f\n", fraction);
 	 float start_x = player->angle - (PI / 6); // calculate where the field of view starts (the leftmost ray).
 	 // "PI / 6" is the half of the triangle view (30 degree)
 	 // "player->angle" is the player angle
-	 printf("start_x: %f\n\n", start_x);
+	// printf("start_x: %f\n\n", start_x);
 	 int i = 0;
 	 while (i < WIDTH)
 	 {
 	 	draw_player_view(player, game, start_x, i); //draw the line from the player view
 	 	start_x += fraction ; //move to the next angle line
-	 	i+= 10; //move to the next line
+	 	i+= 1; //move to the next line
 	 }
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);

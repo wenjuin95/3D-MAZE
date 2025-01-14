@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:56:10 by welow             #+#    #+#             */
-/*   Updated: 2025/01/08 16:00:27 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/14 12:15:43 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		initialize_mlx(t_data *data);
 void	initialize_mlx_hook(t_data *data);
 void	initialize_image(t_data *data, t_img *img, int w_width, int w_height);
 
-//initialize_texture.c
+//initialize_texture1.c
 void	initialize_texture(t_data *data);
 
 // exit.c
@@ -159,5 +159,7 @@ void	init_player_dir(t_data *data);
 
 void	ft_error(char *str);
 size_t	ft_len(char *s);
+
+int	put_minimap(t_data *data);
 
 #endif
