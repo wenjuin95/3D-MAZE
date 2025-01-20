@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 11:17:49 by welow             #+#    #+#             */
-/*   Updated: 2025/01/08 16:19:36 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/21 01:16:27 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ void	define_texture(t_raycast *ray, t_data *data, t_player *player)
 	else if (ray->side == HORIZONTAL)
 		ray->wall_x = player->pos_x + ray->wall_dis * ray->dir_x;
 	ray->wall_x -= floor(ray->wall_x);
-	data->texture.tex_x = (int)(ray->wall_x * data->texture.size);
+	data->texture.tex_x = (int)(ray->wall_x * data->texture.width);
 	if ((ray->side == VERTICAL && ray->dir_x < 0)
 		|| (ray->side == HORIZONTAL && ray->dir_y > 0))
-		data->texture.tex_x = data->texture.size
+		data->texture.tex_x = data->texture.width
 			- data->texture.tex_x - 1;
-	data->texture.step = (double)data->texture.size / ray->line_height;
+	data->texture.step = (double)data->texture.width / ray->line_height;
 	data->texture.position = (ray->draw_start - data->win_height / 2
 			+ ray->line_height / 2) * data->texture.step;
 }
@@ -122,7 +122,7 @@ void	update_texture_pixel(t_data *data, t_tex *tex, t_raycast *ray, int x)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex->tex_y = (int)tex->position & (tex->size - 1);
+		tex->tex_y = (int)tex->position % (tex->size);
 		tex->position += tex->step;
 		color = data->texture.data[tex->direction][tex->size
 			* tex->tex_y + tex->tex_x];

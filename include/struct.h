@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:24:01 by welow             #+#    #+#             */
-/*   Updated: 2024/12/31 12:49:32 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/21 00:46:59 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct s_tex
 	double	position;
 	int		tex_x;
 	int		tex_y;
+	int		width;
+	int		height;
 }	t_tex;
 
 typedef struct s_raycast

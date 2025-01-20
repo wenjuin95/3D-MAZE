@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_texture.c                               :+:      :+:    :+:   */
+/*   initialize_texture1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:54:16 by welow             #+#    #+#             */
-/*   Updated: 2025/01/07 13:32:14 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/21 01:14:56 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 static void	get_xpm_data(t_data *data, char *path)
 {
 	data->img.img = mlx_xpm_file_to_image(data->mlx, path,
-			&data->texture.size,
-			&data->texture.size);
+			&data->texture.width,
+			&data->texture.height);
 	if (data->img.img == NULL)
 		clean_and_exit(data);
 	data->img.img_addr = (int *)mlx_get_data_addr(data->img.img,
@@ -51,18 +51,19 @@ static int	*ft_strdup_data(t_data *data, char *path)
 	if (path == NULL)
 		clean_and_exit(data);
 	get_xpm_data(data, path);
+	data->texture.size = data->texture.width;
 	texture_data = ft_calloc(1, sizeof * texture_data
-			* data->texture.size * data->texture.size);
+			* data->texture.width * data->texture.height);
 	if (texture_data == NULL)
 		clean_and_exit(data);
 	y = 0;
-	while (y < data->texture.size)
+	while (y < data->texture.height)
 	{
 		x = 0;
-		while (x < data->texture.size)
+		while (x < data->texture.width)
 		{
-			texture_data[y * data->texture.size + x]
-				= data->img.img_addr[y * data->texture.size + x];
+			texture_data[y * data->texture.width + x]
+				= data->img.img_addr[y * data->texture.width + x];
 			++x;
 		}
 		y++;

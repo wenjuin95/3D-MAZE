@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:47:53 by welow             #+#    #+#             */
-/*   Updated: 2025/01/07 13:51:52 by welow            ###   ########.fr       */
+/*   Updated: 2025/01/21 01:12:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	initialize_data(t_data *data)
 	ft_bzero(data, sizeof(t_data));
 	data->win_width = WIN_WIDTH;
 	data->win_height = WIN_HEIGHT;
-	data->texture.size = TEXTURE_SIZE;
 }
 
 /**
