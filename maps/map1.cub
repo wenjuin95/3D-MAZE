@@ -1,7 +1,7 @@
-NO ./texture/wood.xpm
-SO ./texture/dungeon.xpm
-WE ./texture/matrix.xpm
-EA ./texture/wood.xpm
+NO ./texture/izone.xpm
+SO ./texture/izone.xpm
+WE ./texture/izone.xpm
+EA ./texture/izone.xpm
 
 F 220,100,0
 C 225,30,0
