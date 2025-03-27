@@ -6,14 +6,14 @@ FSANITIZE = -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-# directory that contains source files
+# assign folder
 FILE_DIR = src parse
 
-# specify the directory where make should look for files
-vpath %.c $(FILE_DIR)
-
-# use shell to find all files in the specified directories
-SRC = $(shell find $(FILE_DIR) -name '*.c')
+# use the shell command to find all .c files in the specified directories
+# find: search for folder
+# -type f: only find files
+# -name '*.c': only find c files
+SRC = $(shell find $(FILE_DIR) -type f -name '*.c')
 
 INC = -I include
 
@@ -22,7 +22,7 @@ OBJ_FOLDER = object_files
 # create a list of object files
 # addprefix: add the path to the front of each file
 # notdir: remove the path from each file
-OBJ_SRC = $(addprefix $(OBJ_FOLDER)/, $(notdir $(SRC:.c=.o)))
+OBJ_SRC = $(SRC:.c=.o)
 
 LIBFT_DIR = libft/libft.a
 
