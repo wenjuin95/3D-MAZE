@@ -87,4 +87,4 @@ error:
 leak:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/map1.cub
 
-.PHONY : all clean fclean re bonus norm leak fsan
+.PHONY : all clean fclean re bonus norm leak fsan $(NAME)
