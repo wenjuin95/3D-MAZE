@@ -19,10 +19,14 @@ INC = -I include
 
 OBJ_FOLDER = object_files
 
-# create a list of object files
-# addprefix: add the path to the front of each file
-# notdir: remove the path from each file
-OBJ_SRC = $(SRC:.c=.o)
+# create a list of .o files in the object folder
+OBJ_SRC = $(patsubst %.c, $(OBJ_FOLDER)/%.o, $(SRC))
+
+# compilation rule that preserves directories
+$(OBJ_FOLDER)/%.o : %.c
+	@mkdir -p $(dir $@)  # Ensures directory exists
+	$(CC) $(CFLAGS) -c $< -o $@
+
 
 LIBFT_DIR = libft/libft.a
 
@@ -54,8 +58,9 @@ $(NAME) : $(OBJ_SRC)
 	$(CC) $(CFLAGS) $(OBJ_SRC) $(INC) $(LIBFT_DIR) $(MINILIBX_LIBRARY) -o $(NAME)
 	@echo "${GREEN}-----COMPILED DONE-----\n${RESET}"
 
+# compilation rule that preserves directories
 $(OBJ_FOLDER)/%.o : %.c
-	@mkdir -p $(OBJ_FOLDER)
+	@mkdir -p $(dir $@)  # Ensures directory exists
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
