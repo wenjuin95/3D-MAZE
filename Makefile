@@ -22,12 +22,6 @@ OBJ_FOLDER = object_files
 # create a list of .o files in the object folder
 OBJ_SRC = $(patsubst %.c, $(OBJ_FOLDER)/%.o, $(SRC))
 
-# compilation rule that preserves directories
-$(OBJ_FOLDER)/%.o : %.c
-	@mkdir -p $(dir $@)  # Ensures directory exists
-	$(CC) $(CFLAGS) -c $< -o $@
-
-
 LIBFT_DIR = libft/libft.a
 
 # color
